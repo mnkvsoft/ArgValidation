@@ -36,5 +36,14 @@ namespace Mynkovv.Validating.Tests.Argument
             int? nullObj = null;
             Validate.Argument(() => nullObj).Null();
         }
+
+        [Fact]
+        public void test()
+        {
+            Validate.Arguments(
+                () => "sdfsdf",
+                () => new object()
+                );
+        }
     }
 }
