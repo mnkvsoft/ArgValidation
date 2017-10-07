@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Mynkovv.Validating.Tests.Argument
+namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
 {
     public class DefaultTest
     {

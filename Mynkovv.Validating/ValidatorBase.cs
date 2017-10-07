@@ -17,52 +17,72 @@ namespace Mynkovv.Validating
 
         public TInheritInstance Default()
         {
-            if (!object.Equals(ValidatingObject.Value, default(TValue)))
+            if (!ConditionChecker.IsDefault(ValidatingObject.Value))
                 throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be default value. Current value: '{ValidatingObject.Value}'");
+
+            return CreateInstance();
+        }
+
+        public TInheritInstance NotDefault()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TInheritInstance Null()
+        {
+            if (!ConditionChecker.IsNull(ValidatingObject.Value))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be null. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
 
         public TInheritInstance NotNull()
         {
-            if (object.ReferenceEquals(ValidatingObject.Value, null))
+            if (ConditionChecker.IsNull(ValidatingObject.Value))
                 throw new ArgumentNullException(ValidatingObject.Name);
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance Null()
-        {
-            if (!object.ReferenceEquals(ValidatingObject.Value, null))
-                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be null. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
 
         public TInheritInstance Equal(TValue value)
         {
-            if (!object.Equals(ValidatingObject.Value, value))
+            if (!ConditionChecker.IsEqual(ValidatingObject.Value, value))
                 throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'");
 
             return CreateInstance();
         }
 
+        public TInheritInstance NotEqual()
+        {
+            throw new NotImplementedException();
+        }
+
         public TInheritInstance MoreThan(TValue value)
         {
-            if (ValidatingObject.Value == null)
-                throw new InvalidOperationException("Сannot compare null argument");
-
-            if(value == null)
-                throw new InvalidOperationException("Сannot compare with null value");
-
-            IComparable<TValue> comparable = ValidatingObject.Value as IComparable<TValue>;
-            if (comparable == null)
-                throw new InvalidOperationException($"Argument must be implement interface '{typeof(IComparable<TValue>)}'");
-
-            if (comparable.CompareTo(value) <= 0)
+            if (!ConditionChecker.MoreThan(ValidatingObject.Value, value))
                 throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be more than '{value}'");
 
             return CreateInstance();
+        }
+
+        public TInheritInstance MoreOrEqualThan()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TInheritInstance LessThan()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TInheritInstance LessOrEqualThan()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TInheritInstance InRange()
+        {
+            throw new NotImplementedException();
         }
     }
 }

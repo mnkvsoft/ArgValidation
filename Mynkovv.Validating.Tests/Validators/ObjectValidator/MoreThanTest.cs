@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Mynkovv.Validating.Tests.Argument
+namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
 {
     public class MoreThanTest
     {
@@ -29,7 +29,7 @@ namespace Mynkovv.Validating.Tests.Argument
             object argNull = null;
             object value = new object();
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Argument(() => argNull).MoreThan(value));
-            Assert.Equal($"Сannot compare null argument", exc.Message);
+            Assert.Equal($"Сannot compare null object", exc.Message);
         }
 
         [Fact]
