@@ -11,7 +11,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void object_is_not_null()
         {
             object notNullObj = new object();
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => notNullObj).Null());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Obj(() => notNullObj).Null());
             Assert.Equal($"Object with name '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
@@ -19,14 +19,14 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void object_is_null()
         {
             object nullObj = null;
-            Validate.Argument(() => nullObj).Null();
+            Validate.Obj(() => nullObj).Null();
         }
 
         [Fact]
         public void nullable_is_not_null()
         {
             int? notNullObj = 5;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => notNullObj).Null());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Obj(() => notNullObj).Null());
             Assert.Equal($"Object with name '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
@@ -34,7 +34,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void nullable_is_null()
         {
             int? nullObj = null;
-            Validate.Argument(() => nullObj).Null();
+            Validate.Obj(() => nullObj).Null();
         }
     }
 }

@@ -25,7 +25,10 @@ namespace Mynkovv.Validating
 
         public TInheritInstance NotDefault()
         {
-            throw new NotImplementedException();
+            if (ConditionChecker.IsDefault(ValidatingObject.Value))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be not default value");
+
+            return CreateInstance();
         }
 
         public TInheritInstance Null()
@@ -47,30 +50,36 @@ namespace Mynkovv.Validating
         public TInheritInstance Equal(TValue value)
         {
             if (!ConditionChecker.IsEqual(ValidatingObject.Value, value))
-                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'");
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
 
-        public TInheritInstance NotEqual()
+        public TInheritInstance NotEqual(TValue value)
         {
-            throw new NotImplementedException();
+            if (ConditionChecker.IsEqual(ValidatingObject.Value, value))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be not equal '{value}'");
+
+            return CreateInstance();
         }
 
         public TInheritInstance MoreThan(TValue value)
         {
-            if (!ConditionChecker.MoreThan(ValidatingObject.Value, value))
+            if (!ConditionChecker.MoreThan(ValidatingObject, value))
                 throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be more than '{value}'");
 
             return CreateInstance();
         }
 
-        public TInheritInstance MoreOrEqualThan()
+        public TInheritInstance MoreOrEqualThan(TValue value)
         {
-            throw new NotImplementedException();
+            if (!ConditionChecker.MoreOrEqualThan(ValidatingObject, value))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be more or equal {value}. Current value: '{ValidatingObject.Value}'");
+
+            return CreateInstance();
         }
 
-        public TInheritInstance LessThan()
+        public TInheritInstance LessThan(TValue value)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +89,7 @@ namespace Mynkovv.Validating
             throw new NotImplementedException();
         }
 
-        public TInheritInstance InRange()
+        public TInheritInstance InRange(TValue value)
         {
             throw new NotImplementedException();
         }

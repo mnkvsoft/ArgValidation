@@ -11,7 +11,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void value_more()
         {
             int argEqual2 = 2;
-            Validate.Argument(() => argEqual2).MoreThan(1);
+            Validate.Obj(() => argEqual2).MoreThan(1);
         }
 
         [Fact]
@@ -19,7 +19,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         {
             int argEqual0 = 0;
             int valueEqual1 = 1;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => argEqual0).MoreThan(valueEqual1));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Obj(() => argEqual0).MoreThan(valueEqual1));
             Assert.Equal($"Object with name '{nameof(argEqual0)}' must be more than '{valueEqual1}'", exc.Message);
         }
 
@@ -28,8 +28,8 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         {
             object argNull = null;
             object value = new object();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Argument(() => argNull).MoreThan(value));
-            Assert.Equal($"Сannot compare null object", exc.Message);
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Obj(() => argNull).MoreThan(value));
+            Assert.Equal($"Object with name '{nameof(argNull)}' is null. Сannot compare null object", exc.Message);
         }
 
         [Fact]
@@ -37,8 +37,8 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         {
             object arg = new object();
             object nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Argument(() => arg).MoreThan(nullValue));
-            Assert.Equal("Сannot compare with null value", exc.Message);
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Obj(() => arg).MoreThan(nullValue));
+            Assert.Equal("Argument cannot be equal null", exc.Message);
         }
 
         [Fact]
@@ -46,8 +46,8 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         {
             object arg = new object();
             object value = new object();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Argument(() => arg).MoreThan(value));
-            Assert.Equal($"Argument must be implement interface '{typeof(IComparable<object>)}'", exc.Message);
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Obj(() => arg).MoreThan(value));
+            Assert.Equal($"Object with name '{nameof(arg)}' must be implement interface '{typeof(IComparable<object>)}'", exc.Message);
         }
     }
 }

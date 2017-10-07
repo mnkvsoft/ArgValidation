@@ -8,10 +8,10 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
     public class NotNullTest
     {
         [Fact]
-        public void object_is_null()
+        public void exception_if_object_is_null()
         {
             object nullObj = null;
-            ArgumentNullException exc = Assert.Throws<ArgumentNullException>(() => Validate.Argument(() => nullObj).NotNull());
+            ArgumentNullException exc = Assert.Throws<ArgumentNullException>(() => Validate.Obj(() => nullObj).NotNull());
             Assert.Equal(nameof(nullObj), exc.ParamName);
         }
 
@@ -19,14 +19,14 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void object_is_not_null()
         {
             object notNullObj = new object();
-            Validate.Argument(() => notNullObj).NotNull();
+            Validate.Obj(() => notNullObj).NotNull();
         }
 
         [Fact]
-        public void nullable_is_null()
+        public void exception_if_nullable_is_null()
         {
             int? nullArg = null;
-            ArgumentNullException exc = Assert.Throws<ArgumentNullException>(() => Validate.Argument(() => nullArg).NotNull());
+            ArgumentNullException exc = Assert.Throws<ArgumentNullException>(() => Validate.Obj(() => nullArg).NotNull());
             Assert.Equal(nameof(nullArg), exc.ParamName);
         }
 
@@ -34,7 +34,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void nullable_is_not_null()
         {
             int? notNullObj = 5;
-            Validate.Argument(() => notNullObj).NotNull();
+            Validate.Obj(() => notNullObj).NotNull();
         }
     }
 }

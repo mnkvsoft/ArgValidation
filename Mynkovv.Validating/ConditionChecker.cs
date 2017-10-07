@@ -21,19 +21,26 @@ namespace Mynkovv.Validating
             return object.Equals(obj1, obj2);
         }
 
-        public static bool MoreThan<T>(T value, T moreThan)
+        public static bool MoreThan<T>(ValidatingObject<T> validatingObject, T moreThan)
         {
-            if (value == null)
-                throw new InvalidOperationException("Сannot compare null object");
+            if (validatingObject.Value == null)
+                throw new InvalidOperationException($"Object with name '{validatingObject.Name}' is null. Сannot compare null object");
 
             if (moreThan == null)
-                throw new InvalidOperationException("Сannot compare with null value");
+                throw new InvalidOperationException($"Argument cannot be equal null");
 
-            IComparable<T> comparable = value as IComparable<T>;
+            IComparable<T> comparable = validatingObject.Value as IComparable<T>;
             if (comparable == null)
-                throw new InvalidOperationException($"Argument must be implement interface '{typeof(IComparable<T>)}'");
+                throw new InvalidOperationException($"Object with name '{validatingObject.Name}' must be implement interface '{typeof(IComparable<T>)}'");
 
             return comparable.CompareTo(moreThan) > 0;
+        }
+
+        public static bool MoreOrEqualThan<T>(ValidatingObject<T> validatingObject, T moreOrEqualThan)
+        {
+            if (MoreThan(validatingObject, moreOrEqualThan) || IsEqual(validatingObject.Value, moreOrEqualThan))
+                return true;
+            return false;
         }
     }
 }

@@ -11,14 +11,14 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void reference_type_is_null()
         {
             object arg = null;
-            Validate.Argument(() => arg).Default();
+            Validate.Obj(() => arg).Default();
         }
 
         [Fact]
         public void exception_if_reference_type_is_not_null()
         {
             object arg = new object();
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => arg).Default());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Obj(() => arg).Default());
             Assert.Equal($"Object with name '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
 
@@ -26,14 +26,14 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         public void value_type_is_default()
         {
             int arg = default(int);
-            Validate.Argument(() => arg).Default();
+            Validate.Obj(() => arg).Default();
         }
 
         [Fact]
         public void exception_if_value_type_is_not_default()
         {
             int arg = 5;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => arg).Default());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Obj(() => arg).Default());
             Assert.Equal($"Object with name '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
     }
