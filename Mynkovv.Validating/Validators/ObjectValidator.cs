@@ -11,7 +11,7 @@ namespace Mynkovv.Validating.Validators
         }
 
 
-        public override ObjectValidator<TValue> CreateInstance()
+        protected override ObjectValidator<TValue> CreateInstance()
         {
             return this;
         }

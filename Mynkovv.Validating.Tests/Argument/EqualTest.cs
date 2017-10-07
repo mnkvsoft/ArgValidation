@@ -20,7 +20,7 @@ namespace Mynkovv.Validating.Tests.Argument
             int val = 5;
             int expectedVal = 4;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => val).Equal(expectedVal));
-            Assert.Equal($"Argument '{nameof(val)}' must be equal '{expectedVal}'", exc.Message);
+            Assert.Equal($"Object with name '{nameof(val)}' must be equal '{expectedVal}'", exc.Message);
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace Mynkovv.Validating.Tests.Argument
             var anonymousObj2 = new { Value = 3 };
 
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => anonymousObj1).Equal(anonymousObj2));
-            Assert.Equal($"Argument '{nameof(anonymousObj1)}' must be equal '{anonymousObj2}'", exc.Message);
+            Assert.Equal($"Object with name '{nameof(anonymousObj1)}' must be equal '{anonymousObj2}'", exc.Message);
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Mynkovv.Validating.Tests.Argument
             object obj2 = new object();
 
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => obj1).Equal(obj2));
-            Assert.Equal($"Argument '{nameof(obj1)}' must be equal '{obj2}'", exc.Message);
+            Assert.Equal($"Object with name '{nameof(obj1)}' must be equal '{obj2}'", exc.Message);
         }
     }
 }

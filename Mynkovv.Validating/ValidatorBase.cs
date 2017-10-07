@@ -8,28 +8,17 @@ namespace Mynkovv.Validating
     {
         private ValidatingObject<TValue> ValidatingObject { get; }
 
-        //protected TValue Value => ValidatingObject.Value;
-        //protected string Name => ValidatingObject.Name;
-        private ExceptionMessage<TValue> ExceptionMessage { get; }
-
-        public abstract TInheritInstance CreateInstance();
+        protected abstract TInheritInstance CreateInstance();
 
         public ValidatorBase(ValidatingObject<TValue> validatingObject)
         {
-            if (validatingObject == null)
-                throw new ArgumentNullException(nameof(validatingObject));
-
-            ValidatingObject = validatingObject;
-            ExceptionMessage = new ExceptionMessage<TValue>
-            {
-                ValidatingObject = validatingObject
-            };
+            ValidatingObject = validatingObject ?? throw new ArgumentNullException(nameof(validatingObject));
         }
 
         public TInheritInstance Default()
         {
             if (!object.Equals(ValidatingObject.Value, default(TValue)))
-                ThrowArgumentException(ExceptionMessage.Default());
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be default value. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -45,23 +34,15 @@ namespace Mynkovv.Validating
         public TInheritInstance Null()
         {
             if (!object.ReferenceEquals(ValidatingObject.Value, null))
-                ThrowArgumentException(ExceptionMessage.Null());
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be null. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
 
         public TInheritInstance Equal(TValue value)
         {
-            if (ValidatingObject.Value != null)
-            {
-                if (!ValidatingObject.Value.Equals(value))
-                    ThrowArgumentException(ExceptionMessage.Equal(value));
-            }
-            else
-            {
-                if(value != null)
-                    ThrowArgumentException(ExceptionMessage.Equal(value));
-            }
+            if (!object.Equals(ValidatingObject.Value, value))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'");
 
             return CreateInstance();
         }
@@ -69,24 +50,19 @@ namespace Mynkovv.Validating
         public TInheritInstance MoreThan(TValue value)
         {
             if (ValidatingObject.Value == null)
-                throw new InvalidOperationException(string.Format(InvalidOperation.CannotCompareNullArgument, ValidatingObject.Name));
+                throw new InvalidOperationException("Сannot compare null argument");
 
             if(value == null)
-                throw new InvalidOperationException(string.Format(InvalidOperation.CannotCompareNullValue, ValidatingObject.Name));
+                throw new InvalidOperationException("Сannot compare with null value");
 
             IComparable<TValue> comparable = ValidatingObject.Value as IComparable<TValue>;
             if (comparable == null)
-                throw new InvalidOperationException(string.Format(InvalidOperation.ArgumentMustBeImplementInterface, typeof(IComparable<TValue>)));
+                throw new InvalidOperationException($"Argument must be implement interface '{typeof(IComparable<TValue>)}'");
 
             if (comparable.CompareTo(value) <= 0)
-                ThrowArgumentException(ExceptionMessage.MoreThan(value));
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be more than '{value}'");
 
             return CreateInstance();
-        }
-
-        private void ThrowArgumentException(string message = "")
-        {
-            throw new ArgumentException(message);
         }
     }
 }

@@ -12,10 +12,6 @@ namespace Mynkovv.Validating
             return new ObjectValidator<T>(validatingObject);
         }
 
-        public static void Arguments<T>(params Expression<Func<T>>[] args)
-        {
-        }
-
         private static ValidatingObject<T> GetValidatingObjectFromExpression<T>(Expression<Func<T>> expression)
         {
             MemberExpression exp = (MemberExpression)expression.Body;

@@ -12,7 +12,7 @@ namespace Mynkovv.Validating.Tests.Argument
         {
             object notNullObj = new object();
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => notNullObj).Null());
-            Assert.Equal($"Argument '{nameof(notNullObj)}' must be null", exc.Message);
+            Assert.Equal($"Object with name '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Mynkovv.Validating.Tests.Argument
         {
             int? notNullObj = 5;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => notNullObj).Null());
-            Assert.Equal($"Argument '{nameof(notNullObj)}' must be null", exc.Message);
+            Assert.Equal($"Object with name '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
         [Fact]
@@ -35,15 +35,6 @@ namespace Mynkovv.Validating.Tests.Argument
         {
             int? nullObj = null;
             Validate.Argument(() => nullObj).Null();
-        }
-
-        [Fact]
-        public void test()
-        {
-            Validate.Arguments(
-                () => "sdfsdf",
-                () => new object()
-                );
         }
     }
 }

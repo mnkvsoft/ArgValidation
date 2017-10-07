@@ -19,7 +19,7 @@ namespace Mynkovv.Validating.Tests.Argument
         {
             object arg = new object();
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => arg).Default());
-            Assert.Equal($"Argument '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
+            Assert.Equal($"Object with name '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace Mynkovv.Validating.Tests.Argument
         {
             int arg = 5;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Argument(() => arg).Default());
-            Assert.Equal($"Argument '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
+            Assert.Equal($"Object with name '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
     }
 }
