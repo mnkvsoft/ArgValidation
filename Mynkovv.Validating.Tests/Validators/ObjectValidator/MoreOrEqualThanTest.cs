@@ -10,15 +10,13 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void value_more_than()
         {
-            int value = 3;
-            Validate.Obj(() => value).MoreOrEqualThan(2);
+            Validate.Obj(() => 3).MoreOrEqualThan(2);
         }
 
         [Fact]
         public void value_equal()
         {
-            int value = 3;
-            Validate.Obj(() => value).MoreOrEqualThan(3);
+            Validate.Obj(() => 3).MoreOrEqualThan(3);
         }
 
         [Fact]
@@ -27,7 +25,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
             int value3 = 3;
             int value4 = 4; 
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Validate.Obj(() => value3).MoreOrEqualThan(value4));
-            Assert.Equal($"Object with name '{nameof(value3)}' must be more or equal {value4}. Current value: '{value3}'", exc.Message);
+            Assert.Equal($"Object with name '{nameof(value3)}' must be more or equal than '{value4}'. Current value: '{value3}'", exc.Message);
         }
 
         [Fact]
@@ -45,6 +43,21 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
             int? val = 5;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Obj(() => val).MoreOrEqualThan(null));
             Assert.Equal("Argument cannot be equal null", exc.Message);
+        }
+
+        [Fact]
+        public void no_exception_if_both_values_is_null_()
+        {
+            object null1 = null;
+            object null2 = null;
+            Validate.Obj(() => null1).MoreOrEqualThan(null2);
+        }
+
+        [Fact]
+        public void no_exception_if_both_values_not_implement_IComparable()
+        {
+            object null1 = new object();
+            Validate.Obj(() => null1).MoreOrEqualThan(null1);
         }
     }
 }

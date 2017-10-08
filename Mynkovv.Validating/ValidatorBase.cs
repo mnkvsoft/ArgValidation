@@ -74,14 +74,17 @@ namespace Mynkovv.Validating
         public TInheritInstance MoreOrEqualThan(TValue value)
         {
             if (!ConditionChecker.MoreOrEqualThan(ValidatingObject, value))
-                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be more or equal {value}. Current value: '{ValidatingObject.Value}'");
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be more or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
 
         public TInheritInstance LessThan(TValue value)
         {
-            throw new NotImplementedException();
+            if (!ConditionChecker.LessThan(ValidatingObject, value))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be less than '{value}'. Current value: '{ValidatingObject.Value}'");
+
+            return CreateInstance();
         }
 
         public TInheritInstance LessOrEqualThan()
@@ -90,6 +93,11 @@ namespace Mynkovv.Validating
         }
 
         public TInheritInstance InRange(TValue value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TInheritInstance OnlyValues(params TValue[] values)
         {
             throw new NotImplementedException();
         }

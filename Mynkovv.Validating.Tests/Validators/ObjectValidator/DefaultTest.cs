@@ -25,8 +25,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void value_type_is_default()
         {
-            int arg = default(int);
-            Validate.Obj(() => arg).Default();
+            Validate.Obj(() => default(int)).Default();
         }
 
         [Fact]

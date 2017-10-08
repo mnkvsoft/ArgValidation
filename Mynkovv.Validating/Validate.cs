@@ -8,20 +8,25 @@ namespace Mynkovv.Validating
     {
         public static ObjectValidator<T> Obj<T>(Expression<Func<T>> arg)
         {
-            var validatingObject = GetValidatingObjectFromExpression(arg);
+            var validatingObject = CreateValidatingObjectFromExpression(arg);
             return new ObjectValidator<T>(validatingObject);
         }
 
-        private static ValidatingObject<T> GetValidatingObjectFromExpression<T>(Expression<Func<T>> expression)
+        internal static ValidatingObject<T> CreateValidatingObjectFromExpression<T>(Expression<Func<T>> expression)
         {
-           //TODO: нужно покрыть тестами
-
             Func<T> func = expression.Compile();
             T value = func();
+
             string name;
             if (expression.Body.NodeType == ExpressionType.Constant)
             {
                 ConstantExpression c = (ConstantExpression)expression.Body;
+                name = $"Static value '{value}'";
+
+            }
+            else if (expression.Body.NodeType == ExpressionType.New)
+            {
+                NewExpression c = (NewExpression)expression.Body;
                 name = $"Static value '{value}'";
             }
             else

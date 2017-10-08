@@ -18,8 +18,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void object_is_not_null()
         {
-            object notNullObj = new object();
-            Validate.Obj(() => notNullObj).NotNull();
+            Validate.Obj(() => new object()).NotNull();
         }
 
         [Fact]
@@ -33,8 +32,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void nullable_is_not_null()
         {
-            int? notNullObj = 5;
-            Validate.Obj(() => notNullObj).NotNull();
+            Validate.Obj(() => 5).NotNull();
         }
     }
 }

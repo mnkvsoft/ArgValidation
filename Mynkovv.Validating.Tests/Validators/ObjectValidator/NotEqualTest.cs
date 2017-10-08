@@ -10,8 +10,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void not_equal()
         {
-            int val = 5;
-            Validate.Obj(() => val).NotEqual(4);
+            Validate.Obj(() => 5).NotEqual(4);
         }
 
         [Fact]

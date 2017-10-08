@@ -10,8 +10,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void reference_type_is_not_null()
         {
-            object arg = new object();
-            Validate.Obj(() => arg).NotDefault();
+            Validate.Obj(() => new object()).NotDefault();
         }
 
         [Fact]
@@ -25,8 +24,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void value_type_is_not_default()
         {
-            int arg = 5;
-            Validate.Obj(() => arg).NotDefault();
+            Validate.Obj(() => 5).NotDefault();
         }
 
         [Fact]

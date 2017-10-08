@@ -10,8 +10,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         [Fact]
         public void int_equal()
         {
-            int val = 5;
-            Validate.Obj(() => val).Equal(5);
+            Validate.Obj(() => 5).Equal(5);
         }
 
         [Fact]
