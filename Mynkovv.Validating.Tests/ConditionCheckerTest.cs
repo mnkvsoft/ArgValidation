@@ -8,7 +8,7 @@ namespace Mynkovv.Validating.Tests
     public class ConditionCheckerTest
     {
         [Fact]
-        public void exception_if_validatingValue_is_null()
+        public void Compare_ValidatingValueIsNull_Exception()
         {
             object nullValue = null;
             ValidatingObject<object> validatingObject = new ValidatingObject<object>(nameof(nullValue), nullValue);
@@ -19,21 +19,20 @@ namespace Mynkovv.Validating.Tests
         }
 
         [Fact]
-        public void exception_if_method_argument_is_null()
+        public void MoreThan_MoreThanArgumentIsNull_Exception()
         {
-            object validatingValue = new object();
-            object nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Obj(() => validatingValue).MoreThan(nullValue));
+            var validatingObject = new ValidatingObject<object>("name", new object());
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => ConditionChecker.MoreThan(validatingObject, null));
             Assert.Equal("Argument cannot be equal null", exc.Message);
         }
 
         [Fact]
-        public void exception_if_validatingValue_not_IComparable()
+        public void MoreThan_ValidatingValueNotIComparable_Exception()
         {
-            object validatingValue = new object();
+            var validatingObject = new ValidatingObject<object>("name", new object());
             object value = new object();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Validate.Obj(() => validatingValue).MoreThan(value));
-            Assert.Equal($"Object with name '{nameof(validatingValue)}' must be implement interface '{typeof(IComparable<object>)}'", exc.Message);
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => ConditionChecker.MoreThan(validatingObject, value));
+            Assert.Equal($"Object with name '{validatingObject.Name}' must be implement interface '{typeof(IComparable<object>)}'", exc.Message);
         }
     }
 }

@@ -39,6 +39,14 @@ namespace Mynkovv.Validating
             return Compare(validatingObject, lessThan) < 0;
         }
 
+        public static bool LessOrEqualThan<T>(ValidatingObject<T> validatingObject, T lessOrEqualThan)
+        {
+            // the order of comparison is significant, because the check should return 'true' for objects that do not support IComparable
+            if (IsEqual(validatingObject.Value, lessOrEqualThan) || LessThan(validatingObject, lessOrEqualThan))
+                return true;
+            return false;
+        }
+
         internal static int Compare<T>(ValidatingObject<T> validatingObject, T value)
         {
             if (validatingObject.Value == null)

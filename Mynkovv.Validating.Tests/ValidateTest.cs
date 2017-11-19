@@ -10,17 +10,17 @@ namespace Mynkovv.Validating.Tests
         private int PrivateTestProperty { get; set; }
 
         [Fact]
-        public void create_validatingObject_from_variable()
+        public void CreateValidatingObjectFromExpression_Variable_Ok()
         {
-            int vaiableName = 1;
-            ValidatingObject<int> validatingObject = Validate.CreateValidatingObjectFromExpression(() => vaiableName);
+            int variableName = 1;
+            ValidatingObject<int> validatingObject = Validate.CreateValidatingObjectFromExpression(() => variableName);
 
-            Assert.Equal(nameof(vaiableName), validatingObject.Name);
-            Assert.Equal(vaiableName, validatingObject.Value);
+            Assert.Equal(nameof(variableName), validatingObject.Name);
+            Assert.Equal(variableName, validatingObject.Value);
         }
 
         [Fact]
-        public void create_validatingObject_from_constant()
+        public void CreateValidatingObjectFromExpression_Constant_Ok()
         {
             ValidatingObject<int> validatingObject = Validate.CreateValidatingObjectFromExpression(() => 1);
 
@@ -28,8 +28,8 @@ namespace Mynkovv.Validating.Tests
             Assert.Equal(1, validatingObject.Value);
         }
 
-        [Fact]
-        public void create_validatingObject_from_constructor()
+        [Fact] 
+        public void CreateValidatingObjectFromExpression_Constructor_Ok()
         {
             int value = 1;
             ValidatingObject<int?> validatingObject = Validate.CreateValidatingObjectFromExpression(() => new int?(value));
@@ -39,7 +39,7 @@ namespace Mynkovv.Validating.Tests
         }
 
         [Fact]
-        public void create_validatingObject_from_private_property()
+        public void CreateValidatingObjectFromExpression_InstanceProperty_Ok()
         {
             ValidatingObject<int> validatingObject = Validate.CreateValidatingObjectFromExpression(() => PrivateTestProperty);
 
@@ -48,7 +48,7 @@ namespace Mynkovv.Validating.Tests
         }
 
         [Fact]
-        public void create_validatingObject_from_object_property()
+        public void CreateValidatingObjectFromExpression_ObjectProperty_Ok()
         {
             ValidateTest objWithProperty = new ValidateTest();
 

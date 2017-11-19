@@ -87,9 +87,12 @@ namespace Mynkovv.Validating
             return CreateInstance();
         }
 
-        public TInheritInstance LessOrEqualThan()
+        public TInheritInstance LessOrEqualThan(TValue value)
         {
-            throw new NotImplementedException();
+            if (!ConditionChecker.LessOrEqualThan(ValidatingObject, value))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be less or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
+
+            return CreateInstance();
         }
 
         public TInheritInstance InRange(TValue value)
