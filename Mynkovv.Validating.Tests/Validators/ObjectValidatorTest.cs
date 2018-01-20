@@ -214,10 +214,10 @@ namespace Mynkovv.Validating.Tests.Validators
         }
 
         [Fact]
-        public void MoreOrEqualThan_BothValuesNotImplementIComparable()
+        public void MoreOrEqualThan_EqualValuesNotImplementIComparable_Ok()
         {
-            object null1 = new object();
-            CreateObjectValidator(() => null1).MoreOrEqualThan(null1);
+            object notComparable = new object();
+            CreateObjectValidator(() => notComparable).MoreOrEqualThan(notComparable);
         }
 
         // LessThan
@@ -245,10 +245,6 @@ namespace Mynkovv.Validating.Tests.Validators
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => bigValue).LessThan(smallValue));
             Assert.Equal($"Object with name '{nameof(bigValue)}' must be less than '{smallValue}'. Current value: '{bigValue}'", exc.Message);
         }
-
-
-
-
 
         // LessOrEqualThan
 
@@ -282,15 +278,121 @@ namespace Mynkovv.Validating.Tests.Validators
         }
 
         [Fact]
-        public void LessOrEqualThan_BothValuesNotImplementIComparable()
+        public void LessOrEqualThan_EqualValuesNotImplementIComparable_Ok()
         {
-            object null1 = new object();
-            CreateObjectValidator(() => null1).MoreOrEqualThan(null1);
+            object notComparable = new object();
+            CreateObjectValidator(() => notComparable).MoreOrEqualThan(notComparable);
         }
+
+        // InRange
+
+        [Fact]
+        public void InRange_EqualValuesNotImplementIComparable_Ok()
+        {
+            object value = new object();
+            object min = value;
+            object max = value;
+            CreateObjectValidator(() => value).InRange(min, max);
+        }
+
+        [Fact]
+        public void InRange_ValueNotNullAndMinNotNullButMaxIsNull_Exception()
+        {
+            object value = new object();
+            object min = new object();
+            object maxNull = null;
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(min, maxNull));
+            Assert.Equal("Max argument cannot be null", exc.Message);
+        }
+
+        [Fact]
+        public void InRange_ValueNotNullAndMaxNotNullButMinIsNull_Exception()
+        {
+            object value = new object();
+            object minNull = null;
+            object max = new object();
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(minNull, max));
+            Assert.Equal("Min argument cannot be null", exc.Message);
+        }
+
+        [Fact]
+        public void InRange_MinNotNullAndMaxNotNullButValueIsNull_Exception()
+        {
+            object valueNull = null;
+            object min = new object();
+            object max = new object();
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => valueNull).InRange(min, max));
+            Assert.Equal("Validating value cannot be null", exc.Message);
+        }
+
+        [Fact]
+        public void InRange_MinMoreThanMax_Exception()
+        {
+            int value = 1;
+            int min5 = 5;
+            int max3 = 3;
+
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(min5, max3));
+            Assert.Equal("Min cannot be more than max", exc.Message);
+        }
+
+        [Fact]
+        public void InRange_ValueEqualMin_Ok()
+        {
+            int value2 = 2;
+            int min2 = 2;
+            int max3 = 3;
+
+            CreateObjectValidator(() => value2).InRange(min2, max3);
+        }
+
+        [Fact]
+        public void InRange_ValueEqualMax_Ok()
+        {
+            int value3 = 3;
+            int min2 = 2;
+            int max3 = 3;
+
+            CreateObjectValidator(() => value3).InRange(min2, max3);
+        }
+
+        [Fact]
+        public void InRange_ValueMiddleMinMax_Ok()
+        {
+            int value2 = 2;
+            int min1 = 1;
+            int max3 = 3;
+
+            CreateObjectValidator(() => value2).InRange(min1, max3);
+        }
+
+        [Fact]
+        public void InRange_ValueMoreMax_Exception()
+        {
+            int value4 = 4;
+            int min1 = 1;
+            int max3 = 3;
+
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value4).InRange(min1, max3));
+            Assert.Equal($"Object with name '{nameof(value4)}' must be in range from '{min1}' to '{max3}'. Current value: '{value4}'", exc.Message);
+        }
+
+        [Fact]
+        public void InRange_ValueLessMin_Exception()
+        {
+            int value0 = 0;
+            int min1 = 1;
+            int max3 = 3;
+
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value0).InRange(min1, max3));
+            Assert.Equal($"Object with name '{nameof(value0)}' must be in range from '{min1}' to '{max3}'. Current value: '{value0}'", exc.Message);
+        }
+
+        // Интервал должен быть обязательно определен
 
         private static ObjectValidator<T> CreateObjectValidator<T>(Expression<Func<T>> arg)
         {
-            var validatingObject = Validate.CreateValidatingObjectFromExpression(arg);
+            var validatingObject = new Argument<T>(arg);
             return new ObjectValidator<T>(validatingObject);
         }
     }

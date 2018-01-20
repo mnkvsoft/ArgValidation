@@ -6,7 +6,7 @@ namespace Mynkovv.Validating.Validators
 {
     public class ObjectValidator<TValue> : ValidatorBase<TValue, ObjectValidator<TValue>>
     {
-        public ObjectValidator(ValidatingObject<TValue> validatingObject) : base(validatingObject)
+        internal ObjectValidator(Argument<TValue> validatingObject) : base(validatingObject)
         {
         }
 

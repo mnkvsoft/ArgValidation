@@ -6,11 +6,11 @@ namespace Mynkovv.Validating
 {
     public abstract class ValidatorBase<TValue, TInheritInstance>
     {
-        private ValidatingObject<TValue> ValidatingObject { get; }
+        private Argument<TValue> ValidatingObject { get; }
 
         protected abstract TInheritInstance CreateInstance();
 
-        public ValidatorBase(ValidatingObject<TValue> validatingObject)
+        internal ValidatorBase(Argument<TValue> validatingObject)
         {
             ValidatingObject = validatingObject ?? throw new ArgumentNullException(nameof(validatingObject));
         }
@@ -95,9 +95,23 @@ namespace Mynkovv.Validating
             return CreateInstance();
         }
 
-        public TInheritInstance InRange(TValue value)
+        /// <summary>
+        /// 1. Если все три значения равны, то true
+        /// 2. Если один из объектов null, то исключение
+        /// 3. Объект должен реализовать IComparable
+        /// 4. Проверка с помощью IComparable
+        /// 5. Граничные условия
+        /// 6. Середина
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        public TInheritInstance InRange(TValue min, TValue max)
         {
-            throw new NotImplementedException();
+            if (!ConditionChecker.InRange(ValidatingObject, min, max))
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must be in range from '{min}' to '{max}'. Current value: '{ValidatingObject.Value}'");
+
+            return CreateInstance();
         }
 
         public TInheritInstance OnlyValues(params TValue[] values)
