@@ -6,7 +6,7 @@ namespace Mynkovv.Validating.Validators
 {
     public sealed class StringValidator : ValidatorBase<string, StringValidator>
     {
-        internal StringValidator(Argument<string> validatingObject) : base(validatingObject)
+        internal StringValidator(ValidatingObject<string> validatingObject) : base(validatingObject)
         {
         }
 

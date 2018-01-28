@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mynkovv.Validating
 {
     public abstract class ValidatorBase<TValue, TInheritInstance>
     {
-        private Argument<TValue> ValidatingObject { get; }
+        private ValidatingObject<TValue> ValidatingObject { get; }
 
         protected abstract TInheritInstance CreateInstance();
 
-        internal ValidatorBase(Argument<TValue> validatingObject)
+        internal ValidatorBase(ValidatingObject<TValue> validatingObject)
         {
             ValidatingObject = validatingObject ?? throw new ArgumentNullException(nameof(validatingObject));
         }
@@ -95,17 +93,6 @@ namespace Mynkovv.Validating
             return CreateInstance();
         }
 
-        /// <summary>
-        /// 1. Если все три значения равны, то true
-        /// 2. Если один из объектов null, то исключение
-        /// 3. Объект должен реализовать IComparable
-        /// 4. Проверка с помощью IComparable
-        /// 5. Граничные условия
-        /// 6. Середина
-        /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
         public TInheritInstance InRange(TValue min, TValue max)
         {
             if (!ConditionChecker.InRange(ValidatingObject, min, max))

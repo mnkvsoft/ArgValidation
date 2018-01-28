@@ -6,7 +6,7 @@ namespace Mynkovv.Validating.Validators
 {
     public class EnumerableValidator<T> : ValidatorBase<IEnumerable<T>, EnumerableValidator<T>>
     {
-        internal EnumerableValidator(Argument<IEnumerable<T>> validatingObject) : base(validatingObject)
+        internal EnumerableValidator(ValidatingObject<IEnumerable<T>> validatingObject) : base(validatingObject)
         {
         }
 

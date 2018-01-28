@@ -10,7 +10,7 @@ namespace Mynkovv.Validating.Tests
         public void ConstructorFromExpression_Variable_Ok()
         {
             int variableName = 1;
-            Argument<int> validatingObject = new Argument<int>(() => variableName);
+            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => variableName);
 
             Assert.Equal(nameof(variableName), validatingObject.Name);
             Assert.Equal(variableName, validatingObject.Value);
@@ -19,7 +19,7 @@ namespace Mynkovv.Validating.Tests
         [Fact]
         public void ConstructorFromExpression_Constant_Ok()
         {
-            Argument<int> validatingObject = new Argument<int>(() => 1);
+            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => 1);
 
             Assert.Equal($"Static value '1'", validatingObject.Name);
             Assert.Equal(1, validatingObject.Value);
@@ -29,7 +29,7 @@ namespace Mynkovv.Validating.Tests
         public void ConstructorFromExpression_Constructor_Ok()
         {
             int value = 1;
-            Argument<int?> validatingObject = new Argument<int?>(() => new int?(value));
+            ValidatingObject<int?> validatingObject = ValidatingObject<int?>.FromExpression(() => new int?(value));
 
             Assert.Equal($"Static value '{value}'", validatingObject.Name);
             Assert.Equal(new int?(value), validatingObject.Value);
@@ -38,7 +38,7 @@ namespace Mynkovv.Validating.Tests
         [Fact]
         public void ConstructorFromExpression_InstanceProperty_Ok()
         {
-            Argument<int> validatingObject = new Argument<int>(() => PrivateTestProperty);
+            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => PrivateTestProperty);
 
             Assert.Equal(nameof(PrivateTestProperty), validatingObject.Name);
             Assert.Equal(PrivateTestProperty, validatingObject.Value);
@@ -49,7 +49,7 @@ namespace Mynkovv.Validating.Tests
         {
             ValidatingObjectTest objWithProperty = new ValidatingObjectTest();
 
-            Argument<int> validatingObject = new Argument<int>(() => objWithProperty.PrivateTestProperty);
+            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => objWithProperty.PrivateTestProperty);
 
             Assert.Equal(nameof(PrivateTestProperty), validatingObject.Name);
             Assert.Equal(PrivateTestProperty, validatingObject.Value);

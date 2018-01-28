@@ -8,7 +8,7 @@ namespace Mynkovv.Validating
     {
         public static ObjectValidator<T> Obj<T>(Expression<Func<T>> arg)
         {
-            var validatingObject = new Argument<T>(arg);
+            var validatingObject = ValidatingObject<T>.FromExpression(arg);
             return new ObjectValidator<T>(validatingObject);
         }
     }
