@@ -46,6 +46,12 @@ namespace Mynkovv.Validating
                 ThrowExc($"Validating object name cannot be empty");
         }
 
+        internal static void IfArgumentIsNullForOnlyValues<TValue>(TValue[] values, string argName)
+        {
+            if (values == null)
+                ThrowExc($"Argument '{argName}' is null. There are no values to compare");
+        }
+
         private static void ThrowExc(string message)
         {
             throw new InvalidOperationException(message);

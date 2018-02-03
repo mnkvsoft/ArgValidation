@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Linq;
 
 namespace Mynkovv.Validating
 {
     public abstract class ValidatorBase<TValue, TInheritInstance>
     {
-        private ValidatingObject<TValue> ValidatingObject { get; }
+        protected ValidatingObject<TValue> ValidatingObject { get; }
 
         protected abstract TInheritInstance CreateInstance();
 
@@ -103,7 +104,13 @@ namespace Mynkovv.Validating
 
         public TInheritInstance OnlyValues(params TValue[] values)
         {
-            throw new NotImplementedException();
+            if (!ConditionChecker.OnlyValues(ValidatingObject, values))
+            {
+                string valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
+                throw new ArgumentException($"Object with name '{ValidatingObject.Name}' must have only values: {valuesStr}. Current value: '{ValidatingObject.Value}'");
+            }
+
+            return CreateInstance();
         }
     }
 }

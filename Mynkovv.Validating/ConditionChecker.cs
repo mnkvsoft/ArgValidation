@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Mynkovv.Validating
 {
@@ -70,7 +71,13 @@ namespace Mynkovv.Validating
             InnerExceptionThrower.IfNotImplementIComparable(validatingObject);
             InnerExceptionThrower.IfNotRange(min, max);
 
-            return validatingObject.Value.CompareWith(min) >= 0 && validatingObject.Value.CompareWith(max) <= 0;
+            return validatingObject.Value.InRange(min, max);
+        }
+
+        internal static bool OnlyValues<TValue>(ValidatingObject<TValue> validatingObject, TValue[] values)
+        {
+            InnerExceptionThrower.IfArgumentIsNullForOnlyValues(values, nameof(values));
+            return values.Any(x => IsEqual(validatingObject.Value, x));
         }
     }
 }

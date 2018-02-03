@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Mynkovv.Validating
 {
-    internal sealed class ValidatingObject<TValue>
+    public sealed class ValidatingObject<TValue>
     {
         public string Name { get; }
         public TValue Value { get; }
