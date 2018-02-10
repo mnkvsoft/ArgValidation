@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace Mynkovv.Validating.Tests.Validators
+namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
 {
     public partial class ObjectValidatorTest
     {

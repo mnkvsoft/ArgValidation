@@ -2,7 +2,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Mynkovv.Validating.Tests.Validators
+namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
 {
     public partial class ObjectValidatorTest
     {
