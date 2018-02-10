@@ -12,20 +12,20 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         }
 
         [Fact]
-        public void MoreThan_0MoreThan1_ArgumentException()
+        public void MoreThan_0MoreThan1_ArgumentOutOfRangeException()
         {
             int argEqual0 = 0;
             int valueEqual1 = 1;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => argEqual0).MoreThan(valueEqual1));
-            Assert.Equal($"Object with name '{nameof(argEqual0)}' must be more than '{valueEqual1}'", exc.Message);
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => argEqual0).MoreThan(valueEqual1));
+            Assert.Equal($"Object with name '{nameof(argEqual0)}' must be more than '{valueEqual1}'. Current value: '{argEqual0}'", exc.Message);
         }
 
         [Fact]
-        public void MoreThan_1MoreThan1_ArgumentException()
+        public void MoreThan_1MoreThan1_ArgumentOutOfRangeException()
         {
             int value1 = 1;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value1).MoreThan(value1));
-            Assert.Equal($"Object with name '{nameof(value1)}' must be more than '{value1}'", exc.Message);
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value1).MoreThan(value1));
+            Assert.Equal($"Object with name '{nameof(value1)}' must be more than '{value1}'. Current value: '{value1}'", exc.Message);
         }
 
         [Fact]

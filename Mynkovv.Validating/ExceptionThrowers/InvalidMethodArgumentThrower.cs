@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Mynkovv.Validating
+namespace Mynkovv.Validating.ExceptionThrowers
 {
-    internal static class InnerExceptionThrower
+    internal static class InvalidMethodArgumentThrower
     {
         internal static void IfArgumentIsNull<T>(T arg, string argName)
         {
@@ -38,12 +38,6 @@ namespace Mynkovv.Validating
         {
             if (min.CompareWith(max) > 0)
                 ThrowExc($"Argument '{nameof(min)}' cannot be more than '{nameof(max)}'. Cannot define range");
-        }
-
-        internal static void IfValidatingObjectNameIsEmpty(string validatingObjectName)
-        {
-            if (string.IsNullOrWhiteSpace(validatingObjectName))
-                ThrowExc($"Validating object name cannot be empty");
         }
 
         internal static void IfArgumentIsNullForOnlyValues<TValue>(TValue[] values, string argName)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mynkovv.Validating.ExceptionThrowers;
+using System;
 using System.Linq;
 
 namespace Mynkovv.Validating
@@ -22,9 +23,9 @@ namespace Mynkovv.Validating
 
         public static bool MoreThan<T>(ValidatingObject<T> validatingObject, T moreThan)
         {
-            InnerExceptionThrower.IfArgumentIsNull(moreThan, nameof(moreThan));
-            InnerExceptionThrower.IfNullForComparable(validatingObject);
-            InnerExceptionThrower.IfNotImplementIComparable(validatingObject);
+            InvalidMethodArgumentThrower.IfArgumentIsNull(moreThan, nameof(moreThan));
+            InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
+            InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
             return validatingObject.Value.CompareWith<T>(moreThan) > 0;
         }
@@ -42,9 +43,9 @@ namespace Mynkovv.Validating
 
         public static bool LessThan<TValue>(ValidatingObject<TValue> validatingObject, TValue lessThan)
         {
-            InnerExceptionThrower.IfArgumentIsNull(lessThan, nameof(lessThan));
-            InnerExceptionThrower.IfNullForComparable(validatingObject);
-            InnerExceptionThrower.IfNotImplementIComparable(validatingObject);
+            InvalidMethodArgumentThrower.IfArgumentIsNull(lessThan, nameof(lessThan));
+            InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
+            InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
             return validatingObject.Value.CompareWith<TValue>(lessThan) < 0;
         }
@@ -65,18 +66,18 @@ namespace Mynkovv.Validating
             if (object.Equals(validatingObject.Value, min) && object.Equals(validatingObject.Value, max))
                 return true;
 
-            InnerExceptionThrower.IfArgumentIsNullForRange(max, nameof(max));
-            InnerExceptionThrower.IfArgumentIsNullForRange(min, nameof(min));
-            InnerExceptionThrower.IfNullForRange(validatingObject, min, max);
-            InnerExceptionThrower.IfNotImplementIComparable(validatingObject);
-            InnerExceptionThrower.IfNotRange(min, max);
+            InvalidMethodArgumentThrower.IfArgumentIsNullForRange(max, nameof(max));
+            InvalidMethodArgumentThrower.IfArgumentIsNullForRange(min, nameof(min));
+            InvalidMethodArgumentThrower.IfNullForRange(validatingObject, min, max);
+            InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
+            InvalidMethodArgumentThrower.IfNotRange(min, max);
 
             return validatingObject.Value.InRange(min, max);
         }
 
         internal static bool OnlyValues<TValue>(ValidatingObject<TValue> validatingObject, TValue[] values)
         {
-            InnerExceptionThrower.IfArgumentIsNullForOnlyValues(values, nameof(values));
+            InvalidMethodArgumentThrower.IfArgumentIsNullForOnlyValues(values, nameof(values));
             return values.Any(x => IsEqual(validatingObject.Value, x));
         }
     }

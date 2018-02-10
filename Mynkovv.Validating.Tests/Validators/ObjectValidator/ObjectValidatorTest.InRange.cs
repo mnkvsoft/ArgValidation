@@ -45,24 +45,24 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         }
 
         [Fact]
-        public void InRange_ValidatingObjectMoreMax_ArgumentException()
+        public void InRange_ValidatingObjectMoreMax_ArgumentOutOfRangeException()
         {
             int value4 = 4;
             int min1 = 1;
             int max3 = 3;
 
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value4).InRange(min1, max3));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value4).InRange(min1, max3));
             Assert.Equal($"Object with name '{nameof(value4)}' must be in range from '{min1}' to '{max3}'. Current value: '{value4}'", exc.Message);
         }
 
         [Fact]
-        public void InRange_ValueLessMin_ArgumentException()
+        public void InRange_ValueLessMin_ArgumentOutOfRangeException()
         {
             int value0 = 0;
             int min1 = 1;
             int max3 = 3;
 
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value0).InRange(min1, max3));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value0).InRange(min1, max3));
             Assert.Equal($"Object with name '{nameof(value0)}' must be in range from '{min1}' to '{max3}'. Current value: '{value0}'", exc.Message);
         }
 

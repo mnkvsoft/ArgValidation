@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mynkovv.Validating.ExceptionThrowers;
+using System;
 using System.Linq.Expressions;
 
 namespace Mynkovv.Validating
@@ -10,7 +11,8 @@ namespace Mynkovv.Validating
 
         private ValidatingObject(string name, TValue value)
         {
-            InnerExceptionThrower.IfValidatingObjectNameIsEmpty(name);
+            if (string.IsNullOrEmpty(name))
+                FrameworkErrorThrower.ArgumentException("Validating object name cannot be empty");
 
             Name = name;
             Value = value;

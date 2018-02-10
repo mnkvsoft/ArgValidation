@@ -19,11 +19,11 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         }
 
         [Fact]
-        public void MoreOrEqualThan_3MoreOrEqualThan4_ArgumentException()
+        public void MoreOrEqualThan_3MoreOrEqualThan4_ArgumentOutOfRangeException()
         {
             int value3 = 3;
             int value4 = 4;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value3).MoreOrEqualThan(value4));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value3).MoreOrEqualThan(value4));
             Assert.Equal($"Object with name '{nameof(value3)}' must be more or equal than '{value4}'. Current value: '{value3}'", exc.Message);
         }
 

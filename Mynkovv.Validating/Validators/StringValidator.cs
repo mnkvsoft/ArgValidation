@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mynkovv.Validating.ExceptionThrowers;
+using System;
 
 namespace Mynkovv.Validating.Validators
 {
@@ -16,7 +17,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NullOrEmpty()
         {
             if (!string.IsNullOrEmpty(ValidatingObject.Value))
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or null. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or null. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -24,7 +25,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NotNullOrEmpty()
         {
             if (string.IsNullOrEmpty(ValidatingObject.Value))
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or null. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or null. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -32,7 +33,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NullOrWhitespace()
         {
             if (!string.IsNullOrWhiteSpace(ValidatingObject.Value))
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or whitespace. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or whitespace. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -40,7 +41,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NotNullOrWhitespace()
         {
             if (string.IsNullOrWhiteSpace(ValidatingObject.Value))
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or whitespace. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or whitespace. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -48,7 +49,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator LengthEqual(int value)
         {
             if (ValidatingObject.Value == null || ValidatingObject.Value.Length != value)
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be length {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -56,7 +57,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator LengthMoreThan(int value)
         {
             if (ValidatingObject.Value == null || ValidatingObject.Value.Length <= value)
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be length more than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length more than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -64,7 +65,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator LengthMoreOrEqualThan(int value)
         {
             if (ValidatingObject.Value == null || ValidatingObject.Value.Length < value)
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be length more or equals than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length more or equals than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -72,7 +73,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator LengthLessThan(int value)
         {
             if (ValidatingObject.Value == null || ValidatingObject.Value.Length >= value)
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be length less than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length less than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -80,17 +81,17 @@ namespace Mynkovv.Validating.Validators
         public StringValidator LengthLessOrEqualThan(int value)
         {
             if (ValidatingObject.Value == null || ValidatingObject.Value.Length > value)
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be length less or equals than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length less or equals than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
 
         public StringValidator LengthInRange(int min, int max)
         {
-            InnerExceptionThrower.IfNotRange(min, max);
+            InvalidMethodArgumentThrower.IfNotRange(min, max);
 
             if (ValidatingObject.Value == null || !ValidatingObject.Value.Length.InRange(min, max))
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must be length in range {min} - {max}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length in range {min} - {max}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
 
 
             return this;
@@ -99,7 +100,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator Contains(string value)
         {
             if (!Contains(ValidatingObject, value))
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must contains {GetStringValueForMessage(value)}. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must contains {GetStringValueForMessage(value)}. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -107,7 +108,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NotContains(string value)
         {
             if (Contains(ValidatingObject, value))
-                throw new ArgumentException($"String with name '{ValidatingObject.Name}' must not contains {GetStringValueForMessage(value)}. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must not contains {GetStringValueForMessage(value)}. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }

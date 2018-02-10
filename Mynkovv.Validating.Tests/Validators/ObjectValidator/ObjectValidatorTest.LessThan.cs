@@ -12,20 +12,20 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         }
 
         [Fact]
-        public void LessThan_EqualValues_ArgumentException()
+        public void LessThan_EqualValues_ArgumentOutOfRangeException()
         {
             int val = 5;
             int equalVal = val;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => val).LessThan(equalVal));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => val).LessThan(equalVal));
             Assert.Equal($"Object with name '{nameof(val)}' must be less than '{equalVal}'. Current value: '{val}'", exc.Message);
         }
 
         [Fact]
-        public void LessThan_5LessThan4_ArgumentException()
+        public void LessThan_5LessThan4_ArgumentOutOfRangeException()
         {
             int value5 = 5;
             int value4 = 4;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value5).LessThan(value4));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value5).LessThan(value4));
             Assert.Equal($"Object with name '{nameof(value5)}' must be less than '{value4}'. Current value: '{value5}'", exc.Message);
         }
 
