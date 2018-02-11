@@ -13,5 +13,10 @@ namespace Mynkovv.Validating.ExceptionThrowers
         {
             throw new ArgumentNullException(paramName);
         }
+
+        internal static void ArgumentException(string message, string paramName)
+        {
+            throw new ArgumentException(message, paramName);
+        }
     }
 }

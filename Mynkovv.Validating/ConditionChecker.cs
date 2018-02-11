@@ -23,7 +23,7 @@ namespace Mynkovv.Validating
 
         public static bool MoreThan<T>(ValidatingObject<T> validatingObject, T moreThan)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(moreThan, nameof(moreThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNullForCompare(moreThan, nameof(moreThan));
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
             InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
@@ -43,7 +43,7 @@ namespace Mynkovv.Validating
 
         public static bool LessThan<TValue>(ValidatingObject<TValue> validatingObject, TValue lessThan)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(lessThan, nameof(lessThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNullForCompare(lessThan, nameof(lessThan));
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
             InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 

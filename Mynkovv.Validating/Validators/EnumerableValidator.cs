@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Mynkovv.Validating.ExceptionThrowers;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mynkovv.Validating.Validators
 {
@@ -16,7 +18,11 @@ namespace Mynkovv.Validating.Validators
 
         public EnumerableValidator<T> CountEqual(int count)
         {
-            throw new NotImplementedException();
+            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
+
+            int currentCount = ValidatingObject.Value.Count();
+            if (currentCount != count)
+                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains {count} elements. Current count elements: {currentCount}");
 
             return CreateInstance();
         }

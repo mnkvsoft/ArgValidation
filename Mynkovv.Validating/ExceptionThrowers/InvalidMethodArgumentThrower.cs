@@ -4,15 +4,15 @@ namespace Mynkovv.Validating.ExceptionThrowers
 {
     internal static class InvalidMethodArgumentThrower
     {
-        internal static void IfArgumentIsNull<T>(T arg, string argName)
+        internal static void IfArgumentIsNullForCompare<T>(T arg, string argName)
         {
-            if (object.ReferenceEquals(null, arg))
+            if (object.ReferenceEquals(arg, null))
                 ThrowExc($"Argument '{argName}' is null. Сannot compare null object");
         }
 
         internal static void IfNullForComparable<T>(ValidatingObject<T> arg1)
         {
-            if (arg1.Value == null)
+            if (object.ReferenceEquals(arg1.Value, null))
                 ThrowExc($"Object with name '{arg1.Name}' is null. Сannot compare null object");
         }
 
@@ -42,8 +42,14 @@ namespace Mynkovv.Validating.ExceptionThrowers
 
         internal static void IfArgumentIsNullForOnlyValues<TValue>(TValue[] values, string argName)
         {
-            if (values == null)
+            if (object.ReferenceEquals(values, null))
                 ThrowExc($"Argument '{argName}' is null. There are no values to compare");
+        }
+
+        internal static void IfNullForCount<T>(ValidatingObject<T> validatingObject)
+        {
+            if (object.ReferenceEquals(validatingObject.Value, null))
+                ThrowExc($"Object with name '{validatingObject.Name}' is null. Сannot get count elements from null object");
         }
 
         private static void ThrowExc(string message)
