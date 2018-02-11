@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Mynkovv.Validating.ExceptionThrowers;
+using System;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Mynkovv.Validating.Reflection
 {
     internal static class ReflectionObjectCreator
     {
-        public static T InvokeConstructor<T>(params ConstructorParameter[] parameters)
+        internal static T InvokeConstructor<T>(params ConstructorParameter[] parameters)
         {
             Type t = typeof(T);
             ConstructorInfo[] constructors = t.GetConstructors();
@@ -35,19 +37,19 @@ namespace Mynkovv.Validating.Reflection
 
         private static string GetExceptionMessage<T>(ConstructorParameter[] parameters)
         {
-            string message = $"Failed to create object. Constructor {typeof(T).Name}(";
+            var result = new StringBuilder($"Failed to create object. Constructor {typeof(T).Name}(");
 
             for (int i = 0; i < parameters.Length; i++)
             {
                 if (i != 0)
-                    message += ", ";
+                    result.Append(", ");
 
                 var par = parameters[i];
-                message += $"{par.ParameterType.Name} {par.Name}";
+                result.Append($"{par.ParameterType.Name} {par.Name}");
             }
 
-            message += ") was not found";
-            return message;
+            result.Append(") was not found");
+            return result.ToString();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Mynkovv.Validating.Validators
 
             int currentCount = ValidatingObject.Value.Count();
             if (currentCount != count)
-                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains {count} elements. Current count elements: {currentCount}");
 
             return CreateInstance();
         }

@@ -1,4 +1,5 @@
 ﻿using Mynkovv.Validating.ExceptionThrowers;
+using Mynkovv.Validating.Reflection;
 using System;
 using System.Linq;
 
@@ -13,23 +14,43 @@ namespace Mynkovv.Validating
         internal ValidatorBase(ValidatingObject<TValue> validatingObject)
         {
             if (validatingObject == null)
-                FrameworkErrorThrower.ArgumentNullException(nameof(validatingObject));
+                throw new ArgumentNullException(nameof(validatingObject));
 
             ValidatingObject = validatingObject;
         }
 
+        # region Default
+
         public TInheritInstance Default()
         {
+            return Default(() => 
+                new ArgumentException($"Object with name '{ValidatingObject.Name}' must be default value. Current value: '{ValidatingObject.Value}'"));
+        }
+
+        public TInheritInstance Default<TException>(string message) where TException : Exception
+        {
+            return Default(() => ReflectionObjectCreator.InvokeConstructor<TException>(
+                    new ConstructorParameter(
+                        name: "message",
+                        value: message,
+                        parameterType: typeof(string))
+                    ));
+        }
+
+        public TInheritInstance Default<TException>(Func<TException> createExceptionFunc) where TException : Exception
+        {
             if (!ConditionChecker.IsDefault(ValidatingObject.Value))
-                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be default value. Current value: '{ValidatingObject.Value}'");
+                throw createExceptionFunc();
 
             return CreateInstance();
         }
 
+        # endregion
+
         public TInheritInstance NotDefault()
         {
             if (ConditionChecker.IsDefault(ValidatingObject.Value))
-                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not default value");
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not default value");
 
             return CreateInstance();
         }
@@ -37,7 +58,7 @@ namespace Mynkovv.Validating
         public TInheritInstance Null()
         {
             if (!ConditionChecker.IsNull(ValidatingObject.Value))
-                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be null. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be null. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -45,7 +66,7 @@ namespace Mynkovv.Validating
         public TInheritInstance NotNull()
         {
             if (ConditionChecker.IsNull(ValidatingObject.Value))
-                ValidationErrorThrower.ArgumentNullException(ValidatingObject.Name);
+                ValidationErrorExceptionThrower.ArgumentNullException(ValidatingObject.Name);
 
             return CreateInstance();
         }
@@ -53,7 +74,7 @@ namespace Mynkovv.Validating
         public TInheritInstance Equal(TValue value)
         {
             if (!ConditionChecker.IsEqual(ValidatingObject.Value, value))
-                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -61,7 +82,7 @@ namespace Mynkovv.Validating
         public TInheritInstance NotEqual(TValue value)
         {
             if (ConditionChecker.IsEqual(ValidatingObject.Value, value))
-                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not equal '{value}'");
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not equal '{value}'");
 
             return CreateInstance();
         }
@@ -69,7 +90,7 @@ namespace Mynkovv.Validating
         public TInheritInstance MoreThan(TValue value)
         {
             if (!ConditionChecker.MoreThan(ValidatingObject, value))
-                ValidationErrorThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more than '{value}'. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more than '{value}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -77,7 +98,7 @@ namespace Mynkovv.Validating
         public TInheritInstance MoreOrEqualThan(TValue value)
         {
             if (!ConditionChecker.MoreOrEqualThan(ValidatingObject, value))
-                ValidationErrorThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -85,7 +106,7 @@ namespace Mynkovv.Validating
         public TInheritInstance LessThan(TValue value)
         {
             if (!ConditionChecker.LessThan(ValidatingObject, value))
-                ValidationErrorThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less than '{value}'. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less than '{value}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -93,7 +114,7 @@ namespace Mynkovv.Validating
         public TInheritInstance LessOrEqualThan(TValue value)
         {
             if (!ConditionChecker.LessOrEqualThan(ValidatingObject, value))
-                ValidationErrorThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -101,7 +122,7 @@ namespace Mynkovv.Validating
         public TInheritInstance InRange(TValue min, TValue max)
         {
             if (!ConditionChecker.InRange(ValidatingObject, min, max))
-                ValidationErrorThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be in range from '{min}' to '{max}'. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be in range from '{min}' to '{max}'. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
         }
@@ -111,7 +132,7 @@ namespace Mynkovv.Validating
             if (!ConditionChecker.OnlyValues(ValidatingObject, values))
             {
                 string valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
-                ValidationErrorThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must have only values: {valuesStr}. Current value: '{ValidatingObject.Value}'");
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must have only values: {valuesStr}. Current value: '{ValidatingObject.Value}'");
             }
 
             return CreateInstance();

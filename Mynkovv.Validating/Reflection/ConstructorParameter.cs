@@ -1,5 +1,4 @@
-﻿using Mynkovv.Validating.ExceptionThrowers;
-using System;
+﻿using System;
 
 namespace Mynkovv.Validating.Reflection
 {
@@ -12,10 +11,10 @@ namespace Mynkovv.Validating.Reflection
         public ConstructorParameter(string name, object value, Type parameterType)
         {
             if (string.IsNullOrWhiteSpace(name))
-                FrameworkErrorThrower.ArgumentException($"Argument {nameof(name)} cannot be empty, null or whitespaces", nameof(name));
+                throw new ArgumentException($"Argument {nameof(name)} cannot be empty, null or whitespaces", nameof(name));
 
             if (parameterType == null)
-                FrameworkErrorThrower.ArgumentNullException(nameof(parameterType));
+                throw new ArgumentNullException(nameof(parameterType));
 
             Name = name;
             Value = value;

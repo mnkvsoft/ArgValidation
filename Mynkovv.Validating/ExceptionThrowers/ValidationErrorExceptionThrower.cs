@@ -2,14 +2,14 @@
 
 namespace Mynkovv.Validating.ExceptionThrowers
 {
-    internal static class ValidationErrorThrower
+    internal static class ValidationErrorExceptionThrower
     {
-        public static void ArgumentOutOfRangeException(string message)
+        internal static void ArgumentOutOfRangeException(string message)
         {
             throw new ArgumentOutOfRangeException("", message);
         }
 
-        public static void ArgumentException(string message)
+        internal static void ArgumentException(string message)
         {
             throw new ArgumentException(message);
         }
