@@ -1,7 +1,6 @@
 ﻿using Mynkovv.Validating.ExceptionThrowers;
 using Mynkovv.Validating.Reflection;
 using System;
-using System.Linq;
 
 namespace Mynkovv.Validating
 {
@@ -23,8 +22,7 @@ namespace Mynkovv.Validating
 
         public TInheritInstance Default()
         {
-            return Default(() => 
-                new ArgumentException($"Object with name '{ValidatingObject.Name}' must be default value. Current value: '{ValidatingObject.Value}'"));
+            return Default(() => new ArgumentException($"Object with name '{ValidatingObject.Name}' must be default value. Current value: '{ValidatingObject.Value}'"));
         }
 
         public TInheritInstance Default<TException>(string message) where TException : Exception
@@ -83,57 +81,6 @@ namespace Mynkovv.Validating
         {
             if (ConditionChecker.IsEqual(ValidatingObject.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not equal '{value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance MoreThan(TValue value)
-        {
-            if (!ConditionChecker.MoreThan(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more than '{value}'. Current value: '{ValidatingObject.Value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance MoreOrEqualThan(TValue value)
-        {
-            if (!ConditionChecker.MoreOrEqualThan(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance LessThan(TValue value)
-        {
-            if (!ConditionChecker.LessThan(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less than '{value}'. Current value: '{ValidatingObject.Value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance LessOrEqualThan(TValue value)
-        {
-            if (!ConditionChecker.LessOrEqualThan(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance InRange(TValue min, TValue max)
-        {
-            if (!ConditionChecker.InRange(ValidatingObject, min, max))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be in range from '{min}' to '{max}'. Current value: '{ValidatingObject.Value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance OnlyValues(params TValue[] values)
-        {
-            if (!ConditionChecker.OnlyValues(ValidatingObject, values))
-            {
-                string valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must have only values: {valuesStr}. Current value: '{ValidatingObject.Value}'");
-            }
 
             return CreateInstance();
         }

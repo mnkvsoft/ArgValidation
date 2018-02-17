@@ -21,7 +21,7 @@ namespace Mynkovv.Validating.Validators
             InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
             int currentCount = ValidatingObject.Value.Count();
-            if (currentCount != count)
+            if (!(currentCount == count))
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains {count} elements. Current count elements: {currentCount}");
 
             return CreateInstance();
@@ -29,37 +29,77 @@ namespace Mynkovv.Validating.Validators
 
         public EnumerableValidator<T> CountNotEqual(int count)
         {
-            throw new NotImplementedException();
+            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
-            return CreateInstance();
+            int currentCount = ValidatingObject.Value.Count();
+            if (!(currentCount != count))
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' not must contains {count} elements");
+
+            return this;
         }
 
         public EnumerableValidator<T> CountMoreThan(int count)
         {
-            throw new NotImplementedException();
+            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
-            return CreateInstance();
+            int currentCount = ValidatingObject.Value.Count();
+            if (!(currentCount > count))
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains more than {count} elements. Current count elements: {currentCount}");
+
+            return this;
         }
 
         public EnumerableValidator<T> CountMoreOrEqualThan(int count)
         {
-            throw new NotImplementedException();
+            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
-            return CreateInstance();
+            int currentCount = ValidatingObject.Value.Count();
+            if (!(currentCount >= count))
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
+
+            return this;
         }
 
         public EnumerableValidator<T> CountLessThan(int count)
         {
-            throw new NotImplementedException();
+            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
-            return CreateInstance();
+            int currentCount = ValidatingObject.Value.Count();
+            if (!(currentCount < count))
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains less than {count} elements. Current count elements: {currentCount}");
+
+            return this;
         }
 
         public EnumerableValidator<T> CountLessOrEqualThan(int count)
         {
-            throw new NotImplementedException();
+            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
-            return CreateInstance();
+            int currentCount = ValidatingObject.Value.Count();
+            if (!(currentCount <= count))
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
+
+            return this;
+        }
+
+        public EnumerableValidator<T> Contains(int count)
+        {
+            return this;
+        }
+
+        public EnumerableValidator<T> NotContains(int count)
+        {
+            return this;
+        }
+
+        public EnumerableValidator<T> Equivalent(IEnumerable<T> otherEnumerable)
+        {
+            return this;
+        }
+
+        public EnumerableValidator<T> EquivalentWithoutOrder(IEnumerable<T> otherEnumerable)
+        {
+            return this;
         }
     }
 }
