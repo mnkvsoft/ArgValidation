@@ -17,7 +17,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NullOrEmpty()
         {
             if (!string.IsNullOrEmpty(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or null. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -25,7 +25,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NotNullOrEmpty()
         {
             if (string.IsNullOrEmpty(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or null. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -33,7 +33,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NullOrWhitespace()
         {
             if (!string.IsNullOrWhiteSpace(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or whitespace. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -41,7 +41,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NotNullOrWhitespace()
         {
             if (string.IsNullOrWhiteSpace(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or whitespace. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -100,7 +100,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator Contains(string value)
         {
             if (!Contains(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must contains {GetStringValueForMessage(value)}. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -108,7 +108,7 @@ namespace Mynkovv.Validating.Validators
         public StringValidator NotContains(string value)
         {
             if (Contains(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must not contains {GetStringValueForMessage(value)}. Current value: {GetStringValueForMessage(ValidatingObject.Value)}");
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must not contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
 
             return this;
         }
@@ -124,14 +124,6 @@ namespace Mynkovv.Validating.Validators
             }
 
             return value == null;
-        }
-
-        private static string GetStringValueForMessage(string str)
-        {
-            if (str == null)
-                return "null";
-
-            return $"'{str}'";
         }
 
         private static string GetLengthValueForMessage(string value)

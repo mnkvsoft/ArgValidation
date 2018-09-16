@@ -82,12 +82,17 @@ namespace Mynkovv.Validating.Validators
             return this;
         }
 
-        public EnumerableValidator<T> Contains(int count)
+        public EnumerableValidator<T> Contains(T elem)
         {
+            InvalidMethodArgumentThrower.IfNullForContains(ValidatingObject);
+
+            if (!ValidatingObject.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+
             return this;
         }
 
-        public EnumerableValidator<T> NotContains(int count)
+        public EnumerableValidator<T> NotContains(T elem)
         {
             return this;
         }
@@ -97,7 +102,7 @@ namespace Mynkovv.Validating.Validators
             return this;
         }
 
-        public EnumerableValidator<T> EquivalentWithoutOrder(IEnumerable<T> otherEnumerable)
+        public EnumerableValidator<T> ContainsOnlyValues(IEnumerable<T> otherEnumerable)
         {
             return this;
         }

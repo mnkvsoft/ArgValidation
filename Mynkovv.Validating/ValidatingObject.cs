@@ -16,7 +16,7 @@ namespace Mynkovv.Validating
             Name = name;
             Value = value;
         }
-
+        
         public static ValidatingObject<TValue> FromExpression(Expression<Func<TValue>> expression)
         {
             Func<TValue> func = expression.Compile();

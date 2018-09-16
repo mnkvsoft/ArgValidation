@@ -15,7 +15,7 @@ namespace Mynkovv.Validating.Tests
 
         //    var value = new Argument<object>(() => new object());
         //    InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => ConditionChecker.Compare(validatingObject, value));
-        //    Assert.Equal($"Object with name '{validatingObject.Name}' is null. Сannot compare null object", exc.Message);
+        //    Assert.Equal($"Object with name '{validatingObject.Name}' is null. Сan not compare null object", exc.Message);
         //}
 
         //[Fact]
@@ -33,7 +33,7 @@ namespace Mynkovv.Validating.Tests
         //    var validatingObject = new Argument<object>(() => new object());
         //    var value = new Argument<object>(() => new object());
         //    InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => ConditionChecker.Compare(validatingObject, value));
-        //    Assert.Equal($"Object with name '{validatingObject.Name}' not implement interface '{typeof(IComparable<object>)}'. Сannot compare objects", exc.Message);
+        //    Assert.Equal($"Object with name '{validatingObject.Name}' not implement interface '{typeof(IComparable<object>)}'. Сan not compare objects", exc.Message);
         //}
     }
 }

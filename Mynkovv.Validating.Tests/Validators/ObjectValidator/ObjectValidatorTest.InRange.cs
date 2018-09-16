@@ -115,7 +115,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
             object max = 3;
 
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(min, max));
-            Assert.Equal($"Object with name '{nameof(value)}' not implement interface '{typeof(IComparable<object>)}'. Сannot compare objects", exc.Message);
+            Assert.Equal($"Object with name '{nameof(value)}' not implement interface '{typeof(IComparable<object>)}'. Сan not compare objects", exc.Message);
         }
     }
 }

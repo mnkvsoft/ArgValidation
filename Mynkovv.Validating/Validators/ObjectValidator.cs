@@ -20,7 +20,7 @@ namespace Mynkovv.Validating.Validators
             if (!ConditionChecker.MoreThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more than '{value}'. Current value: '{ValidatingObject.Value}'");
 
-            return CreateInstance();
+            return this;
         }
 
         public ObjectValidator<TValue> MoreOrEqualThan(TValue value)
@@ -28,7 +28,7 @@ namespace Mynkovv.Validating.Validators
             if (!ConditionChecker.MoreOrEqualThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be more or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
 
-            return CreateInstance();
+            return this;
         }
 
         public ObjectValidator<TValue> LessThan(TValue value)
@@ -36,7 +36,7 @@ namespace Mynkovv.Validating.Validators
             if (!ConditionChecker.LessThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less than '{value}'. Current value: '{ValidatingObject.Value}'");
 
-            return CreateInstance();
+            return this;
         }
 
         public ObjectValidator<TValue> LessOrEqualThan(TValue value)
@@ -44,7 +44,7 @@ namespace Mynkovv.Validating.Validators
             if (!ConditionChecker.LessOrEqualThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be less or equal than '{value}'. Current value: '{ValidatingObject.Value}'");
 
-            return CreateInstance();
+            return this;
         }
 
         public ObjectValidator<TValue> InRange(TValue min, TValue max)
@@ -52,7 +52,7 @@ namespace Mynkovv.Validating.Validators
             if (!ConditionChecker.InRange(ValidatingObject, min, max))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException($"Object with name '{ValidatingObject.Name}' must be in range from '{min}' to '{max}'. Current value: '{ValidatingObject.Value}'");
 
-            return CreateInstance();
+            return this;
         }
 
         public ObjectValidator<TValue> OnlyValues(params TValue[] values)
@@ -63,7 +63,7 @@ namespace Mynkovv.Validating.Validators
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must have only values: {valuesStr}. Current value: '{ValidatingObject.Value}'");
             }
 
-            return CreateInstance();
+            return this;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Mynkovv.Validating.Tests.Validators.EnumerableValidator
         {
             object[] nullValue = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateEnumerableValidator(() => nullValue).CountLessThan(0));
-            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сannot get count elements from null object", exc.Message);
+            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
         [Fact]

@@ -47,7 +47,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
             object notImplementIComparable = new object();
             object lessOrEqualThanValue = new object();
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => notImplementIComparable).LessOrEqualThan(lessOrEqualThanValue));
-            Assert.Equal($"Object with name '{nameof(notImplementIComparable)}' not implement interface '{typeof(IComparable<object>)}'. Сannot compare objects", exc.Message);
+            Assert.Equal($"Object with name '{nameof(notImplementIComparable)}' not implement interface '{typeof(IComparable<object>)}'. Сan not compare objects", exc.Message);
         }
     }
 }

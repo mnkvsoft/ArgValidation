@@ -13,7 +13,7 @@ namespace Mynkovv.Validating
 
         public static bool IsNull(object obj)
         {
-            return object.ReferenceEquals(obj, null);
+            return obj.IsNull();
         }
 
         public static bool IsEqual(object obj1, object obj2)
@@ -23,7 +23,7 @@ namespace Mynkovv.Validating
 
         public static bool MoreThan<T>(ValidatingObject<T> validatingObject, T moreThan)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNullForCompare(moreThan, nameof(moreThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNullForComparable(moreThan, nameof(moreThan));
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
             InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
@@ -43,7 +43,7 @@ namespace Mynkovv.Validating
 
         public static bool LessThan<TValue>(ValidatingObject<TValue> validatingObject, TValue lessThan)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNullForCompare(lessThan, nameof(lessThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNullForComparable(lessThan, nameof(lessThan));
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
             InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 

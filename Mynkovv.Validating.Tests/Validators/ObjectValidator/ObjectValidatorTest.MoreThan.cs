@@ -34,7 +34,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
             object nullValue = null;
             object moreThanValue = new object();
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => nullValue).MoreThan(moreThanValue));
-            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сannot compare null object", exc.Message);
+            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not compare null object", exc.Message);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
             object value = new object();
             object moreThanNull = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).MoreThan(moreThanNull));
-            Assert.Equal($"Argument 'moreThan' is null. Сannot compare null object", exc.Message);
+            Assert.Equal($"Argument 'moreThan' is null. Сan not compare null object", exc.Message);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Mynkovv.Validating.Tests.Validators.ObjectValidator
         {
             object notImplementIComparable = new object();
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => notImplementIComparable).MoreThan(notImplementIComparable));
-            Assert.Equal($"Object with name '{nameof(notImplementIComparable)}' not implement interface '{typeof(IComparable<object>)}'. Сannot compare objects", exc.Message);
+            Assert.Equal($"Object with name '{nameof(notImplementIComparable)}' not implement interface '{typeof(IComparable<object>)}'. Сan not compare objects", exc.Message);
         }
     }
 }
