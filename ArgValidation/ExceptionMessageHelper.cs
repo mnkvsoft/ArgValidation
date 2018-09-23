@@ -4,7 +4,7 @@
     {
         public static string GetStringValueForMessage<T>(T value)
         {
-            if (value.IsNull())
+            if (value == null)
                 return "null";
 
             return $"'{value}'";

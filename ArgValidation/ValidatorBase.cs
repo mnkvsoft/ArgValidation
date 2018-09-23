@@ -1,6 +1,6 @@
 ﻿using ArgValidation.ExceptionThrowers;
-using ArgValidation.Reflection;
 using System;
+using ArgValidation.Reflection;
 
 namespace ArgValidation
 {
@@ -55,7 +55,7 @@ namespace ArgValidation
 
         public TInheritInstance Null()
         {
-            if (!ConditionChecker.IsNull(ValidatingObject.Value))
+            if (ValidatingObject.Value != null)
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be null. Current value: '{ValidatingObject.Value}'");
 
             return CreateInstance();
@@ -63,7 +63,7 @@ namespace ArgValidation
 
         public TInheritInstance NotNull()
         {
-            if (ConditionChecker.IsNull(ValidatingObject.Value))
+            if (ValidatingObject.Value == null)
                 ValidationErrorExceptionThrower.ArgumentNullException(ValidatingObject.Name);
 
             return CreateInstance();

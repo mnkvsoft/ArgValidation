@@ -1,5 +1,4 @@
 ﻿using ArgValidation.ExceptionThrowers;
-using System;
 
 namespace ArgValidation.Validators
 {

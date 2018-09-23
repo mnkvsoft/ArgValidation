@@ -14,13 +14,5 @@ namespace ArgValidation
         {
             return CompareWith(obj, min) >= 0 && CompareWith(obj, max) <= 0;
         }
-
-        public static bool IsNull<T>(this T obj)
-        {
-            if (obj is ValueType)
-                return false;
-
-            return object.ReferenceEquals(null, obj);
-        }
     }
 }

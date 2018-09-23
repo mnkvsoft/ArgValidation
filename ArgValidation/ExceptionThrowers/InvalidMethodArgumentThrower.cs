@@ -7,32 +7,34 @@ namespace ArgValidation.ExceptionThrowers
     {
         public static void IfArgumentIsNullForComparable<T>(T arg, string argName)
         {
-            if (arg.IsNull())
+            if (arg == null)
                 ThrowException($"Argument '{argName}' is null. Сan not compare null object");
         }
 
         public static void IfNullForComparable<T>(ValidatingObject<T> arg1)
         {
-            if (arg1.Value.IsNull())
+            if (arg1.Value == null)
                 ThrowException($"Object with name '{arg1.Name}' is null. Сan not compare null object");
         }
 
         public static void IfNotImplementIComparable<T>(ValidatingObject<T> validatingObject)
         {
             if (!(validatingObject.Value is IComparable<T>))
-                ThrowException($"Object with name '{validatingObject.Name}' not implement interface '{typeof(IComparable<T>)}'. Сan not compare objects");
+                ThrowException(
+                    $"Object with name '{validatingObject.Name}' not implement interface '{typeof(IComparable<T>)}'. Сan not compare objects");
         }
 
         public static void IfArgumentIsNullForRange<TValue>(TValue arg, string argName)
         {
-            if (arg.IsNull())
+            if (arg == null)
                 ThrowException($"Argument '{argName}' is null. Cannot define range");
         }
 
         public static void IfNullForRange<T>(ValidatingObject<T> validatingObject, T min, T max)
         {
-            if (validatingObject.Value.IsNull())
-                ThrowException($"Object with name '{validatingObject.Name}' is null. Cannot define belonging to range: '{min}' - '{max}'");
+            if (validatingObject.Value == null)
+                ThrowException(
+                    $"Object with name '{validatingObject.Name}' is null. Cannot define belonging to range: '{min}' - '{max}'");
         }
 
         public static void IfNotRange<T>(T min, T max)
@@ -43,20 +45,22 @@ namespace ArgValidation.ExceptionThrowers
 
         public static void IfArgumentIsNullForOnlyValues<TValue>(TValue[] values, string argName)
         {
-            if (values.IsNull())
+            if (values == null)
                 ThrowException($"Argument '{argName}' is null. There are no values to compare");
         }
 
         public static void IfNullForCount<T>(ValidatingObject<T> validatingObject)
         {
-            if (object.ReferenceEquals(validatingObject.Value, null))
-                ThrowException($"Object with name '{validatingObject.Name}' is null. Сan not get count elements from null object");
+            if (validatingObject.Value == null)
+                ThrowException(
+                    $"Object with name '{validatingObject.Name}' is null. Сan not get count elements from null object");
         }
 
         public static void IfNullForContains<T>(ValidatingObject<IEnumerable<T>> validatingObject)
         {
-            if (object.ReferenceEquals(validatingObject.Value, null))
-                ThrowException($"Object with name '{validatingObject.Name}' is null. Сan not execute 'Contains' operation");
+            if (validatingObject.Value == null)
+                ThrowException(
+                    $"Object with name '{validatingObject.Name}' is null. Сan not execute 'Contains' operation");
         }
 
         private static void ThrowException(string message)

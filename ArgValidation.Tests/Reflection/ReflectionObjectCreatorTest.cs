@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ArgValidation.Tests.Reflection
 {
-    public partial class ReflectionObjectCreatorTest
+    public class ReflectionObjectCreatorTest
     {
         [Fact]
         public void Create_OneArgument_Ok()
@@ -18,7 +18,7 @@ namespace ArgValidation.Tests.Reflection
                     parameterType: typeof(string)));
 
             Assert.Equal(name, t.Name);
-            Assert.Equal(null, t.BirthDate);
+            Assert.Null(t.BirthDate);
         }
 
         [Fact]
@@ -46,9 +46,9 @@ namespace ArgValidation.Tests.Reflection
         public void Create_WithoutParameters_Ok()
         {
             Person t = ReflectionObjectCreator.InvokeConstructor<Person>();
-            Assert.Equal(null, t.Name);
-            Assert.Equal(null, t.BirthDate);
-            Assert.Equal(null, t.BirthPlace);
+            Assert.Null(t.Name);
+            Assert.Null(t.BirthDate);
+            Assert.Null(t.BirthPlace);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace ArgValidation.Tests.Reflection
                     parameterType: typeof(string)));
 
             Assert.Equal(name, t.Name);
-            Assert.Equal(null, t.BirthDate);
+            Assert.Null(t.BirthDate);
         }
 
         [Fact]

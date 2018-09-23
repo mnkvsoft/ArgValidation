@@ -11,11 +11,6 @@ namespace ArgValidation
             return object.Equals(obj, default(T));
         }
 
-        public static bool IsNull(object obj)
-        {
-            return obj.IsNull();
-        }
-
         public static bool IsEqual(object obj1, object obj2)
         {
             return object.Equals(obj1, obj2);
@@ -27,7 +22,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
             InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
-            return validatingObject.Value.CompareWith<T>(moreThan) > 0;
+            return validatingObject.Value.CompareWith(moreThan) > 0;
         }
 
         public static bool MoreOrEqualThan<T>(ValidatingObject<T> validatingObject, T moreOrEqualThan)
@@ -47,7 +42,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
             InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
-            return validatingObject.Value.CompareWith<TValue>(lessThan) < 0;
+            return validatingObject.Value.CompareWith(lessThan) < 0;
         }
 
         public static bool LessOrEqualThan<T>(ValidatingObject<T> validatingObject, T lessOrEqualThan)
