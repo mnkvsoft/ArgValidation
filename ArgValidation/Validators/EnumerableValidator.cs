@@ -94,17 +94,12 @@ namespace ArgValidation.Validators
 
         public EnumerableValidator<T> NotContains(T elem)
         {
-            return this;
-        }
-
-        public EnumerableValidator<T> Equivalent(IEnumerable<T> otherEnumerable)
-        {
-            return this;
+            throw new NotImplementedException();
         }
 
         public EnumerableValidator<T> ContainsOnlyValues(IEnumerable<T> otherEnumerable)
         {
-            return this;
+            throw new NotImplementedException();
         }
     }
 }
