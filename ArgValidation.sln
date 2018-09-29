@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgValidation", "ArgValidat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgValidation.Tests", "ArgValidation.Tests\ArgValidation.Tests.csproj", "{B08D3736-CECD-4403-A84E-BAAB7DFCAF5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgValidation.Examples", "ArgValidation.Examples\ArgValidation.Examples.csproj", "{E6C20571-0AD6-4A3C-BB9E-C8F7D0C6ABDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B08D3736-CECD-4403-A84E-BAAB7DFCAF5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B08D3736-CECD-4403-A84E-BAAB7DFCAF5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B08D3736-CECD-4403-A84E-BAAB7DFCAF5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C20571-0AD6-4A3C-BB9E-C8F7D0C6ABDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C20571-0AD6-4A3C-BB9E-C8F7D0C6ABDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C20571-0AD6-4A3C-BB9E-C8F7D0C6ABDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C20571-0AD6-4A3C-BB9E-C8F7D0C6ABDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

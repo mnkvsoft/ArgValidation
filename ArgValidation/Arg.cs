@@ -51,6 +51,126 @@ namespace ArgValidation
         
         
         
+        
+        
+        
+        
+        public static ComparableValidator<int> Positive(Expression<Func<int>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreThan(0);
+        }
+        
+        public static ComparableValidator<decimal> Positive(Expression<Func<decimal>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreThan(0);
+        }
+        
+        public static ComparableValidator<double> Positive(Expression<Func<double>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreThan(0);
+        }
+        
+        public static ComparableValidator<float> Positive(Expression<Func<float>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreThan(0);
+        }
+        
+        
+        
+        
+        
+        
+        
+        public static ComparableValidator<int> PositiveOrZero(Expression<Func<int>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreOrEqualThan(0);
+        }
+        
+        public static ComparableValidator<decimal> PositiveOrZero(Expression<Func<decimal>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreOrEqualThan(0);
+        }
+        
+        public static ComparableValidator<double> PositiveOrZero(Expression<Func<double>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreOrEqualThan(0);
+        }
+        
+        public static ComparableValidator<float> PositiveOrZero(Expression<Func<float>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).MoreOrEqualThan(0);
+        }
+        
+        
+        
+        
+        public static ComparableValidator<int> Negative(Expression<Func<int>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessThan(0);
+        }
+        
+        public static ComparableValidator<decimal> Negative(Expression<Func<decimal>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessThan(0);
+        }
+        
+        public static ComparableValidator<double> Negative(Expression<Func<double>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessThan(0);
+        }
+        
+        public static ComparableValidator<float> Negative(Expression<Func<float>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessThan(0);
+        }
+        
+        
+        
+        public static ComparableValidator<int> NegativeOrZero(Expression<Func<int>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessOrEqualThan(0);
+        }
+        
+        public static ComparableValidator<decimal> NegativeOrZero(Expression<Func<decimal>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessOrEqualThan(0);
+        }
+        
+        public static ComparableValidator<double> NegativeOrZero(Expression<Func<double>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessOrEqualThan(0);
+        }
+        
+        public static ComparableValidator<float> NegativeOrZero(Expression<Func<float>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).LessOrEqualThan(0);
+        }
+        
+        
+        
+        public static ComparableValidator<int> Zero(Expression<Func<int>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).Equal(0);
+        }
+        
+        public static ComparableValidator<decimal> Zero(Expression<Func<decimal>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).Equal(0);
+        }
+        
+        public static ComparableValidator<double> Zero(Expression<Func<double>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).Equal(0);
+        }
+        
+        public static ComparableValidator<float> Zero(Expression<Func<float>> value)
+        {
+            return ValidatorFactory.CreateComparableValidator(value).Equal(0);
+        }
+        
+        
+        
+        
         public static ComparableValidator<T> Validate<T>(Expression<Func<T>> value) where T : IComparable<T>
         {
             return ValidatorFactory.CreateComparableValidator(value);

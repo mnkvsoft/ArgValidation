@@ -45,6 +45,7 @@ namespace ArgValidation.Validators
             return this;
         }
 
+        // todo: add string value with message
         public StringValidator LengthEqual(int value)
         {
             if (ValidatingObject.Value == null || ValidatingObject.Value.Length != value)
