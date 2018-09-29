@@ -25,13 +25,11 @@ namespace ArgValidation
             string name;
             if (expression.Body.NodeType == ExpressionType.Constant)
             {
-                ConstantExpression c = (ConstantExpression)expression.Body;
                 name = $"Static value '{value}'";
 
             }
             else if (expression.Body.NodeType == ExpressionType.New)
             {
-                NewExpression c = (NewExpression)expression.Body;
                 name = $"Static value '{value}'";
             }
             else

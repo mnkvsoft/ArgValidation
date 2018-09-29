@@ -1,16 +1,16 @@
 ﻿using System;
 using Xunit;
 
-namespace ArgValidation.Tests.Validators.ObjectValidator
+namespace ArgValidation.Tests.Validators.ComparableValidator
 {
-    public partial class ObjectValidatorTest
+    public partial class ComparableValidatorTest
     {
         [Fact]
         public void InRange_EqualValuesNotImplementIComparable_Ok()
         {
-            object value = new object();
-            object min = value;
-            object max = value;
+            ComparableClass value = new ComparableClass();
+            ComparableClass min = value;
+            ComparableClass max = value;
             CreateObjectValidator(() => value).InRange(min, max);
         }
 
@@ -67,36 +67,6 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         }
 
         [Fact]
-        public void InRange_ValdatingObjectNotNullAndMinNotNullButMaxIsNull_InvalidOperationException()
-        {
-            object value = new object();
-            object min = new object();
-            object maxNull = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(min, maxNull));
-            Assert.Equal("Argument 'max' is null. Cannot define range", exc.Message);
-        }
-
-        [Fact]
-        public void InRange_ValidatingObjectNotNullAndMaxNotNullButMinIsNull_InvalidOperationException()
-        {
-            object value = new object();
-            object minNull = null;
-            object max = new object();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(minNull, max));
-            Assert.Equal("Argument 'min' is null. Cannot define range", exc.Message);
-        }
-
-        [Fact]
-        public void InRange_MinNotNullAndMaxNotNullButValidatingObjectIsNull_InvalidOperationException()
-        {
-            object valueNull = null;
-            object min = 1;
-            object max = 2;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => valueNull).InRange(min, max));
-            Assert.Equal($"Object with name '{nameof(valueNull)}' is null. Cannot define belonging to range: '{min}' - '{max}'", exc.Message);
-        }
-
-        [Fact]
         public void InRange_MinMoreThanMax_InvalidOperationException()
         {
             int value = 1;
@@ -105,17 +75,6 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
 
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(min5, max3));
             Assert.Equal("Argument 'min' cannot be more than 'max'. Cannot define range", exc.Message);
-        }
-
-        [Fact]
-        public void InRange_ValidatingObjectNotImplementIComparable_InvalidOperationException()
-        {
-            object value = 1;
-            object min = 5;
-            object max = 3;
-
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(min, max));
-            Assert.Equal($"Object with name '{nameof(value)}' not implement interface '{typeof(IComparable<object>)}'. Сan not compare objects", exc.Message);
         }
     }
 }

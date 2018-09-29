@@ -14,6 +14,13 @@ namespace ArgValidation
             return validator;
         }
         
+        public static ComparableValidator<T> CreateComparableValidator<T>(Expression<Func<T>> value) where T : IComparable<T>
+        {
+            var validatingObj = ValidatingObject<T>.FromExpression(value);
+            var validator = new ComparableValidator<T>(validatingObj);
+            return validator;
+        }
+        
         public static EnumerableValidator<T> CreateEnumerableValidator<T>(Expression<Func<IEnumerable<T>>> value)
         {
             var validatingObj = ValidatingObject<IEnumerable<T>>.FromExpression(value);

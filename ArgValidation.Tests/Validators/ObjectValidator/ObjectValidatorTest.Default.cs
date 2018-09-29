@@ -16,7 +16,10 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         public void Default_ReferenceTypeIsNotNull_ArgumentException()
         {
             object arg = new object();
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => arg).Default());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
+            {
+                CreateObjectValidator(() => arg).Default();
+            });
             Assert.Equal($"Object with name '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
 

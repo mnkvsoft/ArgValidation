@@ -1,5 +1,6 @@
 ﻿using ArgValidation.ExceptionThrowers;
 using System;
+using System.Linq;
 using ArgValidation.Reflection;
 
 namespace ArgValidation
@@ -81,6 +82,19 @@ namespace ArgValidation
         {
             if (ConditionChecker.IsEqual(ValidatingObject.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not equal '{value}'");
+
+            return CreateInstance();
+        }
+        
+        
+        public TInheritInstance OnlyValues(params TValue[] values)
+        {
+            if (!ConditionChecker.OnlyValues(ValidatingObject, values))
+            {
+                string valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Object with name '{ValidatingObject.Name}' must have only values: {valuesStr}. Current value: '{ValidatingObject.Value}'");
+            }
 
             return CreateInstance();
         }

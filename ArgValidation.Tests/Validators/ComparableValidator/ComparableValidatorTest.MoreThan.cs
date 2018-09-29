@@ -1,9 +1,9 @@
 ﻿using System;
 using Xunit;
 
-namespace ArgValidation.Tests.Validators.ObjectValidator
+namespace ArgValidation.Tests.Validators.ComparableValidator
 {
-    public partial class ObjectValidatorTest
+    public partial class ComparableValidatorTest
     {
         [Fact]
         public void MoreThan_2MoreThan1_Ok()
@@ -31,27 +31,25 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         [Fact]
         public void MoreThan_ValidatingObjectIsNull_InvalidOperationException()
         {
-            object nullValue = null;
-            object moreThanValue = new object();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => nullValue).MoreThan(moreThanValue));
+            ComparableClass nullValue = null;
+            ComparableClass moreThanValue = new ComparableClass();
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            {
+                CreateObjectValidator(() => nullValue).MoreThan(moreThanValue);
+            });
             Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not compare null object", exc.Message);
         }
 
         [Fact]
         public void MoreThan_MoreThanArgumentIsNull_InvalidOperationException()
         {
-            object value = new object();
-            object moreThanNull = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).MoreThan(moreThanNull));
+            ComparableClass value = new ComparableClass();
+            ComparableClass moreThanNull = null;
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            {
+                CreateObjectValidator(() => value).MoreThan(moreThanNull);
+            });
             Assert.Equal($"Argument 'moreThan' is null. Сan not compare null object", exc.Message);
-        }
-
-        [Fact]
-        public void MoreThan_ValidatingObjectNotImplementIComparable_InvalidOperationException()
-        {
-            object notImplementIComparable = new object();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => notImplementIComparable).MoreThan(notImplementIComparable));
-            Assert.Equal($"Object with name '{nameof(notImplementIComparable)}' not implement interface '{typeof(IComparable<object>)}'. Сan not compare objects", exc.Message);
         }
     }
 }

@@ -51,9 +51,9 @@ namespace ArgValidation
         
         
         
-        public static ObjectValidator<T> Validate<T>(Expression<Func<T>> value)
+        public static ComparableValidator<T> Validate<T>(Expression<Func<T>> value) where T : IComparable<T>
         {
-            return ValidatorFactory.CreateObjectValidator(value);
+            return ValidatorFactory.CreateComparableValidator(value);
         }
         
         public static StringValidator Validate(Expression<Func<string>> value)
