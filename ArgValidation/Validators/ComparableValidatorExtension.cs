@@ -108,5 +108,26 @@ namespace ArgValidation.Validators
         {
             return validator.Equal(0);
         }
+        
+        
+        public static ComparableValidator<int> NotZero(this ComparableValidator<int> validator)
+        {
+            return validator.NotEqual(0);
+        }
+        
+        public static ComparableValidator<decimal> NotZero(this ComparableValidator<decimal> validator)
+        {
+            return validator.NotEqual(0);
+        }
+        
+        public static ComparableValidator<double> NotZero(this ComparableValidator<double> validator)
+        {
+            return validator.NotEqual(0);
+        }
+        
+        public static ComparableValidator<float> NotZero(this ComparableValidator<float> validator)
+        {
+            return validator.NotEqual(0);
+        }
     }
 }
