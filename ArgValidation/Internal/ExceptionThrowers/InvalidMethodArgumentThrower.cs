@@ -55,6 +55,13 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException(
                     $"Object with name '{validatingObject.Name}' is null. Сan not execute 'Contains' operation");
         }
+        
+        public static void IfNullForNotContains<T>(ValidatingObject<IEnumerable<T>> validatingObject)
+        {
+            if (validatingObject.Value == null)
+                ThrowException(
+                    $"Object with name '{validatingObject.Name}' is null. Сan not execute 'NotContains' operation");
+        }
 
         private static void ThrowException(string message)
         {

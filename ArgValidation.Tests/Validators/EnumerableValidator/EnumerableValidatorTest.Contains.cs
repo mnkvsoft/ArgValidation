@@ -23,7 +23,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         }
 
         [Fact]
-        public void Contains_ListWithoutNullContainsNull_ArgumentExeption()
+        public void Contains_ListWithoutNullContainsNull_ArgumentException()
         {
             object[] objs = new[] { new object(), new object() };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objs).Contains(null));
@@ -38,7 +38,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         }
 
         [Fact]
-        public void Contains_ListWithout5Contains5_ArgumentExeption()
+        public void Contains_ListWithout5Contains5_ArgumentException()
         {
             int value5 = 5;
             int[] digits = new[] { 1, 2 };

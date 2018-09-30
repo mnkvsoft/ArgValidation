@@ -22,7 +22,7 @@ namespace ArgValidation.Validators
             InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
             int currentCount = ValidatingObject.Value.Count();
-            if (!(currentCount == count))
+            if (currentCount != count)
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains {count} elements. Current count elements: {currentCount}");
 
             return CreateInstance();
@@ -33,7 +33,7 @@ namespace ArgValidation.Validators
             InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
             int currentCount = ValidatingObject.Value.Count();
-            if (!(currentCount != count))
+            if (currentCount == count)
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' not must contains {count} elements");
 
             return this;
@@ -44,7 +44,7 @@ namespace ArgValidation.Validators
             InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
             int currentCount = ValidatingObject.Value.Count();
-            if (!(currentCount > count))
+            if (currentCount <= count)
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains more than {count} elements. Current count elements: {currentCount}");
 
             return this;
@@ -55,7 +55,7 @@ namespace ArgValidation.Validators
             InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
             int currentCount = ValidatingObject.Value.Count();
-            if (!(currentCount >= count))
+            if (currentCount < count)
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
 
             return this;
@@ -66,7 +66,7 @@ namespace ArgValidation.Validators
             InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
             int currentCount = ValidatingObject.Value.Count();
-            if (!(currentCount < count))
+            if (currentCount >= count)
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains less than {count} elements. Current count elements: {currentCount}");
 
             return this;
@@ -77,7 +77,7 @@ namespace ArgValidation.Validators
             InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
 
             int currentCount = ValidatingObject.Value.Count();
-            if (!(currentCount <= count))
+            if (currentCount > count)
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
 
             return this;
@@ -95,12 +95,12 @@ namespace ArgValidation.Validators
 
         public EnumerableValidator<T> NotContains(T elem)
         {
-            throw new NotImplementedException();
-        }
+            InvalidMethodArgumentThrower.IfNullForNotContains(ValidatingObject);
 
-        public EnumerableValidator<T> ContainsOnlyValues(IEnumerable<T> otherEnumerable)
-        {
-            throw new NotImplementedException();
+            if (ValidatingObject.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+
+            return this;
         }
     }
 }
