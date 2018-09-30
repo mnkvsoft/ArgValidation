@@ -17,13 +17,6 @@ namespace ArgValidation.ExceptionThrowers
                 ThrowException($"Object with name '{arg1.Name}' is null. Сan not compare null object");
         }
 
-        public static void IfNotImplementIComparable<T>(ValidatingObject<T> validatingObject)
-        {
-            if (!(validatingObject.Value is IComparable<T>))
-                ThrowException(
-                    $"Object with name '{validatingObject.Name}' not implement interface '{typeof(IComparable<T>)}'. Сan not compare objects");
-        }
-
         public static void IfArgumentIsNullForRange<TValue>(TValue arg, string argName)
         {
             if (arg == null)

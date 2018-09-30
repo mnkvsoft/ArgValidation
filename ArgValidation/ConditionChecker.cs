@@ -15,17 +15,22 @@ namespace ArgValidation
         {
             return object.Equals(obj1, obj2);
         }
+        
+        internal static bool OnlyValues<T>(ValidatingObject<T> validatingObject, T[] values)
+        {
+            InvalidMethodArgumentThrower.IfArgumentIsNullForOnlyValues(values, nameof(values));
+            return values.Any(x => IsEqual(validatingObject.Value, x));
+        }
 
-        public static bool MoreThan<T>(ValidatingObject<T> validatingObject, T moreThan)
+        public static bool MoreThan<T>(ValidatingObject<T> validatingObject, T moreThan) where T : IComparable<T>
         {
             InvalidMethodArgumentThrower.IfArgumentIsNullForComparable(moreThan, nameof(moreThan));
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
-            InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
             return validatingObject.Value.CompareWith(moreThan) > 0;
         }
 
-        public static bool MoreOrEqualThan<T>(ValidatingObject<T> validatingObject, T moreOrEqualThan)
+        public static bool MoreOrEqualThan<T>(ValidatingObject<T> validatingObject, T moreOrEqualThan) where T : IComparable<T>
         {
             if (IsEqual(validatingObject.Value, moreOrEqualThan))
                 return true;
@@ -36,16 +41,15 @@ namespace ArgValidation
             return false;
         }
 
-        public static bool LessThan<TValue>(ValidatingObject<TValue> validatingObject, TValue lessThan)
+        public static bool LessThan<T>(ValidatingObject<T> validatingObject, T lessThan) where T : IComparable<T>
         {
             InvalidMethodArgumentThrower.IfArgumentIsNullForComparable(lessThan, nameof(lessThan));
             InvalidMethodArgumentThrower.IfNullForComparable(validatingObject);
-            InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
 
             return validatingObject.Value.CompareWith(lessThan) < 0;
         }
 
-        public static bool LessOrEqualThan<T>(ValidatingObject<T> validatingObject, T lessOrEqualThan)
+        public static bool LessOrEqualThan<T>(ValidatingObject<T> validatingObject, T lessOrEqualThan) where T : IComparable<T>
         {
             if (IsEqual(validatingObject.Value, lessOrEqualThan))
                 return true;
@@ -56,7 +60,7 @@ namespace ArgValidation
             return false;
         }
 
-        internal static bool InRange<TValue>(ValidatingObject<TValue> validatingObject, TValue min, TValue max)
+        internal static bool InRange<T>(ValidatingObject<T> validatingObject, T min, T max) where T : IComparable<T>
         {
             if (object.Equals(validatingObject.Value, min) && object.Equals(validatingObject.Value, max))
                 return true;
@@ -64,16 +68,9 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentIsNullForRange(max, nameof(max));
             InvalidMethodArgumentThrower.IfArgumentIsNullForRange(min, nameof(min));
             InvalidMethodArgumentThrower.IfNullForRange(validatingObject, min, max);
-            InvalidMethodArgumentThrower.IfNotImplementIComparable(validatingObject);
             InvalidMethodArgumentThrower.IfNotRange(min, max);
 
             return validatingObject.Value.InRange(min, max);
-        }
-
-        internal static bool OnlyValues<TValue>(ValidatingObject<TValue> validatingObject, TValue[] values)
-        {
-            InvalidMethodArgumentThrower.IfArgumentIsNullForOnlyValues(values, nameof(values));
-            return values.Any(x => IsEqual(validatingObject.Value, x));
         }
     }
 }
