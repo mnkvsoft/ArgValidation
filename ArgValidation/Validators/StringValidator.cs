@@ -1,4 +1,5 @@
-﻿using ArgValidation.ExceptionThrowers;
+﻿using ArgValidation.Internal;
+using ArgValidation.Internal.ExceptionThrowers;
 
 namespace ArgValidation.Validators
 {

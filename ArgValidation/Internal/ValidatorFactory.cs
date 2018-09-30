@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using ArgValidation.Validators;
 
-namespace ArgValidation
+namespace ArgValidation.Internal
 {
     internal static class ValidatorFactory
     {

@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using ArgValidation.Validators;
 using System.Collections.Generic;
+using ArgValidation.Internal;
 
 namespace ArgValidation
 {

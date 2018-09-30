@@ -1,4 +1,4 @@
-﻿namespace ArgValidation
+﻿namespace ArgValidation.Internal
 {
     internal class ExceptionMessageHelper
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArgValidation
+namespace ArgValidation.Internal
 {
     internal static class ObjectExtension
     {

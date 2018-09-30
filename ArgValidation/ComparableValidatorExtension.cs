@@ -1,4 +1,6 @@
-namespace ArgValidation.Validators
+using ArgValidation.Validators;
+
+namespace ArgValidation
 {
     public static class ComparableValidatorExtension
     {
@@ -46,7 +48,6 @@ namespace ArgValidation.Validators
         
         
         
-        
         public static ComparableValidator<int> Negative(this ComparableValidator<int> validator)
         {
             return validator.LessThan(0);
@@ -66,6 +67,7 @@ namespace ArgValidation.Validators
         {
             return validator.LessThan(0);
         }
+        
         
         
         public static ComparableValidator<int> NegativeOrZero(this ComparableValidator<int> validator)
@@ -89,6 +91,7 @@ namespace ArgValidation.Validators
         }
         
         
+        
         public static ComparableValidator<int> Zero(this ComparableValidator<int> validator)
         {
             return validator.Equal(0);
@@ -108,6 +111,7 @@ namespace ArgValidation.Validators
         {
             return validator.Equal(0);
         }
+        
         
         
         public static ComparableValidator<int> NotZero(this ComparableValidator<int> validator)

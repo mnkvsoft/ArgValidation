@@ -1,8 +1,8 @@
-﻿using ArgValidation.ExceptionThrowers;
-using System;
+﻿using System;
 using System.Linq;
+using ArgValidation.Internal.ExceptionThrowers;
 
-namespace ArgValidation
+namespace ArgValidation.Internal
 {
     internal static class ConditionChecker
     {

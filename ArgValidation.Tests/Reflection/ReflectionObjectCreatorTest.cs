@@ -1,5 +1,5 @@
-﻿using ArgValidation.Reflection;
-using System;
+﻿using System;
+using ArgValidation.Internal.Reflection;
 using Xunit;
 
 namespace ArgValidation.Tests.Reflection

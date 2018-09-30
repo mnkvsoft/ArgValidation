@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArgValidation.Reflection
+namespace ArgValidation.Internal.Reflection
 {
     internal sealed class ConstructorParameter
     {

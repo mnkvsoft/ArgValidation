@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ArgValidation.Reflection
+namespace ArgValidation.Internal.Reflection
 {
     internal static class ReflectionObjectCreator
     {

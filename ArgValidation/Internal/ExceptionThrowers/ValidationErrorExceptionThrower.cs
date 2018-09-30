@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArgValidation.ExceptionThrowers
+namespace ArgValidation.Internal.ExceptionThrowers
 {
     internal static class ValidationErrorExceptionThrower
     {

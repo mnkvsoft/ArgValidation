@@ -1,7 +1,8 @@
-﻿using ArgValidation.ExceptionThrowers;
-using System;
+﻿using System;
 using System.Linq;
-using ArgValidation.Reflection;
+using ArgValidation.Internal;
+using ArgValidation.Internal.ExceptionThrowers;
+using ArgValidation.Internal.Reflection;
 
 namespace ArgValidation
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ArgValidation.ExceptionThrowers
+namespace ArgValidation.Internal.ExceptionThrowers
 {
     internal static class InvalidMethodArgumentThrower
     {
