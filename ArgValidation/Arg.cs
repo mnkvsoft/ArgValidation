@@ -170,7 +170,7 @@ namespace ArgValidation
         
         public static ComparableValidator<int> NotZero(Expression<Func<int>> value)
         {
-            return ValidatorFactory.CreateComparableValidator(value).Zero();
+            return ValidatorFactory.CreateComparableValidator(value).NotZero();
         }
         
         public static ComparableValidator<decimal> NotZero(Expression<Func<decimal>> value)
