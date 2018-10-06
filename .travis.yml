@@ -19,6 +19,9 @@ env:
   - DOTNET_CLI_TELEMETRY_OPTOUT: 1
   - CODECOV_TOKEN: fc123ca0-cc74-4ad7-9319-898e15bcbd69
 
+before_script:
+  - dotnet restore
+
 script:
 - dotnet build ArgValidation.sln -c Debug
 - dotnet test -c Debug --no-build ./ArgValidation.Tests/ArgValidation.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
