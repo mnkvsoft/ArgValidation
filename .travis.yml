@@ -10,9 +10,9 @@
 
 
 language: csharp
-
-dotnet: 2.1.4
+dotnet: 2.1.402
 sudo: false
+mono: none
 
 env:
   global:
