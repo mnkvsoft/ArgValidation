@@ -1,9 +1,26 @@
-language: csharp  
-sudo: required  
-dist: trusty  
-mono: none
-dotnet: 2.1.402
-before_script:
-  - dotnet restore
-script:  
-  - dotnet test ./ArgValidation.Tests -c Release -f netcoreapp2.1
+#language: csharp  
+#sudo: required  
+#dist: trusty  
+#mono: none
+#dotnet: 2.1.402
+#before_script:
+#  - dotnet restore
+#script:  
+#  - dotnet test ./ArgValidation.Tests -c Release -f netcoreapp2.1
+
+
+language: csharp
+
+dotnet: 2.1.4
+sudo: false
+
+env:
+  global:
+  - DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+script:
+- dotnet build ArgValidation.sln -c Release
+- dotnet test -c Release --no-build ArgValidation.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+after_script:
+- bash <(curl -s https://codecov.io/bash)
