@@ -9,4 +9,8 @@
       <ProjectReference Include="..\ArgValidation\ArgValidation.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="coverlet.msbuild" Version="2.3.0" />
+    </ItemGroup>
+
 </Project>
