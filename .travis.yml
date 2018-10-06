@@ -17,10 +17,11 @@ mono: none
 env:
   global:
   - DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  - CODECOV_TOKEN: fc123ca0-cc74-4ad7-9319-898e15bcbd69
 
 script:
 - dotnet build ArgValidation.sln -c Release
 - dotnet test -c Release --no-build ./ArgValidation.Tests/ArgValidation.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
 after_script:
-- bash <(curl -s https://codecov.io/bash) -t fc123ca0-cc74-4ad7-9319-898e15bcbd69
+- bash <(curl -s https://codecov.io/bash)
