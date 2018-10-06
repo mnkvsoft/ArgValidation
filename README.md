@@ -1,4 +1,6 @@
 # ArgValidation
+[![Build status](https://travis-ci.org/mnkvsoft/ArgValidation.svg?branch=master)](https://travis-ci.org/mnkvsoft/ArgValidation)
+
 A simply arguments validation library
 
 # Code example
