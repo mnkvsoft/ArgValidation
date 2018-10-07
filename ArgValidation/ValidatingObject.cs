@@ -8,7 +8,7 @@ namespace ArgValidation
         public string Name { get; }
         public T Value { get; }
 
-        public ValidatingObject(string name, T value)
+        public ValidatingObject(T value, string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Validating object name cannot be empty");
@@ -38,7 +38,7 @@ namespace ArgValidation
                 name = exp.Member.Name;
             }
 
-            return new ValidatingObject<T>(name, value);
+            return new ValidatingObject<T>(value, name);
         }
     }
 }
