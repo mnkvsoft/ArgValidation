@@ -6,13 +6,13 @@ using ArgValidation.Internal.Reflection;
 
 namespace ArgValidation
 {
-    public abstract class ValidatorBase<TValue, TInheritInstance>
+    public abstract class ValidatorBase<T, TInheritInstance>
     {
-        protected ValidatingObject<TValue> ValidatingObject { get; }
+        protected ValidatingObject<T> ValidatingObject { get; }
 
         protected abstract TInheritInstance CreateInstance();
 
-        internal ValidatorBase(ValidatingObject<TValue> validatingObject)
+        internal ValidatorBase(ValidatingObject<T> validatingObject)
         {
             if (validatingObject == null)
                 throw new ArgumentNullException(nameof(validatingObject));
@@ -71,7 +71,7 @@ namespace ArgValidation
             return CreateInstance();
         }
 
-        public TInheritInstance Equal(TValue value)
+        public TInheritInstance Equal(T value)
         {
             if (!ConditionChecker.IsEqual(ValidatingObject.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'. Current value: '{ValidatingObject.Value}'");
@@ -79,7 +79,7 @@ namespace ArgValidation
             return CreateInstance();
         }
 
-        public TInheritInstance NotEqual(TValue value)
+        public TInheritInstance NotEqual(T value)
         {
             if (ConditionChecker.IsEqual(ValidatingObject.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not equal '{value}'");
@@ -88,7 +88,7 @@ namespace ArgValidation
         }
         
         
-        public TInheritInstance OnlyValues(params TValue[] values)
+        public TInheritInstance OnlyValues(params T[] values)
         {
             if (!ConditionChecker.OnlyValues(ValidatingObject, values))
             {

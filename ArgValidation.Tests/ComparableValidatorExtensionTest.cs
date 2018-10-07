@@ -15,21 +15,21 @@ namespace ArgValidation.Tests
         [InlineData(1000)]
         public void Positive_ValueMoreThanZero_Ok(double doubleValue)
         {
-            var intValue = (int) Math.Ceiling(doubleValue);
+            var inT = (int) Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             var doubleValidator = new ComparableValidator<double>(
                 ValidatingObject<double>.FromExpression(() => doubleValue)).Positive();
 
             var intValidator = new ComparableValidator<int>(
-                ValidatingObject<int>.FromExpression(() => intValue)).Positive();
+                ValidatingObject<int>.FromExpression(() => inT)).Positive();
 
             var decimalValidator = new ComparableValidator<decimal>(
                 ValidatingObject<decimal>.FromExpression(() => decimalValue)).Positive();
 
             var floatValidator = new ComparableValidator<float>(
-                ValidatingObject<float>.FromExpression(() => floatValue)).Positive();
+                ValidatingObject<float>.FromExpression(() => floaT)).Positive();
         }
 
         [Theory]
@@ -42,9 +42,9 @@ namespace ArgValidation.Tests
         [InlineData(-1000)]
         public void Positive_ValueLessOrEqualsZero_Exception(double doubleValue)
         {
-            var intValue = (int) Math.Floor(doubleValue);
+            var inT = (int) Math.Floor(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -55,7 +55,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var intValidator = new ComparableValidator<int>(
-                    ValidatingObject<int>.FromExpression(() => intValue)).Positive();
+                    ValidatingObject<int>.FromExpression(() => inT)).Positive();
             });
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -67,7 +67,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var floatValidator = new ComparableValidator<float>(
-                    ValidatingObject<float>.FromExpression(() => floatValue)).Positive();
+                    ValidatingObject<float>.FromExpression(() => floaT)).Positive();
             });
         }
 
@@ -81,21 +81,21 @@ namespace ArgValidation.Tests
         [InlineData(1000)]
         public void PositiveOrZero_ValueMoreOrEqualsZero_Ok(double doubleValue)
         {
-            var intValue = (int) Math.Ceiling(doubleValue);
+            var inT = (int) Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             var doubleValidator = new ComparableValidator<double>(
                 ValidatingObject<double>.FromExpression(() => doubleValue)).PositiveOrZero();
 
             var intValidator = new ComparableValidator<int>(
-                ValidatingObject<int>.FromExpression(() => intValue)).PositiveOrZero();
+                ValidatingObject<int>.FromExpression(() => inT)).PositiveOrZero();
 
             var decimalValidator = new ComparableValidator<decimal>(
                 ValidatingObject<decimal>.FromExpression(() => decimalValue)).PositiveOrZero();
 
             var floatValidator = new ComparableValidator<float>(
-                ValidatingObject<float>.FromExpression(() => floatValue)).PositiveOrZero();
+                ValidatingObject<float>.FromExpression(() => floaT)).PositiveOrZero();
         }
 
         [Theory]
@@ -107,9 +107,9 @@ namespace ArgValidation.Tests
         [InlineData(-1000)]
         public void PositiveOrZero_ValueLessThanZero_Exception(double doubleValue)
         {
-            var intValue = (int) Math.Floor(doubleValue);
+            var inT = (int) Math.Floor(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -120,7 +120,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var intValidator = new ComparableValidator<int>(
-                    ValidatingObject<int>.FromExpression(() => intValue)).PositiveOrZero();
+                    ValidatingObject<int>.FromExpression(() => inT)).PositiveOrZero();
             });
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -132,7 +132,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var floatValidator = new ComparableValidator<float>(
-                    ValidatingObject<float>.FromExpression(() => floatValue)).PositiveOrZero();
+                    ValidatingObject<float>.FromExpression(() => floaT)).PositiveOrZero();
             });
         }
 
@@ -151,9 +151,9 @@ namespace ArgValidation.Tests
         [InlineData(-1000)]
         public void Zero_ValueNotEqualsZero_Exception(double doubleValue)
         {
-            var intValue = doubleValue < 0 ? (int) Math.Floor(doubleValue) : (int) Math.Ceiling(doubleValue);
+            var inT = doubleValue < 0 ? (int) Math.Floor(doubleValue) : (int) Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             Assert.Throws<ArgumentException>(() =>
             {
@@ -164,7 +164,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentException>(() =>
             {
                 var intValidator = new ComparableValidator<int>(
-                    ValidatingObject<int>.FromExpression(() => intValue)).Zero();
+                    ValidatingObject<int>.FromExpression(() => inT)).Zero();
             });
 
             Assert.Throws<ArgumentException>(() =>
@@ -176,7 +176,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentException>(() =>
             {
                 var floatValidator = new ComparableValidator<float>(
-                    ValidatingObject<float>.FromExpression(() => floatValue)).Zero();
+                    ValidatingObject<float>.FromExpression(() => floaT)).Zero();
             });
         }
 
@@ -195,21 +195,21 @@ namespace ArgValidation.Tests
         [InlineData(-1000)]
         public void NotZero_ValueNotEqualsZero_Ok(double doubleValue)
         {
-            var intValue = doubleValue < 0 ? (int) Math.Floor(doubleValue) : (int) Math.Ceiling(doubleValue);
+            var inT = doubleValue < 0 ? (int) Math.Floor(doubleValue) : (int) Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             var doubleValidator = new ComparableValidator<double>(
                 ValidatingObject<double>.FromExpression(() => doubleValue)).NotZero();
 
             var intValidator = new ComparableValidator<int>(
-                ValidatingObject<int>.FromExpression(() => intValue)).NotZero();
+                ValidatingObject<int>.FromExpression(() => inT)).NotZero();
 
             var decimalValidator = new ComparableValidator<decimal>(
                 ValidatingObject<decimal>.FromExpression(() => decimalValue)).NotZero();
 
             var floatValidator = new ComparableValidator<float>(
-                ValidatingObject<float>.FromExpression(() => floatValue)).NotZero();
+                ValidatingObject<float>.FromExpression(() => floaT)).NotZero();
         }
 
         [Theory]
@@ -221,21 +221,21 @@ namespace ArgValidation.Tests
         [InlineData(-1000)]
         public void Negative_ValueLessThanZero_Ok(double doubleValue)
         {
-            var intValue = (int) Math.Floor(doubleValue);
+            var inT = (int) Math.Floor(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             var doubleValidator = new ComparableValidator<double>(
                 ValidatingObject<double>.FromExpression(() => doubleValue)).Negative();
 
             var intValidator = new ComparableValidator<int>(
-                ValidatingObject<int>.FromExpression(() => intValue)).Negative();
+                ValidatingObject<int>.FromExpression(() => inT)).Negative();
 
             var decimalValidator = new ComparableValidator<decimal>(
                 ValidatingObject<decimal>.FromExpression(() => decimalValue)).Negative();
 
             var floatValidator = new ComparableValidator<float>(
-                ValidatingObject<float>.FromExpression(() => floatValue)).Negative();
+                ValidatingObject<float>.FromExpression(() => floaT)).Negative();
         }
 
         [Theory]
@@ -248,9 +248,9 @@ namespace ArgValidation.Tests
         [InlineData(1000)]
         public void Negative_ValueMoreOrEqualsZero_Exception(double doubleValue)
         {
-            var intValue = (int) Math.Ceiling(doubleValue);
+            var inT = (int) Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -261,7 +261,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var intValidator = new ComparableValidator<int>(
-                    ValidatingObject<int>.FromExpression(() => intValue)).Negative();
+                    ValidatingObject<int>.FromExpression(() => inT)).Negative();
             });
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -273,7 +273,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var floatValidator = new ComparableValidator<float>(
-                    ValidatingObject<float>.FromExpression(() => floatValue)).Negative();
+                    ValidatingObject<float>.FromExpression(() => floaT)).Negative();
             });
         }
 
@@ -287,21 +287,21 @@ namespace ArgValidation.Tests
         [InlineData(-1000)]
         public void NegativeOrZero_ValueLessOrEqualsZero_Ok(double doubleValue)
         {
-            var intValue = (int) Math.Floor(doubleValue);
+            var inT = (int) Math.Floor(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             var doubleValidator = new ComparableValidator<double>(
                 ValidatingObject<double>.FromExpression(() => doubleValue)).NegativeOrZero();
 
             var intValidator = new ComparableValidator<int>(
-                ValidatingObject<int>.FromExpression(() => intValue)).NegativeOrZero();
+                ValidatingObject<int>.FromExpression(() => inT)).NegativeOrZero();
 
             var decimalValidator = new ComparableValidator<decimal>(
                 ValidatingObject<decimal>.FromExpression(() => decimalValue)).NegativeOrZero();
 
             var floatValidator = new ComparableValidator<float>(
-                ValidatingObject<float>.FromExpression(() => floatValue)).NegativeOrZero();
+                ValidatingObject<float>.FromExpression(() => floaT)).NegativeOrZero();
         }
 
         [Theory]
@@ -313,9 +313,9 @@ namespace ArgValidation.Tests
         [InlineData(1000)]
         public void NegativeOrZero_ValueMoreThanZero_Exception(double doubleValue)
         {
-            var intValue = (int) Math.Ceiling(doubleValue);
+            var inT = (int) Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
-            var floatValue = (float) doubleValue;
+            var floaT = (float) doubleValue;
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -326,7 +326,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var intValidator = new ComparableValidator<int>(
-                    ValidatingObject<int>.FromExpression(() => intValue)).NegativeOrZero();
+                    ValidatingObject<int>.FromExpression(() => inT)).NegativeOrZero();
             });
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -338,7 +338,7 @@ namespace ArgValidation.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var floatValidator = new ComparableValidator<float>(
-                    ValidatingObject<float>.FromExpression(() => floatValue)).NegativeOrZero();
+                    ValidatingObject<float>.FromExpression(() => floaT)).NegativeOrZero();
             });
         }
 

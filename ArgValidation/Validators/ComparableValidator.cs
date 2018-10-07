@@ -5,20 +5,20 @@ using ArgValidation.Internal.ExceptionThrowers;
 
 namespace ArgValidation.Validators
 {
-    public sealed class ComparableValidator<TValue> : ValidatorBase<TValue, ComparableValidator<TValue>>
-        where TValue : IComparable<TValue>
+    public sealed class ComparableValidator<T> : ValidatorBase<T, ComparableValidator<T>>
+        where T : IComparable<T>
     {
-        internal ComparableValidator(ValidatingObject<TValue> validatingObject) : base(validatingObject)
+        internal ComparableValidator(ValidatingObject<T> validatingObject) : base(validatingObject)
         {
         }
 
-        protected override ComparableValidator<TValue> CreateInstance()
+        protected override ComparableValidator<T> CreateInstance()
         {
             return this;
         }
 
         
-        public ComparableValidator<TValue> MoreThan(TValue value)
+        public ComparableValidator<T> MoreThan(T value)
         {
             if (!ConditionChecker.MoreThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
@@ -27,7 +27,7 @@ namespace ArgValidation.Validators
             return this;
         }
 
-        public ComparableValidator<TValue> MoreOrEqualThan(TValue value)
+        public ComparableValidator<T> MoreOrEqualThan(T value)
         {
             if (!ConditionChecker.MoreOrEqualThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
@@ -36,7 +36,7 @@ namespace ArgValidation.Validators
             return this;
         }
 
-        public ComparableValidator<TValue> LessThan(TValue value)
+        public ComparableValidator<T> LessThan(T value)
         {
             if (!ConditionChecker.LessThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
@@ -45,7 +45,7 @@ namespace ArgValidation.Validators
             return this;
         }
 
-        public ComparableValidator<TValue> LessOrEqualThan(TValue value)
+        public ComparableValidator<T> LessOrEqualThan(T value)
         {
             if (!ConditionChecker.LessOrEqualThan(ValidatingObject, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
@@ -54,7 +54,7 @@ namespace ArgValidation.Validators
             return this;
         }
 
-        public ComparableValidator<TValue> InRange(TValue min, TValue max)
+        public ComparableValidator<T> InRange(T min, T max)
         {
             if (!ConditionChecker.InRange(ValidatingObject, min, max))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException(

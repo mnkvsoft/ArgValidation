@@ -1,12 +1,12 @@
 namespace ArgValidation.Validators
 {
-    public class ObjectValidator<TValue> : ValidatorBase<TValue, ObjectValidator<TValue>>
+    public class ObjectValidator<T> : ValidatorBase<T, ObjectValidator<T>>
     {
-        internal ObjectValidator(ValidatingObject<TValue> validatingObject) : base(validatingObject)
+        internal ObjectValidator(ValidatingObject<T> validatingObject) : base(validatingObject)
         {
         }
         
-        protected override ObjectValidator<TValue> CreateInstance()
+        protected override ObjectValidator<T> CreateInstance()
         {
             return this;
         }

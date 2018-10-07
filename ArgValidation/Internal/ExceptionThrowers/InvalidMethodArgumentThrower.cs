@@ -17,7 +17,7 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException($"Object with name '{arg1.Name}' is null. Сan not compare null object");
         }
 
-        public static void IfArgumentIsNullForRange<TValue>(TValue arg, string argName)
+        public static void IfArgumentIsNullForRange<T>(T arg, string argName)
         {
             if (arg == null)
                 ThrowException($"Argument '{argName}' is null. Cannot define range");
@@ -36,7 +36,7 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException($"Argument '{nameof(min)}' cannot be more than '{nameof(max)}'. Cannot define range");
         }
 
-        public static void IfArgumentIsNullForOnlyValues<TValue>(TValue[] values, string argName)
+        public static void IfArgumentIsNullForOnlyValues<T>(T[] values, string argName)
         {
             if (values == null)
                 ThrowException($"Argument '{argName}' is null. There are no values to compare");
