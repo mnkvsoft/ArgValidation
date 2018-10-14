@@ -6,7 +6,7 @@ namespace ArgValidation.Tests.Validators
     public partial class StringValidatorTest
     {
         [Fact]
-        public void LengthMoreOrEqualThan_ValidatingObjectIsNull_ArgumentException()
+        public void LengthMoreOrEqualThan_ArgumentIsNull_ArgumentException()
         {
             int length = 2;
             string nullString = null;

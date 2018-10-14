@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         {
             object notNullObj = new object();
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => notNullObj).Null());
-            Assert.Equal($"Object with name '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         {
             int? notNullObj = 5;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => notNullObj).Null());
-            Assert.Equal($"Object with name '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
         [Fact]

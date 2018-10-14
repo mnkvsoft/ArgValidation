@@ -5,7 +5,7 @@ namespace ArgValidation.Validators
 {
     public sealed class StringValidator : ValidatorBase<string, StringValidator>
     {
-        internal StringValidator(ValidatingObject<string> validatingObject) : base(validatingObject)
+        internal StringValidator(Argument<string> argument) : base(argument)
         {
         }
 
@@ -16,32 +16,32 @@ namespace ArgValidation.Validators
 
         public StringValidator NullOrEmpty()
         {
-            if (!string.IsNullOrEmpty(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
+            if (!string.IsNullOrEmpty(Argument.Value))
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator NotNullOrEmpty()
         {
-            if (string.IsNullOrEmpty(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
+            if (string.IsNullOrEmpty(Argument.Value))
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' cannot be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator NullOrWhitespace()
         {
-            if (!string.IsNullOrWhiteSpace(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
+            if (!string.IsNullOrWhiteSpace(Argument.Value))
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator NotNullOrWhitespace()
         {
-            if (string.IsNullOrWhiteSpace(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' cannot be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
+            if (string.IsNullOrWhiteSpace(Argument.Value))
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' cannot be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(Argument.Value)}");
 
             return this;
         }
@@ -49,40 +49,40 @@ namespace ArgValidation.Validators
         // todo: add string value with message
         public StringValidator LengthEqual(int value)
         {
-            if (ValidatingObject.Value == null || ValidatingObject.Value.Length != value)
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+            if (Argument.Value == null || Argument.Value.Length != value)
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be length {value}. Current length: {GetLengthValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator LengthMoreThan(int value)
         {
-            if (ValidatingObject.Value == null || ValidatingObject.Value.Length <= value)
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length more than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+            if (Argument.Value == null || Argument.Value.Length <= value)
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be length more than {value}. Current length: {GetLengthValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator LengthMoreOrEqualThan(int value)
         {
-            if (ValidatingObject.Value == null || ValidatingObject.Value.Length < value)
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length more or equals than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+            if (Argument.Value == null || Argument.Value.Length < value)
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be length more or equals than {value}. Current length: {GetLengthValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator LengthLessThan(int value)
         {
-            if (ValidatingObject.Value == null || ValidatingObject.Value.Length >= value)
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length less than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+            if (Argument.Value == null || Argument.Value.Length >= value)
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be length less than {value}. Current length: {GetLengthValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator LengthLessOrEqualThan(int value)
         {
-            if (ValidatingObject.Value == null || ValidatingObject.Value.Length > value)
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length less or equals than {value}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+            if (Argument.Value == null || Argument.Value.Length > value)
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be length less or equals than {value}. Current length: {GetLengthValueForMessage(Argument.Value)}");
 
             return this;
         }
@@ -91,8 +91,8 @@ namespace ArgValidation.Validators
         {
             InvalidMethodArgumentThrower.IfNotRange(min, max);
 
-            if (ValidatingObject.Value == null || !ValidatingObject.Value.Length.InRange(min, max))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must be length in range {min} - {max}. Current length: {GetLengthValueForMessage(ValidatingObject.Value)}");
+            if (Argument.Value == null || !Argument.Value.Length.InRange(min, max))
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must be length in range {min} - {max}. Current length: {GetLengthValueForMessage(Argument.Value)}");
 
 
             return this;
@@ -100,28 +100,28 @@ namespace ArgValidation.Validators
 
         public StringValidator Contains(string value)
         {
-            if (!Contains(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
+            if (!Contains(Argument, value))
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(Argument.Value)}");
 
             return this;
         }
 
         public StringValidator NotContains(string value)
         {
-            if (Contains(ValidatingObject, value))
-                ValidationErrorExceptionThrower.ArgumentException($"String with name '{ValidatingObject.Name}' must not contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(ValidatingObject.Value)}");
+            if (Contains(Argument, value))
+                ValidationErrorExceptionThrower.ArgumentException($"String with name '{Argument.Name}' must not contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(Argument.Value)}");
 
             return this;
         }
 
-        private static bool Contains(ValidatingObject<string> validatingObject, string value)
+        private static bool Contains(Argument<string> argument, string value)
         {
-            if (validatingObject.Value != null)
+            if (argument.Value != null)
             {
                 if (value == null)
                     return false;
 
-                return validatingObject.Value.Contains(value);
+                return argument.Value.Contains(value);
             }
 
             return value == null;

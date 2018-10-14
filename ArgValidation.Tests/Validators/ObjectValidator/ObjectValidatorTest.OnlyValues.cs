@@ -17,7 +17,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         }
 
         [Fact]
-        public void OnlyValues_ValidatingObjectOnlyNull_Ok()
+        public void OnlyValues_ArgumentOnlyNull_Ok()
         {
             object value = null;
             var onlyNull = new object[] { null };
@@ -26,17 +26,17 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         }
 
         [Fact]
-        public void OnlyValues_ValidatingObjectEqual3Only3Or4_Ok()
+        public void OnlyValues_ArgumentEqual3only3or4_Ok()
         {
             CreateObjectValidator(() => 3).OnlyValues(3, 4);
         }
 
         [Fact]
-        public void OnlyValues_ValidatingObjectEqual3Only2Or1_ArgumentException()
+        public void OnlyValues_ArgumentEqual3Only2Or1_ArgumentException()
         {
             int value3 = 3;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value3).OnlyValues(2, 1));
-            Assert.Equal($"Object with name '{nameof(value3)}' must have only values: '2', '1'. Current value: '3'", exc.Message);
+            Assert.Equal($"Argument '{nameof(value3)}' must have only values: '2', '1'. Current value: '3'", exc.Message);
         }
     }
 }

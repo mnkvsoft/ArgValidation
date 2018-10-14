@@ -9,8 +9,8 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
     {
         private static EnumerableValidator<T> CreateEnumerableValidator<T>(Expression<Func<IEnumerable<T>>> arg)
         {
-            var validatingObject = ValidatingObject<IEnumerable<T>>.FromExpression(arg);
-            return new EnumerableValidator<T>(validatingObject);
+            var Argument = Argument<IEnumerable<T>>.FromExpression(arg);
+            return new EnumerableValidator<T>(Argument);
         }
 
         //[Fact]

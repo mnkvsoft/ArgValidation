@@ -8,23 +8,23 @@ namespace ArgValidation
 {
     public abstract class ValidatorBase<T, TInheritInstance>
     {
-        protected ValidatingObject<T> ValidatingObject { get; }
+        protected Argument<T> Argument { get; }
 
         protected abstract TInheritInstance CreateInstance();
 
-        internal ValidatorBase(ValidatingObject<T> validatingObject)
+        internal ValidatorBase(Argument<T> argument)
         {
-            if (validatingObject == null)
-                throw new ArgumentNullException(nameof(validatingObject));
+            if (argument == null)
+                throw new ArgumentNullException(nameof(argument));
 
-            ValidatingObject = validatingObject;
+            Argument = argument;
         }
 
         # region Default
 
         public TInheritInstance Default()
         {
-            return Default(() => new ArgumentException($"Object with name '{ValidatingObject.Name}' must be default value. Current value: '{ValidatingObject.Value}'"));
+            return Default(() => new ArgumentException($"Argument '{Argument.Name}' must be default value. Current value: '{Argument.Value}'"));
         }
 
         public TInheritInstance Default<TException>(string message) where TException : Exception
@@ -39,7 +39,7 @@ namespace ArgValidation
 
         public TInheritInstance Default<TException>(Func<TException> createExceptionFunc) where TException : Exception
         {
-            if (!ConditionChecker.IsDefault(ValidatingObject.Value))
+            if (!ConditionChecker.IsDefault(Argument.Value))
                 throw createExceptionFunc();
 
             return CreateInstance();
@@ -49,40 +49,40 @@ namespace ArgValidation
 
         public TInheritInstance NotDefault()
         {
-            if (ConditionChecker.IsDefault(ValidatingObject.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not default value");
+            if (ConditionChecker.IsDefault(Argument.Value))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be not default value");
 
             return CreateInstance();
         }
 
         public TInheritInstance Null()
         {
-            if (ValidatingObject.Value != null)
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be null. Current value: '{ValidatingObject.Value}'");
+            if (Argument.Value != null)
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be null. Current value: '{Argument.Value}'");
 
             return CreateInstance();
         }
 
         public TInheritInstance NotNull()
         {
-            if (ValidatingObject.Value == null)
-                ValidationErrorExceptionThrower.ArgumentNullException(ValidatingObject.Name);
+            if (Argument.Value == null)
+                ValidationErrorExceptionThrower.ArgumentNullException(Argument.Name);
 
             return CreateInstance();
         }
 
         public TInheritInstance Equal(T value)
         {
-            if (!ConditionChecker.IsEqual(ValidatingObject.Value, value))
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be equal '{value}'. Current value: '{ValidatingObject.Value}'");
+            if (!ConditionChecker.IsEqual(Argument.Value, value))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be equal '{value}'. Current value: '{Argument.Value}'");
 
             return CreateInstance();
         }
 
         public TInheritInstance NotEqual(T value)
         {
-            if (ConditionChecker.IsEqual(ValidatingObject.Value, value))
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must be not equal '{value}'");
+            if (ConditionChecker.IsEqual(Argument.Value, value))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be not equal '{value}'");
 
             return CreateInstance();
         }
@@ -90,11 +90,11 @@ namespace ArgValidation
         
         public TInheritInstance OnlyValues(params T[] values)
         {
-            if (!ConditionChecker.OnlyValues(ValidatingObject, values))
+            if (!ConditionChecker.OnlyValues(Argument, values))
             {
                 string valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Object with name '{ValidatingObject.Name}' must have only values: {valuesStr}. Current value: '{ValidatingObject.Value}'");
+                    $"Argument '{Argument.Name}' must have only values: {valuesStr}. Current value: '{Argument.Value}'");
             }
 
             return CreateInstance();

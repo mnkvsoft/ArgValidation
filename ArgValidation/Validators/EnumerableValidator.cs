@@ -8,7 +8,7 @@ namespace ArgValidation.Validators
 {
     public class EnumerableValidator<T> : ValidatorBase<IEnumerable<T>, EnumerableValidator<T>>
     {
-        internal EnumerableValidator(ValidatingObject<IEnumerable<T>> validatingObject) : base(validatingObject)
+        internal EnumerableValidator(Argument<IEnumerable<T>> argument) : base(argument)
         {
         }
 
@@ -19,86 +19,86 @@ namespace ArgValidation.Validators
 
         public EnumerableValidator<T> CountEqual(int count)
         {
-            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForCount(Argument);
 
-            int currentCount = ValidatingObject.Value.Count();
+            int currentCount = Argument.Value.Count();
             if (currentCount != count)
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains {count} elements. Current count elements: {currentCount}");
 
             return CreateInstance();
         }
 
         public EnumerableValidator<T> CountNotEqual(int count)
         {
-            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForCount(Argument);
 
-            int currentCount = ValidatingObject.Value.Count();
+            int currentCount = Argument.Value.Count();
             if (currentCount == count)
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' not must contains {count} elements");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' not must contains {count} elements");
 
             return this;
         }
 
         public EnumerableValidator<T> CountMoreThan(int count)
         {
-            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForCount(Argument);
 
-            int currentCount = ValidatingObject.Value.Count();
+            int currentCount = Argument.Value.Count();
             if (currentCount <= count)
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains more than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains more than {count} elements. Current count elements: {currentCount}");
 
             return this;
         }
 
         public EnumerableValidator<T> CountMoreOrEqualThan(int count)
         {
-            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForCount(Argument);
 
-            int currentCount = ValidatingObject.Value.Count();
+            int currentCount = Argument.Value.Count();
             if (currentCount < count)
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
 
             return this;
         }
 
         public EnumerableValidator<T> CountLessThan(int count)
         {
-            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForCount(Argument);
 
-            int currentCount = ValidatingObject.Value.Count();
+            int currentCount = Argument.Value.Count();
             if (currentCount >= count)
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains less than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains less than {count} elements. Current count elements: {currentCount}");
 
             return this;
         }
 
         public EnumerableValidator<T> CountLessOrEqualThan(int count)
         {
-            InvalidMethodArgumentThrower.IfNullForCount(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForCount(Argument);
 
-            int currentCount = ValidatingObject.Value.Count();
+            int currentCount = Argument.Value.Count();
             if (currentCount > count)
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
 
             return this;
         }
 
         public EnumerableValidator<T> Contains(T elem)
         {
-            InvalidMethodArgumentThrower.IfNullForContains(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForContains(Argument);
 
-            if (!ValidatingObject.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+            if (!Argument.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
 
             return this;
         }
 
         public EnumerableValidator<T> NotContains(T elem)
         {
-            InvalidMethodArgumentThrower.IfNullForNotContains(ValidatingObject);
+            InvalidMethodArgumentThrower.IfNullForNotContains(Argument);
 
-            if (ValidatingObject.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException($"Object with name '{ValidatingObject.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+            if (Argument.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
 
             return this;
         }

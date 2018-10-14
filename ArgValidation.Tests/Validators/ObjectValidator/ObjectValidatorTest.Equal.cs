@@ -17,7 +17,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
             int val = 5;
             int expectedVal = 4;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => val).Equal(expectedVal));
-            Assert.Equal($"Object with name '{nameof(val)}' must be equal '{expectedVal}'. Current value: '{val}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(val)}' must be equal '{expectedVal}'. Current value: '{val}'", exc.Message);
         }
     }
 }

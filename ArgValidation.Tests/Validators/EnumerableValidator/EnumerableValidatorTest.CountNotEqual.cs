@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] nullValue = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateEnumerableValidator(() => nullValue).CountNotEqual(0));
-            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
         [Fact]
@@ -18,7 +18,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] objs = new[] { new object(), new object() };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objs).CountNotEqual(objs.Length));
-            Assert.Equal($"Object with name '{nameof(objs)}' not must contains {objs.Length} elements", exc.Message);
+            Assert.Equal($"Argument '{nameof(objs)}' not must contains {objs.Length} elements", exc.Message);
         }
 
         [Fact]

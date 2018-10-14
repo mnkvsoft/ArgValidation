@@ -11,10 +11,10 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException($"Argument '{argName}' is null. Сan not compare null object");
         }
 
-        public static void IfNullForComparable<T>(ValidatingObject<T> arg1)
+        public static void IfNullForComparable<T>(Argument<T> arg1)
         {
             if (arg1.Value == null)
-                ThrowException($"Object with name '{arg1.Name}' is null. Сan not compare null object");
+                ThrowException($"Argument '{arg1.Name}' is null. Сan not compare null object");
         }
 
         public static void IfArgumentIsNullForRange<T>(T arg, string argName)
@@ -23,11 +23,11 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException($"Argument '{argName}' is null. Cannot define range");
         }
 
-        public static void IfNullForRange<T>(ValidatingObject<T> validatingObject, T min, T max)
+        public static void IfNullForRange<T>(Argument<T> argument, T min, T max)
         {
-            if (validatingObject.Value == null)
+            if (argument.Value == null)
                 ThrowException(
-                    $"Object with name '{validatingObject.Name}' is null. Cannot define belonging to range: '{min}' - '{max}'");
+                    $"Argument '{argument.Name}' is null. Cannot define belonging to range: '{min}' - '{max}'");
         }
 
         public static void IfNotRange<T>(T min, T max)
@@ -42,25 +42,25 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException($"Argument '{argName}' is null. There are no values to compare");
         }
 
-        public static void IfNullForCount<T>(ValidatingObject<T> validatingObject)
+        public static void IfNullForCount<T>(Argument<T> argument)
         {
-            if (validatingObject.Value == null)
+            if (argument.Value == null)
                 ThrowException(
-                    $"Object with name '{validatingObject.Name}' is null. Сan not get count elements from null object");
+                    $"Argument '{argument.Name}' is null. Сan not get count elements from null object");
         }
 
-        public static void IfNullForContains<T>(ValidatingObject<IEnumerable<T>> validatingObject)
+        public static void IfNullForContains<T>(Argument<IEnumerable<T>> argument)
         {
-            if (validatingObject.Value == null)
+            if (argument.Value == null)
                 ThrowException(
-                    $"Object with name '{validatingObject.Name}' is null. Сan not execute 'Contains' operation");
+                    $"Argument '{argument.Name}' is null. Сan not execute 'Contains' operation");
         }
         
-        public static void IfNullForNotContains<T>(ValidatingObject<IEnumerable<T>> validatingObject)
+        public static void IfNullForNotContains<T>(Argument<IEnumerable<T>> argument)
         {
-            if (validatingObject.Value == null)
+            if (argument.Value == null)
                 ThrowException(
-                    $"Object with name '{validatingObject.Name}' is null. Сan not execute 'NotContains' operation");
+                    $"Argument '{argument.Name}' is null. Сan not execute 'NotContains' operation");
         }
 
         private static void ThrowException(string message)

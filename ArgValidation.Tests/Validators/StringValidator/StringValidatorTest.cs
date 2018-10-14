@@ -8,8 +8,8 @@ namespace ArgValidation.Tests.Validators
     {
         private static StringValidator CreateStringValidator(Expression<Func<string>> arg)
         {
-            var validatingObject = ValidatingObject<string>.FromExpression(arg);
-            return new StringValidator(validatingObject);
+            var Argument = Argument<string>.FromExpression(arg);
+            return new StringValidator(Argument);
         }
     }
 }

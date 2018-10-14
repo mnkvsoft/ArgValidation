@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] nullValue = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateEnumerableValidator(() => nullValue).CountLessThan(0));
-            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
         [Fact]
@@ -19,7 +19,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
             object[] objsWithEqualCount = new[] { new object(), new object() };
             int count = objsWithEqualCount.Length;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objsWithEqualCount).CountLessThan(count));
-            Assert.Equal($"Object with name '{nameof(objsWithEqualCount)}' must contains less than {count} elements. Current count elements: {objsWithEqualCount.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(objsWithEqualCount)}' must contains less than {count} elements. Current count elements: {objsWithEqualCount.Length}", exc.Message);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
             object[] objsWithMoreCount = new[] { new object(), new object() };
             int count = objsWithMoreCount.Length - 1;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objsWithMoreCount).CountLessThan(count));
-            Assert.Equal($"Object with name '{nameof(objsWithMoreCount)}' must contains less than {count} elements. Current count elements: {objsWithMoreCount.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(objsWithMoreCount)}' must contains less than {count} elements. Current count elements: {objsWithMoreCount.Length}", exc.Message);
         }
     }
 }

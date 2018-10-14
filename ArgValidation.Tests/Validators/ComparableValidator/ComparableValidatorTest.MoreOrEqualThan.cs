@@ -23,7 +23,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             int value3 = 3;
             int value4 = 4;
             ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value3).MoreOrEqualThan(value4));
-            Assert.Equal($"Object with name '{nameof(value3)}' must be more or equal than '{value4}'. Current value: '{value3}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(value3)}' must be more or equal than '{value4}'. Current value: '{value3}'", exc.Message);
         }
 
         [Fact]

@@ -16,7 +16,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         {
             int val = 5;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => val).NotEqual(val));
-            Assert.Equal($"Object with name '{nameof(val)}' must be not equal '{val}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(val)}' must be not equal '{val}'", exc.Message);
         }
     }
 }

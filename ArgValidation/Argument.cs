@@ -3,21 +3,21 @@ using System.Linq.Expressions;
 
 namespace ArgValidation
 {
-    public sealed class ValidatingObject<T>
+    public sealed class Argument<T>
     {
         public string Name { get; }
         public T Value { get; }
 
-        public ValidatingObject(T value, string name)
+        public Argument(T value, string name)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Validating object name cannot be empty");
+                throw new ArgumentException("Argument name cannot be empty");
 
             Name = name;
             Value = value;
         }
         
-        public static ValidatingObject<T> FromExpression(Expression<Func<T>> expression)
+        public static Argument<T> FromExpression(Expression<Func<T>> expression)
         {
             Func<T> func = expression.Compile();
             T value = func();
@@ -38,7 +38,7 @@ namespace ArgValidation
                 name = exp.Member.Name;
             }
 
-            return new ValidatingObject<T>(value, name);
+            return new Argument<T>(value, name);
         }
     }
 }

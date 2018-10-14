@@ -11,7 +11,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] nullValue = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateEnumerableValidator(() => nullValue).Contains(new object()));
-            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not execute 'Contains' operation", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Contains' operation", exc.Message);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] objs = new[] { new object(), new object() };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objs).Contains(null));
-            Assert.Equal($"Object with name '{nameof(objs)}' not contains null value", exc.Message);
+            Assert.Equal($"Argument '{nameof(objs)}' not contains null value", exc.Message);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
             int value5 = 5;
             int[] digits = new[] { 1, 2 };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => digits).Contains(value5));
-            Assert.Equal($"Object with name '{nameof(digits)}' not contains '{value5}' value", exc.Message);
+            Assert.Equal($"Argument '{nameof(digits)}' not contains '{value5}' value", exc.Message);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
             {
                 CreateObjectValidator(() => arg).Default();
             });
-            Assert.Equal($"Object with name '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         {
             int arg = 5;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => arg).Default());
-            Assert.Equal($"Object with name '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
 
         [Fact]

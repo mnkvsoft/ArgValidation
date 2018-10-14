@@ -2,7 +2,7 @@ namespace ArgValidation.Validators
 {
     public class ObjectValidator<T> : ValidatorBase<T, ObjectValidator<T>>
     {
-        internal ObjectValidator(ValidatingObject<T> validatingObject) : base(validatingObject)
+        internal ObjectValidator(Argument<T> argument) : base(argument)
         {
         }
         

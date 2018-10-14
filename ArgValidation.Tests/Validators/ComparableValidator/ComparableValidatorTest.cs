@@ -8,8 +8,8 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
     {
         private static ComparableValidator<T> CreateObjectValidator<T>(Expression<Func<T>> arg) where T : IComparable<T> 
         {
-            var validatingObject = ValidatingObject<T>.FromExpression(arg);
-            return new ComparableValidator<T>(validatingObject);
+            var Argument = Argument<T>.FromExpression(arg);
+            return new ComparableValidator<T>(Argument);
         }
     }
 }

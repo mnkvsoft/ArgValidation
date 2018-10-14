@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] nullValue = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateEnumerableValidator(() => nullValue).CountMoreThan(0));
-            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
         [Fact]
@@ -19,7 +19,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
             object[] objsWithEqualCount = new[] { new object(), new object() };
             int count = objsWithEqualCount.Length;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objsWithEqualCount).CountMoreThan(count));
-            Assert.Equal($"Object with name '{nameof(objsWithEqualCount)}' must contains more than {count} elements. Current count elements: {objsWithEqualCount.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(objsWithEqualCount)}' must contains more than {count} elements. Current count elements: {objsWithEqualCount.Length}", exc.Message);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
             object[] objsWithLessCount = new[] { new object(), new object() };
             int count = objsWithLessCount.Length + 1;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objsWithLessCount).CountMoreThan(count));
-            Assert.Equal($"Object with name '{nameof(objsWithLessCount)}' must contains more than {count} elements. Current count elements: {objsWithLessCount.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(objsWithLessCount)}' must contains more than {count} elements. Current count elements: {objsWithLessCount.Length}", exc.Message);
         }
 
         [Fact]

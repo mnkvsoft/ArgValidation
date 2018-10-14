@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] nullValue = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateEnumerableValidator(() => nullValue).CountMoreOrEqualThan(0));
-            Assert.Equal($"Object with name '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
             object[] objsWithLessCount = new[] { new object(), new object() };
             int count = objsWithLessCount.Length + 1;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objsWithLessCount).CountMoreOrEqualThan(count));
-            Assert.Equal($"Object with name '{nameof(objsWithLessCount)}' must contains more or equal than {count} elements. Current count elements: {objsWithLessCount.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(objsWithLessCount)}' must contains more or equal than {count} elements. Current count elements: {objsWithLessCount.Length}", exc.Message);
         }
 
         [Fact]

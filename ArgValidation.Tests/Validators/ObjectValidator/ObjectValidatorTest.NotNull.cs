@@ -22,7 +22,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         [Fact]
         public void NotNull_NullableIsNull_ArgumentNullException()
         {
-            int? nullArg = null;
+            int? nullArg = new int?();
             ArgumentNullException exc = Assert.Throws<ArgumentNullException>(() => CreateObjectValidator(() => nullArg).NotNull());
             Assert.Equal(nameof(nullArg), exc.ParamName);
         }

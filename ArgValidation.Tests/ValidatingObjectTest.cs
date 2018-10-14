@@ -2,7 +2,7 @@
 
 namespace ArgValidation.Tests
 {
-    public class ValidatingObjectTest
+    public class ArgumentTest
     {
         private int PrivateTestProperty { get; set; }
         
@@ -10,49 +10,49 @@ namespace ArgValidation.Tests
         public void ConstructorFromExpression_Variable_Ok()
         {
             int variableName = 1;
-            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => variableName);
+            Argument<int> argument = Argument<int>.FromExpression(() => variableName);
 
-            Assert.Equal(nameof(variableName), validatingObject.Name);
-			Assert.Equal(variableName, validatingObject.Value);
+            Assert.Equal(nameof(variableName), argument.Name);
+			Assert.Equal(variableName, argument.Value);
         }
 
 		[Fact]
         public void ConstructorFromExpression_Constant_Ok()
         {
-            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => 1);
+            Argument<int> argument = Argument<int>.FromExpression(() => 1);
 
-			Assert.Equal($"Static value '1'", validatingObject.Name);
-			Assert.Equal(1, validatingObject.Value);
+			Assert.Equal($"Static value '1'", argument.Name);
+			Assert.Equal(1, argument.Value);
         }
         
 		[Fact]
         public void ConstructorFromExpression_Constructor_Ok()
         {
             int value = 1;
-            ValidatingObject<int?> validatingObject = ValidatingObject<int?>.FromExpression(() => new int?(value));
+            Argument<int?> argument = Argument<int?>.FromExpression(() => new int?(value));
 
-			Assert.Equal($"Static value '{value}'", validatingObject.Name);
-			Assert.Equal(new int?(value), validatingObject.Value);
+			Assert.Equal($"Static value '{value}'", argument.Name);
+			Assert.Equal(new int?(value), argument.Value);
         }
 
 		[Fact]
         public void ConstructorFromExpression_InstanceProperty_Ok()
         {
-            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => PrivateTestProperty);
+            Argument<int> argument = Argument<int>.FromExpression(() => PrivateTestProperty);
 
-			Assert.Equal(nameof(PrivateTestProperty), validatingObject.Name);
-			Assert.Equal(PrivateTestProperty, validatingObject.Value);
+			Assert.Equal(nameof(PrivateTestProperty), argument.Name);
+			Assert.Equal(PrivateTestProperty, argument.Value);
         }
 
 		[Fact]
         public void ConstructorFromExpression_ObjectProperty_Ok()
         {
-            ValidatingObjectTest objWithProperty = new ValidatingObjectTest();
+            ArgumentTest objWithProperty = new ArgumentTest();
 
-            ValidatingObject<int> validatingObject = ValidatingObject<int>.FromExpression(() => objWithProperty.PrivateTestProperty);
+            Argument<int> argument = Argument<int>.FromExpression(() => objWithProperty.PrivateTestProperty);
 
-			Assert.Equal(nameof(PrivateTestProperty), validatingObject.Name);
-			Assert.Equal(PrivateTestProperty, validatingObject.Value);
+			Assert.Equal(nameof(PrivateTestProperty), argument.Name);
+			Assert.Equal(PrivateTestProperty, argument.Value);
         }
     }
 }
