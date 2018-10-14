@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ArgValidation
 {
-    public sealed class Argument<T>
+    public struct Argument<T>
     {
         public string Name { get; }
         public T Value { get; }
@@ -15,6 +15,11 @@ namespace ArgValidation
 
             Name = name;
             Value = value;
+        }
+
+        public bool IsNotInitialized()
+        {
+            return Name == null;
         }
         
         public static Argument<T> FromExpression(Expression<Func<T>> expression)

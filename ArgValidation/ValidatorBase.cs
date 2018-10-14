@@ -14,38 +14,18 @@ namespace ArgValidation
 
         internal ValidatorBase(Argument<T> argument)
         {
-            if (argument == null)
-                throw new ArgumentNullException(nameof(argument));
+            if (argument.IsNotInitialized())
+                throw new ArgumentException("Argument must be initialized", nameof(argument));
 
             Argument = argument;
         }
 
-        # region Default
-
         public TInheritInstance Default()
         {
-            return Default(() => new ArgumentException($"Argument '{Argument.Name}' must be default value. Current value: '{Argument.Value}'"));
-        }
-
-        public TInheritInstance Default<TException>(string message) where TException : Exception
-        {
-            return Default(() => ReflectionObjectCreator.InvokeConstructor<TException>(
-                    new ConstructorParameter(
-                        name: "message",
-                        value: message,
-                        parameterType: typeof(string))
-                    ));
-        }
-
-        public TInheritInstance Default<TException>(Func<TException> createExceptionFunc) where TException : Exception
-        {
             if (!ConditionChecker.IsDefault(Argument.Value))
-                throw createExceptionFunc();
-
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be default value. Current value: '{Argument.Value}'");
             return CreateInstance();
         }
-
-        # endregion
 
         public TInheritInstance NotDefault()
         {

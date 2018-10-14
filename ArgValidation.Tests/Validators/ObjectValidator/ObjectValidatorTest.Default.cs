@@ -36,23 +36,5 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => arg).Default());
             Assert.Equal($"Argument '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
-
-        [Fact]
-        public void Default_CustomExceptionGeneric_CustomException()
-        {
-            int arg = 5;
-            string customMessage = "oops...";
-            OutOfMemoryException exc = Assert.Throws<OutOfMemoryException>(() => CreateObjectValidator(() => arg).Default<OutOfMemoryException>(customMessage));
-            Assert.Equal(customMessage, exc.Message);
-        }
-
-        [Fact]
-        public void Default_CustomExceptionLambda_CustomException()
-        {
-            int arg = 5;
-            OutOfMemoryException customExc = new OutOfMemoryException("message");
-            OutOfMemoryException exc = Assert.Throws<OutOfMemoryException>(() => CreateObjectValidator(() => arg).Default(() => customExc));
-            Assert.Equal(customExc, exc);
-        }
     }
 }
