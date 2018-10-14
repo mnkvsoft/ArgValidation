@@ -72,5 +72,5 @@ When writing business logic classes, it is almost always necessary to check the 
 ```
 ## Used technologies
 
-Language: C# 7.0
-Target framefork: .NET Standard 2.0
+- Language: C# 7.0
+- Target framefork: .NET Standard 2.0
