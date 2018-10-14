@@ -11,7 +11,7 @@ namespace ArgValidation.Tests.Validators
             int length = 2;
             string nullString = null;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullString).LengthMoreOrEqualThan(length));
-            Assert.Equal($"String with name '{nameof(nullString)}' must be length more or equals than {length}. Current length: unknown (string is null)", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullString)}' must be length more or equals than {length}. Current length: unknown (string is null)", exc.Message);
         }
 
 
@@ -21,7 +21,7 @@ namespace ArgValidation.Tests.Validators
             string str = "str";
             int length = str.Length + 1;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => str).LengthMoreOrEqualThan(length));
-            Assert.Equal($"String with name '{nameof(str)}' must be length more or equals than {length}. Current length: {str.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(str)}' must be length more or equals than {length}. Current length: {str.Length}", exc.Message);
         }
 
         [Fact]

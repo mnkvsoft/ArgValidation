@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators
         {
             string emptyString = string.Empty;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => emptyString).NotNullOrWhitespace());
-            Assert.Equal($"String with name '{nameof(emptyString)}' cannot be empty or whitespace. Current value: ''", exc.Message);
+            Assert.Equal($"Argument '{nameof(emptyString)}' cannot be empty or whitespace. Current value: ''", exc.Message);
         }
 
         [Fact]
@@ -18,7 +18,7 @@ namespace ArgValidation.Tests.Validators
         {
             string whitespaceString = "   ";
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => whitespaceString).NotNullOrWhitespace());
-            Assert.Equal($"String with name '{nameof(whitespaceString)}' cannot be empty or whitespace. Current value: '   '", exc.Message);
+            Assert.Equal($"Argument '{nameof(whitespaceString)}' cannot be empty or whitespace. Current value: '   '", exc.Message);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace ArgValidation.Tests.Validators
         {
             string nullString = null;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullString).NotNullOrWhitespace());
-            Assert.Equal($"String with name '{nameof(nullString)}' cannot be empty or whitespace. Current value: null", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullString)}' cannot be empty or whitespace. Current value: null", exc.Message);
         }
 
         [Fact]

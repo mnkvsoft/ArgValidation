@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators
         {
             string nullValue = null;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullValue).NotContains(nullValue));
-            Assert.Equal($"String with name '{nameof(nullValue)}' must not contains null. Current value: null", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' must not contains null. Current value: null", exc.Message);
         }
 
 
@@ -19,7 +19,7 @@ namespace ArgValidation.Tests.Validators
         {
             string emptyValue = string.Empty;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => emptyValue).NotContains(emptyValue));
-            Assert.Equal($"String with name '{nameof(emptyValue)}' must not contains '{emptyValue}'. Current value: '{emptyValue}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(emptyValue)}' must not contains '{emptyValue}'. Current value: '{emptyValue}'", exc.Message);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace ArgValidation.Tests.Validators
             string value = "string";
             string substring = value.Substring(3);
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => value).NotContains(substring));
-            Assert.Equal($"String with name '{nameof(value)}' must not contains '{substring}'. Current value: '{value}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(value)}' must not contains '{substring}'. Current value: '{value}'", exc.Message);
         }
 
         [Fact]

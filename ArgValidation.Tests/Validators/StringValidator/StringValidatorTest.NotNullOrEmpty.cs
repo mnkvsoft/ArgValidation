@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.Validators
         {
             string emptyString = string.Empty;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => emptyString).NotNullOrEmpty());
-            Assert.Equal($"String with name '{nameof(emptyString)}' cannot be empty or null. Current value: ''", exc.Message);
+            Assert.Equal($"Argument '{nameof(emptyString)}' cannot be empty or null. Current value: ''", exc.Message);
         }
 
         [Fact]
@@ -18,7 +18,7 @@ namespace ArgValidation.Tests.Validators
         {
             string nullString = null;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullString).NotNullOrEmpty());
-            Assert.Equal($"String with name '{nameof(nullString)}' cannot be empty or null. Current value: null", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullString)}' cannot be empty or null. Current value: null", exc.Message);
         }
 
         [Fact]

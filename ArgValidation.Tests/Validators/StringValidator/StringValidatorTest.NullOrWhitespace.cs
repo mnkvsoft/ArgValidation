@@ -31,7 +31,7 @@ namespace ArgValidation.Tests.Validators
         {
             string strWithValue = "with-value";
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => strWithValue).NullOrWhitespace());
-            Assert.Equal($"String with name '{nameof(strWithValue)}' must be empty or whitespace. Current value: '{strWithValue}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(strWithValue)}' must be empty or whitespace. Current value: '{strWithValue}'", exc.Message);
         }
     }
 }

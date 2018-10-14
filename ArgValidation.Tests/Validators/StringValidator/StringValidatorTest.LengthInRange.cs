@@ -24,7 +24,7 @@ namespace ArgValidation.Tests.Validators
             int max5 = 5;
 
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullString).LengthInRange(min3, max5));
-            Assert.Equal($"String with name '{nameof(nullString)}' must be length in range {min3} - {max5}. Current length: unknown (string is null)", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullString)}' must be length in range {min3} - {max5}. Current length: unknown (string is null)", exc.Message);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace ArgValidation.Tests.Validators
             int max5 = 5;
 
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => strLength6).LengthInRange(min3, max5));
-            Assert.Equal($"String with name '{nameof(strLength6)}' must be length in range {min3} - {max5}. Current length: {strLength6.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(strLength6)}' must be length in range {min3} - {max5}. Current length: {strLength6.Length}", exc.Message);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace ArgValidation.Tests.Validators
             int max5 = 5;
 
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => strLength2).LengthInRange(min3, max5));
-            Assert.Equal($"String with name '{nameof(strLength2)}' must be length in range {min3} - {max5}. Current length: {strLength2.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(strLength2)}' must be length in range {min3} - {max5}. Current length: {strLength2.Length}", exc.Message);
         }
 
         [Fact]

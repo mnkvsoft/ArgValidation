@@ -22,7 +22,7 @@ namespace ArgValidation.Tests.Validators
         {
             string notEmptyString = "not-empty";
             ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => notEmptyString).NullOrEmpty());
-            Assert.Equal($"String with name '{nameof(notEmptyString)}' must be empty or null. Current value: '{notEmptyString}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(notEmptyString)}' must be empty or null. Current value: '{notEmptyString}'", exc.Message);
         }
     }
 }
