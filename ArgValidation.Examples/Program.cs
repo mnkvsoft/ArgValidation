@@ -1,22 +1,20 @@
 ﻿using System;
-using ArgValidation.Examples.Model;
-using ArgValidation.Examples.Model.ArgValidation.ExpressionTree;
-using Dawn;
+using ArgValidation.Examples.Model.ArgValidation.NameOf;
 
 namespace ArgValidation.Examples
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            CarModel vwGolf = new CarModel();
-            
-            Car myVaz2101 = new Car(
-                model:vwGolf,
-                color: "White",
-                releaseYear: 2005,
-                dateOfPurchase: new DateTime(2008, 02, 12));
-            
+            var vwGolf = new CarModel();
+
+            var myVaz2101 = new Car(
+                vwGolf,
+                "White",
+                2005,
+                new DateTime(2008, 02, 12));
+
             Console.WriteLine(myVaz2101);
             Console.ReadLine();
         }

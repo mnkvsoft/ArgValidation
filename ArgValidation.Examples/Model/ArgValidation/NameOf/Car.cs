@@ -2,7 +2,7 @@
 
 namespace ArgValidation.Examples.Model.ArgValidation.NameOf
 {
-    class Car
+    public class Car
     {
         public CarModel Model { get; }
         public string Color { get; }

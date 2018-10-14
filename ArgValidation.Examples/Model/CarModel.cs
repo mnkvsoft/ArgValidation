@@ -1,6 +1,6 @@
 ﻿namespace ArgValidation.Examples
 {
-    class CarModel
+    public class CarModel
     {
 //        public CarBrand Brand { get; }
 //        public string Model { get; }

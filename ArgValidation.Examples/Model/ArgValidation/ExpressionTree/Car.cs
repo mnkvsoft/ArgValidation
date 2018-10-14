@@ -2,7 +2,7 @@
 
 namespace ArgValidation.Examples.Model.ArgValidation.ExpressionTree
 {
-    class Car
+    public class Car
     {
         public CarModel Model { get; }
         public string Color { get; }
