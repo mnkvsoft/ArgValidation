@@ -11,7 +11,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
             var value = new object();
             object[] nullArgument = null;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).OnlyValues(nullArgument));
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).OnlyValues(nullArgument));
 
             Assert.Equal("Argument 'values' is null. There are no values to compare", exc.Message);
         }
@@ -22,20 +22,20 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
             object value = null;
             var onlyNull = new object[] { null };
 
-            CreateObjectValidator(() => value).OnlyValues(onlyNull);
+            Arg.Validate(() => value).OnlyValues(onlyNull);
         }
 
         [Fact]
         public void OnlyValues_ArgumentEqual3only3or4_Ok()
         {
-            CreateObjectValidator(() => 3).OnlyValues(3, 4);
+            Arg.Validate(() => 3).OnlyValues(3, 4);
         }
 
         [Fact]
         public void OnlyValues_ArgumentEqual3Only2Or1_ArgumentException()
         {
             int value3 = 3;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => value3).OnlyValues(2, 1));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => value3).OnlyValues(2, 1));
             Assert.Equal($"Argument '{nameof(value3)}' must have only values: '2', '1'. Current value: '3'", exc.Message);
         }
     }

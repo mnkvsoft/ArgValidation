@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using ArgValidation.Validators;
 
 namespace ArgValidation.Tests.Validators.EnumerableValidator
 {
@@ -9,7 +10,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         public void CountMoreOrEqualThan_ValuesIsNull_InvalidOperationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateEnumerableValidator(() => nullValue).CountMoreOrEqualThan(0));
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).CountMoreOrEqualThan(0));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
@@ -18,7 +19,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] objsWithEqualCount = new[] { new object(), new object() };
             int count = objsWithEqualCount.Length;
-           CreateEnumerableValidator(() => objsWithEqualCount).CountMoreOrEqualThan(count);
+           Arg.Validate(() => objsWithEqualCount).CountMoreOrEqualThan(count);
         }
 
         [Fact]
@@ -26,7 +27,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] objsWithLessCount = new[] { new object(), new object() };
             int count = objsWithLessCount.Length + 1;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateEnumerableValidator(() => objsWithLessCount).CountMoreOrEqualThan(count));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => objsWithLessCount).CountMoreOrEqualThan(count));
             Assert.Equal($"Argument '{nameof(objsWithLessCount)}' must contains more or equal than {count} elements. Current count elements: {objsWithLessCount.Length}", exc.Message);
         }
 
@@ -35,7 +36,7 @@ namespace ArgValidation.Tests.Validators.EnumerableValidator
         {
             object[] objsWithMoreCount = new[] { new object(), new object() };
             int count = objsWithMoreCount.Length - 1;
-            CreateEnumerableValidator(() => objsWithMoreCount).CountMoreOrEqualThan(count);
+            Arg.Validate(() => objsWithMoreCount).CountMoreOrEqualThan(count);
         }
     }
 }

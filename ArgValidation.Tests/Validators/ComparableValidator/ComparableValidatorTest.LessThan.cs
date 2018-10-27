@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Validators;
 using Xunit;
 
 namespace ArgValidation.Tests.Validators.ComparableValidator
@@ -8,7 +9,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
         [Fact]
         public void LessThan_3LessThan4_Ok()
         {
-            CreateObjectValidator(() => 3).LessThan(4);
+            Arg.Validate(() => 3).LessThan(4);
         }
 
         [Fact]
@@ -16,7 +17,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
         {
             int val = 5;
             int equalVal = val;
-            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => val).LessThan(equalVal));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => Arg.Validate(() => val).LessThan(equalVal));
             Assert.Equal($"Argument '{nameof(val)}' must be less than '{equalVal}'. Current value: '{val}'", exc.Message);
         }
 
@@ -25,7 +26,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
         {
             int value5 = 5;
             int value4 = 4;
-            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value5).LessThan(value4));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => Arg.Validate(() => value5).LessThan(value4));
             Assert.Equal($"Argument '{nameof(value5)}' must be less than '{value4}'. Current value: '{value5}'", exc.Message);
         }
 
@@ -36,7 +37,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             ComparableClass lessThanValue = new ComparableClass();
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
             {
-                CreateObjectValidator(() => nullValue).LessThan(lessThanValue);
+                Arg.Validate(() => nullValue).LessThan(lessThanValue);
             });
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not compare null object", exc.Message);
         }
@@ -48,7 +49,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             ComparableClass lessThanNull = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
             {
-                CreateObjectValidator(() => value).LessThan(lessThanNull);
+                Arg.Validate(() => value).LessThan(lessThanNull);
             });
             Assert.Equal($"Argument 'lessThan' is null. Сan not compare null object", exc.Message);
         }

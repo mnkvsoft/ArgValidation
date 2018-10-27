@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ArgValidation.Internal;
@@ -6,101 +7,93 @@ using ArgValidation.Internal.ExceptionThrowers;
 
 namespace ArgValidation.Validators
 {
-    public class EnumerableValidator<T> : ValidatorBase<IEnumerable<T>, EnumerableValidator<T>>
+    public static class EnumerableValidator
     {
-        internal EnumerableValidator(Argument<IEnumerable<T>> argument) : base(argument)
+        public static Argument<TEnumerable> CountEqual<TEnumerable>(this Argument<TEnumerable> argument, int count) where TEnumerable : IEnumerable
         {
-        }
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
 
-        protected override EnumerableValidator<T> CreateInstance()
-        {
-            return this;
-        }
-
-        public EnumerableValidator<T> CountEqual(int count)
-        {
-            InvalidMethodArgumentThrower.IfNullForCount(Argument);
-
-            int currentCount = Argument.Value.Count();
+            int currentCount = argument.Value.Count();
             if (currentCount != count)
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' must contains {count} elements. Current count elements: {currentCount}");
 
-            return CreateInstance();
+            return argument;
         }
 
-        public EnumerableValidator<T> CountNotEqual(int count)
+        public static Argument<TEnumerable> CountNotEqual<TEnumerable>(this Argument<TEnumerable> argument,int count) where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(Argument);
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
 
-            int currentCount = Argument.Value.Count();
+            int currentCount = argument.Value.Count();
             if (currentCount == count)
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' not must contains {count} elements");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' not must contains {count} elements");
 
-            return this;
+            return argument;
         }
 
-        public EnumerableValidator<T> CountMoreThan(int count)
+        public static Argument<TEnumerable> CountMoreThan<TEnumerable>(this Argument<TEnumerable> argument,int count) where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(Argument);
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
 
-            int currentCount = Argument.Value.Count();
+            int currentCount = argument.Value.Count();
             if (currentCount <= count)
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains more than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' must contains more than {count} elements. Current count elements: {currentCount}");
 
-            return this;
+            return argument;
         }
 
-        public EnumerableValidator<T> CountMoreOrEqualThan(int count)
+        public static Argument<TEnumerable> CountMoreOrEqualThan<TEnumerable>(this Argument<TEnumerable> argument,int count) where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(Argument);
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
 
-            int currentCount = Argument.Value.Count();
+            int currentCount = argument.Value.Count();
             if (currentCount < count)
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
 
-            return this;
+            return argument;
         }
 
-        public EnumerableValidator<T> CountLessThan(int count)
+        public static Argument<TEnumerable> CountLessThan<TEnumerable>(this Argument<TEnumerable> argument,int count) where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(Argument);
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
 
-            int currentCount = Argument.Value.Count();
+            int currentCount = argument.Value.Count();
             if (currentCount >= count)
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains less than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' must contains less than {count} elements. Current count elements: {currentCount}");
 
-            return this;
+            return argument;
         }
 
-        public EnumerableValidator<T> CountLessOrEqualThan(int count)
+        public static Argument<TEnumerable> CountLessOrEqualThan<TEnumerable>(this Argument<TEnumerable> argument,int count) where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(Argument);
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
 
-            int currentCount = Argument.Value.Count();
+            int currentCount = argument.Value.Count();
             if (currentCount > count)
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
 
-            return this;
+            return argument;
         }
 
-        public EnumerableValidator<T> Contains(T elem)
+        public static Argument<TEnumerable> Contains<TEnumerable, T>(this Argument<TEnumerable> argument, T elem) where TEnumerable :IEnumerable<T>
         {
-            InvalidMethodArgumentThrower.IfNullForContains(Argument);
+            InvalidMethodArgumentThrower.IfNullForContains(argument);
 
-            if (!Argument.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+            if (!argument.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
 
-            return this;
+            return argument;
         }
 
-        public EnumerableValidator<T> NotContains(T elem)
+        public static Argument<TEnumerable> NotContains<TEnumerable, T>(this Argument<TEnumerable> argument, T elem) where TEnumerable :IEnumerable<T>
         {
-            InvalidMethodArgumentThrower.IfNullForNotContains(Argument);
+            InvalidMethodArgumentThrower.IfNullForNotContains(argument);
 
-            if (Argument.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+            if (argument.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
 
-            return this;
+            return argument;
         }
     }
 }
+

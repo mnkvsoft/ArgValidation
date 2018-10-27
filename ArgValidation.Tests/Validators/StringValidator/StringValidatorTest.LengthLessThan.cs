@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Validators;
 using Xunit;
 
 namespace ArgValidation.Tests.Validators
@@ -10,7 +11,7 @@ namespace ArgValidation.Tests.Validators
         {
             int length = 2;
             string nullString = null;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullString).LengthLessThan(length));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => nullString).LengthLessThan(length));
             Assert.Equal($"Argument '{nameof(nullString)}' must be length less than {length}. Current length: unknown (string is null)", exc.Message);
         }
 
@@ -19,7 +20,7 @@ namespace ArgValidation.Tests.Validators
         {
             string str = "str";
             int length = str.Length - 1;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => str).LengthLessThan(length));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => str).LengthLessThan(length));
             Assert.Equal($"Argument '{nameof(str)}' must be length less than {length}. Current length: {str.Length}", exc.Message);
         }
 
@@ -28,7 +29,7 @@ namespace ArgValidation.Tests.Validators
         {
             string str = "str";
             int length = str.Length;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => str).LengthLessThan(length));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => str).LengthLessThan(length));
             Assert.Equal($"Argument '{nameof(str)}' must be length less than {length}. Current length: {str.Length}", exc.Message);
         }
 
@@ -37,7 +38,7 @@ namespace ArgValidation.Tests.Validators
         {
             string str = "str";
             int length = str.Length + 1;
-            CreateStringValidator(() => str).LengthLessThan(length);
+            Arg.Validate(() => str).LengthLessThan(length);
         }
     }
 }

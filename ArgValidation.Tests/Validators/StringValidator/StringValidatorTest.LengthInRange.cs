@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Validators;
 using Xunit;
 
 namespace ArgValidation.Tests.Validators
@@ -12,7 +13,7 @@ namespace ArgValidation.Tests.Validators
             int min5 = 5;
             int max3 = 3;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateStringValidator(() => str).LengthInRange(min5, max3));
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => str).LengthInRange(min5, max3));
             Assert.Equal("Argument 'min' cannot be more than 'max'. Cannot define range", exc.Message);
         }
 
@@ -23,7 +24,7 @@ namespace ArgValidation.Tests.Validators
             int min3 = 3;
             int max5 = 5;
 
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullString).LengthInRange(min3, max5));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => nullString).LengthInRange(min3, max5));
             Assert.Equal($"Argument '{nameof(nullString)}' must be length in range {min3} - {max5}. Current length: unknown (string is null)", exc.Message);
         }
 
@@ -34,7 +35,7 @@ namespace ArgValidation.Tests.Validators
             int min3 = 3;
             int max5 = 5;
 
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => strLength6).LengthInRange(min3, max5));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => strLength6).LengthInRange(min3, max5));
             Assert.Equal($"Argument '{nameof(strLength6)}' must be length in range {min3} - {max5}. Current length: {strLength6.Length}", exc.Message);
         }
 
@@ -45,7 +46,7 @@ namespace ArgValidation.Tests.Validators
             int min3 = 3;
             int max5 = 5;
 
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => strLength2).LengthInRange(min3, max5));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => strLength2).LengthInRange(min3, max5));
             Assert.Equal($"Argument '{nameof(strLength2)}' must be length in range {min3} - {max5}. Current length: {strLength2.Length}", exc.Message);
         }
 
@@ -56,7 +57,7 @@ namespace ArgValidation.Tests.Validators
             int min3 = 3;
             int max5 = 5;
 
-            CreateStringValidator(() => strLength5).LengthInRange(min3, max5);
+            Arg.Validate(() => strLength5).LengthInRange(min3, max5);
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace ArgValidation.Tests.Validators
             int min3 = 3;
             int max5 = 5;
 
-            CreateStringValidator(() => strLength3).LengthInRange(min3, max5);
+            Arg.Validate(() => strLength3).LengthInRange(min3, max5);
         }
     }
 }

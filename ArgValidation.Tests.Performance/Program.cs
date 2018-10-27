@@ -9,7 +9,7 @@ using Native = ArgValidation.Examples.Model.Native;
 namespace ArgValidation.Tests.Performance
 {
     [CoreJob]
-    //[MemoryDiagnoser]
+    [MemoryDiagnoser]
     public class NativeVsNameOfVsExpressionTree
     {
         [Params(1)] 

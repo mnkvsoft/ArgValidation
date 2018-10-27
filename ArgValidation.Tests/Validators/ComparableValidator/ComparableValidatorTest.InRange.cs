@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Validators;
 using Xunit;
 
 namespace ArgValidation.Tests.Validators.ComparableValidator
@@ -11,7 +12,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             ComparableClass value = new ComparableClass();
             ComparableClass min = value;
             ComparableClass max = value;
-            CreateObjectValidator(() => value).InRange(min, max);
+            Arg.Validate(() => value).InRange(min, max);
         }
 
         [Fact]
@@ -21,7 +22,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             int min2 = 2;
             int max3 = 3;
 
-            CreateObjectValidator(() => value2).InRange(min2, max3);
+            Arg.Validate(() => value2).InRange(min2, max3);
         }
 
         [Fact]
@@ -31,7 +32,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             int min2 = 2;
             int max3 = 3;
 
-            CreateObjectValidator(() => value3).InRange(min2, max3);
+            Arg.Validate(() => value3).InRange(min2, max3);
         }
 
         [Fact]
@@ -41,7 +42,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             int min1 = 1;
             int max3 = 3;
 
-            CreateObjectValidator(() => value2).InRange(min1, max3);
+            Arg.Validate(() => value2).InRange(min1, max3);
         }
 
         [Fact]
@@ -51,7 +52,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             int min1 = 1;
             int max3 = 3;
 
-            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value4).InRange(min1, max3));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => Arg.Validate(() => value4).InRange(min1, max3));
             Assert.Equal($"Argument '{nameof(value4)}' must be in range from '{min1}' to '{max3}'. Current value: '{value4}'", exc.Message);
         }
 
@@ -62,7 +63,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             int min1 = 1;
             int max3 = 3;
 
-            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => CreateObjectValidator(() => value0).InRange(min1, max3));
+            ArgumentOutOfRangeException exc = Assert.Throws<ArgumentOutOfRangeException>(() => Arg.Validate(() => value0).InRange(min1, max3));
             Assert.Equal($"Argument '{nameof(value0)}' must be in range from '{min1}' to '{max3}'. Current value: '{value0}'", exc.Message);
         }
 
@@ -73,7 +74,7 @@ namespace ArgValidation.Tests.Validators.ComparableValidator
             int min5 = 5;
             int max3 = 3;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => CreateObjectValidator(() => value).InRange(min5, max3));
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min5, max3));
             Assert.Equal("Argument 'min' cannot be more than 'max'. Cannot define range", exc.Message);
         }
     }

@@ -1,83 +1,72 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using ArgValidation.Internal;
 using ArgValidation.Internal.ExceptionThrowers;
-using ArgValidation.Internal.Reflection;
 
 namespace ArgValidation
 {
-    public abstract class ValidatorBase<T, TInheritInstance>
+    public static class ValidatorBase
     {
-        protected Argument<T> Argument { get; }
-
-        protected abstract TInheritInstance CreateInstance();
-
-        internal ValidatorBase(Argument<T> argument)
+        public static Argument<T> Default<T>(this Argument<T> arg)
         {
-            if (argument.IsNotInitialized())
-                throw new ArgumentException("Argument must be initialized", nameof(argument));
-
-            Argument = argument;
-        }
-
-        public TInheritInstance Default()
-        {
-            if (!ConditionChecker.IsDefault(Argument.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be default value. Current value: '{Argument.Value}'");
-            return CreateInstance();
-        }
-
-        public TInheritInstance NotDefault()
-        {
-            if (ConditionChecker.IsDefault(Argument.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be not default value");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance Null()
-        {
-            if (Argument.Value != null)
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be null. Current value: '{Argument.Value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance NotNull()
-        {
-            if (Argument.Value == null)
-                ValidationErrorExceptionThrower.ArgumentNullException(Argument.Name);
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance Equal(T value)
-        {
-            if (!ConditionChecker.IsEqual(Argument.Value, value))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be equal '{value}'. Current value: '{Argument.Value}'");
-
-            return CreateInstance();
-        }
-
-        public TInheritInstance NotEqual(T value)
-        {
-            if (ConditionChecker.IsEqual(Argument.Value, value))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{Argument.Name}' must be not equal '{value}'");
-
-            return CreateInstance();
-        }
-        
-        
-        public TInheritInstance OnlyValues(params T[] values)
-        {
-            if (!ConditionChecker.OnlyValues(Argument, values))
-            {
-                string valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
+            if (!ConditionChecker.IsDefault(arg.Value))
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{Argument.Name}' must have only values: {valuesStr}. Current value: '{Argument.Value}'");
+                    $"Argument '{arg.Name}' must be default value. Current value: '{arg.Value}'");
+            return arg;
+        }
+
+        public static Argument<T> NotDefault<T>(this Argument<T> arg)
+        {
+            if (ConditionChecker.IsDefault(arg.Value))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not default value");
+
+            return arg;
+        }
+
+        public static Argument<T> Null<T>(this Argument<T> arg) // where T : class
+        {
+            if (arg.Value != null)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be null. Current value: '{arg.Value}'");
+
+            return arg;
+        }
+
+        public static Argument<T> NotNull<T>(this Argument<T> arg) // where T : class
+        {
+            if (arg.Value == null)
+                ValidationErrorExceptionThrower.ArgumentNullException(arg.Name);
+
+            return arg;
+        }
+
+        public static Argument<T> Equal<T>(this Argument<T> arg, T value)
+        {
+            if (!ConditionChecker.IsEqual(arg.Value, value))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be equal '{value}'. Current value: '{arg.Value}'");
+
+            return arg;
+        }
+
+        public static Argument<T> NotEqual<T>(this Argument<T> arg, T value)
+        {
+            if (ConditionChecker.IsEqual(arg.Value, value))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not equal '{value}'");
+
+            return arg;
+        }
+
+
+        public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
+        {
+            if (!ConditionChecker.OnlyValues(arg, values))
+            {
+                var valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must have only values: {valuesStr}. Current value: '{arg.Value}'");
             }
 
-            return CreateInstance();
+            return arg;
         }
     }
 }

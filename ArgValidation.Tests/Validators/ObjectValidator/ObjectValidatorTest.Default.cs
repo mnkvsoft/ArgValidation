@@ -9,7 +9,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         public void Default_ReferenceTypeIsNull_Ok()
         {
             object arg = null;
-            CreateObjectValidator(() => arg).Default();
+            Arg.Validate(() => arg).Default();
         }
 
         [Fact]
@@ -18,7 +18,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
             object arg = new object();
             ArgumentException exc = Assert.Throws<ArgumentException>(() =>
             {
-                CreateObjectValidator(() => arg).Default();
+                Arg.Validate(() => arg).Default();
             });
             Assert.Equal($"Argument '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
@@ -26,14 +26,14 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         [Fact]
         public void Default_ValueTypeIsDefault_Ok()
         {
-            CreateObjectValidator(() => default(int)).Default();
+            Arg.Validate(() => default(int)).Default();
         }
 
         [Fact]
         public void Default_ValueTypeIsNotDefault_ArgumentException()
         {
             int arg = 5;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => arg).Default());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => arg).Default());
             Assert.Equal($"Argument '{nameof(arg)}' must be default value. Current value: '{arg}'", exc.Message);
         }
     }

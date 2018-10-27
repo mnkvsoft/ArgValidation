@@ -9,7 +9,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         public void Null_ObjectIsNotNull_ArgumentException()
         {
             object notNullObj = new object();
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => notNullObj).Null());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => notNullObj).Null());
             Assert.Equal($"Argument '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
@@ -17,14 +17,18 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         public void Null_ObjectIsNull_Ok()
         {
             object nullObj = null;
-            CreateObjectValidator(() => nullObj).Null();
+            Arg.Validate(() => nullObj).Null();
         }
 
         [Fact]
         public void Null_NullableIsNotNull_ArgumentException()
         {
             int? notNullObj = 5;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => notNullObj).Null());
+            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
+            {
+                Arg.Validate(() => notNullObj)
+                    .Null();
+            });
             Assert.Equal($"Argument '{nameof(notNullObj)}' must be null. Current value: '{notNullObj}'", exc.Message);
         }
 
@@ -32,7 +36,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         public void Null_NullableIsNull_Ok()
         {
             int? nullObj = null;
-            CreateObjectValidator(() => nullObj).Null();
+            Arg.Validate(() => nullObj).Null();
         }
     }
 }

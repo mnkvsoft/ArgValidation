@@ -49,14 +49,14 @@ namespace ArgValidation.Internal.ExceptionThrowers
                     $"Argument '{argument.Name}' is null. Сan not get count elements from null object");
         }
 
-        public static void IfNullForContains<T>(Argument<IEnumerable<T>> argument)
+        public static void IfNullForContains<T>(Argument<T> argument)
         {
             if (argument.Value == null)
                 ThrowException(
                     $"Argument '{argument.Name}' is null. Сan not execute 'Contains' operation");
         }
         
-        public static void IfNullForNotContains<T>(Argument<IEnumerable<T>> argument)
+        public static void IfNullForNotContains<T>(Argument<T> argument)
         {
             if (argument.Value == null)
                 ThrowException(

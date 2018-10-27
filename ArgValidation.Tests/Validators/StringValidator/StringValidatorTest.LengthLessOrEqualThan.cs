@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Validators;
 using Xunit;
 
 namespace ArgValidation.Tests.Validators
@@ -10,7 +11,7 @@ namespace ArgValidation.Tests.Validators
         {
             int length = 2;
             string nullString = null;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullString).LengthLessOrEqualThan(length));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => nullString).LengthLessOrEqualThan(length));
             Assert.Equal($"Argument '{nameof(nullString)}' must be length less or equals than {length}. Current length: unknown (string is null)", exc.Message);
         }
 
@@ -19,7 +20,7 @@ namespace ArgValidation.Tests.Validators
         {
             string str = "str";
             int length = str.Length - 1;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => str).LengthLessOrEqualThan(length));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => str).LengthLessOrEqualThan(length));
             Assert.Equal($"Argument '{nameof(str)}' must be length less or equals than {length}. Current length: {str.Length}", exc.Message);
         }
 
@@ -28,7 +29,7 @@ namespace ArgValidation.Tests.Validators
         {
             string str = "str";
             int length = str.Length;
-            CreateStringValidator(() => str).LengthLessOrEqualThan(length);
+            Arg.Validate(() => str).LengthLessOrEqualThan(length);
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace ArgValidation.Tests.Validators
         {
             string str = "str";
             int length = str.Length + 1;
-            CreateStringValidator(() => str).LengthLessOrEqualThan(length);
+            Arg.Validate(() => str).LengthLessOrEqualThan(length);
         }
     }
 }

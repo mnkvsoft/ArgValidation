@@ -8,7 +8,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         [Fact]
         public void Equal_5Equal5_Ok()
         {
-            CreateObjectValidator(() => 5).Equal(5);
+            Arg.Validate(() => 5).Equal(5);
         }
 
         [Fact]
@@ -16,7 +16,7 @@ namespace ArgValidation.Tests.Validators.ObjectValidator
         {
             int val = 5;
             int expectedVal = 4;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateObjectValidator(() => val).Equal(expectedVal));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => val).Equal(expectedVal));
             Assert.Equal($"Argument '{nameof(val)}' must be equal '{expectedVal}'. Current value: '{val}'", exc.Message);
         }
     }

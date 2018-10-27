@@ -7,18 +7,19 @@ namespace ArgValidation.Tests.Validators
 {
     public partial class StringValidatorTest
     {
+        
         [Fact]
         public void Contains_ValueIsNullAndArgumentIsNull_Ok()
         {
             string nullValue = null;
-            CreateStringValidator(() => nullValue).Contains(null);
+            Arg.Validate(() => nullValue).Contains(null);
         }
 
         [Fact]
         public void Contains_ValueIsEmptyAndArgumentIsEmpty_Ok()
         {
             string emptyValue = string.Empty;
-            CreateStringValidator(() => emptyValue).Contains(emptyValue);
+            Arg.Validate(() => emptyValue).Contains(emptyValue);
         }
 
         [Fact]
@@ -26,7 +27,10 @@ namespace ArgValidation.Tests.Validators
         {
             string value = "qwe";
             string arg = "123";
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => value).Contains(arg));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
+            {
+                Arg.Validate(() => value).Contains(arg);
+            });
             Assert.Equal($"Argument '{nameof(value)}' must contains '{arg}'. Current value: '{value}'", exc.Message);
         }
 
@@ -35,7 +39,7 @@ namespace ArgValidation.Tests.Validators
         {
             string value = "string";
             string substring = value.Substring(3);
-            CreateStringValidator(() => value).Contains(substring);
+            Arg.Validate(() => value).Contains(substring);
         }
 
         [Fact]
@@ -43,7 +47,10 @@ namespace ArgValidation.Tests.Validators
         {
             string nullValue = null;
             string arg = "123";
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => nullValue).Contains(arg));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
+            {
+                Arg.Validate(() => nullValue).Contains(arg);
+            });
             Assert.Equal($"Argument '{nameof(nullValue)}' must contains '{arg}'. Current value: null", exc.Message);
         }
 
@@ -52,7 +59,10 @@ namespace ArgValidation.Tests.Validators
         {
             string value = "value";
             string nullArg = null;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => CreateStringValidator(() => value).Contains(nullArg));
+            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
+            {
+                Arg.Validate(() => value).Contains(nullArg);
+            });
             Assert.Equal($"Argument '{nameof(value)}' must contains null. Current value: '{value}'", exc.Message);
         }
     }
