@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ArgValidation</id>
+    <version>0.1.0</version>
+    <title>ArgValidation</title>
+    <authors>Viktor Mynkov</authors>
+    <owners>Viktor Mynkov</owners>
+    <licenseUrl>https://github.com/mnkvsoft/ArgValidation/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mnkvsoft/ArgValidation</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      A simply arguments validation library with fluent API.
+      
+      Examples:
+        Arg.NotNull(() => model);
+
+        Arg.Validate(() => color)
+          .NotNullOrWhitespace()
+          .LengthLessOrEqualThan(20);
+
+        Arg.Positive(releaseYear, nameof(releaseYear));
+    </description>
+    <summary>A simply arguments validation library with fluent API</summary>
+    <releaseNotes>
+      Support checks for the following types:
+        - Object:
+            - Default()
+            - NotDefault()
+            - Null()
+            - NotNull()
+            - Equal(T value)
+            - NotEqual(T value)
+            - OnlyValues(params T[] values)
+      
+        - IComparable&lt;T&gt;:
+            - MoreThan(T value)
+            - MoreOrEqualThan(T value)
+            - LessThan(T value)
+            - LessOrEqualThan(T value)
+            - InRange(T min, T max)
+      
+        - IEnumerable&lt;T&gt;:
+            - CountEqual(int count)
+            - CountNotEqual(int count)
+            - CountMoreThan(int count)
+            - CountMoreOrEqualThan(int count)
+            - CountLessThan(int count)
+            - CountLessOrEqualThan(int count)
+            - Contains(T elem)
+            - NotContains(T elem)
+      
+        - String
+            - NullOrEmpty()
+            - NotNullOrEmpty()
+            - NullOrWhitespace()
+            - NotNullOrWhitespace()
+            - LengthEqual(int value)
+            - LengthMoreThan(int value)
+            - LengthMoreOrEqualThan(int value)
+            - LengthLessThan(int value)
+            - LengthLessOrEqualThan(int value)
+            - LengthInRange(int min, int max)
+            - Contains(string value)
+            - NotContains(string value)
+    </releaseNotes>
+    <tags>arguments argument validation validator checker check parameter parameters</tags>
+  </metadata>
+  <files>
+    <file src="./bin/Release/netstandard2.0/ArgValidation.dll" target="lib/netstandard2.0/ArgValidation.dll" />
+  </files>
+</package>

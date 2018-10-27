@@ -1,5 +1,4 @@
 ﻿using System;
-using ArgValidation.Validators;
 
 namespace ArgValidation.Examples.Model.ArgValidation.NameOf
 {
@@ -16,9 +15,12 @@ namespace ArgValidation.Examples.Model.ArgValidation.NameOf
             Arg.NotDefault(dateOfPurchase, nameof(dateOfPurchase));
             Arg.Positive(releaseYear, nameof(releaseYear));
             
+//            Arg.Validate(color, nameof(color))
+//                .NotNullOrWhitespace()
+//                .LengthLessOrEqualThan(20);
+
             Arg.Validate(color, nameof(color))
-                .NotNullOrWhitespace()
-                .LengthLessOrEqualThan(20);
+                .CountMoreThan(1);
             
             Model = model;
             Color = color;

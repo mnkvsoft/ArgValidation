@@ -42,18 +42,18 @@ namespace ArgValidation.Tests.Performance
             }
         }
 
-        [Benchmark]
-        public void ExpressionTree()
-        {
-            for (int i = 0; i < N; i++)
-            {
-                var car = new ExpressionTree.Car(
-                    model: new CarModel(), 
-                    color: "white",
-                    releaseYear: 2005, 
-                    dateOfPurchase: new DateTime(2008, 01, 02));
-            }
-        }
+//        [Benchmark]
+//        public void ExpressionTree()
+//        {
+//            for (int i = 0; i < N; i++)
+//            {
+//                var car = new ExpressionTree.Car(
+//                    model: new CarModel(), 
+//                    color: "white",
+//                    releaseYear: 2005, 
+//                    dateOfPurchase: new DateTime(2008, 01, 02));
+//            }
+//        }
     }
 
     class Program

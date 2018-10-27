@@ -1,28 +1,72 @@
-//using System;
-//using System.Collections.Generic;
-//
-//namespace ArgValidation
-//{
-//    public static class ArgumentExtension
-//    {
-//        public static T NotNull<T>(this T arg) where T : Argument<T>
-//        {
-//            return arg;
-//        }
-//        
-//        public static ArgumentEnumerable<T> CountMoreThan<T>(this ArgumentEnumerable<T> arg, int lentght)
-//        {
-//            return arg;
-//        }
-//        
-//        public static IEnumerable<T> Count1<T>(this IEnumerable<T> arg, int lentght)
-//        {
-//            return arg;
-//        }
-//        
-//        public static Argument<string> Length(this Argument<string> arg, int length) 
-//        {
-//            return arg;
-//        }
-//    }
-//}
+﻿using System.Linq;
+using ArgValidation.Internal;
+using ArgValidation.Internal.ExceptionThrowers;
+
+namespace ArgValidation
+{
+    public static class ArgumentExtension
+    {
+        public static Argument<T> Default<T>(this Argument<T> arg)
+        {
+            if (!ConditionChecker.IsDefault(arg.Value))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be default value. Current value: '{arg.Value}'");
+            return arg;
+        }
+
+        public static Argument<T> NotDefault<T>(this Argument<T> arg)
+        {
+            if (ConditionChecker.IsDefault(arg.Value))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not default value");
+
+            return arg;
+        }
+
+        public static Argument<T> Null<T>(this Argument<T> arg)
+        {
+            if (arg.Value != null)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be null. Current value: '{arg.Value}'");
+
+            return arg;
+        }
+
+        public static Argument<T> NotNull<T>(this Argument<T> arg)
+        {
+            if (arg.Value == null)
+                ValidationErrorExceptionThrower.ArgumentNullException(arg.Name);
+
+            return arg;
+        }
+
+        public static Argument<T> Equal<T>(this Argument<T> arg, T value)
+        {
+            if (!ConditionChecker.IsEqual(arg.Value, value))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be equal '{value}'. Current value: '{arg.Value}'");
+
+            return arg;
+        }
+
+        public static Argument<T> NotEqual<T>(this Argument<T> arg, T value)
+        {
+            if (ConditionChecker.IsEqual(arg.Value, value))
+                ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not equal '{value}'");
+
+            return arg;
+        }
+
+
+        public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
+        {
+            if (!ConditionChecker.OnlyValues(arg, values))
+            {
+                var valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must have only values: {valuesStr}. Current value: '{arg.Value}'");
+            }
+
+            return arg;
+        }
+    }
+}
