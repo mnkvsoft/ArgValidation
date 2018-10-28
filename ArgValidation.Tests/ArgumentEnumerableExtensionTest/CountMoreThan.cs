@@ -16,7 +16,7 @@ namespace ArgValidation.Tests.ArgumentEnumerableExtensionTest
         [Fact]
         public void CountMoreThan_CountEqual_ArgumentException()
         {
-            object[] objsWithEqualCount = new[] { new object(), new object() };
+            object[] objsWithEqualCount = { new object(), new object() };
             int count = objsWithEqualCount.Length;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => objsWithEqualCount).CountMoreThan(count));
             Assert.Equal($"Argument '{nameof(objsWithEqualCount)}' must contains more than {count} elements. Current count elements: {objsWithEqualCount.Length}", exc.Message);
@@ -25,7 +25,7 @@ namespace ArgValidation.Tests.ArgumentEnumerableExtensionTest
         [Fact]
         public void CountMoreThan_CountLess_ArgumentException()
         {
-            object[] objsWithLessCount = new[] { new object(), new object() };
+            object[] objsWithLessCount = { new object(), new object() };
             int count = objsWithLessCount.Length + 1;
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => objsWithLessCount).CountMoreThan(count));
             Assert.Equal($"Argument '{nameof(objsWithLessCount)}' must contains more than {count} elements. Current count elements: {objsWithLessCount.Length}", exc.Message);
@@ -34,7 +34,7 @@ namespace ArgValidation.Tests.ArgumentEnumerableExtensionTest
         [Fact]
         public void CountMoreThan_CountMore_Ok()
         {
-            object[] objsWithMoreCount = new[] { new object(), new object() };
+            object[] objsWithMoreCount = { new object(), new object() };
             int count = objsWithMoreCount.Length - 1;
             Arg.Validate(() => objsWithMoreCount).CountMoreThan(count);
         }

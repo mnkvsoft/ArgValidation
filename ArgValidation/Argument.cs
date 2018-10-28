@@ -10,16 +10,8 @@ namespace ArgValidation
 
         public Argument(T value, string name)
         {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Argument name cannot be empty");
-
             Name = name;
             Value = value;
-        }
-
-        public bool IsNotInitialized()
-        {
-            return Name == null;
         }
     }
 }
