@@ -24,7 +24,7 @@ before_script:
 
 script:
 - dotnet build ArgValidation.sln -c Debug
-#- dotnet test -c Debug --no-build ./ArgValidation.Tests/ArgValidation.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+- dotnet test -c Debug --no-build ./ArgValidation.Tests/ArgValidation.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
 after_script:
 - bash <(curl -s https://codecov.io/bash)
