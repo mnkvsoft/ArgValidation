@@ -1,387 +1,362 @@
 using System;
 using System.Linq.Expressions;
-using ArgValidation.Validators;
-using System.Collections.Generic;
-using ArgValidation.Internal;
 
 namespace ArgValidation
 {
     public static class Arg
     {
-        #region ObjectValidator
-        
-        public static ObjectValidator<T> Default<T>(Expression<Func<T>> value)
+        public static Argument<T> Validate<T>(T argValue, string argName)
         {
-            return ValidatorFactory.CreateObjectValidator(value).Default();
+            return new Argument<T>(argValue, argName);
         }
         
-        public static ObjectValidator<T> Default<T>(T value, string argName)
+        public static Argument<T> Validate<T>(Expression<Func<T>> value)
         {
-            return ValidatorFactory.CreateObjectValidator(value, argName).Default();
+            return ArgumentFactory.FromExpression(value);
+        }
+        
+        
+        
+        # region object
+        
+        public static T Default<T>(Expression<Func<T>> value)
+        {
+            return Validate(value).Default().Value;
+        }
+        
+        public static T Default<T>(T value, string argName)
+        {
+            return Validate(value, argName).Default().Value;
         }
 
         
-        public static ObjectValidator<T> NotDefault<T>(Expression<Func<T>> value)
+        public static T NotDefault<T>(Expression<Func<T>> value)
         {
-            return ValidatorFactory.CreateObjectValidator(value).NotDefault();
+            return Validate(value).NotDefault().Value;
         }
         
-        public static ObjectValidator<T> NotDefault<T>(T value, string argName)
+        public static T NotDefault<T>(T value, string argName)
         {
-            return ValidatorFactory.CreateObjectValidator(value, argName).NotDefault();
+            return Validate(value, argName).NotDefault().Value;
         }
         
-        public static ObjectValidator<T> Null<T>(Expression<Func<T>> value)
+        public static T Null<T>(Expression<Func<T>> value)
         {
-            return ValidatorFactory.CreateObjectValidator(value).Null();
+            return Validate(value).Null().Value;
         }
         
-        public static ObjectValidator<T> Null<T>(T value, string argName)
+        public static T Null<T>(T value, string argName)
         {
-            return ValidatorFactory.CreateObjectValidator(value, argName).Null();
+            return Validate(value, argName).Null().Value;
         }
         
-        public static ObjectValidator<T> NotNull<T>(Expression<Func<T>> value)
+        public static T NotNull<T>(Expression<Func<T>> value)
         {
-            return ValidatorFactory.CreateObjectValidator(value).NotNull();
+            return Validate(value).NotNull().Value;
         }
         
-        public static ObjectValidator<T> NotNull<T>(T value, string argName)
+        public static T NotNull<T>(T value, string argName)
         {
-            return ValidatorFactory.CreateObjectValidator(value, argName).NotNull();
+            return Validate(value, argName).NotNull().Value;
         }
         
         #endregion
 
-        #region StringValidator
+        #region string
 
-        public static StringValidator NullOrEmpty(Expression<Func<string>> value)
+        public static string NullOrEmpty(Expression<Func<string>> value)
         {
-            return ValidatorFactory.CreateStringValidator(value).NullOrEmpty();
+            return Validate(value).NullOrEmpty().Value;
         }
         
-        public static StringValidator NullOrEmpty(string value, string argName)
+        public static string NullOrEmpty(string value, string argName)
         {
-            return ValidatorFactory.CreateStringValidator(value, argName).NullOrEmpty();
+            return Validate(value, argName).NullOrEmpty().Value;
         }
         
-        public static StringValidator NotNullOrEmpty(Expression<Func<string>> value)
+        public static string NotNullOrEmpty(Expression<Func<string>> value)
         {
-            return ValidatorFactory.CreateStringValidator(value).NotNullOrEmpty();
+            return Validate(value).NotNullOrEmpty().Value;
         }
         
-        public static StringValidator NotNullOrEmpty(string value, string argName)
+        public static string NotNullOrEmpty(string value, string argName)
         {
-            return ValidatorFactory.CreateStringValidator(value, argName).NotNullOrEmpty();
+            return Validate(value, argName).NotNullOrEmpty().Value;
         }
         
-        public static StringValidator NullOrWhitespace(Expression<Func<string>> value)
+        public static string NullOrWhitespace(Expression<Func<string>> value)
         {
-            return ValidatorFactory.CreateStringValidator(value).NullOrWhitespace();
+            return Validate(value).NullOrWhitespace().Value;
         }
         
-        public static StringValidator NullOrWhitespace(string value, string argName)
+        public static string NullOrWhitespace(string value, string argName)
         {
-            return ValidatorFactory.CreateStringValidator(value, argName).NullOrWhitespace();
+            return Validate(value, argName).NullOrWhitespace().Value;
         }
         
-        public static StringValidator NotNullOrWhitespace(Expression<Func<string>> value)
+        public static string NotNullOrWhitespace(Expression<Func<string>> value)
         {
-            return ValidatorFactory.CreateStringValidator(value).NotNullOrWhitespace();
+            return Validate(value).NotNullOrWhitespace().Value;
         }
         
-        public static StringValidator NotNullOrWhitespace(string value, string argName)
+        public static string NotNullOrWhitespace(string value, string argName)
         {
-            return ValidatorFactory.CreateStringValidator(value, argName).NotNullOrWhitespace();
+            return Validate(value, argName).NotNullOrWhitespace().Value;
         }
 
         #endregion
 
         #region ComparableValidator
 
-        public static ComparableValidator<int> Positive(Expression<Func<int>> value)
+        public static int Positive(Expression<Func<int>> value)
         {
-            return ValidatorFactory.CreateComparableValidator(value).Positive();
+            return Validate(value).Positive().Value;
         }
         
-        public static ComparableValidator<int> Positive(int value, string argName)
+        public static int Positive(int value, string argName)
         {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Positive();
+            return Validate(value, argName).Positive().Value;
         }
         
-        public static ComparableValidator<decimal> Positive(Expression<Func<decimal>> value)
+        public static decimal Positive(Expression<Func<decimal>> value)
         {
-            return ValidatorFactory.CreateComparableValidator(value).Positive();
+            return Validate(value).Positive().Value;
         }
         
-        public static ComparableValidator<decimal> Positive(decimal value, string argName)
+        public static decimal Positive(decimal value, string argName)
         {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Positive();
+            return Validate(value, argName).Positive().Value;
         }
         
-        public static ComparableValidator<double> Positive(Expression<Func<double>> value)
+        public static double Positive(Expression<Func<double>> value)
         {
-            return ValidatorFactory.CreateComparableValidator(value).Positive();
+            return Validate(value).Positive().Value;
         }
         
-        public static ComparableValidator<double> Positive(double value, string argName)
+        public static double Positive(double value, string argName)
         {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Positive();
+            return Validate(value, argName).Positive().Value;
         }
         
-        public static ComparableValidator<float> Positive(Expression<Func<float>> value)
+        public static float Positive(Expression<Func<float>> value)
         {
-            return ValidatorFactory.CreateComparableValidator(value).Positive();
+            return Validate(value).Positive().Value;
         }
         
-        public static ComparableValidator<float> Positive(float value, string argName)
+        public static float Positive(float value, string argName)
         {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Positive();
-        }
-
-        
-        
-        public static ComparableValidator<int> PositiveOrZero(Expression<Func<int>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).PositiveOrZero();
-        }
-        
-        public static ComparableValidator<int> PositiveOrZero(int value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).PositiveOrZero();
-        }
-        
-        public static ComparableValidator<decimal> PositiveOrZero(Expression<Func<decimal>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).PositiveOrZero();
-        }
-        
-        public static ComparableValidator<decimal> PositiveOrZero(decimal value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).PositiveOrZero();
-        }
-        
-        public static ComparableValidator<double> PositiveOrZero(Expression<Func<double>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).PositiveOrZero();
-        }
-        
-        public static ComparableValidator<double> PositiveOrZero(double value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).PositiveOrZero();
-        }
-        
-        public static ComparableValidator<float> PositiveOrZero(Expression<Func<float>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).PositiveOrZero();
-        }
-        
-        public static ComparableValidator<float> PositiveOrZero(float value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).PositiveOrZero();
-        }
-        
-        
-        
-        public static ComparableValidator<int> Negative(Expression<Func<int>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Negative();
-        }
-        
-        public static ComparableValidator<int> Negative(int value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Negative();
-        }
-        
-        public static ComparableValidator<decimal> Negative(Expression<Func<decimal>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Negative();
-        }
-        
-        public static ComparableValidator<decimal> Negative(decimal value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Negative();
-        }
-        
-        public static ComparableValidator<double> Negative(Expression<Func<double>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Negative();
-        }
-        
-        public static ComparableValidator<double> Negative(double value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Negative();
-        }
-        
-        public static ComparableValidator<float> Negative(Expression<Func<float>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Negative();
-        }
-        
-        public static ComparableValidator<float> Negative(float value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Negative();
-        }
-        
-        
-        
-        
-        public static ComparableValidator<int> NegativeOrZero(Expression<Func<int>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NegativeOrZero();
-        }
-        
-        public static ComparableValidator<int> NegativeOrZero(int value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NegativeOrZero();
-        }
-        
-        public static ComparableValidator<decimal> NegativeOrZero(Expression<Func<decimal>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NegativeOrZero();
-        }
-        
-        public static ComparableValidator<decimal> NegativeOrZero(decimal value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NegativeOrZero();
-        }
-        
-        public static ComparableValidator<double> NegativeOrZero(Expression<Func<double>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NegativeOrZero();
-        }
-        
-        public static ComparableValidator<double> NegativeOrZero(double value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NegativeOrZero();
-        }
-        
-        public static ComparableValidator<float> NegativeOrZero(Expression<Func<float>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NegativeOrZero();
-        }
-        
-        public static ComparableValidator<float> NegativeOrZero(float value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NegativeOrZero();
-        }
-        
-        
-        
-        public static ComparableValidator<int> Zero(Expression<Func<int>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Zero();
-        }
-        
-        public static ComparableValidator<int> Zero(int value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Zero();
-        }
-        
-        public static ComparableValidator<decimal> Zero(Expression<Func<decimal>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Zero();
-        }
-        
-        public static ComparableValidator<decimal> Zero(decimal value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Zero();
-        }
-        
-        public static ComparableValidator<double> Zero(Expression<Func<double>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Zero();
-        }
-        
-        public static ComparableValidator<double> Zero(double value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Zero();
-        }
-        
-        public static ComparableValidator<float> Zero(Expression<Func<float>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).Zero();
-        }
-        
-        public static ComparableValidator<float> Zero(float value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).Zero();
-        }
-        
-        
-        
-        public static ComparableValidator<int> NotZero(Expression<Func<int>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NotZero();
-        }
-        
-        public static ComparableValidator<int> NotZero(int value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NotZero();
-        }
-        
-        public static ComparableValidator<decimal> NotZero(Expression<Func<decimal>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NotZero();
-        }
-        
-        public static ComparableValidator<decimal> NotZero(decimal value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NotZero();
-        }
-        
-        public static ComparableValidator<double> NotZero(Expression<Func<double>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NotZero();
-        }
-        
-        public static ComparableValidator<double> NotZero(double value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NotZero();
-        }
-        
-        public static ComparableValidator<float> NotZero(Expression<Func<float>> value)
-        {
-            return ValidatorFactory.CreateComparableValidator(value).NotZero();
-        }
-        
-        public static ComparableValidator<float> NotZero(float value, string argName)
-        {
-            return ValidatorFactory.CreateComparableValidator(value, argName).NotZero();
+            return Validate(value, argName).Positive().Value;
         }
 
-        #endregion
-
-        #region Validate Methods
-
-        public static ComparableValidator<T> Validate<T>(Expression<Func<T>> value) where T : IComparable<T>
+        
+        
+        public static int PositiveOrZero(Expression<Func<int>> value)
         {
-            return ValidatorFactory.CreateComparableValidator(value);
+            return Validate(value).PositiveOrZero().Value;
         }
         
-        public static ComparableValidator<T> Validate<T>(T value, string argName) where T : IComparable<T>
+        public static int PositiveOrZero(int value, string argName)
         {
-            return ValidatorFactory.CreateComparableValidator(value, argName);
+            return Validate(value, argName).PositiveOrZero().Value;
         }
         
-        public static StringValidator Validate(Expression<Func<string>> value)
+        public static decimal PositiveOrZero(Expression<Func<decimal>> value)
         {
-            return ValidatorFactory.CreateStringValidator(value);
+            return Validate(value).PositiveOrZero().Value;
         }
         
-        public static StringValidator Validate(string value, string argName)
+        public static decimal PositiveOrZero(decimal value, string argName)
         {
-            return ValidatorFactory.CreateStringValidator(value, argName);
+            return Validate(value, argName).PositiveOrZero().Value;
         }
         
-        public static EnumerableValidator<T> Validate<T>(Expression<Func<IEnumerable<T>>> value)
+        public static double PositiveOrZero(Expression<Func<double>> value)
         {
-            return ValidatorFactory.CreateEnumerableValidator(value);
+            return Validate(value).PositiveOrZero().Value;
         }
         
-        public static EnumerableValidator<T> Validate<T>(IEnumerable<T> value, string argName)
+        public static double PositiveOrZero(double value, string argName)
         {
-            return ValidatorFactory.CreateEnumerableValidator(value, argName);
+            return Validate(value, argName).PositiveOrZero().Value;
+        }
+        
+        public static float PositiveOrZero(Expression<Func<float>> value)
+        {
+            return Validate(value).PositiveOrZero().Value;
+        }
+        
+        public static float PositiveOrZero(float value, string argName)
+        {
+            return Validate(value, argName).PositiveOrZero().Value;
+        }
+        
+        
+        
+        public static int Negative(Expression<Func<int>> value)
+        {
+            return Validate(value).Negative().Value;
+        }
+        
+        public static int Negative(int value, string argName)
+        {
+            return Validate(value, argName).Negative().Value;
+        }
+        
+        public static decimal Negative(Expression<Func<decimal>> value)
+        {
+            return Validate(value).Negative().Value;
+        }
+        
+        public static decimal Negative(decimal value, string argName)
+        {
+            return Validate(value, argName).Negative().Value;
+        }
+        
+        public static double Negative(Expression<Func<double>> value)
+        {
+            return Validate(value).Negative().Value;
+        }
+        
+        public static double Negative(double value, string argName)
+        {
+            return Validate(value, argName).Negative().Value;
+        }
+        
+        public static float Negative(Expression<Func<float>> value)
+        {
+            return Validate(value).Negative().Value;
+        }
+        
+        public static float Negative(float value, string argName)
+        {
+            return Validate(value, argName).Negative().Value;
+        }
+        
+        
+        
+        
+        public static int NegativeOrZero(Expression<Func<int>> value)
+        {
+            return Validate(value).NegativeOrZero().Value;
+        }
+        
+        public static int NegativeOrZero(int value, string argName)
+        {
+            return Validate(value, argName).NegativeOrZero().Value;
+        }
+        
+        public static decimal NegativeOrZero(Expression<Func<decimal>> value)
+        {
+            return Validate(value).NegativeOrZero().Value;
+        }
+        
+        public static decimal NegativeOrZero(decimal value, string argName)
+        {
+            return Validate(value, argName).NegativeOrZero().Value;
+        }
+        
+        public static double NegativeOrZero(Expression<Func<double>> value)
+        {
+            return Validate(value).NegativeOrZero().Value;
+        }
+        
+        public static double NegativeOrZero(double value, string argName)
+        {
+            return Validate(value, argName).NegativeOrZero().Value;
+        }
+        
+        public static float NegativeOrZero(Expression<Func<float>> value)
+        {
+            return Validate(value).NegativeOrZero().Value;
+        }
+        
+        public static float NegativeOrZero(float value, string argName)
+        {
+            return Validate(value, argName).NegativeOrZero().Value;
+        }
+        
+        
+        
+        public static int Zero(Expression<Func<int>> value)
+        {
+            return Validate(value).Zero().Value;
+        }
+        
+        public static int Zero(int value, string argName)
+        {
+            return Validate(value, argName).Zero().Value;
+        }
+        
+        public static decimal Zero(Expression<Func<decimal>> value)
+        {
+            return Validate(value).Zero().Value;
+        }
+        
+        public static decimal Zero(decimal value, string argName)
+        {
+            return Validate(value, argName).Zero().Value;
+        }
+        
+        public static double Zero(Expression<Func<double>> value)
+        {
+            return Validate(value).Zero().Value;
+        }
+        
+        public static double Zero(double value, string argName)
+        {
+            return Validate(value, argName).Zero().Value;
+        }
+        
+        public static float Zero(Expression<Func<float>> value)
+        {
+            return Validate(value).Zero().Value;
+        }
+        
+        public static float Zero(float value, string argName)
+        {
+            return Validate(value, argName).Zero().Value;
+        }
+        
+        
+        
+        public static int NotZero(Expression<Func<int>> value)
+        {
+            return Validate(value).NotZero().Value;
+        }
+        
+        public static int NotZero(int value, string argName)
+        {
+            return Validate(value, argName).NotZero().Value;
+        }
+        
+        public static decimal NotZero(Expression<Func<decimal>> value)
+        {
+            return Validate(value).NotZero().Value;
+        }
+        
+        public static decimal NotZero(decimal value, string argName)
+        {
+            return Validate(value, argName).NotZero().Value;
+        }
+        
+        public static double NotZero(Expression<Func<double>> value)
+        {
+            return Validate(value).NotZero().Value;
+        }
+        
+        public static double NotZero(double value, string argName)
+        {
+            return Validate(value, argName).NotZero().Value;
+        }
+        
+        public static float NotZero(Expression<Func<float>> value)
+        {
+            return Validate(value).NotZero().Value;
+        }
+        
+        public static float NotZero(float value, string argName)
+        {
+            return Validate(value, argName).NotZero().Value;
         }
 
         #endregion
