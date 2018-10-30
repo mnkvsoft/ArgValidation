@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ArgValidation</id>
-    <version>0.1.0</version>
+    <version>0.2.1</version>
     <title>ArgValidation</title>
     <authors>Viktor Mynkov</authors>
     <owners>Viktor Mynkov</owners>
@@ -23,46 +23,10 @@
     </description>
     <summary>A simply arguments validation library with fluent API</summary>
     <releaseNotes>
-      Support checks for the following types:
-        - Object:
-            - Default()
-            - NotDefault()
-            - Null()
-            - NotNull()
-            - Equal(T value)
-            - NotEqual(T value)
-            - OnlyValues(params T[] values)
-      
-        - IComparable&lt;T&gt;:
-            - MoreThan(T value)
-            - MoreOrEqualThan(T value)
-            - LessThan(T value)
-            - LessOrEqualThan(T value)
-            - InRange(T min, T max)
-      
-        - IEnumerable&lt;T&gt;:
-            - CountEqual(int count)
-            - CountNotEqual(int count)
-            - CountMoreThan(int count)
-            - CountMoreOrEqualThan(int count)
-            - CountLessThan(int count)
-            - CountLessOrEqualThan(int count)
-            - Contains(T elem)
-            - NotContains(T elem)
-      
-        - String
-            - NullOrEmpty()
-            - NotNullOrEmpty()
-            - NullOrWhitespace()
-            - NotNullOrWhitespace()
-            - LengthEqual(int value)
-            - LengthMoreThan(int value)
-            - LengthMoreOrEqualThan(int value)
-            - LengthLessThan(int value)
-            - LengthLessOrEqualThan(int value)
-            - LengthInRange(int min, int max)
-            - Contains(string value)
-            - NotContains(string value)
+        - Bug fix for IEnumerable type
+        - The implementation was translated to use extension methods instead of the validator object
+        - Improved performance
+        - Increased test coverage
     </releaseNotes>
     <tags>arguments argument validation validator checker check parameter parameters</tags>
   </metadata>
