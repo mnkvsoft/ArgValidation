@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 
 namespace ArgValidation.Internal
 {
@@ -9,9 +8,11 @@ namespace ArgValidation.Internal
         {
             if (enumerable is ICollection collection)
                 return collection.Count;
-            
+
             int counter = 0;
-            foreach (object unused in enumerable)
+            var enumerator = enumerable.GetEnumerator();
+            enumerator.Reset();
+            while (enumerator.MoveNext())
             {
                 counter++;
             }
