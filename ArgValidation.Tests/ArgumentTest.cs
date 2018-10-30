@@ -14,5 +14,16 @@ namespace ArgValidation.Tests
             Assert.Equal(value, arg.Value);
             Assert.Equal(nameof(value), arg.Name);
         }
+        
+        [Fact]
+        public void implicitOperator_NotDefaultValue_ReturnValidValue()
+        {
+            string value = "stringValue";
+
+            Argument<string> arg = new Argument<string>(value, nameof(value));
+
+            string value2 = arg;
+            Assert.Equal(value, value2);
+        }
     }
 }

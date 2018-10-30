@@ -13,5 +13,10 @@ namespace ArgValidation
             Name = name;
             Value = value;
         }
+
+        public static implicit operator T(Argument<T> argument)
+        {
+            return argument.Value;
+        }
     }
 }
