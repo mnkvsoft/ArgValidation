@@ -21,8 +21,4 @@
     <ProjectReference Include="..\ArgValidation\ArgValidation.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="StringValidationTests" />
-  </ItemGroup>
-
 </Project>

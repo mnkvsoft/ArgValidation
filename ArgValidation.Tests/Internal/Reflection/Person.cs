@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArgValidation.Tests.Reflection
+namespace ArgValidation.Tests.Internal.Reflection
 {
     internal class Person
     {

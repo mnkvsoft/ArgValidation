@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
-using ArgValidation.Tests.ObjectValidationTests.SingleMethodsTestBase;
+using ArgValidation.Tests.ObjectValidationTests;
 using Xunit;
-using StringSingleMethodsTestBase = ArgValidation.Tests.StringValidationTests.SingleMethodsTestBase.StringSingleMethodsTestBase;
+using StringSingleMethodsTestBase = ArgValidation.Tests.StringValidationTests.StringSingleMethodsTestBase;
 
 namespace ArgValidation.Tests
 {
@@ -31,7 +31,7 @@ namespace ArgValidation.Tests
 		    Assert.Equal(nameof(argValue), argument.Name);
 	    }
 	    
-	    public class StringMethodsExpressionThreeTest : StringSingleMethodsTestBase
+	    public class StringMethodsExpressionThreeTest : StringValidationTests.StringSingleMethodsTestBase
 	    {
 		    protected override void RunNullOrWhitespace(Expression<Func<string>> value)
 		    {
@@ -54,7 +54,7 @@ namespace ArgValidation.Tests
 		    }
 	    }
 	    
-	    public class StringMethodsNameOfTest : StringSingleMethodsTestBase
+	    public class StringMethodsNameOfTest : StringValidationTests.StringSingleMethodsTestBase
 	    {
 		    protected override void RunNullOrWhitespace(Expression<Func<string>> value)
 		    {
