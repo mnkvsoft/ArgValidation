@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ArgValidation.Internal.ExceptionThrowers
@@ -61,6 +62,20 @@ namespace ArgValidation.Internal.ExceptionThrowers
             if (argument.Value == null)
                 ThrowException(
                     $"Argument '{argument.Name}' is null. Сan not execute 'NotContains' operation");
+        }
+		
+        public static void IfNullForEmpty<TEnumerable>(Argument<TEnumerable> argument) where TEnumerable : IEnumerable
+        {
+            if (argument.Value == null)
+                ThrowException(
+                    $"Argument '{argument.Name}' is null. Сan not execute 'Empty' operation");
+        }
+
+        public static void IfNullForNotEmpty<TEnumerable>(Argument<TEnumerable> argument) where TEnumerable : IEnumerable
+        {
+            if (argument.Value == null)
+                ThrowException(
+                    $"Argument '{argument.Name}' is null. Сan not execute 'NotEmpty' operation");
         }
 
         private static void ThrowException(string message)

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ArgValidation.Tests.StringValidationTests
 {
-    public partial class StringSingleMethodsTestBase
+    public partial class StringSimpleMethodsTestBase
     {
         protected abstract void RunNullOrEmpty(Expression<Func<string>> value);
         

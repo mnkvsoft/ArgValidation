@@ -1,4 +1,5 @@
-﻿using ArgValidation.Internal;
+﻿using System;
+using ArgValidation.Internal;
 using ArgValidation.Internal.ExceptionThrowers;
 
 namespace ArgValidation
@@ -41,7 +42,6 @@ namespace ArgValidation
             return arg;
         }
 
-        // todo: add string value with message
         public static Argument<string> LengthEqual(this Argument<string> arg, int value)
         {
             if (arg.Value == null || arg.Value.Length != value)
@@ -83,6 +83,24 @@ namespace ArgValidation
             if (arg.Value == null || arg.Value.Length > value)
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be length less or equals than {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+        
+        public static Argument<string> MaxLength(this Argument<string> arg, int value)
+        {
+            if (arg.Value == null || arg.Value.Length > value)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' has a maximum length of {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+        
+        public static Argument<string> MinLength(this Argument<string> arg, int value)
+        {
+            if (arg.Value == null || arg.Value.Length < value)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' has a minimum length of {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
 
             return arg;
         }

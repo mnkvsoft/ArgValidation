@@ -109,5 +109,60 @@ namespace ArgValidation
 
             return argument;
         }
+        
+        public static Argument<TEnumerable> Empty<TEnumerable>(this Argument<TEnumerable> argument)
+            where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForEmpty(argument);
+
+            var currentCount = argument.Value.Count();
+            if (currentCount > 0)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must be empty");
+
+            return argument;
+        }
+
+        public static Argument<TEnumerable> NotEmpty<TEnumerable>(this Argument<TEnumerable> argument)
+            where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForNotEmpty(argument);
+
+            var currentCount = argument.Value.Count();
+            if (currentCount < 1)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must be not empty");
+
+            return argument;
+        }
+        
+        public static Argument<TEnumerable> NullOrEmpty<TEnumerable>(this Argument<TEnumerable> argument)
+            where TEnumerable : IEnumerable
+        {
+            if (argument.Value == null)
+                return argument;
+
+            var currentCount = argument.Value.Count();
+            if (currentCount > 0)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must be null or empty");
+
+            return argument;
+        }
+
+        public static Argument<TEnumerable> NotNullOrEmpty<TEnumerable>(this Argument<TEnumerable> argument)
+            where TEnumerable : IEnumerable
+        {
+            if (argument.Value == null)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must be null or empty. Current value is null");
+
+            var currentCount = argument.Value.Count();
+            if (currentCount < 1)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must be null or empty. Current value is empty");
+
+            return argument;
+        }
     }
 }

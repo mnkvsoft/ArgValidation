@@ -15,6 +15,7 @@ namespace ArgValidation
             return argument;
         }
 
+        [Obsolete("Use Min method")]
         public static Argument<T> MoreOrEqualThan<T>(this Argument<T> argument, T value) where T : IComparable<T>
         {
             if (!ConditionChecker.MoreOrEqualThan(argument, value))
@@ -33,11 +34,30 @@ namespace ArgValidation
             return argument;
         }
 
+        [Obsolete("Use Max method")]
         public static Argument<T> LessOrEqualThan<T>(this Argument<T> argument, T value) where T : IComparable<T>
         {
             if (!ConditionChecker.LessOrEqualThan(argument, value))
                 ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
                     $"Argument '{argument.Name}' must be less or equal than '{value}'. Current value: '{argument.Value}'");
+
+            return argument;
+        }
+        
+        public static Argument<T> Max<T>(this Argument<T> argument, T value) where T : IComparable<T>
+        {
+            if (!ConditionChecker.Max(argument, value))
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
+                    $"The maximum value for the argument '{argument.Name}' is '{value}'. Current value: '{argument.Value}'");
+
+            return argument;
+        }
+        
+        public static Argument<T> Min<T>(this Argument<T> argument, T value) where T : IComparable<T>
+        {
+            if (!ConditionChecker.Min(argument, value))
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
+                    $"The minimum value for the argument '{argument.Name}' is '{value}'. Current value: '{argument.Value}'");
 
             return argument;
         }

@@ -4,6 +4,7 @@ namespace ArgValidation.Internal
 {
     internal static class EnumerableExtension
     {
+        //todo: optimaze
         public static int Count(this IEnumerable enumerable)
         {
             if (enumerable is ICollection collection)

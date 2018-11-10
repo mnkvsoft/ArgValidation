@@ -3,111 +3,8 @@ using System.Linq.Expressions;
 
 namespace ArgValidation
 {
-    public static class Arg
+    public static partial class Arg
     {
-        public static Argument<T> Validate<T>(T argValue, string argName)
-        {
-            return new Argument<T>(argValue, argName);
-        }
-        
-        public static Argument<T> Validate<T>(Expression<Func<T>> value)
-        {
-            return ArgumentFactory.FromExpression(value);
-        }
-        
-        
-        
-        # region object
-        
-        public static T Default<T>(Expression<Func<T>> value)
-        {
-            return Validate(value).Default().Value;
-        }
-        
-        public static T Default<T>(T value, string argName)
-        {
-            return Validate(value, argName).Default().Value;
-        }
-
-        
-        public static T NotDefault<T>(Expression<Func<T>> value)
-        {
-            return Validate(value).NotDefault().Value;
-        }
-        
-        public static T NotDefault<T>(T value, string argName)
-        {
-            return Validate(value, argName).NotDefault().Value;
-        }
-        
-        public static T Null<T>(Expression<Func<T>> value)
-        {
-            return Validate(value).Null().Value;
-        }
-        
-        public static T Null<T>(T value, string argName)
-        {
-            return Validate(value, argName).Null().Value;
-        }
-        
-        public static T NotNull<T>(Expression<Func<T>> value)
-        {
-            return Validate(value).NotNull().Value;
-        }
-        
-        public static T NotNull<T>(T value, string argName)
-        {
-            return Validate(value, argName).NotNull().Value;
-        }
-        
-        #endregion
-
-        #region string
-
-        public static string NullOrEmpty(Expression<Func<string>> value)
-        {
-            return Validate(value).NullOrEmpty().Value;
-        }
-        
-        public static string NullOrEmpty(string value, string argName)
-        {
-            return Validate(value, argName).NullOrEmpty().Value;
-        }
-        
-        public static string NotNullOrEmpty(Expression<Func<string>> value)
-        {
-            return Validate(value).NotNullOrEmpty().Value;
-        }
-        
-        public static string NotNullOrEmpty(string value, string argName)
-        {
-            return Validate(value, argName).NotNullOrEmpty().Value;
-        }
-        
-        public static string NullOrWhitespace(Expression<Func<string>> value)
-        {
-            return Validate(value).NullOrWhitespace().Value;
-        }
-        
-        public static string NullOrWhitespace(string value, string argName)
-        {
-            return Validate(value, argName).NullOrWhitespace().Value;
-        }
-        
-        public static string NotNullOrWhitespace(Expression<Func<string>> value)
-        {
-            return Validate(value).NotNullOrWhitespace().Value;
-        }
-        
-        public static string NotNullOrWhitespace(string value, string argName)
-        {
-            return Validate(value, argName).NotNullOrWhitespace().Value;
-        }
-
-        #endregion
-
-        #region ComparableValidator
-
         public static int Positive(Expression<Func<int>> value)
         {
             return Validate(value).Positive().Value;
@@ -358,7 +255,5 @@ namespace ArgValidation
         {
             return Validate(value, argName).NotZero().Value;
         }
-
-        #endregion
     }
 }

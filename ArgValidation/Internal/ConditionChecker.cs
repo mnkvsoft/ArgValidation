@@ -60,6 +60,22 @@ namespace ArgValidation.Internal
 
             return false;
         }
+        
+        public static bool Max<T>(Argument<T> argument, T max) where T : IComparable<T>
+        {
+            InvalidMethodArgumentThrower.IfArgumentIsNullForComparable(max, nameof(max));
+            InvalidMethodArgumentThrower.IfNullForComparable(argument);
+
+            return argument.Value.CompareWith(max) <= 0;
+        }
+        
+        public static bool Min<T>(Argument<T> argument, T min) where T : IComparable<T>
+        {
+            InvalidMethodArgumentThrower.IfArgumentIsNullForComparable(min, nameof(min));
+            InvalidMethodArgumentThrower.IfNullForComparable(argument);
+
+            return argument.Value.CompareWith(min) >= 0;
+        }
 
         internal static bool InRange<T>(Argument<T> argument, T min, T max) where T : IComparable<T>
         {

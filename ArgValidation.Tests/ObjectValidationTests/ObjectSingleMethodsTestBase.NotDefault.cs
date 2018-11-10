@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ArgValidation.Tests.ObjectValidationTests
 {   
-    public abstract partial class ObjectSingleMethodsTestBase
+    public abstract partial class ObjectSimpleMethodsTestBase
     {
         protected abstract void RunNotDefault<T>(Expression<Func<T>> value);
         
