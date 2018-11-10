@@ -9,189 +9,183 @@ namespace ArgValidation
 {
     public static class ArgumentEnumerableExtension
     {
-        public static Argument<TEnumerable> CountEqual<TEnumerable>(this Argument<TEnumerable> argument, int count)
+        public static Argument<TEnumerable> CountEqual<TEnumerable>(this Argument<TEnumerable> arg, int count)
             where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            var currentCount = argument.Value.Count();
-            if (currentCount != count)
+            if (!arg.Value.CountEqual(count))
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains {count} elements. Current count elements: {currentCount}");
+                    $"Argument '{arg.Name}' must contains {count} elements. Current count elements: {arg.Value.Count()}");
 
-            return argument;
+            return arg;
         }
 
-        public static Argument<TEnumerable> CountNotEqual<TEnumerable>(this Argument<TEnumerable> argument, int count)
+        public static Argument<TEnumerable> CountNotEqual<TEnumerable>(this Argument<TEnumerable> arg, int count)
             where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            var currentCount = argument.Value.Count();
-            if (currentCount == count)
+            if (arg.Value.CountEqual(count))
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' not must contains {count} elements");
+                    $"Argument '{arg.Name}' not must contains {arg.Value.Count()} elements");
 
-            return argument;
+            return arg;
         }
 
-        public static Argument<TEnumerable> CountMoreThan<TEnumerable>(this Argument<TEnumerable> argument, int count)
+        public static Argument<TEnumerable> CountMoreThan<TEnumerable>(this Argument<TEnumerable> arg, int count)
             where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            var currentCount = argument.Value.Count();
-            if (currentCount <= count)
+            if (!arg.Value.CountMoreThan(count))
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains more than {count} elements. Current count elements: {currentCount}");
+                    $"Argument '{arg.Name}' must contains more than {count} elements. Current count elements: {arg.Value.Count()}");
 
-            return argument;
+            return arg;
         }
-        
-        public static Argument<TEnumerable> CountLessThan<TEnumerable>(this Argument<TEnumerable> argument, int count)
+
+        public static Argument<TEnumerable> CountLessThan<TEnumerable>(this Argument<TEnumerable> arg, int count)
             where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            var currentCount = argument.Value.Count();
-            if (currentCount >= count)
+            if (!arg.Value.CountLessThan(count))
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains less than {count} elements. Current count elements: {currentCount}");
+                    $"Argument '{arg.Name}' must contains less than {count} elements. Current count elements: {arg.Value.Count()}");
 
-            return argument;
+            return arg;
+        }
+
+        public static Argument<TEnumerable> MinCount<TEnumerable>(this Argument<TEnumerable> arg,
+            int count) where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
+
+            if (arg.Value.CountLessThan(count))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must contains a minimum of {count} elements. Current count elements: {arg.Value.Count()}");
+
+            return arg;
+        }
+
+        public static Argument<TEnumerable> MaxCount<TEnumerable>(this Argument<TEnumerable> arg,
+            int count) where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
+
+            if (arg.Value.CountMoreThan(count))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must contains a maximum of {count} elements. Current count elements: {arg.Value.Count()}");
+
+            return arg;
+        }
+
+        public static Argument<TEnumerable> Contains<TEnumerable, T>(this Argument<TEnumerable> arg, T elem)
+            where TEnumerable : IEnumerable<T>
+        {
+            InvalidMethodArgumentThrower.IfNullForContains(arg);
+
+            if (!arg.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+
+            return arg;
+        }
+
+        public static Argument<TEnumerable> NotContains<TEnumerable, T>(this Argument<TEnumerable> arg, T elem)
+            where TEnumerable : IEnumerable<T>
+        {
+            InvalidMethodArgumentThrower.IfNullForNotContains(arg);
+
+            if (arg.Value.Contains(elem))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+
+            return arg;
+        }
+
+        public static Argument<TEnumerable> Empty<TEnumerable>(this Argument<TEnumerable> arg)
+            where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForEmpty(arg);
+
+            var currentCount = arg.Value.Count();
+            if (currentCount > 0)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be empty");
+
+            return arg;
+        }
+
+        public static Argument<TEnumerable> NotEmpty<TEnumerable>(this Argument<TEnumerable> arg)
+            where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForNotEmpty(arg);
+
+            var currentCount = arg.Value.Count();
+            if (currentCount < 1)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be not empty");
+
+            return arg;
+        }
+
+        public static Argument<TEnumerable> NullOrEmpty<TEnumerable>(this Argument<TEnumerable> arg)
+            where TEnumerable : IEnumerable
+        {
+            if (arg.Value == null)
+                return arg;
+
+            var currentCount = arg.Value.Count();
+            if (currentCount > 0)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be null or empty");
+
+            return arg;
+        }
+
+        public static Argument<TEnumerable> NotNullOrEmpty<TEnumerable>(this Argument<TEnumerable> arg)
+            where TEnumerable : IEnumerable
+        {
+            if (arg.Value == null)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be null or empty. Current value is null");
+
+            var currentCount = arg.Value.Count();
+            if (currentCount < 1)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be null or empty. Current value is empty");
+
+            return arg;
         }
 
         [Obsolete("Use MinCount method")]
-        public static Argument<TEnumerable> CountMoreOrEqualThan<TEnumerable>(this Argument<TEnumerable> argument,
+        public static Argument<TEnumerable> CountMoreOrEqualThan<TEnumerable>(this Argument<TEnumerable> arg,
             int count) where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            var currentCount = argument.Value.Count();
+            var currentCount = arg.Value.Count();
             if (currentCount < count)
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
+                    $"Argument '{arg.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
 
-            return argument;
+            return arg;
         }
-        
+
         [Obsolete("Use MaxCount method")]
-        public static Argument<TEnumerable> CountLessOrEqualThan<TEnumerable>(this Argument<TEnumerable> argument,
+        public static Argument<TEnumerable> CountLessOrEqualThan<TEnumerable>(this Argument<TEnumerable> arg,
             int count) where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
+            InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            var currentCount = argument.Value.Count();
+            var currentCount = arg.Value.Count();
             if (currentCount > count)
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
+                    $"Argument '{arg.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
 
-            return argument;
-        }
-        
-        public static Argument<TEnumerable> MinCount<TEnumerable>(this Argument<TEnumerable> argument,
-            int minCount) where TEnumerable : IEnumerable
-        {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
-
-            var currentCount = argument.Value.Count();
-            if (currentCount < minCount)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains a minimum of {minCount} elements. Current count elements: {currentCount}");
-
-            return argument;
-        }
-        
-        public static Argument<TEnumerable> MaxCount<TEnumerable>(this Argument<TEnumerable> argument,
-            int maxCount) where TEnumerable : IEnumerable
-        {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
-
-            var currentCount = argument.Value.Count();
-            if (currentCount > maxCount)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains a maximum of {maxCount} elements. Current count elements: {currentCount}");
-
-            return argument;
-        }
-
-        public static Argument<TEnumerable> Contains<TEnumerable, T>(this Argument<TEnumerable> argument, T elem)
-            where TEnumerable : IEnumerable<T>
-        {
-            InvalidMethodArgumentThrower.IfNullForContains(argument);
-
-            if (!argument.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
-
-            return argument;
-        }
-
-        public static Argument<TEnumerable> NotContains<TEnumerable, T>(this Argument<TEnumerable> argument, T elem)
-            where TEnumerable : IEnumerable<T>
-        {
-            InvalidMethodArgumentThrower.IfNullForNotContains(argument);
-
-            if (argument.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
-
-            return argument;
-        }
-        
-        public static Argument<TEnumerable> Empty<TEnumerable>(this Argument<TEnumerable> argument)
-            where TEnumerable : IEnumerable
-        {
-            InvalidMethodArgumentThrower.IfNullForEmpty(argument);
-
-            var currentCount = argument.Value.Count();
-            if (currentCount > 0)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must be empty");
-
-            return argument;
-        }
-
-        public static Argument<TEnumerable> NotEmpty<TEnumerable>(this Argument<TEnumerable> argument)
-            where TEnumerable : IEnumerable
-        {
-            InvalidMethodArgumentThrower.IfNullForNotEmpty(argument);
-
-            var currentCount = argument.Value.Count();
-            if (currentCount < 1)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must be not empty");
-
-            return argument;
-        }
-        
-        public static Argument<TEnumerable> NullOrEmpty<TEnumerable>(this Argument<TEnumerable> argument)
-            where TEnumerable : IEnumerable
-        {
-            if (argument.Value == null)
-                return argument;
-
-            var currentCount = argument.Value.Count();
-            if (currentCount > 0)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must be null or empty");
-
-            return argument;
-        }
-
-        public static Argument<TEnumerable> NotNullOrEmpty<TEnumerable>(this Argument<TEnumerable> argument)
-            where TEnumerable : IEnumerable
-        {
-            if (argument.Value == null)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must be null or empty. Current value is null");
-
-            var currentCount = argument.Value.Count();
-            if (currentCount < 1)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must be null or empty. Current value is empty");
-
-            return argument;
+            return arg;
         }
     }
 }

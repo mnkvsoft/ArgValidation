@@ -20,21 +20,20 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             object[] objs = new[] { new object(), new object() };
             
-            Arg.Validate(() => objs)
-                .CountEqual(objs.Length);
+            Arg.Validate(() => objs).CountEqual(objs.Length);
         }
 
         [Fact]
         public void CountEqual_CountNotEqual_ArgumentException()
         {
-            object[] objsWithNotEqualCount = { new object(), new object() };
-            int count = objsWithNotEqualCount.Length + 1;
+            object[] objs = { new object(), new object() };
+            int count = objs.Length + 1;
             
             ArgumentException exc = Assert.Throws<ArgumentException>(() =>
-                Arg.Validate(() => objsWithNotEqualCount)
+                Arg.Validate(() => objs)
                     .CountEqual(count));
             
-            Assert.Equal($"Argument '{nameof(objsWithNotEqualCount)}' must contains {count} elements. Current count elements: {objsWithNotEqualCount.Length}", exc.Message);
+            Assert.Equal($"Argument '{nameof(objs)}' must contains {count} elements. Current count elements: {objs.Length}", exc.Message);
         }
     }
 }

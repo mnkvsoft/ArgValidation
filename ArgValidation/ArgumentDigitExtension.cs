@@ -26,22 +26,22 @@ namespace ArgValidation
         
         public static Argument<int> PositiveOrZero(this Argument<int> argument)
         {
-            return argument.MoreOrEqualThan(0);
+            return argument.Min(0);
         }
         
         public static Argument<decimal> PositiveOrZero(this Argument<decimal> argument)
         {
-            return argument.MoreOrEqualThan(0);
+            return argument.Min(0);
         }
         
         public static Argument<double> PositiveOrZero(this Argument<double> argument)
         {
-            return argument.MoreOrEqualThan(0);
+            return argument.Min(0);
         }
         
         public static Argument<float> PositiveOrZero(this Argument<float> argument)
         {
-            return argument.MoreOrEqualThan(0);
+            return argument.Min(0);
         }
         
         
@@ -70,22 +70,22 @@ namespace ArgValidation
         
         public static Argument<int> NegativeOrZero(this Argument<int> argument)
         {
-            return argument.LessOrEqualThan(0);
+            return argument.Max(0);
         }
         
         public static Argument<decimal> NegativeOrZero(this Argument<decimal> argument)
         {
-            return argument.LessOrEqualThan(0);
+            return argument.Max(0);
         }
         
         public static Argument<double> NegativeOrZero(this Argument<double> argument)
         {
-            return argument.LessOrEqualThan(0);
+            return argument.Max(0);
         }
         
         public static Argument<float> NegativeOrZero(this Argument<float> argument)
         {
-            return argument.LessOrEqualThan(0);
+            return argument.Max(0);
         }
         
         
