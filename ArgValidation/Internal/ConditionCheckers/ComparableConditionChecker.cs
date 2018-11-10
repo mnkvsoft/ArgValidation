@@ -5,24 +5,8 @@ using ArgValidation.Internal.ExceptionThrowers;
 
 namespace ArgValidation.Internal.ConditionCheckers
 {
-    internal static class ConditionChecker
+    internal static class CompatableConditionChecker
     {
-        public static bool IsDefault<T>(T obj)
-        {
-            return EqualityComparer<T>.Default.Equals(obj, default(T));
-        }
-
-        public static bool IsEqual<T>(T obj1, T obj2)
-        {
-            return EqualityComparer<T>.Default.Equals(obj1, obj2);
-        }
-        
-        internal static bool OnlyValues<T>(Argument<T> arg, T[] values)
-        {
-            InvalidMethodArgumentThrower.IfArgumentIsNullForOnlyValues(values, nameof(values));
-            return values.Any(x => IsEqual(arg.Value, x));
-        }
-
         public static bool MoreThan<T>(Argument<T> arg, T moreThan) where T : IComparable<T>
         {
             InvalidMethodArgumentThrower.IfNullForComparable(moreThan, nameof(moreThan));
@@ -57,7 +41,7 @@ namespace ArgValidation.Internal.ConditionCheckers
 
         internal static bool InRange<T>(Argument<T> arg, T min, T max) where T : IComparable<T>
         {
-            if (IsEqual(arg.Value, min) && IsEqual(arg.Value, max))
+            if (ObjectConditionChecker.IsEqual(arg.Value, min) && ObjectConditionChecker.IsEqual(arg.Value, max))
                 return true;
 
             InvalidMethodArgumentThrower.IfArgumentIsNullForRange(max, nameof(max));
@@ -70,7 +54,7 @@ namespace ArgValidation.Internal.ConditionCheckers
         
         public static bool LessOrEqualThan<T>(Argument<T> arg, T lessOrEqualThan) where T : IComparable<T>
         {
-            if (IsEqual(arg.Value, lessOrEqualThan))
+            if (ObjectConditionChecker.IsEqual(arg.Value, lessOrEqualThan))
                 return true;
 
             if (LessThan(arg, lessOrEqualThan))
@@ -81,7 +65,7 @@ namespace ArgValidation.Internal.ConditionCheckers
         
         public static bool MoreOrEqualThan<T>(Argument<T> arg, T moreOrEqualThan) where T : IComparable<T>
         {
-            if (IsEqual(arg.Value, moreOrEqualThan))
+            if (ObjectConditionChecker.IsEqual(arg.Value, moreOrEqualThan))
                 return true;
 
             if (MoreThan(arg, moreOrEqualThan))

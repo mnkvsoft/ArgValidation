@@ -6,12 +6,12 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void MinLength_ArgumentIsNull_ArgumentException()
+        public void MinLength_ArgumentIsNull_InvalidOperationException()
         {
             int length = 2;
             string nullString = null;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => nullString).MinLength(length));
-            Assert.Equal($"Argument '{nameof(nullString)}' has a minimum length of {length}. Current length: unknown (string is null)", exc.Message);
+            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).MinLength(length));
+            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'MinLength' operation", exc.Message);
         }
 
         [Fact]

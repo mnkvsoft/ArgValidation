@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using ArgValidation.Internal;
+using ArgValidation.Internal.ConditionCheckers;
 using ArgValidation.Internal.ExceptionThrowers;
 
 namespace ArgValidation
@@ -8,7 +9,7 @@ namespace ArgValidation
     {
         public static Argument<T> Default<T>(this Argument<T> arg)
         {
-            if (!ConditionChecker.IsDefault(arg.Value))
+            if (!ObjectConditionChecker.IsDefault(arg.Value))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be default value. Current value: '{arg.Value}'");
             return arg;
@@ -16,7 +17,7 @@ namespace ArgValidation
 
         public static Argument<T> NotDefault<T>(this Argument<T> arg)
         {
-            if (ConditionChecker.IsDefault(arg.Value))
+            if (ObjectConditionChecker.IsDefault(arg.Value))
                 ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not default value");
 
             return arg;
@@ -41,7 +42,7 @@ namespace ArgValidation
 
         public static Argument<T> Equal<T>(this Argument<T> arg, T value)
         {
-            if (!ConditionChecker.IsEqual(arg.Value, value))
+            if (!ObjectConditionChecker.IsEqual(arg.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be equal '{value}'. Current value: '{arg.Value}'");
 
@@ -50,7 +51,7 @@ namespace ArgValidation
 
         public static Argument<T> NotEqual<T>(this Argument<T> arg, T value)
         {
-            if (ConditionChecker.IsEqual(arg.Value, value))
+            if (ObjectConditionChecker.IsEqual(arg.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not equal '{value}'");
 
             return arg;
@@ -59,7 +60,7 @@ namespace ArgValidation
 
         public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
         {
-            if (!ConditionChecker.OnlyValues(arg, values))
+            if (!ObjectConditionChecker.OnlyValues(arg, values))
             {
                 var valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
                 ValidationErrorExceptionThrower.ArgumentException(

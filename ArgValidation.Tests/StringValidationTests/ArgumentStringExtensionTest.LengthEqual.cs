@@ -6,16 +6,16 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void ArgumentIsNull_ArgumentException()
+        public void LengthEqual_ArgumentIsNull_InvalidOperationException()
         {
             int length = 2;
             string nullString = null;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => nullString).LengthEqual(length));
-            Assert.Equal($"Argument '{nameof(nullString)}' must be length {length}. Current length: unknown (string is null)", exc.Message);
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).LengthEqual(length));
+            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthEqual' operation", exc.Message);
         }
 
         [Fact]
-        public void NotEqual_ArgumentException()
+        public void LengthEqual_NotEqual_ArgumentException()
         {
             string str = "str";
             int length = str.Length + 2;
@@ -24,7 +24,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void Equal_Ok()
+        public void LengthEqual_Equal_Ok()
         {
             string str = "str";
             Arg.Validate(() => str).LengthEqual(str.Length);

@@ -11,11 +11,11 @@ namespace ArgValidation.Tests.StringValidationTests
             var length = 2;
             string nullString = null;
             
-            var exc = Assert.Throws<ArgumentException>(() =>
+            var exc = Assert.Throws<InvalidOperationException>(() =>
                 Arg.Validate(() => nullString).LengthLessOrEqualThan(length));
             
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' must be length less or equals than {length}. Current length: unknown (string is null)",
+                $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthLessOrEqualThan' operation",
                 exc.Message);
         }
 

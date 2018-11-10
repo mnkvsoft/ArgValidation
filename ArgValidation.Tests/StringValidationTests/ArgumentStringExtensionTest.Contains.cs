@@ -6,21 +6,25 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void ValueIsNullAndArgumentIsNull_Ok()
+        public void Contains_ArgumentIsNull_InvalidOperationException()
         {
             string nullValue = null;
-            Arg.Validate(() => nullValue).Contains(null);
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            {
+                Arg.Validate(() => nullValue).Contains("");
+            });
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Contains' operation", exc.Message);            
         }
 
         [Fact]
-        public void ValueIsEmptyAndArgumentIsEmpty_Ok()
+        public void Contains_ValueIsEmptyAndArgumentIsEmpty_Ok()
         {
             string emptyValue = string.Empty;
             Arg.Validate(() => emptyValue).Contains(emptyValue);
         }
 
         [Fact]
-        public void ValueNotContainsArgument_ArgumentException()
+        public void Contains_ValueNotContainsArgument_ArgumentException()
         {
             string value = "qwe";
             string arg = "123";
@@ -32,7 +36,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void ValueContainsArgument_Ok()
+        public void Contains_ValueContainsArgument_Ok()
         {
             string value = "string";
             string substring = value.Substring(3);
@@ -40,19 +44,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void ValueIsNullButArgumentNotNull_ArgumentException()
-        {
-            string nullValue = null;
-            string arg = "123";
-            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
-            {
-                Arg.Validate(() => nullValue).Contains(arg);
-            });
-            Assert.Equal($"Argument '{nameof(nullValue)}' must contains '{arg}'. Current value: null", exc.Message);
-        }
-
-        [Fact]
-        public void ValueNotNullButArgumentIsNull_ArgumentException()
+        public void Contains_ValueNotNullButArgumentIsNull_ArgumentException()
         {
             string value = "value";
             string nullArg = null;

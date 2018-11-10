@@ -6,16 +6,10 @@ namespace ArgValidation.Internal.ExceptionThrowers
 {
     internal static class InvalidMethodArgumentThrower
     {
-        public static void IfArgumentIsNullForComparable<T>(T arg, string argName)
+        public static void IfNullForComparable<T>(T arg, string argName)
         {
             if (arg == null)
                 ThrowException($"Argument '{argName}' is null. Сan not compare null object");
-        }
-
-        public static void IfNullForComparable<T>(Argument<T> arg1)
-        {
-            if (arg1.Value == null)
-                ThrowException($"Argument '{arg1.Name}' is null. Сan not compare null object");
         }
 
         public static void IfArgumentIsNullForRange<T>(T arg, string argName)
@@ -24,11 +18,11 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException($"Argument '{argName}' is null. Cannot define range");
         }
 
-        public static void IfNullForRange<T>(Argument<T> argument, T min, T max)
+        public static void IfNullForRange<T>(Argument<T> arg, T min, T max)
         {
-            if (argument.Value == null)
+            if (arg.Value == null)
                 ThrowException(
-                    $"Argument '{argument.Name}' is null. Cannot define belonging to range: '{min}' - '{max}'");
+                    $"Argument '{arg.Name}' is null. Cannot define belonging to range: '{min}' - '{max}'");
         }
 
         public static void IfNotRange<T>(T min, T max)
@@ -49,33 +43,40 @@ namespace ArgValidation.Internal.ExceptionThrowers
                 ThrowException(
                     $"Argument '{argument.Name}' is null. Сan not get count elements from null object");
         }
-
-        public static void IfNullForContains<T>(Argument<T> argument)
+        
+        public static void IfNullForLength(Argument<string> arg, string operationName)
         {
-            if (argument.Value == null)
+            if (arg.Value == null)
                 ThrowException(
-                    $"Argument '{argument.Name}' is null. Сan not execute 'Contains' operation");
+                    $"Argument '{arg.Name}' is null. Сan not execute '{operationName}' operation");
+        }
+
+        public static void IfNullForContains<T>(Argument<T> arg)
+        {
+            if (arg.Value == null)
+                ThrowException(
+                    $"Argument '{arg.Name}' is null. Сan not execute 'Contains' operation");
         }
         
-        public static void IfNullForNotContains<T>(Argument<T> argument)
+        public static void IfNullForNotContains<T>(Argument<T> arg)
         {
-            if (argument.Value == null)
+            if (arg.Value == null)
                 ThrowException(
-                    $"Argument '{argument.Name}' is null. Сan not execute 'NotContains' operation");
+                    $"Argument '{arg.Name}' is null. Сan not execute 'NotContains' operation");
         }
 		
-        public static void IfNullForEmpty<TEnumerable>(Argument<TEnumerable> argument) where TEnumerable : IEnumerable
+        public static void IfNullForEmpty<TEnumerable>(Argument<TEnumerable> arg) where TEnumerable : IEnumerable
         {
-            if (argument.Value == null)
+            if (arg.Value == null)
                 ThrowException(
-                    $"Argument '{argument.Name}' is null. Сan not execute 'Empty' operation");
+                    $"Argument '{arg.Name}' is null. Сan not execute 'Empty' operation");
         }
 
-        public static void IfNullForNotEmpty<TEnumerable>(Argument<TEnumerable> argument) where TEnumerable : IEnumerable
+        public static void IfNullForNotEmpty<TEnumerable>(Argument<TEnumerable> arg) where TEnumerable : IEnumerable
         {
-            if (argument.Value == null)
+            if (arg.Value == null)
                 ThrowException(
-                    $"Argument '{argument.Name}' is null. Сan not execute 'NotEmpty' operation");
+                    $"Argument '{arg.Name}' is null. Сan not execute 'NotEmpty' operation");
         }
 
         private static void ThrowException(string message)

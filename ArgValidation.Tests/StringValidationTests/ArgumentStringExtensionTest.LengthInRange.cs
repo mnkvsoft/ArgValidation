@@ -6,7 +6,7 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void MinMoreThanMax_InvalidOperationException()
+        public void LengthInRange_MinMoreThanMax_InvalidOperationException()
         {
             var str = "str";
             var min5 = 5;
@@ -17,20 +17,20 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void ValueIsNull_ArgumentException()
+        public void LengthInRange_ValueIsNull_InvalidOperationException()
         {
             string nullString = null;
             var min3 = 3;
             var max5 = 5;
 
-            var exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => nullString).LengthInRange(min3, max5));
+            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).LengthInRange(min3, max5));
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' must be length in range {min3} - {max5}. Current length: unknown (string is null)",
+                $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthInRange' operation",
                 exc.Message);
         }
 
         [Fact]
-        public void ValueLengthEqualsMax_Ok()
+        public void LengthInRange_ValueLengthEqualsMax_Ok()
         {
             var strLength5 = "12345";
             var min3 = 3;
@@ -40,7 +40,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void ValueLengthEqualsMin_Ok()
+        public void LengthInRange_ValueLengthEqualsMin_Ok()
         {
             var strLength3 = "123";
             var min3 = 3;
@@ -50,7 +50,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void ValueLengthLessMin_ArgumentException()
+        public void LengthInRange_ValueLengthLessMin_ArgumentException()
         {
             var strLength2 = "12";
             var min3 = 3;
@@ -63,7 +63,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void ValueLengthMoreMax_ArgumentException()
+        public void LengthInRange_ValueLengthMoreMax_ArgumentException()
         {
             var strLength6 = "123456";
             var min3 = 3;
