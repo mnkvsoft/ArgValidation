@@ -60,6 +60,7 @@ namespace ArgValidation
             return arg;
         }
 
+        [Obsolete("Use MinLength method")]
         public static Argument<string> LengthMoreOrEqualThan(this Argument<string> arg, int value)
         {
             if (arg.Value == null || arg.Value.Length < value)
@@ -78,6 +79,7 @@ namespace ArgValidation
             return arg;
         }
 
+        [Obsolete("Use MaxLength method")]
         public static Argument<string> LengthLessOrEqualThan(this Argument<string> arg, int value)
         {
             if (arg.Value == null || arg.Value.Length > value)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ArgValidation.Internal;
@@ -46,20 +47,7 @@ namespace ArgValidation
 
             return argument;
         }
-
-        public static Argument<TEnumerable> CountMoreOrEqualThan<TEnumerable>(this Argument<TEnumerable> argument,
-            int count) where TEnumerable : IEnumerable
-        {
-            InvalidMethodArgumentThrower.IfNullForCount(argument);
-
-            var currentCount = argument.Value.Count();
-            if (currentCount < count)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{argument.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
-
-            return argument;
-        }
-
+        
         public static Argument<TEnumerable> CountLessThan<TEnumerable>(this Argument<TEnumerable> argument, int count)
             where TEnumerable : IEnumerable
         {
@@ -73,6 +61,21 @@ namespace ArgValidation
             return argument;
         }
 
+        [Obsolete("Use MinCount method")]
+        public static Argument<TEnumerable> CountMoreOrEqualThan<TEnumerable>(this Argument<TEnumerable> argument,
+            int count) where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
+
+            var currentCount = argument.Value.Count();
+            if (currentCount < count)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must contains more or equal than {count} elements. Current count elements: {currentCount}");
+
+            return argument;
+        }
+        
+        [Obsolete("Use MaxCount method")]
         public static Argument<TEnumerable> CountLessOrEqualThan<TEnumerable>(this Argument<TEnumerable> argument,
             int count) where TEnumerable : IEnumerable
         {
@@ -82,6 +85,32 @@ namespace ArgValidation
             if (currentCount > count)
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{argument.Name}' must contains less or equal than {count} elements. Current count elements: {currentCount}");
+
+            return argument;
+        }
+        
+        public static Argument<TEnumerable> MinCount<TEnumerable>(this Argument<TEnumerable> argument,
+            int minCount) where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
+
+            var currentCount = argument.Value.Count();
+            if (currentCount < minCount)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must contains a minimum of {minCount} elements. Current count elements: {currentCount}");
+
+            return argument;
+        }
+        
+        public static Argument<TEnumerable> MaxCount<TEnumerable>(this Argument<TEnumerable> argument,
+            int maxCount) where TEnumerable : IEnumerable
+        {
+            InvalidMethodArgumentThrower.IfNullForCount(argument);
+
+            var currentCount = argument.Value.Count();
+            if (currentCount > maxCount)
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{argument.Name}' must contains a maximum of {maxCount} elements. Current count elements: {currentCount}");
 
             return argument;
         }
