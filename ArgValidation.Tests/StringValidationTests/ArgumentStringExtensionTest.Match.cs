@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.StringValidationTests
         {
             string nullValue = null;
             var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).NotContains(""));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotContains' operation", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotContains' method", exc.Message);
         }
 
         [Fact]

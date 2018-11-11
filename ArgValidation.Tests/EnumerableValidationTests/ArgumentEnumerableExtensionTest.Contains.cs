@@ -14,7 +14,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
                 Arg.Validate(() => nullValue)
                     .Contains(new object()));
             
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Contains' operation", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Contains' method", exc.Message);
         }
 
         [Fact]

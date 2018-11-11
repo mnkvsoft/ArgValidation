@@ -48,7 +48,7 @@ namespace ArgValidation.Tests.ComparableValidationTests
             {
                 Arg.Validate(() => value).Max(maxNull);
             });
-            Assert.Equal($"Argument 'value' is null. Сan not compare null object", exc.Message);
+            Assert.Equal($"Argument 'value' of method 'Max' is null. Сan not compare null object", exc.Message);
         }
     }
 }

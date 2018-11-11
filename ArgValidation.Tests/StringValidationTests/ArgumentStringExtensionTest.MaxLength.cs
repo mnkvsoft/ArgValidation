@@ -15,7 +15,7 @@ namespace ArgValidation.Tests.StringValidationTests
                 Arg.Validate(() => nullString).MaxLength(length));
             
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' is null. Сan not execute 'MaxLength' operation",
+                $"Argument '{nameof(nullString)}' is null. Сan not execute 'MaxLength' method",
                 exc.Message);
         }
 

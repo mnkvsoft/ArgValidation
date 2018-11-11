@@ -47,7 +47,7 @@ namespace ArgValidation.Tests.ComparableValidationTests
             {
                 Arg.Validate(() => value).Min(minNull);
             });
-            Assert.Equal("Argument 'value' is null. Сan not compare null object", exc.Message);
+            Assert.Equal("Argument 'value' of method 'Min' is null. Сan not compare null object", exc.Message);
         }
     }
 }

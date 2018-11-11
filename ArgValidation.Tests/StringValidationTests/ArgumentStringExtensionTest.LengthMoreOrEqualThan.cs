@@ -11,7 +11,7 @@ namespace ArgValidation.Tests.StringValidationTests
             int length = 2;
             string nullString = null;
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).LengthMoreOrEqualThan(length));
-            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthMoreOrEqualThan' operation", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthMoreOrEqualThan' method", exc.Message);
         }
 
 

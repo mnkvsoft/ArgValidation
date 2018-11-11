@@ -45,7 +45,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthEqual(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(LengthEqual));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthEqual));
 
             if (arg.Value.Length != value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -56,7 +56,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthMoreThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(LengthMoreThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthMoreThan));
 
             if (arg.Value.Length <= value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -67,7 +67,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthLessThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(LengthLessThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthLessThan));
 
             if (arg.Value.Length >= value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -78,7 +78,7 @@ namespace ArgValidation
 
         public static Argument<string> MaxLength(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(MaxLength));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(MaxLength));
 
             if (arg.Value.Length > value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -89,7 +89,7 @@ namespace ArgValidation
 
         public static Argument<string> MinLength(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(MinLength));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(MinLength));
 
             if (arg.Value.Length < value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -100,7 +100,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthInRange(this Argument<string> arg, int min, int max)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(LengthInRange));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthInRange));
             InvalidMethodArgumentThrower.IfNotRange(min, max);
 
             if (!arg.Value.Length.InRange(min, max))
@@ -113,7 +113,7 @@ namespace ArgValidation
 
         public static Argument<string> Contains(this Argument<string> arg, string value)
         {
-            if (!ContainsPrivate(arg, value, nameof(Contains)))
+            if (!ContainsPrivate(arg, value, methodName: nameof(Contains)))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
@@ -122,7 +122,7 @@ namespace ArgValidation
 
         public static Argument<string> NotContains(this Argument<string> arg, string value)
         {
-            if (ContainsPrivate(arg, value, nameof(NotContains)))
+            if (ContainsPrivate(arg, value, methodName: nameof(NotContains)))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must not contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
@@ -133,7 +133,7 @@ namespace ArgValidation
         [Obsolete("Use MinLength method")]
         public static Argument<string> LengthMoreOrEqualThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(LengthMoreOrEqualThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthMoreOrEqualThan));
             
             if (arg.Value.Length < value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -145,7 +145,7 @@ namespace ArgValidation
         [Obsolete("Use MaxLength method")]
         public static Argument<string> LengthLessOrEqualThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, nameof(LengthLessOrEqualThan));
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthLessOrEqualThan));
             
             if (arg.Value.Length > value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -157,9 +157,9 @@ namespace ArgValidation
 
         //todo Match
 
-        private static bool ContainsPrivate(Argument<string> arg, string value, string operationName)
+        private static bool ContainsPrivate(Argument<string> arg, string value, string methodName)
         {
-            InvalidMethodArgumentThrower.IfNullForLength(arg, operationName);
+            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName);
 
             if (value == null)
                 return false;

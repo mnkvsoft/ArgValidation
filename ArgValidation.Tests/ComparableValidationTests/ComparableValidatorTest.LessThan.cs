@@ -50,7 +50,7 @@ namespace ArgValidation.Tests.ComparableValidationTests
             {
                 Arg.Validate(() => value).LessThan(lessThanNull);
             });
-            Assert.Equal($"Argument 'value' is null. Сan not compare null object", exc.Message);
+            Assert.Equal($"Argument 'value' of method 'LessThan' is null. Сan not compare null object", exc.Message);
         }
     }
 }

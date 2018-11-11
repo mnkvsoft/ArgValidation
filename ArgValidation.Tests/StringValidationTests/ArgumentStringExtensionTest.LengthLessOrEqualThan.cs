@@ -15,7 +15,7 @@ namespace ArgValidation.Tests.StringValidationTests
                 Arg.Validate(() => nullString).LengthLessOrEqualThan(length));
             
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthLessOrEqualThan' operation",
+                $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthLessOrEqualThan' method",
                 exc.Message);
         }
 

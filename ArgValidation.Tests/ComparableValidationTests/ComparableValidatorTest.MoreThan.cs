@@ -49,7 +49,7 @@ namespace ArgValidation.Tests.ComparableValidationTests
             {
                 Arg.Validate(() => value).MoreThan(moreThanNull);
             });
-            Assert.Equal($"Argument 'value' is null. Сan not compare null object", exc.Message);
+            Assert.Equal($"Argument 'value' of method 'MoreThan' is null. Сan not compare null object", exc.Message);
         }
     }
 }
