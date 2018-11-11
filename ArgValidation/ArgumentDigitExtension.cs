@@ -2,134 +2,134 @@ namespace ArgValidation
 {
     public static class ArgumentDigitExtension
     {
-        public static Argument<int> Positive(this Argument<int> argument)
+        public static Argument<int> Positive(this Argument<int> arg)
         {
-            return argument.MoreThan(0);
+            return arg.MoreThan(0);
         }
         
-        public static Argument<decimal> Positive(this Argument<decimal> argument)
+        public static Argument<decimal> Positive(this Argument<decimal> arg)
         {
-            return argument.MoreThan(0);
+            return arg.MoreThan(0);
         }
         
-        public static Argument<double> Positive(this Argument<double> argument)
+        public static Argument<double> Positive(this Argument<double> arg)
         {
-            return argument.MoreThan(0);
+            return arg.MoreThan(0);
         }
         
-        public static Argument<float> Positive(this Argument<float> argument)
+        public static Argument<float> Positive(this Argument<float> arg)
         {
-            return argument.MoreThan(0);
-        }
-        
-        
-        
-        public static Argument<int> PositiveOrZero(this Argument<int> argument)
-        {
-            return argument.Min(0);
-        }
-        
-        public static Argument<decimal> PositiveOrZero(this Argument<decimal> argument)
-        {
-            return argument.Min(0);
-        }
-        
-        public static Argument<double> PositiveOrZero(this Argument<double> argument)
-        {
-            return argument.Min(0);
-        }
-        
-        public static Argument<float> PositiveOrZero(this Argument<float> argument)
-        {
-            return argument.Min(0);
+            return arg.MoreThan(0);
         }
         
         
         
-        public static Argument<int> Negative(this Argument<int> argument)
+        public static Argument<int> PositiveOrZero(this Argument<int> arg)
         {
-            return argument.LessThan(0);
+            return arg.Min(0);
         }
         
-        public static Argument<decimal> Negative(this Argument<decimal> argument)
+        public static Argument<decimal> PositiveOrZero(this Argument<decimal> arg)
         {
-            return argument.LessThan(0);
+            return arg.Min(0);
         }
         
-        public static Argument<double> Negative(this Argument<double> argument)
+        public static Argument<double> PositiveOrZero(this Argument<double> arg)
         {
-            return argument.LessThan(0);
+            return arg.Min(0);
         }
         
-        public static Argument<float> Negative(this Argument<float> argument)
+        public static Argument<float> PositiveOrZero(this Argument<float> arg)
         {
-            return argument.LessThan(0);
-        }
-        
-        
-        
-        public static Argument<int> NegativeOrZero(this Argument<int> argument)
-        {
-            return argument.Max(0);
-        }
-        
-        public static Argument<decimal> NegativeOrZero(this Argument<decimal> argument)
-        {
-            return argument.Max(0);
-        }
-        
-        public static Argument<double> NegativeOrZero(this Argument<double> argument)
-        {
-            return argument.Max(0);
-        }
-        
-        public static Argument<float> NegativeOrZero(this Argument<float> argument)
-        {
-            return argument.Max(0);
+            return arg.Min(0);
         }
         
         
         
-        public static Argument<int> Zero(this Argument<int> argument)
+        public static Argument<int> Negative(this Argument<int> arg)
         {
-            return argument.Equal(0);
+            return arg.LessThan(0);
         }
         
-        public static Argument<decimal> Zero(this Argument<decimal> argument)
+        public static Argument<decimal> Negative(this Argument<decimal> arg)
         {
-            return argument.Equal(0);
+            return arg.LessThan(0);
         }
         
-        public static Argument<double> Zero(this Argument<double> argument)
+        public static Argument<double> Negative(this Argument<double> arg)
         {
-            return argument.Equal(0);
+            return arg.LessThan(0);
         }
         
-        public static Argument<float> Zero(this Argument<float> argument)
+        public static Argument<float> Negative(this Argument<float> arg)
         {
-            return argument.Equal(0);
+            return arg.LessThan(0);
         }
         
         
         
-        public static Argument<int> NotZero(this Argument<int> argument)
+        public static Argument<int> NegativeOrZero(this Argument<int> arg)
         {
-            return argument.NotEqual(0);
+            return arg.Max(0);
         }
         
-        public static Argument<decimal> NotZero(this Argument<decimal> argument)
+        public static Argument<decimal> NegativeOrZero(this Argument<decimal> arg)
         {
-            return argument.NotEqual(0);
+            return arg.Max(0);
         }
         
-        public static Argument<double> NotZero(this Argument<double> argument)
+        public static Argument<double> NegativeOrZero(this Argument<double> arg)
         {
-            return argument.NotEqual(0);
+            return arg.Max(0);
         }
         
-        public static Argument<float> NotZero(this Argument<float> argument)
+        public static Argument<float> NegativeOrZero(this Argument<float> arg)
         {
-            return argument.NotEqual(0);
+            return arg.Max(0);
+        }
+        
+        
+        
+        public static Argument<int> Zero(this Argument<int> arg)
+        {
+            return arg.Equal(0);
+        }
+        
+        public static Argument<decimal> Zero(this Argument<decimal> arg)
+        {
+            return arg.Equal(0);
+        }
+        
+        public static Argument<double> Zero(this Argument<double> arg)
+        {
+            return arg.Equal(0);
+        }
+        
+        public static Argument<float> Zero(this Argument<float> arg)
+        {
+            return arg.Equal(0);
+        }
+        
+        
+        
+        public static Argument<int> NotZero(this Argument<int> arg)
+        {
+            return arg.NotEqual(0);
+        }
+        
+        public static Argument<decimal> NotZero(this Argument<decimal> arg)
+        {
+            return arg.NotEqual(0);
+        }
+        
+        public static Argument<double> NotZero(this Argument<double> arg)
+        {
+            return arg.NotEqual(0);
+        }
+        
+        public static Argument<float> NotZero(this Argument<float> arg)
+        {
+            return arg.NotEqual(0);
         }
     }
 }

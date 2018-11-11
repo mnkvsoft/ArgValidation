@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace ArgValidation
+﻿namespace ArgValidation
 {
     public struct Argument<T>
     {

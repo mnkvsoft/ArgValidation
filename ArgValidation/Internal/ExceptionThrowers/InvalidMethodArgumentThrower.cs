@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ArgValidation.Internal.Utils;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace ArgValidation.Internal.ExceptionThrowers
 {
@@ -25,9 +25,9 @@ namespace ArgValidation.Internal.ExceptionThrowers
                     $"Argument '{arg.Name}' is null. Cannot define belonging to range: '{min}' - '{max}'");
         }
 
-        public static void IfNotRange<T>(T min, T max)
+        public static void IfNotRange<T>(T min, T max) where T : IComparable<T>
         {
-            if (min.CompareWith(max) > 0)
+            if (min.MoreThan(max))
                 ThrowException($"Argument '{nameof(min)}' cannot be more than '{nameof(max)}'. Cannot define range");
         }
 

@@ -10,9 +10,9 @@ namespace ArgValidation
             return Validate(value).Default().Value;
         }
         
-        public static T Default<T>(T value, string argName)
+        public static T Default<T>(T argValue, string argName)
         {
-            return Validate(value, argName).Default().Value;
+            return Validate(argValue, argName).Default().Value;
         }
         
         public static T NotDefault<T>(Expression<Func<T>> value)
@@ -20,9 +20,9 @@ namespace ArgValidation
             return Validate(value).NotDefault().Value;
         }
         
-        public static T NotDefault<T>(T value, string argName)
+        public static T NotDefault<T>(T argValue, string argName)
         {
-            return Validate(value, argName).NotDefault().Value;
+            return Validate(argValue, argName).NotDefault().Value;
         }
         
         public static T Null<T>(Expression<Func<T>> value)
@@ -30,9 +30,9 @@ namespace ArgValidation
             return Validate(value).Null().Value;
         }
         
-        public static T Null<T>(T value, string argName)
+        public static T Null<T>(T argValue, string argName)
         {
-            return Validate(value, argName).Null().Value;
+            return Validate(argValue, argName).Null().Value;
         }
         
         public static T NotNull<T>(Expression<Func<T>> value)
@@ -40,9 +40,9 @@ namespace ArgValidation
             return Validate(value).NotNull().Value;
         }
         
-        public static T NotNull<T>(T value, string argName)
+        public static T NotNull<T>(T argValue, string argName)
         {
-            return Validate(value, argName).NotNull().Value;
+            return Validate(argValue, argName).NotNull().Value;
         }
     }
 }

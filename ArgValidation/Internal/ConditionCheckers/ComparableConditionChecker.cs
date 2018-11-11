@@ -1,42 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using ArgValidation.Internal.ExceptionThrowers;
+using ArgValidation.Internal.Utils;
 
 namespace ArgValidation.Internal.ConditionCheckers
 {
     internal static class CompatableConditionChecker
     {
-        public static bool MoreThan<T>(Argument<T> arg, T moreThan) where T : IComparable<T>
+        public static bool MoreThan<T>(Argument<T> arg, T value) where T : IComparable<T>
         {
-            InvalidMethodArgumentThrower.IfNullForComparable(moreThan, nameof(moreThan));
+            InvalidMethodArgumentThrower.IfNullForComparable(value, nameof(value));
             InvalidMethodArgumentThrower.IfNullForComparable(arg.Value, arg.Name);
 
-            return arg.Value.CompareWith(moreThan) > 0;
+            return arg.Value.MoreThan(value);
         }
 
-        public static bool LessThan<T>(Argument<T> arg, T lessThan) where T : IComparable<T>
+        public static bool LessThan<T>(Argument<T> arg, T value) where T : IComparable<T>
         {
-            InvalidMethodArgumentThrower.IfNullForComparable(lessThan, nameof(lessThan));
+            InvalidMethodArgumentThrower.IfNullForComparable(value, nameof(value));
             InvalidMethodArgumentThrower.IfNullForComparable(arg.Value, arg.Name);
 
-            return arg.Value.CompareWith(lessThan) < 0;
-        }
-        
-        public static bool Max<T>(Argument<T> arg, T max) where T : IComparable<T>
-        {
-            InvalidMethodArgumentThrower.IfNullForComparable(max, nameof(max));
-            InvalidMethodArgumentThrower.IfNullForComparable(arg.Value, arg.Name);
-
-            return arg.Value.CompareWith(max) <= 0;
+            return arg.Value.LessThan(value);
         }
         
-        public static bool Min<T>(Argument<T> arg, T min) where T : IComparable<T>
+        public static bool Max<T>(Argument<T> arg, T value) where T : IComparable<T>
         {
-            InvalidMethodArgumentThrower.IfNullForComparable(min, nameof(min));
+            InvalidMethodArgumentThrower.IfNullForComparable(value, nameof(value));
             InvalidMethodArgumentThrower.IfNullForComparable(arg.Value, arg.Name);
 
-            return arg.Value.CompareWith(min) >= 0;
+            return arg.Value.Max(value);
+        }
+        
+        public static bool Min<T>(Argument<T> arg, T value) where T : IComparable<T>
+        {
+            InvalidMethodArgumentThrower.IfNullForComparable(value, nameof(value));
+            InvalidMethodArgumentThrower.IfNullForComparable(arg.Value, arg.Name);
+
+            return arg.Value.Min(value);
         }
 
         internal static bool InRange<T>(Argument<T> arg, T min, T max) where T : IComparable<T>
@@ -52,6 +51,7 @@ namespace ArgValidation.Internal.ConditionCheckers
             return arg.Value.InRange(min, max);
         }
         
+        [Obsolete("Use Max method")]
         public static bool LessOrEqualThan<T>(Argument<T> arg, T lessOrEqualThan) where T : IComparable<T>
         {
             if (ObjectConditionChecker.IsEqual(arg.Value, lessOrEqualThan))
@@ -62,7 +62,8 @@ namespace ArgValidation.Internal.ConditionCheckers
 
             return false;
         }
-        
+
+        [Obsolete("Use Min method")]
         public static bool MoreOrEqualThan<T>(Argument<T> arg, T moreOrEqualThan) where T : IComparable<T>
         {
             if (ObjectConditionChecker.IsEqual(arg.Value, moreOrEqualThan))

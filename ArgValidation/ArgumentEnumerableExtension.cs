@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ArgValidation.Internal;
 using ArgValidation.Internal.ExceptionThrowers;
+using ArgValidation.Internal.Utils;
 
 namespace ArgValidation
 {
@@ -14,7 +15,7 @@ namespace ArgValidation
         {
             InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            if (!arg.Value.CountEqual(count))
+            if (!arg.Value.CountEquals(count))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must contains {count} elements. Current count elements: {arg.Value.Count()}");
 
@@ -26,7 +27,7 @@ namespace ArgValidation
         {
             InvalidMethodArgumentThrower.IfNullForCount(arg);
 
-            if (arg.Value.CountEqual(count))
+            if (arg.Value.CountEquals(count))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' not must contains {arg.Value.Count()} elements");
 

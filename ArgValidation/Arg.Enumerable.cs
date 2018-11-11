@@ -6,10 +6,10 @@ namespace ArgValidation
 {
     public static partial class Arg
     {
-        public static TEnumerable Empty<TEnumerable>(TEnumerable value, string argName)
+        public static TEnumerable Empty<TEnumerable>(TEnumerable argValue, string argName)
             where TEnumerable : IEnumerable
         {
-            return Validate(value, argName).Empty().Value;
+            return Validate(argValue, argName).Empty().Value;
         }
         
         public static TEnumerable Empty<TEnumerable>(Expression<Func<TEnumerable>> value)
@@ -19,10 +19,10 @@ namespace ArgValidation
         }
         
         
-        public static TEnumerable NotEmpty<TEnumerable>(TEnumerable value, string argName)
+        public static TEnumerable NotEmpty<TEnumerable>(TEnumerable argValue, string argName)
             where TEnumerable : IEnumerable
         {
-            return Validate(value, argName).NotEmpty().Value;
+            return Validate(argValue, argName).NotEmpty().Value;
         }
         
         public static TEnumerable NotEmpty<TEnumerable>(Expression<Func<TEnumerable>> value)
@@ -32,10 +32,10 @@ namespace ArgValidation
         }
         
         
-        public static TEnumerable NotNullOrEmpty<TEnumerable>(TEnumerable value, string argName)
+        public static TEnumerable NotNullOrEmpty<TEnumerable>(TEnumerable argValue, string argName)
             where TEnumerable : IEnumerable
         {
-            return Validate(value, argName).NotNullOrEmpty().Value;
+            return Validate(argValue, argName).NotNullOrEmpty().Value;
         }
         
         public static TEnumerable NotNullOrEmpty<TEnumerable>(Expression<Func<TEnumerable>> value)
@@ -45,10 +45,10 @@ namespace ArgValidation
         }
         
         
-        public static TEnumerable NullOrEmpty<TEnumerable>(TEnumerable value, string argName)
+        public static TEnumerable NullOrEmpty<TEnumerable>(TEnumerable argValue, string argName)
             where TEnumerable : IEnumerable
         {
-            return Validate(value, argName).NullOrEmpty().Value;
+            return Validate(argValue, argName).NullOrEmpty().Value;
         }
         
         public static TEnumerable NullOrEmpty<TEnumerable>(Expression<Func<TEnumerable>> value)

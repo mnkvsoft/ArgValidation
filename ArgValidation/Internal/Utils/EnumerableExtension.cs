@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace ArgValidation.Internal
+namespace ArgValidation.Internal.Utils
 {
     internal static class EnumerableExtension
     {
@@ -46,14 +46,14 @@ namespace ArgValidation.Internal
             while (enumerator.MoveNext())
             {
                 counter++;
-                if (counter > count)
+                if (counter >= count)
                     return false;
             }
 
             return true;
         }
 
-        public static bool CountEqual(this IEnumerable enumerable, int count)
+        public static bool CountEquals(this IEnumerable enumerable, int count)
         {
             if (enumerable is ICollection collection)
                 return collection.Count == count;

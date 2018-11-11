@@ -39,7 +39,7 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void Min_MoreThanArgumentIsNull_InvalidOperationException()
+        public void Min_MinArgumentIsNull_InvalidOperationException()
         {
             ComparableClass value = new ComparableClass();
             ComparableClass minNull = null;
@@ -47,7 +47,7 @@ namespace ArgValidation.Tests.ComparableValidationTests
             {
                 Arg.Validate(() => value).Min(minNull);
             });
-            Assert.Equal("Argument 'min' is null. Сan not compare null object", exc.Message);
+            Assert.Equal("Argument 'value' is null. Сan not compare null object", exc.Message);
         }
     }
 }
