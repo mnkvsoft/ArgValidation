@@ -6,15 +6,6 @@ namespace ArgValidation.Tests.ComparableValidationTests
     public partial class ComparableValidatorTest
     {
         [Fact]
-        public void InRange_EqualValuesNotImplementIComparable_Ok()
-        {
-            ComparableClass value = new ComparableClass();
-            ComparableClass min = value;
-            ComparableClass max = value;
-            Arg.Validate(() => value).InRange(min, max);
-        }
-
-        [Fact]
         public void InRange_ArgumentEqualMin_Ok()
         {
             int value2 = 2;
@@ -74,12 +65,23 @@ namespace ArgValidation.Tests.ComparableValidationTests
             int max3 = 3;
 
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min5, max3));
-            Assert.Equal("Argument 'min' cannot be more than 'max'. Cannot define range", exc.Message);
+            Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
+        }
+
+        [Fact]
+        public void InRange_MinEqualsMax_InvalidOperationException()
+        {
+            int value = 2;
+            int min = 1;
+            int max = min;
+
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min, max));
+            Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 
 
         // todo: not work for nullable type
-        
+
         //[Fact]
         //public void InRange_MinIsNull_InvalidOperationException()
         //{

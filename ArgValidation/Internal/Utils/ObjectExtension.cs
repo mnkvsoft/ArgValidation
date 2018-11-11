@@ -9,6 +9,11 @@ namespace ArgValidation.Internal.Utils
             return obj.CompareTo(otherObj) > 0;
         }
 
+        public static bool MoreOrEquals<T>(this T obj, T otherObj) where T : IComparable<T>
+        {
+            return obj.CompareTo(otherObj) >= 0;
+        }
+
         public static bool LessThan<T>(this T obj, T otherObj) where T : IComparable<T>
         {
             return obj.CompareTo(otherObj) < 0;

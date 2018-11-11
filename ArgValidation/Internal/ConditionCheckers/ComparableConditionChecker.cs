@@ -40,9 +40,6 @@ namespace ArgValidation.Internal.ConditionCheckers
 
         internal static bool InRange<T>(Argument<T> arg, T min, T max) where T : IComparable<T>
         {
-            if (ObjectConditionChecker.IsEqual(arg.Value, min) && ObjectConditionChecker.IsEqual(arg.Value, max))
-                return true;
-
             InvalidMethodArgumentThrower.ForRange.IfValueIsNull(max, nameof(max));
             InvalidMethodArgumentThrower.ForRange.IfValueIsNull(min, nameof(min));
             InvalidMethodArgumentThrower.IfNotRange(min, max);

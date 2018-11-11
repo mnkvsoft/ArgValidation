@@ -13,7 +13,7 @@ namespace ArgValidation.Tests.StringValidationTests
             var max3 = 3;
 
             var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => str).LengthInRange(min5, max3));
-            Assert.Equal("Argument 'min' cannot be more than 'max'. Cannot define range", exc.Message);
+            Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 
         [Fact]

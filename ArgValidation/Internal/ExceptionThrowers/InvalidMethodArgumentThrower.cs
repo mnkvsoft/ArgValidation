@@ -44,8 +44,8 @@ namespace ArgValidation.Internal.ExceptionThrowers
 
         public static void IfNotRange<T>(T min, T max) where T : IComparable<T>
         {
-            if (min.MoreThan(max))
-                ThrowException($"Argument '{nameof(min)}' cannot be more than '{nameof(max)}'. Cannot define range");
+            if (min.MoreOrEquals(max))
+                ThrowException($"Argument '{nameof(min)}' cannot be more or equals '{nameof(max)}'. Cannot define range");
         }
 
         public static void IfArgumentIsNullForOnlyValues<T>(T[] values, string argName)
