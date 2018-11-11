@@ -28,12 +28,6 @@ namespace ArgValidation.Internal.ExceptionThrowers
                     ThrowException($"Argument '{argName}' of method 'InRange' is null. Cannot define range");
             }
 
-            public static void IfArgumentIsNull<T>(T arg, string argName)
-            {
-                if (arg == null)
-                    ThrowException($"Argument '{argName}' is null. Cannot define range");
-            }
-
             public static void IfArgumentIsNull<T>(Argument<T> arg, T min, T max)
             {
                 if (arg.Value == null)
