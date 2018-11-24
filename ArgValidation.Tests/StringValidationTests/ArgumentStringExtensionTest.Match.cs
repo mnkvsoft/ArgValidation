@@ -6,28 +6,39 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void Match_ArgumentIsNull_ArgumentException()
+        public void Match_IsMatch_Ok()
         {
-            string nullValue = null;
-            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).NotContains(""));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotContains' method", exc.Message);
+            string digits = "1234567890";
+            Arg.Validate(digits, nameof(digits))
+                .Match("\\d{10}");
         }
 
         [Fact]
-        public void Match_Match_Ok()
+        public void Match_IsNotMatch_ArgumentException()
         {
-            string value = "qwe";
-            string arg = "123";
-            Arg.Validate(() => value).NotContains(arg);
+            string letters = "asdf";
+            const string pattern = "\\d{10}";
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(letters, nameof(letters)).Match(pattern));
+            Assert.Equal($"Argument '{nameof(letters)}' must be match with pattern '{pattern}'. Current value: '{letters}'",exc.Message);
         }
 
-        //[Fact]
-        //public void NotContainsString_ValueContainsArgument_ArgumentException()
-        //{
-        //    string value = "string";
-        //    string substring = value.Substring(3);
-        //    ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => value).NotContains(substring));
-        //    Assert.Equal($"Argument '{nameof(value)}' must not contains '{substring}'. Current value: '{value}'", exc.Message);
-        //}
+        [Fact]
+        public void Match_ArgumentValueIsNull_InvalidOperationException()
+        {
+            string nullValue = null;
+            const string pattern = "\\d{10}";
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(nullValue, nameof(nullValue)).Match(pattern));
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Match' method", exc.Message);
+        }
+
+        [Fact]
+        public void Match_Pattern_InvalidOperationException()
+        {
+            string argValue = "some-value";
+            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => 
+                Arg.Validate(argValue, nameof(argValue))
+                    .Match(pattern: null));
+            Assert.Equal($"Argument 'pattern' of method 'Match' is null. Can not execute 'Match' method", exc.Message);
+        }
     }
 }

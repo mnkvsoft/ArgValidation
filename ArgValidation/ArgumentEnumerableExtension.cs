@@ -85,7 +85,7 @@ namespace ArgValidation
         public static Argument<TEnumerable> Contains<TEnumerable, T>(this Argument<TEnumerable> arg, T elem)
             where TEnumerable : IEnumerable<T>
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(Contains));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(Contains));
 
             if (!arg.Value.Contains(elem))
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -97,7 +97,7 @@ namespace ArgValidation
         public static Argument<TEnumerable> NotContains<TEnumerable, T>(this Argument<TEnumerable> arg, T elem)
             where TEnumerable : IEnumerable<T>
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(NotContains));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(NotContains));
 
             if (arg.Value.Contains(elem))
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -109,7 +109,7 @@ namespace ArgValidation
         public static Argument<TEnumerable> Empty<TEnumerable>(this Argument<TEnumerable> arg)
             where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(Empty));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(Empty));
 
             var currentCount = arg.Value.Count();
             if (currentCount > 0)
@@ -122,7 +122,7 @@ namespace ArgValidation
         public static Argument<TEnumerable> NotEmpty<TEnumerable>(this Argument<TEnumerable> arg)
             where TEnumerable : IEnumerable
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(NotEmpty));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(NotEmpty));
 
             var currentCount = arg.Value.Count();
             if (currentCount < 1)

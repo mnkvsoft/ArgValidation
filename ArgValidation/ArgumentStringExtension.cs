@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using ArgValidation.Internal;
+using ArgValidation.Internal.ConditionCheckers;
 using ArgValidation.Internal.ExceptionThrowers;
 using ArgValidation.Internal.Utils;
 
@@ -45,7 +47,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthEqual(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthEqual));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthEqual));
 
             if (arg.Value.Length != value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -56,7 +58,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthMoreThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthMoreThan));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthMoreThan));
 
             if (arg.Value.Length <= value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -67,7 +69,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthLessThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthLessThan));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthLessThan));
 
             if (arg.Value.Length >= value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -78,7 +80,7 @@ namespace ArgValidation
 
         public static Argument<string> MaxLength(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(MaxLength));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(MaxLength));
 
             if (arg.Value.Length > value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -89,7 +91,7 @@ namespace ArgValidation
 
         public static Argument<string> MinLength(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(MinLength));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(MinLength));
 
             if (arg.Value.Length < value)
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -100,7 +102,7 @@ namespace ArgValidation
 
         public static Argument<string> LengthInRange(this Argument<string> arg, int min, int max)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthInRange));
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthInRange));
             InvalidMethodArgumentThrower.IfNotRange(min, max);
 
             if (!arg.Value.Length.InRange(min, max))
@@ -129,12 +131,36 @@ namespace ArgValidation
             return arg;
         }
 
+        public static Argument<string> Match(this Argument<string> arg, string pattern)
+        {
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(Match));
+            InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(arg: pattern, argName: nameof(pattern), methodName: nameof(Match));
+
+            if (!StringConditionChecker.Match(arg, pattern))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must be match with pattern '{pattern}'. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+
+        public static Argument<string> NotMatch(this Argument<string> arg, string pattern)
+        {
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(NotMatch));
+            InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(arg: pattern, argName: nameof(pattern), methodName: nameof(NotMatch));
+
+            if (StringConditionChecker.Match(arg, pattern))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' not must be match with pattern '{pattern}'. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+
 
         [Obsolete("Use MinLength method")]
         public static Argument<string> LengthMoreOrEqualThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthMoreOrEqualThan));
-            
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthMoreOrEqualThan));
+
             if (arg.Value.Length < value)
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be length more or equals than {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
@@ -145,8 +171,8 @@ namespace ArgValidation
         [Obsolete("Use MaxLength method")]
         public static Argument<string> LengthLessOrEqualThan(this Argument<string> arg, int value)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName: nameof(LengthLessOrEqualThan));
-            
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthLessOrEqualThan));
+
             if (arg.Value.Length > value)
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be length less or equals than {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
@@ -154,12 +180,9 @@ namespace ArgValidation
             return arg;
         }
 
-
-        //todo Match
-
         private static bool ContainsPrivate(Argument<string> arg, string value, string methodName)
         {
-            InvalidMethodArgumentThrower.IfArgumentIsNull(arg, methodName);
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName);
 
             if (value == null)
                 return false;

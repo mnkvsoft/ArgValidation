@@ -6,7 +6,7 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void NotContainsString_ArgumentIsNull_ArgumentException()
+        public void NotContains_ArgumentIsNull_ArgumentException()
         {
             string nullValue = null;
             var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).NotContains(""));
@@ -14,7 +14,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void NotContainsString_ValueNotContainsArgument_Ok()
+        public void NotContains_ValueNotContainsArgument_Ok()
         {
             string value = "qwe";
             string arg = "123";
@@ -22,7 +22,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void NotContainsString_ValueContainsArgument_ArgumentException()
+        public void NotContains_ValueContainsArgument_ArgumentException()
         {
             string value = "string";
             string substring = value.Substring(3);

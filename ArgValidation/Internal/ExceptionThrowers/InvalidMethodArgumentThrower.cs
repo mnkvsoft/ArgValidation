@@ -55,11 +55,17 @@ namespace ArgValidation.Internal.ExceptionThrowers
                     $"Argument '{argument.Name}' is null. Сan not get count elements from null object");
         }
         
-        public static void IfArgumentIsNull<T>(Argument<T> arg, string methodName)
+        public static void IfArgumentValueIsNull<T>(Argument<T> arg, string methodName)
         {
             if (arg.Value == null)
                 ThrowException(
                     $"Argument '{arg.Name}' is null. Сan not execute '{methodName}' method");
+        }
+
+        public static void IfArgumentOfMethodIsNull<T>(T arg, string argName, string methodName)
+        {
+            if (arg == null)
+                ThrowException($"Argument '{argName}' of method '{methodName}' is null. Can not execute '{methodName}' method");
         }
 
         private static void ThrowException(string message)
