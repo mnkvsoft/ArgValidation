@@ -102,9 +102,9 @@ If for some reason the verification fails, for example, a LengthInRange is check
 
 *Important*. The library throws exceptions to the `ArgumentException` family, only in the case of a failed validaton, in all other cases, an `InvalidOperationException` is thrown.
 
-## Complete list of validation methods for types
+## Complete list of validation methods
 
-Where -s is labeled *simple validation methods.*
+-s is labeled *simple validation methods.*
 *Simple validation method* is a validation method that does not require additional parameters for validation, except for the validated argument itself.
 Methods are available directly by calling the class `Arg.`
 
