@@ -73,7 +73,7 @@ When writing business logic classes, it is almost always necessary to check the 
 ```
 ## Get started
 
-All checks begin with a reference to the static class Arg.
+All checks begin with a reference to the static class `Arg`.
 Then there are 2 ways:
 
 - Call the Validate method, which provides all the possible methods for validation the argument using a fluent API.
@@ -106,7 +106,7 @@ If for some reason the verification fails, for example, a LengthInRange is check
 
 -s is labeled *simple validation methods.*
 *Simple validation method* is a validation method that does not require additional parameters for validation, except for the validated argument itself.
-Methods are available directly by calling the class `Arg.`
+Methods are available directly by calling the class `Arg`.
 
 
 For `Object`:
