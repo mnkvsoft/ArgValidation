@@ -81,9 +81,9 @@ Then there are 2 ways:
 ```cs
 // example
 
-Arg.Validate (personName, nameof (personName))
-     .NotNull ()
-     .LengthInRange (1, 30);
+Arg.Validate(personName, nameof (personName))
+     .NotNull()
+     .LengthInRange(1, 30);
 ```
 
 - If you want to perform only 1 validation, without passing any additional parameters to the check method (*Simple validation method*), then you can immediately call this method directly. This path does not support a fluent API.
@@ -91,9 +91,9 @@ Arg.Validate (personName, nameof (personName))
 ```cs
 // example
 
-Arg.NotNull (personRepositoty, nameof (personRepositoty));
-Arg.NotDefault (birthDate, nameof (birthDate));
-Arg.PositiveOrZero (passengersCount, nameof (passengersCount));
+Arg.NotNull(personRepositoty, nameof (personRepositoty));
+Arg.NotDefault(birthDate, nameof (birthDate));
+Arg.PositiveOrZero(passengersCount, nameof (passengersCount));
 ```
 
 
