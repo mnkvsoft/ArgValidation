@@ -2,6 +2,7 @@
 [![Build status](https://travis-ci.org/mnkvsoft/ArgValidation.svg?branch=master)](https://travis-ci.org/mnkvsoft/ArgValidation)
 [![codecov](https://codecov.io/gh/mnkvsoft/ArgValidation/branch/master/graph/badge.svg)](https://codecov.io/gh/mnkvsoft/ArgValidation)
 [![NuGet](https://img.shields.io/nuget/v/ArgValidation.svg?style=flat)](https://www.nuget.org/packages/ArgValidation)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 A simply arguments validation library with fluent API
 
