@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ArgValidation.Internal;
 using ArgValidation.Internal.ConditionCheckers;
 using ArgValidation.Internal.ExceptionThrowers;
@@ -66,6 +67,14 @@ namespace ArgValidation
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must have only values: {valuesStr}. Current value: '{arg.Value}'");
             }
+
+            return arg;
+        }
+
+        public static Argument<T> FailedIf<T>(this Argument<T> arg, bool condition, string message)
+        {
+            if (condition)
+                ValidationErrorExceptionThrower.ArgumentException(message + Environment.NewLine + $"Argument name: '{arg.Name}'");
 
             return arg;
         }
