@@ -16,8 +16,8 @@ namespace ArgValidation
 
         public static Argument<T> IfNotNull<T>(Expression<Func<T?>> value) where T : struct
         {
-            T? argValue = ArgumentFactory.GetArgumentValue(value);
-            string argName = ArgumentFactory.GetArgumentName(value);
+            T? argValue = ExpressionHelper.GetArgumentValue(value);
+            string argName = ExpressionHelper.GetArgumentName(value);
 
             if (!argValue.HasValue)
                 return new Argument<T>(default(T), argName, validationIsDisabled: true);
@@ -35,8 +35,8 @@ namespace ArgValidation
 
         public static Argument<T> IfNotNull<T>(Expression<Func<T>> value) where T : class
         {
-            T argValue = ArgumentFactory.GetArgumentValue(value);
-            string argName = ArgumentFactory.GetArgumentName(value);
+            T argValue = ExpressionHelper.GetArgumentValue(value);
+            string argName = ExpressionHelper.GetArgumentName(value);
 
             if (argValue == null)
                 return new Argument<T>(default(T), argName, validationIsDisabled: true);
