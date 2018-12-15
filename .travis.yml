@@ -23,7 +23,7 @@ before_script:
   - dotnet restore
 
 script:
-- dotnet build ArgValidation.sln -c Debug -f netstandard2.0
+- dotnet build ArgValidation.sln -c Debug -f netcoreapp2.1
 - dotnet test -c Debug --no-build ./ArgValidation.Tests/ArgValidation.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
 after_script:
