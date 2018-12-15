@@ -6,6 +6,10 @@ namespace ArgValidation
 {
     public static class ArgumentComparableExtension
     {
+        /// <summary>
+        /// For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull"/> or <see cref="Arg.IfNotNull"/>
+        /// </summary>
         public static Argument<T> MoreThan<T>(this Argument<T> arg, T value) where T : IComparable<T>
         {
             if (arg.ValidationIsDisabled())
@@ -18,6 +22,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull"/> or <see cref="Arg.IfNotNull"/>
+        /// </summary>
         public static Argument<T> LessThan<T>(this Argument<T> arg, T value) where T : IComparable<T>
         {
             if (arg.ValidationIsDisabled())
@@ -29,7 +37,11 @@ namespace ArgValidation
 
             return arg;
         }
-        
+
+        /// <summary>
+        /// For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull"/> or <see cref="Arg.IfNotNull"/>
+        /// </summary>
         public static Argument<T> Max<T>(this Argument<T> arg, T value) where T : IComparable<T>
         {
             if (arg.ValidationIsDisabled())
@@ -41,7 +53,11 @@ namespace ArgValidation
 
             return arg;
         }
-        
+
+        /// <summary>
+        /// For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull"/> or <see cref="Arg.IfNotNull"/>
+        /// </summary>
         public static Argument<T> Min<T>(this Argument<T> arg, T value) where T : IComparable<T>
         {
             if (arg.ValidationIsDisabled())
@@ -54,6 +70,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull"/> or <see cref="Arg.IfNotNull"/>
+        /// </summary>
         public static Argument<T> InRange<T>(this Argument<T> arg, T min, T max) where T : IComparable<T>
         {
             if (arg.ValidationIsDisabled())

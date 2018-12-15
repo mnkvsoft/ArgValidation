@@ -29,19 +29,31 @@ namespace ArgValidation
             return arg;
         }
 
-        public static Argument<T> Null<T>(this Argument<T> arg)
+        public static void Null<T>(this Argument<T> arg) where T : class
         {
             if (arg.ValidationIsDisabled())
-                return arg;
+                return;
 
             if (arg.Value != null)
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{arg.Name}' must be null. Current value: '{arg.Value}'");
-
-            return arg;
+                ValidationErrorExceptionThrower.ArgumentException(GetMessageFotNullValidation(arg));
         }
 
-        public static Argument<T> NotNull<T>(this Argument<T> arg)
+        public static void Null<T>(this Argument<T?> arg) where T : struct
+        {
+            if (arg.ValidationIsDisabled())
+                return;
+
+            if (arg.Value != null)
+                ValidationErrorExceptionThrower.ArgumentException(GetMessageFotNullValidation(arg));
+        }
+
+        /// <summary>
+        /// If <paramref name="arg"/> is null then throw <see cref="ArgumentNullException"/>.
+        /// 
+        /// Overload for the <see cref="Nullable{T}"/> type is specifically not defined, because this type is used specifically 
+        /// when the argument should be able to have the value null
+        /// </summary>
+        public static Argument<T> NotNull<T>(this Argument<T> arg) where T : class
         {
             if (arg.ValidationIsDisabled())
                 return arg;
@@ -100,6 +112,11 @@ namespace ArgValidation
                 ValidationErrorExceptionThrower.ArgumentException(message + Environment.NewLine + $"Argument name: '{arg.Name}'");
 
             return arg;
+        }
+
+        private static string GetMessageFotNullValidation<T>(Argument<T> arg)
+        {
+            return $"Argument '{arg.Name}' must be null. Current value: '{arg.Value}'";
         }
     }
 }

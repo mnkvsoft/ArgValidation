@@ -1,15 +1,16 @@
-﻿//namespace ArgValidation.Examples
-//{
-//    enum CarBrand
-//    {
-//        MercedesBenz,
-//        Audi,
-//        Bmw,
-//        Kia,
-//        Hyundai,
-//        Honda,
-//        Gaz,
-//        Vaz,
-//        Belaz
-//    }
-//}
+﻿namespace ArgValidation.Examples
+{
+    public enum CarBrand
+    {
+        MercedesBenz,
+        Audi,
+        Bmw,
+        Kia,
+        Hyundai,
+        Honda,
+        Gaz,
+        Vaz,
+        Belaz,
+        Volkswagen
+    }
+}

@@ -9,7 +9,7 @@ namespace ArgValidation.Examples.Model.ArgValidation.NameOf
         public int ReleaseYear { get; }
         public DateTime DateOfPurchase { get; }
             
-        public Car(CarModel model, string color, int releaseYear, DateTime dateOfPurchase, int? passangerCount)
+        public Car(CarModel model, string color, int releaseYear, DateTime dateOfPurchase)
         {
             Arg.NotNull(model, nameof(model));
             Arg.NotDefault(dateOfPurchase, nameof(dateOfPurchase));
@@ -21,9 +21,6 @@ namespace ArgValidation.Examples.Model.ArgValidation.NameOf
 
             Arg.Validate(color, nameof(color))
                 .CountMoreThan(1);
-
-            Arg.IfNotNull(passangerCount, nameof(passangerCount))
-                  .InRange(0, 10);
 
             Model = model;
             Color = color;

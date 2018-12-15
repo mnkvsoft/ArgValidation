@@ -6,7 +6,7 @@ namespace ArgValidation.Tests.ObjectValidationTests
 {
     public abstract partial class ObjectSimpleMethodsTestBase
     {
-        protected abstract void RunNotNull<T>(Expression<Func<T>> value);
+        protected abstract void RunNotNull<T>(Expression<Func<T>> value) where T : class;
         
         [Fact]
         public void NotNull_ObjectIsNull_ArgumentNullException()
@@ -20,24 +20,6 @@ namespace ArgValidation.Tests.ObjectValidationTests
         public void NotNull_ObjectIsNotNull_Ok()
         {
             RunNotNull(() => new object());
-        }
-
-        [Fact]
-        public void NotNull_NullableIsNull_ArgumentNullException()
-        {
-            int? nullArg = new int?();
-            ArgumentNullException exc = Assert.Throws<ArgumentNullException>(() =>
-            {
-                RunNotNull(() => nullArg)
-                    ;
-            });
-            Assert.Equal(nameof(nullArg), exc.ParamName);
-        }
-
-        [Fact]
-        public void NotNull_NullableIsNotNull_Ok()
-        {
-            RunNotNull(() => 5);
         }
     }
 }
