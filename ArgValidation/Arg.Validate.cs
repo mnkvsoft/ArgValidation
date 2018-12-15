@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using ArgValidation.Internal;
 
 namespace ArgValidation
 {

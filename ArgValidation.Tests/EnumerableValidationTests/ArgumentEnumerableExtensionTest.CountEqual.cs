@@ -35,5 +35,14 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             
             Assert.Equal($"Argument '{nameof(objs)}' must contains {count} elements. Current count elements: {objs.Length}", exc.Message);
         }
+
+        [Fact]
+        public void CountEqual_ValidationIsDisabled_WithoutException()
+        {
+            int[] digits = { 1, 2 };
+            var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
+
+            arg.CountEqual(digits.Length + 1);
+        }
     }
 }

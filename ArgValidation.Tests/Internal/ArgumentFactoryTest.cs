@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using ArgValidation.Internal;
+using Xunit;
 
 namespace ArgValidation.Tests.Internal
 {
@@ -21,7 +22,7 @@ namespace ArgValidation.Tests.Internal
         {
             Argument<int> argument = ArgumentFactory.FromExpression(() => 1);
 
-			Assert.Equal($"Static value '1'", argument.Name);
+			Assert.Equal("Static value", argument.Name);
 			Assert.Equal(1, argument.Value);
         }
         
@@ -31,7 +32,7 @@ namespace ArgValidation.Tests.Internal
             int value = 1;
             Argument<int?> argument = ArgumentFactory.FromExpression(() => new int?(value));
 
-			Assert.Equal($"Static value '{value}'", argument.Name);
+			Assert.Equal("Static value", argument.Name);
 			Assert.Equal(new int?(value), argument.Value);
         }
 

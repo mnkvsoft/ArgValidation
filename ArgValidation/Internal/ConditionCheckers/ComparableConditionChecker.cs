@@ -47,30 +47,5 @@ namespace ArgValidation.Internal.ConditionCheckers
 
             return arg.Value.InRange(min, max);
         }
-
-
-        [Obsolete("Use Max method")]
-        public static bool LessOrEqualThan<T>(Argument<T> arg, T lessOrEqualThan) where T : IComparable<T>
-        {
-            if (ObjectConditionChecker.IsEqual(arg.Value, lessOrEqualThan))
-                return true;
-
-            if (LessThan(arg, lessOrEqualThan))
-                return true;
-
-            return false;
-        }
-
-        [Obsolete("Use Min method")]
-        public static bool MoreOrEqualThan<T>(Argument<T> arg, T moreOrEqualThan) where T : IComparable<T>
-        {
-            if (ObjectConditionChecker.IsEqual(arg.Value, moreOrEqualThan))
-                return true;
-
-            if (MoreThan(arg, moreOrEqualThan))
-                return true;
-
-            return false;
-        }
     }
 }

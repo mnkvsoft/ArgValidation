@@ -13,10 +13,11 @@ namespace ArgValidation.Tests
             
             Assert.Equal(value, arg.Value);
             Assert.Equal(nameof(value), arg.Name);
+            Assert.False(arg.ValidationIsDisabled());
         }
         
         [Fact]
-        public void implicitOperator_NotDefaultValue_ReturnValidValue()
+        public void ImplicitOperator_NotDefaultValue_ReturnValidValue()
         {
             string value = "stringValue";
 

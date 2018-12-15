@@ -29,5 +29,13 @@ namespace ArgValidation.Tests.StringValidationTests
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => value).NotContains(substring));
             Assert.Equal($"Argument '{nameof(value)}' must not contains '{substring}'. Current value: '{value}'", exc.Message);
         }
+
+        [Fact]
+        public void NotContains_ValidationIsDisabled_WithoutException()
+        {
+            string value = "asdf";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.NotContains(value);
+        }
     }
 }

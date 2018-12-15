@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using ArgValidation.Internal;
 using ArgValidation.Internal.ConditionCheckers;
 using ArgValidation.Internal.ExceptionThrowers;
 
@@ -10,6 +9,9 @@ namespace ArgValidation
     {
         public static Argument<T> Default<T>(this Argument<T> arg)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (!ObjectConditionChecker.IsDefault(arg.Value))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be default value. Current value: '{arg.Value}'");
@@ -18,6 +20,9 @@ namespace ArgValidation
 
         public static Argument<T> NotDefault<T>(this Argument<T> arg)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (ObjectConditionChecker.IsDefault(arg.Value))
                 ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not default value");
 
@@ -26,6 +31,9 @@ namespace ArgValidation
 
         public static Argument<T> Null<T>(this Argument<T> arg)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (arg.Value != null)
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be null. Current value: '{arg.Value}'");
@@ -35,6 +43,9 @@ namespace ArgValidation
 
         public static Argument<T> NotNull<T>(this Argument<T> arg)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (arg.Value == null)
                 ValidationErrorExceptionThrower.ArgumentNullException(arg.Name);
 
@@ -43,6 +54,9 @@ namespace ArgValidation
 
         public static Argument<T> Equal<T>(this Argument<T> arg, T value)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (!ObjectConditionChecker.IsEqual(arg.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must be equal '{value}'. Current value: '{arg.Value}'");
@@ -52,6 +66,9 @@ namespace ArgValidation
 
         public static Argument<T> NotEqual<T>(this Argument<T> arg, T value)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (ObjectConditionChecker.IsEqual(arg.Value, value))
                 ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not equal '{value}'");
 
@@ -61,6 +78,9 @@ namespace ArgValidation
 
         public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (!ObjectConditionChecker.OnlyValues(arg, values))
             {
                 var valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
@@ -73,6 +93,9 @@ namespace ArgValidation
 
         public static Argument<T> FailedIf<T>(this Argument<T> arg, bool condition, string message)
         {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
             if (condition)
                 ValidationErrorExceptionThrower.ArgumentException(message + Environment.NewLine + $"Argument name: '{arg.Name}'");
 

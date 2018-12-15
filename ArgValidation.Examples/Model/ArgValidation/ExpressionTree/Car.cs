@@ -17,7 +17,7 @@ namespace ArgValidation.Examples.Model.ArgValidation.ExpressionTree
                 
             Arg.Validate(() => color)
                 .NotNullOrWhitespace()
-                .LengthLessOrEqualThan(20);
+                .MaxLength(20);
                 
             Model = model;
             Color = color;

@@ -13,7 +13,7 @@ namespace ArgValidation.Examples
                 vwGolf,
                 "White",
                 2005,
-                new DateTime(2008, 02, 12));
+                new DateTime(2008, 02, 12), 11);
 
             Console.WriteLine(myVaz2101);
             Console.ReadLine();

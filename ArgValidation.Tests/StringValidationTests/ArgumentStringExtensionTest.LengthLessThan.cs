@@ -43,5 +43,13 @@ namespace ArgValidation.Tests.StringValidationTests
             Assert.Equal($"Argument '{nameof(str)}' must be length less than {length}. Current length: {str.Length}",
                 exc.Message);
         }
+
+        [Fact]
+        public void LengthLessThan_ValidationIsDisabled_WithoutException()
+        {
+            string value = "value";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.LengthLessThan(value.Length - 1);
+        }
     }
 }

@@ -38,5 +38,14 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => objsWithMoreCount).CountLessThan(count));
             Assert.Equal($"Argument '{nameof(objsWithMoreCount)}' must contains less than {count} elements. Current count elements: {objsWithMoreCount.Length}", exc.Message);
         }
+
+        [Fact]
+        public void CountLessThan_ValidationIsDisabled_WithoutException()
+        {
+            int[] digits = { 1, 2 };
+            var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
+
+            arg.CountLessThan(digits.Length);
+        }
     }
 }

@@ -79,18 +79,13 @@ namespace ArgValidation.Tests.ComparableValidationTests
             Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 
-
-        // todo: not work for nullable type
-
-        //[Fact]
-        //public void InRange_MinIsNull_InvalidOperationException()
-        //{
-        //    int? value = 2;
-        //    int? min1 = 1;
-        //    int? maxNull = null;
-
-        //    InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min1, maxNull));
-        //    Assert.Equal("Argument 'min' cannot be more than 'max'. Cannot define range", exc.Message);
-        //}
+        [Fact]
+        public void InRange_ValidationIsDisabled_WithoutException()
+        {
+            int min = 1;
+            int max = 2;
+            var arg = new Argument<int>(max + 1, "name", validationIsDisabled: true);
+            arg.InRange(min, max);
+        }
     }
 }

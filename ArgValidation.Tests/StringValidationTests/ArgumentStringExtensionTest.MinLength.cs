@@ -38,5 +38,13 @@ namespace ArgValidation.Tests.StringValidationTests
             int length = str.Length;
             Arg.Validate(() => str).MinLength(length);
         }
+
+        [Fact]
+        public void MinLength_ValidationIsDisabled_WithoutException()
+        {
+            string value = "asdf";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.MinLength(value.Length + 1);
+        }
     }
 }

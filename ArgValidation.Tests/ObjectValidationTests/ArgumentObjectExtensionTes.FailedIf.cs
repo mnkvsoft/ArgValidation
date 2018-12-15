@@ -28,5 +28,12 @@ namespace ArgValidation.Tests.ObjectValidationTests
             Arg.Validate(shortName, nameof(shortName))
                 .FailedIf(shortName.Last() != '.', "Last char must be equals '.'");
         }
+
+        [Fact]
+        public void FailedIf_ValidationIsDisabled_WithoutException()
+        {
+            var arg = new Argument<int>(1, "name", validationIsDisabled: true);
+            arg.FailedIf(true, "message");
+        }
     }
 }

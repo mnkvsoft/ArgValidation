@@ -38,7 +38,7 @@ namespace ArgValidation.Tests.Performance
                     model: new CarModel(), 
                     color: "white",
                     releaseYear: 2005, 
-                    dateOfPurchase: new DateTime(2008, 01, 02));
+                    dateOfPurchase: new DateTime(2008, 01, 02), passangerCount:null);
             }
         }
 
