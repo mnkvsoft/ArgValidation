@@ -6,7 +6,7 @@ namespace ArgValidation.Internal.ConditionCheckers
     {
         public static bool Match(Argument<string> arg, string pattern)
         {
-            Regex r = new Regex(pattern, RegexOptions.Compiled);
+            Regex r = new Regex(pattern);
             return r.IsMatch(arg.Value);
         }
     }

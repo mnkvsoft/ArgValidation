@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ArgValidation</id>
-    <version>0.3.0</version>
+    <version>1.0.1</version>
     <title>ArgValidation</title>
     <authors>Viktor Mynkov</authors>
     <owners>Viktor Mynkov</owners>
@@ -13,11 +13,11 @@
       A simply arguments validation library with fluent API.
       
       Examples:
-        Arg.NotNull(() => model);
+        Arg.NotNull(model, nameof(model));
 
-        Arg.Validate(() => color)
+        Arg.Validate(color, nameof(color))
           .NotNullOrWhitespace()
-          .LengthLessOrEqualThan(20);
+          .MaxLength(20);
 
         Arg.Positive(releaseYear, nameof(releaseYear));
     </description>
@@ -26,24 +26,10 @@
 Implemented new methods for classes:
 
  String:
- - MaxLength
- - MinLength
-
- Comparable:
-  - Max
-  - Min
-
- Enumerable:
-  - Empty
-  - NotEmpty
-  - NullOrEmpty
-  - NotNullOrEmpty
-  - MaxCount
-  - MinCount
-
-Optimized class ArgumentEnumerableExtension
+ - Match
+ - NotMatch
     </releaseNotes>
-    <tags>arguments argument validation validator checker check parameter parameters</tags>
+    <tags>argument validation parameter</tags>
   </metadata>
   <files>
       <file src="./bin/Release/netstandard2.0/ArgValidation.dll" target="lib/netstandard2.0/ArgValidation.dll" />
