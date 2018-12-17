@@ -17,10 +17,7 @@ namespace ArgValidation.Examples.Model.ArgValidation.NameOf
 
             Arg.Validate(color, nameof(color))
                 .NotNullOrWhitespace()
-                .MaxLength(20);
-
-            Arg.Validate(color, nameof(color))
-                .CountMoreThan(1);
+                .LengthInRange(2, 20);
 
             Model = model;
             Color = color;
