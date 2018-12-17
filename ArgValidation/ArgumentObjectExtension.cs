@@ -103,6 +103,9 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throw <see cref="ArgumentException"/> with message <see cref="message"/> if <see cref="condition"/> is true
+        /// </summary>
         public static Argument<T> FailedIf<T>(this Argument<T> arg, bool condition, string message)
         {
             if (arg.ValidationIsDisabled())
