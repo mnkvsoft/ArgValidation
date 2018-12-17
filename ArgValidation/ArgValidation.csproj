@@ -25,6 +25,10 @@ Examples:
     <PackageTags>argument validation validator checker check parameter</PackageTags>
     <Copyright>Viktor Mynkov</Copyright>
     <NeutralLanguage></NeutralLanguage>
+    <PackageReleaseNotes>Implemented new methods
+
+- FailedIf 
+- IfNotNull</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
