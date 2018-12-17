@@ -18,5 +18,13 @@ namespace ArgValidation.Tests.ObjectValidationTests
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => val).NotEqual(val));
             Assert.Equal($"Argument '{nameof(val)}' must be not equal '{val}'", exc.Message);
         }
+
+        [Fact]
+        public void NotEqual_ValidationIsDisabled_WithoutException()
+        {
+            int value = 1;
+            var arg = new Argument<int>(value, "name", validationIsDisabled: true);
+            arg.NotEqual(value);
+        }
     }
 }

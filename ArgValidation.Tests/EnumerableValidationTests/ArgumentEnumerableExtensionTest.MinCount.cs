@@ -37,5 +37,14 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             int count = objsWithMoreCount.Length - 1;
             Arg.Validate(() => objsWithMoreCount).MinCount(count);
         }
+
+        [Fact]
+        public void MinCount_ValidationIsDisabled_WithoutException()
+        {
+            int[] digits = { 1, 2 };
+            var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
+
+            arg.MinCount(digits.Length + 1);
+        }
     }
 }

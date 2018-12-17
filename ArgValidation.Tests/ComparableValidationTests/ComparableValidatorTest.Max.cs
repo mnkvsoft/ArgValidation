@@ -50,5 +50,13 @@ namespace ArgValidation.Tests.ComparableValidationTests
             });
             Assert.Equal($"Argument 'value' of method 'Max' is null. Сan not compare null object", exc.Message);
         }
+
+        [Fact]
+        public void Max_ValidationIsDisabled_WithoutException()
+        {
+            int maxValue = 1;
+            var arg = new Argument<int>(maxValue + 1, "name", validationIsDisabled: true);
+            arg.Max(maxValue);
+        }
     }
 }

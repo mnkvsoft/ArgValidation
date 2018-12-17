@@ -25,22 +25,44 @@ namespace ArgValidation
             return Validate(argValue, argName).NotDefault().Value;
         }
         
-        public static T Null<T>(Expression<Func<T>> value)
+        public static void Null<T>(Expression<Func<T>> value) where T : class
         {
-            return Validate(value).Null().Value;
+            Validate(value).Null();
         }
         
-        public static T Null<T>(T argValue, string argName)
+        public static void Null<T>(T argValue, string argName) where T : class
         {
-            return Validate(argValue, argName).Null().Value;
+            Validate(argValue, argName).Null();
         }
-        
-        public static T NotNull<T>(Expression<Func<T>> value)
+
+        public static void Null<T>(Expression<Func<T?>> value) where T : struct
+        {
+            Validate(value).Null();
+        }
+
+        public static void Null<T>(T? argValue, string argName) where T : struct
+        {
+            Validate(argValue, argName).Null();
+        }
+
+        /// <summary>
+        /// If <paramref name="arg"/> is null then throw <see cref="ArgumentNullException"/>.
+        /// 
+        /// Overload for the <see cref="Nullable{T}"/> type is specifically not defined, because this type is used specifically 
+        /// when the argument should be able to have the value null
+        /// </summary>
+        public static T NotNull<T>(Expression<Func<T>> value) where T : class
         {
             return Validate(value).NotNull().Value;
         }
-        
-        public static T NotNull<T>(T argValue, string argName)
+
+        /// <summary>
+        /// If <paramref name="arg"/> is null then throw <see cref="ArgumentNullException"/>.
+        /// 
+        /// Overload for the <see cref="Nullable{T}"/> type is specifically not defined, because this type is used specifically 
+        /// when the argument should be able to have the value null
+        /// </summary>
+        public static T NotNull<T>(T argValue, string argName) where T : class
         {
             return Validate(argValue, argName).NotNull().Value;
         }

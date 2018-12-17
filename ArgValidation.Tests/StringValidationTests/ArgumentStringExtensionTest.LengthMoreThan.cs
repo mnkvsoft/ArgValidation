@@ -39,5 +39,13 @@ namespace ArgValidation.Tests.StringValidationTests
             int length = str.Length - 1;
             Arg.Validate(() => str).LengthMoreThan(length);
         }
+
+        [Fact]
+        public void LengthMoreThan_ValidationIsDisabled_WithoutException()
+        {
+            string value = "value";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.LengthMoreThan(value.Length + 1);
+        }
     }
 }

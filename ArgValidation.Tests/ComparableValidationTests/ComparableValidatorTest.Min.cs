@@ -49,5 +49,13 @@ namespace ArgValidation.Tests.ComparableValidationTests
             });
             Assert.Equal("Argument 'value' of method 'Min' is null. Сan not compare null object", exc.Message);
         }
+
+        [Fact]
+        public void Min_ValidationIsDisabled_WithoutException()
+        {
+            int minValue = 1;
+            var arg = new Argument<int>(minValue - 1, "name", validationIsDisabled: true);
+            arg.Min(minValue);
+        }
     }
 }

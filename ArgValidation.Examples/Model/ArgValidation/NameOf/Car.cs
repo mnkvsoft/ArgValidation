@@ -14,14 +14,11 @@ namespace ArgValidation.Examples.Model.ArgValidation.NameOf
             Arg.NotNull(model, nameof(model));
             Arg.NotDefault(dateOfPurchase, nameof(dateOfPurchase));
             Arg.Positive(releaseYear, nameof(releaseYear));
-            
-//            Arg.Validate(color, nameof(color))
-//                .NotNullOrWhitespace()
-//                .LengthLessOrEqualThan(20);
 
             Arg.Validate(color, nameof(color))
-                .CountMoreThan(1);
-            
+                .NotNullOrWhitespace()
+                .LengthInRange(2, 20);
+
             Model = model;
             Color = color;
             ReleaseYear = releaseYear;

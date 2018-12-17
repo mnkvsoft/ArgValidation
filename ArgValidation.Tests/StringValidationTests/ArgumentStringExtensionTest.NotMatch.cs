@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.StringValidationTests
         {
             string letters = "asdf";
             Arg.Validate(letters, nameof(letters))
-                .NotMatch("\\d{10}");
+                .NotMatch("\\d+");
         }
 
         [Fact]
@@ -38,7 +38,15 @@ namespace ArgValidation.Tests.StringValidationTests
             InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => 
                 Arg.Validate(argValue, nameof(argValue))
                     .NotMatch(pattern: null));
-            Assert.Equal($"Argument 'pattern' of method 'NotMatch' is null. Can not execute 'NotMatch' method", exc.Message);
+            Assert.Equal("Argument 'pattern' of method 'NotMatch' is null. Can not execute 'NotMatch' method", exc.Message);
+        }
+
+        [Fact]
+        public void NotMatch_ValidationIsDisabled_WithoutException()
+        {
+            string digits = "0123456789";
+            var arg = new Argument<string>(digits, "name", validationIsDisabled: true);
+            arg.NotMatch("\\d+");
         }
     }
 }

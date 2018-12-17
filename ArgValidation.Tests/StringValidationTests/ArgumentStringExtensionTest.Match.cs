@@ -40,5 +40,13 @@ namespace ArgValidation.Tests.StringValidationTests
                     .Match(pattern: null));
             Assert.Equal($"Argument 'pattern' of method 'Match' is null. Can not execute 'Match' method", exc.Message);
         }
+
+        [Fact]
+        public void Match_ValidationIsDisabled_WithoutException()
+        {
+            string letters = "asdf";
+            var arg = new Argument<string>(letters, "name", validationIsDisabled: true);
+            arg.Match("\\d{10}");
+        }
     }
 }

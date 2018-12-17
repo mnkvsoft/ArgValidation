@@ -54,5 +54,13 @@ namespace ArgValidation.Tests.StringValidationTests
             });
             Assert.Equal($"Argument '{nameof(value)}' must contains null. Current value: '{value}'", exc.Message);
         }
+
+        [Fact]
+        public void Contains_ValidationIsDisabled_WithoutException()
+        {
+            string value = "value";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.Contains("asfd");
+        }
     }
 }

@@ -2,14 +2,19 @@
 {
     public struct Argument<T>
     {
-        public string Name { get; }
-        public T Value { get; }
+        internal string Name { get; }
+        internal T Value { get; }
 
-        public Argument(T value, string name)
+        private ValidationOption ValidationOption { get; } 
+
+        internal Argument(T value, string name, bool validationIsDisabled = false)
         {
             Name = name;
             Value = value;
+            ValidationOption = validationIsDisabled ? ValidationOption.NoValidation : ValidationOption.None;
         }
+
+        internal bool ValidationIsDisabled() => ValidationOption == ValidationOption.NoValidation;
 
         public static implicit operator T(Argument<T> argument)
         {

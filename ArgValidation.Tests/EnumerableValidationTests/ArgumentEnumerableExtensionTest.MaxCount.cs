@@ -47,5 +47,14 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             
             Assert.Equal($"Argument '{nameof(objsWithMoreCount)}' must contains a maximum of {count} elements. Current count elements: {objsWithMoreCount.Length}", exc.Message);
         }
+
+        [Fact]
+        public void MaxCount_ValidationIsDisabled_WithoutException()
+        {
+            int[] digits = { 1, 2 };
+            var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
+
+            arg.MaxCount(digits.Length - 1);
+        }
     }
 }

@@ -51,5 +51,13 @@ namespace ArgValidation.Tests.ComparableValidationTests
             });
             Assert.Equal($"Argument 'value' of method 'MoreThan' is null. Сan not compare null object", exc.Message);
         }
+
+        [Fact]
+        public void MoreThan_ValidationIsDisabled_WithoutException()
+        {
+            int moreThanValue = 1;
+            var arg = new Argument<int>(moreThanValue, "name", validationIsDisabled: true);
+            arg.MoreThan(moreThanValue);
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using ArgValidation.Tests.ObjectValidationTests;
-using Xunit;
 
 namespace ArgValidation.Tests
 {
@@ -14,7 +13,12 @@ namespace ArgValidation.Tests
 			    Arg.Null(value);
 		    }
 
-		    protected override void RunNotNull<T>(Expression<Func<T>> value)
+            protected override void RunNull<T>(Expression<Func<T?>> value)
+            {
+                Arg.Null(value);
+            }
+
+            protected override void RunNotNull<T>(Expression<Func<T>> value)
 		    {
 			    Arg.NotNull(value);
 		    }
@@ -38,7 +42,13 @@ namespace ArgValidation.Tests
 			    Arg.Null(arg.Value, arg.Name);
 		    }
 
-		    protected override void RunNotNull<T>(Expression<Func<T>> value)
+            protected override void RunNull<T>(Expression<Func<T?>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.Null(arg.Value, arg.Name);
+            }
+
+            protected override void RunNotNull<T>(Expression<Func<T>> value)
 		    {
 			    var arg = Arg.Validate(value);
 			    Arg.NotNull(arg.Value, arg.Name);

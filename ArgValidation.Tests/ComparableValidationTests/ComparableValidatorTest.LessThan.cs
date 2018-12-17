@@ -52,5 +52,13 @@ namespace ArgValidation.Tests.ComparableValidationTests
             });
             Assert.Equal($"Argument 'value' of method 'LessThan' is null. Сan not compare null object", exc.Message);
         }
+
+        [Fact]
+        public void LessThan_ValidationIsDisabled_WithoutException()
+        {
+            int lessThan = 1;
+            var arg = new Argument<int>(lessThan, "name", validationIsDisabled: true);
+            arg.LessThan(lessThan);
+        }
     }
 }

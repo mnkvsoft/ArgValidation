@@ -27,5 +27,14 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             object[] objs = new[] { new object(), new object() };
             Arg.Validate(() => objs).CountNotEqual(objs.Length + 1);
         }
+
+        [Fact]
+        public void CountNotEqual_ValidationIsDisabled_WithoutException()
+        {
+            int[] digits = { 1, 2 };
+            var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
+
+            arg.CountNotEqual(digits.Length);
+        }
     }
 }

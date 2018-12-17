@@ -47,5 +47,14 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => digits).NotContains(value5));
             Assert.Equal($"Argument '{nameof(digits)}' not contains '{value5}' value", exc.Message);
         }
+
+        [Fact]
+        public void NotContains_ValidationIsDisabled_WithoutException()
+        {
+            int[] digits = { 1, 2 };
+            var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
+
+            arg.NotContains(digits[0]);
+        }
     }
 }

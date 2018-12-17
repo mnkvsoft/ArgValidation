@@ -38,5 +38,13 @@ namespace ArgValidation.Tests.ObjectValidationTests
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => value3).OnlyValues(2, 1));
             Assert.Equal($"Argument '{nameof(value3)}' must have only values: '2', '1'. Current value: '3'", exc.Message);
         }
+
+        [Fact]
+        public void OnlyValues_ValidationIsDisabled_WithoutException()
+        {
+            int value = 1;
+            var arg = new Argument<int>(value, "name", validationIsDisabled: true);
+            arg.OnlyValues(2, 3);
+        }
     }
 }

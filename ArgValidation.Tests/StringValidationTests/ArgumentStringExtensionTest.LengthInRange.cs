@@ -74,5 +74,13 @@ namespace ArgValidation.Tests.StringValidationTests
                 $"Argument '{nameof(strLength6)}' must be length in range {min3} - {max5}. Current length: {strLength6.Length}",
                 exc.Message);
         }
+
+        [Fact]
+        public void LengthInRange_ValidationIsDisabled_WithoutException()
+        {
+            string value = "value";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.LengthInRange(value.Length + 1, value.Length + 10);
+        }
     }
 }

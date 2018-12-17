@@ -38,6 +38,11 @@ namespace ArgValidation.Tests.ObjectValidationTests
                 Arg.Validate(value).Null();
             }
 
+            protected override void RunNull<T>(Expression<Func<T?>> value)
+            {
+                Arg.Validate(value).Null();
+            }
+
             protected override void RunNotNull<T>(Expression<Func<T>> value)
             {
                 Arg.Validate(value).NotNull();
@@ -58,6 +63,12 @@ namespace ArgValidation.Tests.ObjectValidationTests
             }
 
             protected override void RunNull<T>(Expression<Func<T>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.Validate(arg.Value, arg.Name).Null();
+            }
+
+            protected override void RunNull<T>(Expression<Func<T?>> value)
             {
                 var arg = Arg.Validate(value);
                 Arg.Validate(arg.Value, arg.Name).Null();

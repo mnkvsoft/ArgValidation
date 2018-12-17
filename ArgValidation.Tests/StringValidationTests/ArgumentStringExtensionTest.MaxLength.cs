@@ -53,5 +53,13 @@ namespace ArgValidation.Tests.StringValidationTests
                 $"Argument '{nameof(str)}' has a maximum length of {length}. Current length: {str.Length}",
                 exc.Message);
         }
+
+        [Fact]
+        public void MaxLength_ValidationIsDisabled_WithoutException()
+        {
+            string value = "asdf";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.MaxLength(value.Length - 1);
+        }
     }
 }

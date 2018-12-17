@@ -21,7 +21,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         public void Contains_ListWithNullContainsNull_Ok()
         {
             object nullObj = null;
-            object[] objs = new[] { nullObj, new object() };
+            object[] objs = { nullObj, new object() };
             
             Arg.Validate(() => objs)
                 .Contains(nullObj);
@@ -30,7 +30,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         [Fact]
         public void Contains_ListWithoutNullContainsNull_ArgumentException()
         {
-            object[] objs = new[] { new object(), new object() };
+            object[] objs = { new object(), new object() };
             object nullObj = null;
             
             ArgumentException exc = Assert.Throws<ArgumentException>(() => 
@@ -43,7 +43,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         [Fact]
         public void Contains_ListWith5Contains5_Ok()
         {
-            int[] digits = new[] { 1, 5 };
+            int[] digits = { 1, 5 };
             Arg.Validate(() => digits)
                 .Contains(5);
         }
@@ -52,13 +52,24 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         public void Contains_ListWithout5Contains5_ArgumentException()
         {
             int value5 = 5;
-            int[] digits = new[] { 1, 2 };
+            int[] digits = { 1, 2 };
             
             ArgumentException exc = Assert.Throws<ArgumentException>(() =>
                 Arg.Validate(() => digits)
                     .Contains(value5));
             
             Assert.Equal($"Argument '{nameof(digits)}' not contains '{value5}' value", exc.Message);
+        }
+
+        [Fact]
+        public void Contains_ValidationIsDisabled_WithoutException()
+        {
+            int notContainsValue = 5;
+            int[] digits = { 1, 2 };
+
+            var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
+
+            arg.Contains(notContainsValue);
         }
     }
 }

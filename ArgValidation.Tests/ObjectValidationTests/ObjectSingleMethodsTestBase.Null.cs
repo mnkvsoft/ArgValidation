@@ -6,8 +6,9 @@ namespace ArgValidation.Tests.ObjectValidationTests
 {
     public partial class ObjectSimpleMethodsTestBase
     {
-        protected abstract void RunNull<T>(Expression<Func<T>> value);
-        
+        protected abstract void RunNull<T>(Expression<Func<T>> value) where T : class;
+        protected abstract void RunNull<T>(Expression<Func<T?>> value) where T : struct;
+
         [Fact]
         public void Null_ObjectIsNotNull_ArgumentException()
         {

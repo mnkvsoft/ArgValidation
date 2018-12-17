@@ -29,5 +29,13 @@ namespace ArgValidation.Tests.StringValidationTests
             string str = "str";
             Arg.Validate(() => str).LengthEqual(str.Length);
         }
+
+        [Fact]
+        public void LengthEqual_ValidationIsDisabled_WithoutException()
+        {
+            string value = "value";
+            var arg = new Argument<string>(value, "name", validationIsDisabled: true);
+            arg.LengthEqual(value.Length + 1);
+        }
     }
 }
