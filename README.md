@@ -115,8 +115,8 @@ Arg.IfNotNull(passangerCount, nameof(passangerCount))
 // or
 
 Arg.Validate(passangerCount, nameof(passangerCount))
-      .IfNotNull(
-         .Positive();
+     .IfNotNull(
+       .Positive();
 ```
 
 *Important* For `Nullable` type before validation need always invoke `IfNotNull` method. Since variables of this type are defined specifically to be able to take the `null` value
@@ -130,9 +130,9 @@ If the required verification method is very specific, it is necessary to use the
 
 // driverShortName is string argument
 Arg.Validate(driverShortName, nameof(driverShortName))
-                .NotNullOrWhitespace()
-                .MaxLength(30)
-                .FailedIf(driverShortName.Last() != '.', "Lastname must be shorted. Last char must be '.'");
+     .NotNullOrWhitespace()
+     .MaxLength(30)
+     .FailedIf(driverShortName.Last() != '.', "Lastname must be shorted. Last char must be '.'");
 ```
 
 ### Throwed exception types
