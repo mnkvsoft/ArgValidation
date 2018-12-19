@@ -19,7 +19,7 @@ Examples:
         // passangerCount is Nullable type
         Arg.IfNotNull(passangerCount, nameof(passangerCount))
                 .Positive();</Description>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/mnkvsoft/ArgValidation/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mnkvsoft/ArgValidation</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mnkvsoft/ArgValidation</RepositoryUrl>
     <PackageTags>argument validation validator checker check parameter</PackageTags>
