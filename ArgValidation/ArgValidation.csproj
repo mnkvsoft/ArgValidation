@@ -27,8 +27,8 @@ Examples:
     <NeutralLanguage></NeutralLanguage>
     <PackageReleaseNotes>Implemented new methods
 
-- FailedIf 
-- IfNotNull</PackageReleaseNotes>
+- In
+- NotIn</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
