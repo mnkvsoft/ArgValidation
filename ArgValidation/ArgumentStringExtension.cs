@@ -12,7 +12,7 @@ namespace ArgValidation
         public static Argument<string> NullOrEmpty(this Argument<string> arg)
         {
             if (arg.ValidationIsDisabled())
-                return arg;
+                return arg; 
 
             if (!string.IsNullOrEmpty(arg.Value))
                 ValidationErrorExceptionThrower.ArgumentException(

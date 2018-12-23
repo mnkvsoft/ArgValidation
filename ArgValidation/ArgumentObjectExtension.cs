@@ -2,6 +2,7 @@
 using System.Linq;
 using ArgValidation.Internal.ConditionCheckers;
 using ArgValidation.Internal.ExceptionThrowers;
+using ArgValidation.Internal;
 
 namespace ArgValidation
 {
@@ -87,17 +88,29 @@ namespace ArgValidation
             return arg;
         }
 
-
-        public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
+        public static Argument<T> In<T>(this Argument<T> arg, params T[] values)
         {
             if (arg.ValidationIsDisabled())
                 return arg;
 
-            if (!ObjectConditionChecker.OnlyValues(arg, values))
+            if (!ObjectConditionChecker.In(arg, values))
             {
-                var valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
                 ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{arg.Name}' must have only values: {valuesStr}. Current value: '{arg.Value}'");
+                    $"Argument '{arg.Name}' can only have the following values: {values.JoinForMessage()}. Current value: '{arg.Value}'");
+            }
+
+            return arg;
+        }
+
+        public static Argument<T> NotIn<T>(this Argument<T> arg, params T[] values)
+        {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
+            if (ObjectConditionChecker.In(arg, values))
+            {
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' can not have the following values: {values.JoinForMessage()}. Current value: {arg.Value.GetStringValueForMessage()}");
             }
 
             return arg;
@@ -116,6 +129,23 @@ namespace ArgValidation
 
             return arg;
         }
+
+        [Obsolete("Use In method")]
+        public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
+        {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
+            if (!ObjectConditionChecker.In(arg, values))
+            {
+                var valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must have only values: {valuesStr}. Current value: '{arg.Value}'");
+            }
+
+            return arg;
+        }
+
 
         private static string GetMessageFotNullValidation<T>(Argument<T> arg)
         {
