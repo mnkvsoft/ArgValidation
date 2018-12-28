@@ -1,8 +1,14 @@
 ﻿namespace ArgValidation
 {
+    /// <summary>
+    /// The main class for the library. 
+    /// All necessary extensions are implemented for it to check the argument and control the validation flow
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public struct Argument<T>
     {
         internal string Name { get; }
+
         internal T Value { get; }
 
         private ValidationOption ValidationOption { get; } 

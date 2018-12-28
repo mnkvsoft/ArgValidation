@@ -6,12 +6,12 @@ namespace ArgValidation.Tests.ObjectValidationTests
     public partial class ArgumentObjectExtensionTest
     {
         [Fact]
-        public void OnlyValues_ArgumentIsNull_InvalidOperationException()
+        public void OnlyValues_ArgumentIsNull_ArgValidationException()
         {
             var value = new object();
             object[] nullArgument = null;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).OnlyValues(nullArgument));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => value).OnlyValues(nullArgument));
 
             Assert.Equal("Argument 'values' is null. There are no values to compare", exc.Message);
         }

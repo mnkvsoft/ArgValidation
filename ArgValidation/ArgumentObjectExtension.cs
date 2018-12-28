@@ -6,8 +6,15 @@ using ArgValidation.Internal;
 
 namespace ArgValidation
 {
-    public static class ArgumentExtension
+    /// <summary>
+    /// Contains extension methods common to all types
+    /// </summary>
+    public static class ArgumentObjectExtension
     {
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is not default value
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is not default value</exception>
         public static Argument<T> Default<T>(this Argument<T> arg)
         {
             if (arg.ValidationIsDisabled())
@@ -19,6 +26,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is default value
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is default value</exception>
         public static Argument<T> NotDefault<T>(this Argument<T> arg)
         {
             if (arg.ValidationIsDisabled())
@@ -30,6 +41,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is not <c>null</c>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is not <c>null</c></exception>
         public static void Null<T>(this Argument<T> arg) where T : class
         {
             if (arg.ValidationIsDisabled())
@@ -39,6 +54,10 @@ namespace ArgValidation
                 ValidationErrorExceptionThrower.ArgumentException(GetMessageFotNullValidation(arg));
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is not <c>null</c>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is not <c>null</c></exception>
         public static void Null<T>(this Argument<T?> arg) where T : struct
         {
             if (arg.ValidationIsDisabled())
@@ -49,11 +68,15 @@ namespace ArgValidation
         }
 
         /// <summary>
-        /// If <paramref name="arg"/> is null then throw <see cref="ArgumentNullException"/>.
-        /// 
+        /// <para>
+        /// Throws <see cref="ArgumentNullException"/> if the argument is <c>null</c>
+        /// </para>
+        /// <para>
         /// Overload for the <see cref="Nullable{T}"/> type is specifically not defined, because this type is used specifically 
         /// when the argument should be able to have the value null
+        /// </para>
         /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is <c>null</c></exception>
         public static Argument<T> NotNull<T>(this Argument<T> arg) where T : class
         {
             if (arg.ValidationIsDisabled())
@@ -65,6 +88,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is not equals <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is not equals <paramref name="value"/></exception>
         public static Argument<T> Equal<T>(this Argument<T> arg, T value)
         {
             if (arg.ValidationIsDisabled())
@@ -77,6 +104,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is equals <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is equals <paramref name="value"/></exception>
         public static Argument<T> NotEqual<T>(this Argument<T> arg, T value)
         {
             if (arg.ValidationIsDisabled())
@@ -88,6 +119,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is not contained in <paramref name="values"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is not contained in <paramref name="values"/></exception>
+        /// <exception cref="ArgValidationException">Throws if <paramref name="values"/> is <c>null</c></exception>
         public static Argument<T> In<T>(this Argument<T> arg, params T[] values)
         {
             if (arg.ValidationIsDisabled())
@@ -102,6 +138,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is contained in <paramref name="values"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is contained in <paramref name="values"/></exception>
+        /// <exception cref="ArgValidationException">Throws if <paramref name="values"/> is <c>null</c></exception>
         public static Argument<T> NotIn<T>(this Argument<T> arg, params T[] values)
         {
             if (arg.ValidationIsDisabled())
@@ -117,8 +158,9 @@ namespace ArgValidation
         }
 
         /// <summary>
-        /// Throw <see cref="ArgumentException"/> with message <see cref="message"/> if <see cref="condition"/> is true
+        /// Throw <see cref="ArgumentException"/> with message <paramref name="message"/> if <paramref name="condition"/> is <c>true</c>
         /// </summary>
+        /// <exception cref="ArgumentException">If <paramref name="condition"/> is <c>true</c></exception>
         public static Argument<T> FailedIf<T>(this Argument<T> arg, bool condition, string message)
         {
             if (arg.ValidationIsDisabled())
@@ -130,6 +172,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if the argument is not contained in <paramref name="values"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if the argument is not contained in <paramref name="values"/></exception>
+        /// <exception cref="ArgValidationException">Throws if <paramref name="values"/> is <c>null</c></exception>
         [Obsolete("Use In method")]
         public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
         {

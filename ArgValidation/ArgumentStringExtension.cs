@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using ArgValidation.Internal;
 using ArgValidation.Internal.ConditionCheckers;
 using ArgValidation.Internal.ExceptionThrowers;
@@ -7,8 +6,15 @@ using ArgValidation.Internal.Utils;
 
 namespace ArgValidation
 {
+    /// <summary>
+    /// Contains extension methods for <see cref="string"/> type
+    /// </summary>
     public static class ArgumentStringExtension
     {
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not <c>null</c> or length is more than 0
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not <c>null</c> or length is more than 0</exception>
         public static Argument<string> NullOrEmpty(this Argument<string> arg)
         {
             if (arg.ValidationIsDisabled())
@@ -21,6 +27,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is <c>null</c> or length is equals 0
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is <c>null</c> or length is equals 0</exception>
         public static Argument<string> NotNullOrEmpty(this Argument<string> arg)
         {
             if (arg.ValidationIsDisabled())
@@ -33,6 +43,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not <c>null</c> or argument is not contains only whitespaces
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not <c>null</c> or argument is not contains only whitespaces</exception>
         public static Argument<string> NullOrWhitespace(this Argument<string> arg)
         {
             if (arg.ValidationIsDisabled())
@@ -45,6 +59,10 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is <c>null</c> or argument is contains only whitespaces
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is <c>null</c> or argument is contains only whitespaces</exception>
         public static Argument<string> NotNullOrWhitespace(this Argument<string> arg)
         {
             if (arg.ValidationIsDisabled())
@@ -57,6 +75,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if length is not equals <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if length is not equals <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> LengthEqual(this Argument<string> arg, int value)
         {
             if (arg.ValidationIsDisabled())
@@ -71,6 +94,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if length is not more than <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if length is not more than <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> LengthMoreThan(this Argument<string> arg, int value)
         {
             if (arg.ValidationIsDisabled())
@@ -85,6 +113,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if length is not less than <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if length is not less than <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> LengthLessThan(this Argument<string> arg, int value)
         {
             if (arg.ValidationIsDisabled())
@@ -99,6 +132,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if length is more than <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if length is more than <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> MaxLength(this Argument<string> arg, int value)
         {
             if (arg.ValidationIsDisabled())
@@ -113,6 +151,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if length is less than <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if length is less than <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> MinLength(this Argument<string> arg, int value)
         {
             if (arg.ValidationIsDisabled())
@@ -127,6 +170,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if length is not in range from <paramref name="min"/> to <paramref name="max"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if length is not in range from <paramref name="min"/> to <paramref name="max"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c> or <paramref name="min"/> - <paramref name="max"/> is not range</exception>
         public static Argument<string> LengthInRange(this Argument<string> arg, int min, int max)
         {
             if (arg.ValidationIsDisabled())
@@ -143,6 +191,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not contains <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not contains <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> Contains(this Argument<string> arg, string value)
         {
             if (arg.ValidationIsDisabled())
@@ -155,6 +208,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is contains <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is contains <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> NotContains(this Argument<string> arg, string value)
         {
             if (arg.ValidationIsDisabled())
@@ -167,6 +225,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not match <paramref name="pattern"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not match <paramref name="pattern"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c> or <paramref name="pattern"/> is <c>null</c></exception>
         public static Argument<string> Match(this Argument<string> arg, string pattern)
         {
             if (arg.ValidationIsDisabled())
@@ -182,6 +245,11 @@ namespace ArgValidation
             return arg;
         }
 
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is match <paramref name="pattern"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is match <paramref name="pattern"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c> or <paramref name="pattern"/> is <c>null</c></exception>
         public static Argument<string> NotMatch(this Argument<string> arg, string pattern)
         {
             if (arg.ValidationIsDisabled())

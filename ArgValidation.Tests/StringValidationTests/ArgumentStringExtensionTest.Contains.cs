@@ -6,10 +6,10 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void Contains_ArgumentIsNull_InvalidOperationException()
+        public void Contains_ArgumentIsNull_ArgValidationException()
         {
             string nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => nullValue).Contains("");
             });

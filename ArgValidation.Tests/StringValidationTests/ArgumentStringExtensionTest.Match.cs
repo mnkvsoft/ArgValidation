@@ -23,19 +23,19 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void Match_ArgumentValueIsNull_InvalidOperationException()
+        public void Match_ArgumentValueIsNull_ArgValidationException()
         {
             string nullValue = null;
             const string pattern = "\\d{10}";
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(nullValue, nameof(nullValue)).Match(pattern));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(nullValue, nameof(nullValue)).Match(pattern));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Match' method", exc.Message);
         }
 
         [Fact]
-        public void Match_Pattern_InvalidOperationException()
+        public void Match_Pattern_ArgValidationException()
         {
             string argValue = "some-value";
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => 
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => 
                 Arg.Validate(argValue, nameof(argValue))
                     .Match(pattern: null));
             Assert.Equal($"Argument 'pattern' of method 'Match' is null. Can not execute 'Match' method", exc.Message);

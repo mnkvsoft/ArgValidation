@@ -58,24 +58,24 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void InRange_MinMoreThanMax_InvalidOperationException()
+        public void InRange_MinMoreThanMax_ArgValidationException()
         {
             int value = 1;
             int min5 = 5;
             int max3 = 3;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min5, max3));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => value).InRange(min5, max3));
             Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 
         [Fact]
-        public void InRange_MinEqualsMax_InvalidOperationException()
+        public void InRange_MinEqualsMax_ArgValidationException()
         {
             int value = 2;
             int min = 1;
             int max = min;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min, max));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => value).InRange(min, max));
             Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 

@@ -35,4 +35,8 @@ Examples:
     <DebugType>full</DebugType>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
+    <DocumentationFile>bin\Release\net40\ArgValidation.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>
