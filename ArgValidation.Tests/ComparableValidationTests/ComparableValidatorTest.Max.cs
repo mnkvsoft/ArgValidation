@@ -28,11 +28,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
 
         
         [Fact]
-        public void Max_ArgumentIsNull_InvalidOperationException()
+        public void Max_ArgumentIsNull_ArgValidationException()
         {
             ComparableClass nullValue = null;
             ComparableClass maxValue = new ComparableClass();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => nullValue).Max(maxValue);
             });
@@ -40,11 +40,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void Max_MaxArgumentIsNull_InvalidOperationException()
+        public void Max_MaxArgumentIsNull_ArgValidationException()
         {
             ComparableClass value = new ComparableClass();
             ComparableClass maxNull = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => value).Max(maxNull);
             });

@@ -6,11 +6,11 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void LengthLessThan_ArgumentIsNull_InvalidOperationException()
+        public void LengthLessThan_ArgumentIsNull_ArgValidationException()
         {
             var length = 2;
             string nullString = null;
-            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).LengthLessThan(length));
+            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).LengthLessThan(length));
             Assert.Equal(
                 $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthLessThan' method",
                 exc.Message);

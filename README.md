@@ -138,9 +138,9 @@ Arg.Validate(driverShortName, nameof(driverShortName))
 ### Throwed exception types
 
 In the case of a failed validation, exception `ArgumentException` family is thrown.
-If for some reason the verification fails, for example, a LengthInRange is checked on an argument that is null, then `InvalidOperationException` is thrown in such cases.
+If for some reason the verification fails, for example, a LengthInRange is checked on an argument that is null, then `ArgValidationException` is thrown in such cases.
 
-*Important*. The library throws exceptions to the `ArgumentException` family, only in the case of a failed validaton, in all other cases, an `InvalidOperationException` is thrown.
+*Important*. The library throws exceptions to the `ArgumentException` family, only in the case of a failed validaton, in all other cases, an `ArgValidationException` is thrown.
 
 ## Complete list of validation methods
 

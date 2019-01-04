@@ -67,12 +67,12 @@
 //        }
 //
 //        [Fact]
-//        public void Create_MissingConstructor_InvalidOperationException()
+//        public void Create_MissingConstructor_ArgValidationException()
 //        {
 //            string missingParameter1 = "value";
 //            object missingParameter2 = new object();
 //
-//            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+//            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
 //                 ReflectionObjectCreator.InvokeConstructor<Person>(
 //                     new ConstructorParameter(
 //                         name: nameof(missingParameter1), 

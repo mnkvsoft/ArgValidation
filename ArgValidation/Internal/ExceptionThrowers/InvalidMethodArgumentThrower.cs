@@ -70,7 +70,7 @@ namespace ArgValidation.Internal.ExceptionThrowers
 
         private static void ThrowException(string message)
         {
-            throw new InvalidOperationException(message);
+            throw new ArgValidationException(message);
         }
     }
 }

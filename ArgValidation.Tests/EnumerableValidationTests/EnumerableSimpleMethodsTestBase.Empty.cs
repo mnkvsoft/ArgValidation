@@ -10,10 +10,10 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         protected abstract void RunEmpty<TEnumerable>(Expression<Func<TEnumerable>> value) where TEnumerable : IEnumerable;
     
         [Fact]
-        public void Empty_ValuesIsNull_InvalidOperationException()
+        public void Empty_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => RunEmpty(() => nullValue));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => RunEmpty(() => nullValue));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Empty' method", exc.Message);
         }
 

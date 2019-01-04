@@ -27,11 +27,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void Min_ArgumentIsNull_InvalidOperationException()
+        public void Min_ArgumentIsNull_ArgValidationException()
         {
             ComparableClass nullValue = null;
             ComparableClass minValue = new ComparableClass();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => nullValue).Min(minValue);
             });
@@ -39,11 +39,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void Min_MinArgumentIsNull_InvalidOperationException()
+        public void Min_MinArgumentIsNull_ArgValidationException()
         {
             ComparableClass value = new ComparableClass();
             ComparableClass minNull = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => value).Min(minNull);
             });

@@ -6,10 +6,10 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void NotContains_ArgumentIsNull_ArgumentException()
+        public void NotContains_ArgumentIsNull_ArgValidationException()
         {
             string nullValue = null;
-            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).NotContains(""));
+            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullValue).NotContains(""));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotContains' method", exc.Message);
         }
 

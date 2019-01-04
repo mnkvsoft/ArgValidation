@@ -6,11 +6,11 @@ namespace ArgValidation.Tests.ObjectValidationTests
     public partial class ArgumentObjectExtensionTest
     {
         [Fact]
-        public void NotIn_ListIsNull_InvalidOperationException()
+        public void NotIn_ListIsNull_ArgValidationException()
         {
             object[] nullList = null;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => 
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => 
                 Arg.Validate(() => new object())
                     .NotIn(nullList));
 

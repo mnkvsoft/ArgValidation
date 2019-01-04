@@ -6,10 +6,10 @@ namespace ArgValidation.Tests.EnumerableValidationTests
     public partial class ArgumentEnumerableExtensionTest
     {
         [Fact]
-        public void NotContains_ValuesIsNull_InvalidOperationException()
+        public void NotContains_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).NotContains(new object()));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullValue).NotContains(new object()));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotContains' method", exc.Message);
         }
 

@@ -4,7 +4,7 @@
     <TargetFrameworks>net40;netstandard1.0;netstandard1.4;netstandard2.0;netcoreapp2.1</TargetFrameworks>
 
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
     <Authors>Viktor Mynkov</Authors>
     <Company />
     <Description>A simply arguments validation library with fluent API.
@@ -19,20 +19,21 @@ Examples:
         // passangerCount is Nullable type
         Arg.IfNotNull(passangerCount, nameof(passangerCount))
                 .Positive();</Description>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/mnkvsoft/ArgValidation/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mnkvsoft/ArgValidation</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mnkvsoft/ArgValidation</RepositoryUrl>
     <PackageTags>argument validation validator checker check parameter</PackageTags>
     <Copyright>Viktor Mynkov</Copyright>
     <NeutralLanguage></NeutralLanguage>
-    <PackageReleaseNotes>Implemented new methods
-
-- In
-- NotIn</PackageReleaseNotes>
+    <PackageReleaseNotes>Сompleted commenting public API</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
+    <DocumentationFile>bin\Release\net40\ArgValidation.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

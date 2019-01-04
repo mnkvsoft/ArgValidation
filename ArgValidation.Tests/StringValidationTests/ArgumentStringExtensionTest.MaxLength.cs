@@ -6,12 +6,12 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void MaxLength_ArgumentIsNull_InvalidOperationException()
+        public void MaxLength_ArgumentIsNull_ArgValidationException()
         {
             var length = 2;
             string nullString = null;
             
-            var exc = Assert.Throws<InvalidOperationException>(() =>
+            var exc = Assert.Throws<ArgValidationException>(() =>
                 Arg.Validate(() => nullString).MaxLength(length));
             
             Assert.Equal(
