@@ -250,51 +250,120 @@ namespace ArgValidation
 
         /// <summary>
         /// <para>
-        /// Throws <see cref="ArgumentException"/> if argument is more than 0
+        /// Throws <see cref="ArgumentException"/> if argument is not equals 0
         /// </para>
         /// <para>
         /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
         /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
         /// </para>
         /// </summary>
-        /// <exception cref="ArgumentException">Throws if argument is more than 0</exception>
+        /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
         public static Argument<int> Zero(this Argument<int> arg)
         {
             return arg.Equal(0);
         }
-        
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is not equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
         public static Argument<decimal> Zero(this Argument<decimal> arg)
         {
             return arg.Equal(0);
         }
-        
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is not equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
         public static Argument<double> Zero(this Argument<double> arg)
         {
             return arg.Equal(0);
         }
-        
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is not equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
         public static Argument<float> Zero(this Argument<float> arg)
         {
             return arg.Equal(0);
         }
-        
-        
-        
+
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
         public static Argument<int> NotZero(this Argument<int> arg)
         {
             return arg.NotEqual(0);
         }
-        
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
         public static Argument<decimal> NotZero(this Argument<decimal> arg)
         {
             return arg.NotEqual(0);
         }
-        
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
         public static Argument<double> NotZero(this Argument<double> arg)
         {
             return arg.NotEqual(0);
         }
-        
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
         public static Argument<float> NotZero(this Argument<float> arg)
         {
             return arg.NotEqual(0);

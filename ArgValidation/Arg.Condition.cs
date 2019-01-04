@@ -6,6 +6,9 @@ namespace ArgValidation
 {
     public static partial class Arg
     {
+        /// <summary>
+        /// The following validation methods after calling this method will be executed only if the argument is not equal <c>null</c>
+        /// </summary>
         public static Argument<T> IfNotNull<T>(T? argValue, string argName) where T : struct
         {
             if (!argValue.HasValue)
@@ -14,6 +17,9 @@ namespace ArgValidation
             return new Argument<T>(argValue.Value, argName);
         }
 
+        /// <summary>
+        /// The following validation methods after calling this method will be executed only if the argument is not equal <c>null</c>
+        /// </summary>
         public static Argument<T> IfNotNull<T>(Expression<Func<T?>> value) where T : struct
         {
             T? argValue = ExpressionHelper.GetArgumentValue(value);
@@ -25,6 +31,9 @@ namespace ArgValidation
             return new Argument<T>(argValue.Value, argName);
         }
 
+        /// <summary>
+        /// The following validation methods after calling this method will be executed only if the argument is not equal <c>null</c>
+        /// </summary>
         public static Argument<T> IfNotNull<T>(T argValue, string argName) where T : class
         {
             if (argValue == null)
@@ -33,6 +42,9 @@ namespace ArgValidation
             return new Argument<T>(argValue, argName);
         }
 
+        /// <summary>
+        /// The following validation methods after calling this method will be executed only if the argument is not equal <c>null</c>
+        /// </summary>
         public static Argument<T> IfNotNull<T>(Expression<Func<T>> value) where T : class
         {
             T argValue = ExpressionHelper.GetArgumentValue(value);

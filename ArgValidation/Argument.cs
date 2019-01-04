@@ -4,7 +4,6 @@
     /// The main class for the library. 
     /// All necessary extensions are implemented for it to check the argument and control the validation flow
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public struct Argument<T>
     {
         internal string Name { get; }
@@ -22,6 +21,9 @@
 
         internal bool ValidationIsDisabled() => ValidationOption == ValidationOption.NoValidation;
 
+        /// <summary>
+        /// Returns the value of the argument being validated
+        /// </summary>
         public static implicit operator T(Argument<T> argument)
         {
             return argument.Value;
