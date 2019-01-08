@@ -11,7 +11,7 @@ namespace ArgValidation.Tests.StringValidationTests
             int length = 2;
             string nullString = null;
             ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).LengthEqual(length));
-            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthEqual' method", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullString)}' is null. Can not execute 'LengthEqual' method", exc.Message);
         }
 
         [Fact]

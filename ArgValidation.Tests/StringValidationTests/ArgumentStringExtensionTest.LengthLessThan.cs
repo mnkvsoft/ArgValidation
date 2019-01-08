@@ -12,7 +12,7 @@ namespace ArgValidation.Tests.StringValidationTests
             string nullString = null;
             var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).LengthLessThan(length));
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthLessThan' method",
+                $"Argument '{nameof(nullString)}' is null. Can not execute 'LengthLessThan' method",
                 exc.Message);
         }
 

@@ -28,7 +28,7 @@ namespace ArgValidation.Tests.StringValidationTests
             string nullValue = null;
             const string pattern = "\\d{10}";
             ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(nullValue, nameof(nullValue)).Match(pattern));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Match' method", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'Match' method", exc.Message);
         }
 
         [Fact]
