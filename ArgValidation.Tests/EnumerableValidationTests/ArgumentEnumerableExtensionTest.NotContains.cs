@@ -10,7 +10,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             object[] nullValue = null;
             ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullValue).NotContains(new object()));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotContains' method", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'NotContains' method", exc.Message);
         }
 
         //todo: Arg.Validate(() => objs).NotContains(null);

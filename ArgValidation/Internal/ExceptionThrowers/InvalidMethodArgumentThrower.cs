@@ -59,7 +59,7 @@ namespace ArgValidation.Internal.ExceptionThrowers
         {
             if (arg.Value == null)
                 ThrowException(
-                    $"Argument '{arg.Name}' is null. Сan not execute '{methodName}' method");
+                    $"Argument '{arg.Name}' is null. Can not execute '{methodName}' method");
         }
 
         public static void IfArgumentOfMethodIsNull<T>(T arg, string argName, string methodName)

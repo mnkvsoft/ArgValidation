@@ -25,7 +25,7 @@ namespace ArgValidation.Tests.StringValidationTests
 
             var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).LengthInRange(min3, max5));
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthInRange' method",
+                $"Argument '{nameof(nullString)}' is null. Can not execute 'LengthInRange' method",
                 exc.Message);
         }
 
