@@ -14,7 +14,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             object[] nullValue = null;
             ArgValidationException exc = Assert.Throws<ArgValidationException>(() => RunEmpty(() => nullValue));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Empty' method", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'Empty' method", exc.Message);
         }
 
         [Fact]

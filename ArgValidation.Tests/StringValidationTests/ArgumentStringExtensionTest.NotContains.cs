@@ -8,26 +8,35 @@ namespace ArgValidation.Tests.StringValidationTests
         [Fact]
         public void NotContains_ArgumentIsNull_ArgValidationException()
         {
-            string nullValue = null;
-            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullValue).NotContains(""));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotContains' method", exc.Message);
+            string nullArg = null;
+            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullArg).NotContains(""));
+            Assert.Equal($"Argument '{nameof(nullArg)}' is null. Can not execute 'NotContains' method", exc.Message);
         }
 
         [Fact]
-        public void NotContains_ValueNotContainsArgument_Ok()
+        public void NotContains_ArgumentNotContainsValue_Ok()
         {
-            string value = "qwe";
-            string arg = "123";
-            Arg.Validate(() => value).NotContains(arg);
+            string arg = "qwe";
+            string value = "123";
+            Arg.Validate(() => arg).NotContains(value);
         }
 
         [Fact]
-        public void NotContains_ValueContainsArgument_ArgumentException()
+        public void NotContains_ArgumentContainsValue_ArgumentException()
         {
-            string value = "string";
-            string substring = value.Substring(3);
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => value).NotContains(substring));
-            Assert.Equal($"Argument '{nameof(value)}' must not contains '{substring}'. Current value: '{value}'", exc.Message);
+            string arg = "string";
+            string value = arg.Substring(3);
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => arg).NotContains(value));
+            Assert.Equal($"Argument '{nameof(arg)}' must not contains '{value}'. Current value: '{arg}'", exc.Message);
+        }
+
+        [Fact]
+        public void NotContains_ArgumentContainsValueWithIgnoreCase_ArgumentException()
+        {
+            string arg = "string";
+            string value = "STR";
+            ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => arg).NotContains(value, StringComparison.OrdinalIgnoreCase));
+            Assert.Equal($"Argument '{nameof(arg)}' must not contains '{value}'. Current value: '{arg}'", exc.Message);
         }
 
         [Fact]

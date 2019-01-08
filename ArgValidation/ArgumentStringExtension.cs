@@ -18,7 +18,7 @@ namespace ArgValidation
         public static Argument<string> NullOrEmpty(this Argument<string> arg)
         {
             if (arg.ValidationIsDisabled())
-                return arg; 
+                return arg;
 
             if (!string.IsNullOrEmpty(arg.Value))
                 ValidationErrorExceptionThrower.ArgumentException(
@@ -198,10 +198,20 @@ namespace ArgValidation
         /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> Contains(this Argument<string> arg, string value)
         {
+            return Contains(arg, value, StringComparison.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not contains <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not contains <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> Contains(this Argument<string> arg, string value, StringComparison comparisonType)
+        {
             if (arg.ValidationIsDisabled())
                 return arg;
 
-            if (!ContainsPrivate(arg, value, methodName: nameof(Contains)))
+            if (!ContainsPrivate(arg, value, comparisonType, methodName: nameof(Contains)))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
@@ -215,12 +225,76 @@ namespace ArgValidation
         /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
         public static Argument<string> NotContains(this Argument<string> arg, string value)
         {
+            return NotContains(arg, value, StringComparison.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is contains <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is contains <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> NotContains(this Argument<string> arg, string value, StringComparison comparisonType)
+        {
             if (arg.ValidationIsDisabled())
                 return arg;
 
-            if (ContainsPrivate(arg, value, methodName: nameof(NotContains)))
+            if (ContainsPrivate(arg, value, comparisonType, methodName: nameof(NotContains)))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must not contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not starts with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not starts with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> StartsWith(this Argument<string> arg, string value)
+        {
+            return StartsWith(arg, value, StringComparison.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not starts with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not starts with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> StartsWith(this Argument<string> arg, string value, StringComparison comparisonType)
+        {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
+            if (!StartWithPrivate(arg, value, comparisonType, methodName: nameof(StartsWith)))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must starts with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is starts with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is starts with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> NotStartsWith(this Argument<string> arg, string value)
+        {
+            return NotStartsWith(arg, value, StringComparison.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is starts with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is starts with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> NotStartsWith(this Argument<string> arg, string value, StringComparison comparisonType)
+        {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
+            if (StartWithPrivate(arg, value, comparisonType, methodName: nameof(NotStartsWith)))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must not starts with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
         }
@@ -265,14 +339,27 @@ namespace ArgValidation
             return arg;
         }
 
-        private static bool ContainsPrivate(Argument<string> arg, string value, string methodName)
+        // todo: EndsWith, NotEndsWith
+
+        // todo: NotMatch(this Argument<string> arg, Regex regex)
+        //public static Argument<string> NotMatch(this Argument<string> arg, Regex regex)
+        //{
+        //}
+
+        private static bool ContainsPrivate(Argument<string> arg, string value, StringComparison comparisonType, string methodName)
         {
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName);
+            InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(value, nameof(value), methodName);
 
-            if (value == null)
-                return false;
+            return arg.Value.IndexOf(value, comparisonType) >= 0;
+        }
 
-            return arg.Value.Contains(value);
+        private static bool StartWithPrivate(Argument<string> arg, string value, StringComparison comparisonType, string methodName)
+        {
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName);
+            InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(value, nameof(value), methodName);
+
+            return arg.Value.StartsWith(value, comparisonType);
         }
 
         private static string GetLengthValueForMessage(string value)
