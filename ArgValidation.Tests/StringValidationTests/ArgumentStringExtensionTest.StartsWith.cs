@@ -17,7 +17,7 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void StartsWith_ArgumentNotNullButValueIsNull_ArgValidationException()
+        public void StartsWith_ValueIsNull_ArgValidationException()
         {
             string arg = "value";
             string nullValue = null;

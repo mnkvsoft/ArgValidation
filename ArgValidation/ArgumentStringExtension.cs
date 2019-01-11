@@ -265,7 +265,7 @@ namespace ArgValidation
             if (arg.ValidationIsDisabled())
                 return arg;
 
-            if (!StartWithPrivate(arg, value, comparisonType, methodName: nameof(StartsWith)))
+            if (!StartsWithPrivate(arg, value, comparisonType, methodName: nameof(StartsWith)))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must starts with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
@@ -292,9 +292,63 @@ namespace ArgValidation
             if (arg.ValidationIsDisabled())
                 return arg;
 
-            if (StartWithPrivate(arg, value, comparisonType, methodName: nameof(NotStartsWith)))
+            if (StartsWithPrivate(arg, value, comparisonType, methodName: nameof(NotStartsWith)))
                 ValidationErrorExceptionThrower.ArgumentException(
                     $"Argument '{arg.Name}' must not starts with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not ends with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not ends with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> EndsWith(this Argument<string> arg, string value)
+        {
+            return EndsWith(arg, value, StringComparison.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is not ends with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not ends with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> EndsWith(this Argument<string> arg, string value, StringComparison comparisonType)
+        {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
+            if (!EndsWithPrivate(arg, value, comparisonType, methodName: nameof(EndsWith)))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must ends with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
+
+            return arg;
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is ends with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is ends with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> NotEndsWith(this Argument<string> arg, string value)
+        {
+            return NotEndsWith(arg, value, StringComparison.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is ends with <paramref name="value"/>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is ends with <paramref name="value"/></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<string> NotEndsWith(this Argument<string> arg, string value, StringComparison comparisonType)
+        {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
+            if (EndsWithPrivate(arg, value, comparisonType, methodName: nameof(NotEndsWith)))
+                ValidationErrorExceptionThrower.ArgumentException(
+                    $"Argument '{arg.Name}' must not ends with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
         }
@@ -346,6 +400,8 @@ namespace ArgValidation
         //{
         //}
 
+        // todo: Char(5).IsDigit()
+
         private static bool ContainsPrivate(Argument<string> arg, string value, StringComparison comparisonType, string methodName)
         {
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName);
@@ -354,12 +410,20 @@ namespace ArgValidation
             return arg.Value.IndexOf(value, comparisonType) >= 0;
         }
 
-        private static bool StartWithPrivate(Argument<string> arg, string value, StringComparison comparisonType, string methodName)
+        private static bool StartsWithPrivate(Argument<string> arg, string value, StringComparison comparisonType, string methodName)
         {
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName);
             InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(value, nameof(value), methodName);
 
             return arg.Value.StartsWith(value, comparisonType);
+        }
+
+        private static bool EndsWithPrivate(Argument<string> arg, string value, StringComparison comparisonType, string methodName)
+        {
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName);
+            InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(value, nameof(value), methodName);
+
+            return arg.Value.EndsWith(value, comparisonType);
         }
 
         private static string GetLengthValueForMessage(string value)

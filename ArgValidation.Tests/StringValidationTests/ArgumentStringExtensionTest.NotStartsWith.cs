@@ -14,6 +14,16 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
+        public void NotStartsWith_ValueIsNull_ArgValidationException()
+        {
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
+            {
+                Arg.Validate(() => "value").NotStartsWith(null);
+            });
+            Assert.Equal("Argument 'value' of method 'NotStartsWith' is null. Can not execute 'NotStartsWith' method", exc.Message);
+        }
+
+        [Fact]
         public void NotStartsWith_ArgumentNotStartsWithValue_Ok()
         {
             string arg = "qwe";
