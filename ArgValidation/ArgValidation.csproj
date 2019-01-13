@@ -25,8 +25,7 @@ Examples:
     <PackageTags>argument validation validator checker check parameter</PackageTags>
     <Copyright>Viktor Mynkov</Copyright>
     <NeutralLanguage></NeutralLanguage>
-    <PackageReleaseNotes>Added parameter "StringComparison" to methods: Contains, NotContains
-Implemented methods: StartsWith, NotStartsWith
+    <PackageReleaseNotes>Implemented methods: EndsWith, NotEndsWith
 </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -34,8 +33,8 @@ Implemented methods: StartsWith, NotStartsWith
     <DebugType>full</DebugType>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
-    <DocumentationFile>bin\Release\net40\ArgValidation.xml</DocumentationFile>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>
