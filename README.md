@@ -186,6 +186,8 @@ For `string`:
 - `Notmatch`
 - `StartsWith`
 - `NotStartsWith`
+- `EndsWith`
+- `NotEndsWith`
 
 For `IEnumerable`:
 
