@@ -210,7 +210,7 @@ For `Enum`:
 - `NotHasFlag`
 - `DefinedInEnum`
 
-For `int, decimal, double, float`:
+For `int, long, decimal, double, float`:
 
 - `Positive` -s
 - `PositiveOrZero` -s
