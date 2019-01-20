@@ -4,7 +4,7 @@
     <TargetFrameworks>net40;netstandard1.0;netstandard1.4;netstandard2.0;netcoreapp2.1</TargetFrameworks>
 
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.6.0</Version>
+    <Version>1.7.0</Version>
     <Authors>Viktor Mynkov</Authors>
     <Company />
     <Description>A simply arguments validation library with fluent API.
@@ -25,8 +25,7 @@ Examples:
     <PackageTags>argument validation validator checker check parameter</PackageTags>
     <Copyright>Viktor Mynkov</Copyright>
     <NeutralLanguage></NeutralLanguage>
-    <PackageReleaseNotes>Implemented methods: EndsWith, NotEndsWith
-</PackageReleaseNotes>
+    <PackageReleaseNotes>Implemented methods for Enum: DefinedInEnum, HasFlag, NotHasFlag</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
