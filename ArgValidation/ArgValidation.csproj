@@ -38,4 +38,8 @@ Implemented methods: StartsWith, NotStartsWith
     <DocumentationFile>bin\Release\net40\ArgValidation.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
 </Project>
