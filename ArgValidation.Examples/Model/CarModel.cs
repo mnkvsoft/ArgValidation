@@ -1,4 +1,4 @@
-﻿namespace ArgValidation.Examples
+﻿namespace ArgValidation.Examples.Model
 {
     public class CarModel
     {

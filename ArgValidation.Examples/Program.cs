@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Examples.Model;
 using ArgValidation.Examples.Model.ArgValidation.NameOf;
 
 namespace ArgValidation.Examples
