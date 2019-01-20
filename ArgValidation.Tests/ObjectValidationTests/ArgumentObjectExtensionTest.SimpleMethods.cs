@@ -26,7 +26,7 @@ namespace ArgValidation.Tests.ObjectValidationTests
             Assert.Equal(nameof(argValue), argument.Name);
         }
         
-        public class SimpleObjectMethodsExpressionThreeTest: ObjectSimpleMethodsTestBase
+        public class SimpleObjectMethodsExpressionThreeTest : ObjectSimpleMethodsTestBase
         {
             protected override void RunDefault<T>(Expression<Func<T>> value)
             {

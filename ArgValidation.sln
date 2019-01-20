@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgValidation", "ArgValidation\ArgValidation.csproj", "{A44E532A-CCFD-4329-A91F-7C92C44EC7FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArgValidation", "ArgValidation\ArgValidation.csproj", "{A44E532A-CCFD-4329-A91F-7C92C44EC7FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgValidation.Tests", "ArgValidation.Tests\ArgValidation.Tests.csproj", "{B08D3736-CECD-4403-A84E-BAAB7DFCAF5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArgValidation.Tests", "ArgValidation.Tests\ArgValidation.Tests.csproj", "{B08D3736-CECD-4403-A84E-BAAB7DFCAF5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgValidation.Examples", "ArgValidation.Examples\ArgValidation.Examples.csproj", "{E6C20571-0AD6-4A3C-BB9E-C8F7D0C6ABDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArgValidation.Examples", "ArgValidation.Examples\ArgValidation.Examples.csproj", "{E6C20571-0AD6-4A3C-BB9E-C8F7D0C6ABDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgValidation.Tests.Performance", "ArgValidation.Tests.Performance\ArgValidation.Tests.Performance.csproj", "{316F769D-18D8-48E9-B59E-E34C8AEB7C53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArgValidation.Tests.Performance", "ArgValidation.Tests.Performance\ArgValidation.Tests.Performance.csproj", "{316F769D-18D8-48E9-B59E-E34C8AEB7C53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
