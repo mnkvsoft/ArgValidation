@@ -14,6 +14,10 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Internal\IEnumerableExtensionTest.Count.cs~RF5b7b5f.TMP" />
   </ItemGroup>

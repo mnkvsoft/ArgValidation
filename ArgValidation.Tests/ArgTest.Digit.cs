@@ -21,7 +21,13 @@ namespace ArgValidation.Tests
 			    Arg.Positive(arg.Value, arg.Name);
 		    }
 
-		    protected override void RunPositive(Expression<Func<decimal>> value)
+            protected override void RunPositive(Expression<Func<long>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.Positive(arg.Value, arg.Name);
+            }
+
+            protected override void RunPositive(Expression<Func<decimal>> value)
 		    {
 			    var arg = Arg.Validate(value);
 			    Arg.Positive(arg.Value, arg.Name);
@@ -45,7 +51,13 @@ namespace ArgValidation.Tests
 			    Arg.PositiveOrZero(arg.Value, arg.Name);
 		    }
 
-		    protected override void RunPositiveOrZero(Expression<Func<decimal>> value)
+            protected override void RunPositiveOrZero(Expression<Func<long>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.PositiveOrZero(arg.Value, arg.Name);
+            }
+
+            protected override void RunPositiveOrZero(Expression<Func<decimal>> value)
 		    {
 			    var arg = Arg.Validate(value);
 			    Arg.PositiveOrZero(arg.Value, arg.Name);
@@ -69,7 +81,13 @@ namespace ArgValidation.Tests
 			    Arg.Zero(arg.Value, arg.Name);
 		    }
 
-		    protected override void RunZero(Expression<Func<decimal>> value)
+            protected override void RunZero(Expression<Func<long>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.Zero(arg.Value, arg.Name);
+            }
+
+            protected override void RunZero(Expression<Func<decimal>> value)
 		    {
 			    var arg = Arg.Validate(value);
 			    Arg.Zero(arg.Value, arg.Name);
@@ -93,7 +111,13 @@ namespace ArgValidation.Tests
 			    Arg.NotZero(arg.Value, arg.Name);
 		    }
 
-		    protected override void RunNotZero(Expression<Func<decimal>> value)
+            protected override void RunNotZero(Expression<Func<long>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.NotZero(arg.Value, arg.Name);
+            }
+
+            protected override void RunNotZero(Expression<Func<decimal>> value)
 		    {
 			    var arg = Arg.Validate(value);
 			    Arg.NotZero(arg.Value, arg.Name);
@@ -117,7 +141,13 @@ namespace ArgValidation.Tests
 			    Arg.Negative(arg.Value, arg.Name);
 		    }
 
-		    protected override void RunNegative(Expression<Func<decimal>> value)
+            protected override void RunNegative(Expression<Func<long>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.Negative(arg.Value, arg.Name);
+            }
+
+            protected override void RunNegative(Expression<Func<decimal>> value)
 		    {
 			    var arg = Arg.Validate(value);
 			    Arg.Negative(arg.Value, arg.Name);
@@ -141,7 +171,13 @@ namespace ArgValidation.Tests
 			    Arg.NegativeOrZero(arg.Value, arg.Name);
 		    }
 
-		    protected override void RunNegativeOrZero(Expression<Func<decimal>> value)
+            protected override void RunNegativeOrZero(Expression<Func<long>> value)
+            {
+                var arg = Arg.Validate(value);
+                Arg.NegativeOrZero(arg.Value, arg.Name);
+            }
+
+            protected override void RunNegativeOrZero(Expression<Func<decimal>> value)
 		    {
 			    var arg = Arg.Validate(value);
 			    Arg.NegativeOrZero(arg.Value, arg.Name);
@@ -166,7 +202,12 @@ namespace ArgValidation.Tests
 			    Arg.Positive(value);
 		    }
 
-		    protected override void RunPositive(Expression<Func<decimal>> value)
+            protected override void RunPositive(Expression<Func<long>> value)
+            {
+                Arg.Positive(value);
+            }
+
+            protected override void RunPositive(Expression<Func<decimal>> value)
 		    {
 			    Arg.Positive(value);
 		    }
@@ -186,7 +227,12 @@ namespace ArgValidation.Tests
 			    Arg.PositiveOrZero(value);
 		    }
 
-		    protected override void RunPositiveOrZero(Expression<Func<decimal>> value)
+            protected override void RunPositiveOrZero(Expression<Func<long>> value)
+            {
+                Arg.PositiveOrZero(value);
+            }
+
+            protected override void RunPositiveOrZero(Expression<Func<decimal>> value)
 		    {
 			    Arg.PositiveOrZero(value);
 		    }
@@ -206,7 +252,12 @@ namespace ArgValidation.Tests
 			    Arg.Zero(value);
 		    }
 
-		    protected override void RunZero(Expression<Func<decimal>> value)
+            protected override void RunZero(Expression<Func<long>> value)
+            {
+                Arg.Zero(value);
+            }
+
+            protected override void RunZero(Expression<Func<decimal>> value)
 		    {
 			    Arg.Zero(value);
 		    }
@@ -226,7 +277,12 @@ namespace ArgValidation.Tests
 			    Arg.NotZero(value);
 		    }
 
-		    protected override void RunNotZero(Expression<Func<decimal>> value)
+            protected override void RunNotZero(Expression<Func<long>> value)
+            {
+                Arg.NotZero(value);
+            }
+
+            protected override void RunNotZero(Expression<Func<decimal>> value)
 		    {
 			    Arg.NotZero(value);
 		    }
@@ -246,7 +302,12 @@ namespace ArgValidation.Tests
 			    Arg.Negative(value);
 		    }
 
-		    protected override void RunNegative(Expression<Func<decimal>> value)
+            protected override void RunNegative(Expression<Func<long>> value)
+            {
+                Arg.Negative(value);
+            }
+
+            protected override void RunNegative(Expression<Func<decimal>> value)
 		    {
 			    Arg.Negative(value);
 		    }
@@ -266,7 +327,12 @@ namespace ArgValidation.Tests
 			    Arg.NegativeOrZero(value);
 		    }
 
-		    protected override void RunNegativeOrZero(Expression<Func<decimal>> value)
+            protected override void RunNegativeOrZero(Expression<Func<long>> value)
+            {
+                Arg.NegativeOrZero(value);
+            }
+
+            protected override void RunNegativeOrZero(Expression<Func<decimal>> value)
 		    {
 			    Arg.NegativeOrZero(value);
 		    }

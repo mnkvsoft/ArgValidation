@@ -15,6 +15,11 @@ namespace ArgValidation.Tests
             Arg.Validate(value).Positive();
         }
 
+        protected override void RunPositive(Expression<Func<long>> value)
+        {
+            Arg.Validate(value).Positive();
+        }
+
         protected override void RunPositive(Expression<Func<decimal>> value)
         {
             Arg.Validate(value).Positive();
@@ -31,6 +36,11 @@ namespace ArgValidation.Tests
         }
 
         protected override void RunPositiveOrZero(Expression<Func<int>> value)
+        {
+            Arg.Validate(value).PositiveOrZero();
+        }
+
+        protected override void RunPositiveOrZero(Expression<Func<long>> value)
         {
             Arg.Validate(value).PositiveOrZero();
         }
@@ -55,6 +65,11 @@ namespace ArgValidation.Tests
             Arg.Validate(value).Zero();
         }
 
+        protected override void RunZero(Expression<Func<long>> value)
+        {
+            Arg.Validate(value).Zero();
+        }
+
         protected override void RunZero(Expression<Func<decimal>> value)
         {
             Arg.Validate(value).Zero();
@@ -66,6 +81,11 @@ namespace ArgValidation.Tests
         }
 
         protected override void RunNotZero(Expression<Func<double>> value)
+        {
+            Arg.Validate(value).NotZero();
+        }
+
+        protected override void RunNotZero(Expression<Func<long>> value)
         {
             Arg.Validate(value).NotZero();
         }
@@ -95,6 +115,11 @@ namespace ArgValidation.Tests
             Arg.Validate(value).Negative();
         }
 
+        protected override void RunNegative(Expression<Func<long>> value)
+        {
+            Arg.Validate(value).Negative();
+        }
+
         protected override void RunNegative(Expression<Func<decimal>> value)
         {
             Arg.Validate(value).Negative();
@@ -111,6 +136,11 @@ namespace ArgValidation.Tests
         }
 
         protected override void RunNegativeOrZero(Expression<Func<int>> value)
+        {
+            Arg.Validate(value).NegativeOrZero();
+        }
+
+        protected override void RunNegativeOrZero(Expression<Func<long>> value)
         {
             Arg.Validate(value).NegativeOrZero();
         }
