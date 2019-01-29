@@ -204,7 +204,13 @@ For `IEnumerable`:
 - `NullOrEmpty` -s
 - `NotNullOrEmpty` -s
 
-For `int, decimal, double, float`:
+For `Enum`:
+
+- `HasFlag`
+- `NotHasFlag`
+- `DefinedInEnum`
+
+For `int, long, decimal, double, float`:
 
 - `Positive` -s
 - `PositiveOrZero` -s

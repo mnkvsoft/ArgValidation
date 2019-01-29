@@ -49,6 +49,36 @@ namespace ArgValidation
         /// </para>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Throws if argument is not more than 0</exception>
+        public static long Positive(Expression<Func<long>> value)
+        {
+            return Validate(value).Positive().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is not more than 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is not more than 0</exception>
+        public static long Positive(long argValue, string argName)
+        {
+            return Validate(argValue, argName).Positive().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is not more than 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is not more than 0</exception>
         public static decimal Positive(Expression<Func<decimal>> value)
         {
             return Validate(value).Positive().Value;
@@ -159,6 +189,36 @@ namespace ArgValidation
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Throws if argument is less than 0</exception>
         public static int PositiveOrZero(int argValue, string argName)
+        {
+            return Validate(argValue, argName).PositiveOrZero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is less than 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is less than 0</exception>
+        public static long PositiveOrZero(Expression<Func<long>> value)
+        {
+            return Validate(value).PositiveOrZero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is less than 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is less than 0</exception>
+        public static long PositiveOrZero(long argValue, string argName)
         {
             return Validate(argValue, argName).PositiveOrZero().Value;
         }
@@ -297,6 +357,36 @@ namespace ArgValidation
         /// </para>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Throws if argument is more than or equals 0</exception>
+        public static long Negative(Expression<Func<long>> value)
+        {
+            return Validate(value).Negative().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is more than or equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is more than or equals 0</exception>
+        public static long Negative(long argValue, string argName)
+        {
+            return Validate(argValue, argName).Negative().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is more than or equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is more than or equals 0</exception>
         public static decimal Negative(Expression<Func<decimal>> value)
         {
             return Validate(value).Negative().Value;
@@ -407,6 +497,36 @@ namespace ArgValidation
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Throws if argument is more than 0</exception>
         public static int NegativeOrZero(int argValue, string argName)
+        {
+            return Validate(argValue, argName).NegativeOrZero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is more than 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is more than 0</exception>
+        public static long NegativeOrZero(Expression<Func<long>> value)
+        {
+            return Validate(value).NegativeOrZero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentOutOfRangeException"/> if argument is more than 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if argument is more than 0</exception>
+        public static long NegativeOrZero(long argValue, string argName)
         {
             return Validate(argValue, argName).NegativeOrZero().Value;
         }
@@ -545,6 +665,36 @@ namespace ArgValidation
         /// </para>
         /// </summary>
         /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
+        public static long Zero(Expression<Func<long>> value)
+        {
+            return Validate(value).Zero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is not equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
+        public static long Zero(long argValue, string argName)
+        {
+            return Validate(argValue, argName).Zero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is not equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
         public static decimal Zero(Expression<Func<decimal>> value)
         {
             return Validate(value).Zero().Value;
@@ -655,6 +805,36 @@ namespace ArgValidation
         /// </summary>
         /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
         public static int NotZero(int argValue, string argName)
+        {
+            return Validate(argValue, argName).NotZero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
+        public static long NotZero(Expression<Func<long>> value)
+        {
+            return Validate(value).NotZero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
+        public static long NotZero(long argValue, string argName)
         {
             return Validate(argValue, argName).NotZero().Value;
         }
