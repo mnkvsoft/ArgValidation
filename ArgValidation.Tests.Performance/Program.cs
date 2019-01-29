@@ -1,31 +1,21 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using ArgValidation.Tests.Performance.MethodTests;
 using BenchmarkDotNet.Running;
 
 namespace ArgValidation.Tests.Performance
 {
-    [CoreJob]
-    [MemoryDiagnoser]
-    public class NativeVsNameOfVsExpressionTree
-    {
-        [Params(1)] 
-        public int N;
-
-        [Benchmark]
-        public void Native()
-        {
-        }
-
-        [Benchmark]
-        public void NameOf()
-        {
-        }
-    }
-
     class Program
     {
         public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<NativeVsNameOfVsExpressionTree>();
+            //BenchmarkRunner.Run<DefaultTest>();
+            //BenchmarkRunner.Run<NotDefaultTest>();
+            //BenchmarkRunner.Run<NotNullTest>();
+            //BenchmarkRunner.Run<NullTest>();
+            //BenchmarkRunner.Run<EqualTest>();
+            //BenchmarkRunner.Run<NotEqualTest>();
+            //BenchmarkRunner.Run<InTest>();
+            //BenchmarkRunner.Run<NotInTest>();
+            BenchmarkRunner.Run<FailedIfTest>();
         }
     }
 }
