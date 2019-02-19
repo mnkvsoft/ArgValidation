@@ -393,13 +393,7 @@ namespace ArgValidation
             return arg;
         }
 
-        // todo: EndsWith, NotEndsWith
-
         // todo: NotMatch(this Argument<string> arg, Regex regex)
-        //public static Argument<string> NotMatch(this Argument<string> arg, Regex regex)
-        //{
-        //}
-
         // todo: Char(5).IsDigit()
 
         private static bool ContainsPrivate(Argument<string> arg, string value, StringComparison comparisonType, string methodName)

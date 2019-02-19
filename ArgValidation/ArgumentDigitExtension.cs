@@ -458,5 +458,7 @@ namespace ArgValidation
         {
             return arg.NotEqual(0);
         }
+
+        // todo: Implements for byte
     }
 }

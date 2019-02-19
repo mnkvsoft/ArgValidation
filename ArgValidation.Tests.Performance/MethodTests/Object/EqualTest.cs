@@ -1,7 +1,7 @@
 ﻿using System;
 using BenchmarkDotNet.Attributes;
 
-namespace ArgValidation.Tests.Performance.MethodTests
+namespace ArgValidation.Tests.Performance.MethodTests.Object
 {
     [CoreJob]
     [MemoryDiagnoser]
@@ -9,10 +9,10 @@ namespace ArgValidation.Tests.Performance.MethodTests
     {
         #region Object
 
-        private static readonly object Obj = new Object();
+        private static readonly object Obj = new System.Object();
 
         [Benchmark]
-        public void Equal_Object_Native()
+        public void Native_Object()
         {
             var value1 = Obj;
             var value2 = value1;
@@ -21,7 +21,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Object()
+        public void ArgValidation_Object()
         {
             var value1 = Obj;
             var value2 = value1;
@@ -31,7 +31,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Object_Multiple()
+        public void ArgValidation_Object_Multiple()
         {
             var value1 = Obj;
             var value2 = value1;
@@ -45,7 +45,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Byte
 
         [Benchmark]
-        public void Equal_Byte_Native()
+        public void Native_Byte()
         {
             Byte value1 = 1;
             var value2 = value1;
@@ -54,7 +54,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Byte()
+        public void ArgValidation_Byte()
         {
             Byte value1 = 1;
             var value2 = value1;
@@ -64,7 +64,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Byte_Multiple()
+        public void ArgValidation_Byte_Multiple()
         {
             Byte value1 = 1;
             var value2 = value1;
@@ -78,7 +78,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Int32
 
         [Benchmark]
-        public void Equal_Int32_Native()
+        public void Native_Int32()
         {
             Int32 value1 = 1;
             var value2 = value1;
@@ -87,7 +87,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Int32()
+        public void ArgValidation_Int32()
         {
             Int32 value1 = 1;
             var value2 = value1;
@@ -97,7 +97,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Int32_Multiple()
+        public void ArgValidation_Int32_Multiple()
         {
             Int32 value1 = 1;
             var value2 = value1;
@@ -111,7 +111,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Int64
 
         [Benchmark]
-        public void Equal_Int64_Native()
+        public void Native_Int64()
         {
             Int64 value1 = 1;
             var value2 = value1;
@@ -120,7 +120,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Int64()
+        public void ArgValidation_Int64()
         {
             Int64 value1 = 1;
             var value2 = value1;
@@ -130,7 +130,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Int64_Multiple()
+        public void ArgValidation_Int64_Multiple()
         {
             Int64 value1 = 1;
             var value2 = value1;
@@ -144,7 +144,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Decimal
 
         [Benchmark]
-        public void Equal_Decimal_Native()
+        public void Native_Decimal()
         {
             Decimal value1 = 1;
             var value2 = value1;
@@ -153,7 +153,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Decimal()
+        public void ArgValidation_Decimal()
         {
             Decimal value1 = 1;
             var value2 = value1;
@@ -163,7 +163,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void Equal_Decimal_Multiple()
+        public void ArgValidation_Decimal_Multiple()
         {
             Decimal value1 = 1;
             var value2 = value1;

@@ -1,7 +1,7 @@
 ﻿using System;
 using BenchmarkDotNet.Attributes;
 
-namespace ArgValidation.Tests.Performance.MethodTests
+namespace ArgValidation.Tests.Performance.MethodTests.Object
 {
     [CoreJob]
     [MemoryDiagnoser]
@@ -9,10 +9,10 @@ namespace ArgValidation.Tests.Performance.MethodTests
     {
         #region Object
 
-        private static readonly object Obj = new Object();
+        private static readonly object Obj = new System.Object();
 
         [Benchmark]
-        public void NotDefault_Object_Native()
+        public void Native_Object()
         {
             var value = Obj;
             if (value == null)
@@ -20,21 +20,21 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void NotDefault_Object()
+        public void ArgValidation_Object()
         {
             var value = Obj;
             Arg.Validate(value, nameof(value)).NotDefault();
         }
 
         [Benchmark]
-        public void NotDefault_Object_Short()
+        public void ArgValidation_Object_Short()
         {
             var value = Obj;
             Arg.NotDefault(value, nameof(value));
         }
 
         [Benchmark]
-        public void NotDefault_Object_Multiple()
+        public void ArgValidation_Object_Multiple()
         {
             var value = Obj;
             Arg.Validate(value, nameof(value))
@@ -48,7 +48,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Byte
 
         [Benchmark]
-        public void NotDefault_Byte_Native()
+        public void Native_Byte()
         {
             Byte value = 1;
             if (value == null)
@@ -56,21 +56,21 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void NotDefault_Byte()
+        public void ArgValidation_Byte()
         {
             Byte value = 1;
             Arg.Validate(value, nameof(value)).NotDefault();
         }
 
         [Benchmark]
-        public void NotDefault_Byte_Short()
+        public void ArgValidation_Byte_Short()
         {
             Byte value = 1;
             Arg.NotDefault(value, nameof(value));
         }
 
         [Benchmark]
-        public void NotDefault_Byte_Multiple()
+        public void ArgValidation_Byte_Multiple()
         {
             Byte value = 1;
             Arg.Validate(value, nameof(value))
@@ -84,7 +84,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Int32
 
         [Benchmark]
-        public void NotDefault_Int32_Native()
+        public void Native_Int32()
         {
             Int32 value = 1;
             if (value == null)
@@ -92,21 +92,21 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void NotDefault_Int32()
+        public void ArgValidation_Int32()
         {
             Int32 value = 1;
             Arg.Validate(value, nameof(value)).NotDefault();
         }
 
         [Benchmark]
-        public void NotDefault_Int32_Short()
+        public void ArgValidation_Int32_Short()
         {
             Int32 value = 1;
             Arg.NotDefault(value, nameof(value));
         }
 
         [Benchmark]
-        public void NotDefault_Int32_Multiple()
+        public void ArgValidation_Int32_Multiple()
         {
             Int32 value = 1;
             Arg.Validate(value, nameof(value))
@@ -120,7 +120,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Int64
 
         [Benchmark]
-        public void NotDefault_Int64_Native()
+        public void Native_Int64()
         {
             Int64 value = 1;
             if (value == null)
@@ -128,21 +128,21 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void NotDefault_Int64()
+        public void ArgValidation_Int64()
         {
             Int64 value = 1;
             Arg.Validate(value, nameof(value)).NotDefault();
         }
 
         [Benchmark]
-        public void NotDefault_Int64_Short()
+        public void ArgValidation_Int64_Short()
         {
             Int64 value = 1;
             Arg.NotDefault(value, nameof(value));
         }
 
         [Benchmark]
-        public void NotDefault_Int64_Multiple()
+        public void ArgValidation_Int64_Multiple()
         {
             Int64 value = 1;
             Arg.Validate(value, nameof(value))
@@ -156,7 +156,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
         #region Decimal
 
         [Benchmark]
-        public void NotDefault_Decimal_Native()
+        public void Native_Decimal()
         {
             Decimal value = 1;
             if (value == null)
@@ -164,21 +164,21 @@ namespace ArgValidation.Tests.Performance.MethodTests
         }
 
         [Benchmark]
-        public void NotDefault_Decimal()
+        public void ArgValidation_Decimal()
         {
             Decimal value = 1;
             Arg.Validate(value, nameof(value)).NotDefault();
         }
 
         [Benchmark]
-        public void NotDefault_Decimal_Short()
+        public void ArgValidation_Decimal_Short()
         {
             Decimal value = 1;
             Arg.NotDefault(value, nameof(value));
         }
 
         [Benchmark]
-        public void NotDefault_Decimal_Multiple()
+        public void ArgValidation_Decimal_Multiple()
         {
             Decimal value = 1;
             Arg.Validate(value, nameof(value))

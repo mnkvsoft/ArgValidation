@@ -1,7 +1,7 @@
 ﻿using System;
 using BenchmarkDotNet.Attributes;
 
-namespace ArgValidation.Tests.Performance.MethodTests
+namespace ArgValidation.Tests.Performance.MethodTests.Object
 {
     [CoreJob]
     [MemoryDiagnoser]
@@ -20,6 +20,15 @@ namespace ArgValidation.Tests.Performance.MethodTests
         public void ArgValidation()
         {
             Arg.Validate(FalseBool, nameof(FalseBool)).FailedIf(FalseBool, "error message");
+        }
+
+        [Benchmark]
+        public void ArgValidation_Multiple()
+        {
+            Arg.Validate(FalseBool, nameof(FalseBool))
+                .FailedIf(FalseBool, "error message")
+                .FailedIf(FalseBool, "error message")
+                .FailedIf(FalseBool, "error message");
         }
     }
 }
