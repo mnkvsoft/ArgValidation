@@ -6,27 +6,23 @@
     /// </summary>
     public struct Argument<T>
     {
-        internal string Name { get; }
+        internal T Value => ValidationContext<T>.ArgumentValue;
 
-        internal T Value { get; }
-
-        private ValidationOption ValidationOption { get; } 
+        internal string Name => ValidationContext<T>.ArgumentName;
 
         internal Argument(T value, string name, bool validationIsDisabled = false)
         {
-            Name = name;
-            Value = value;
-            ValidationOption = validationIsDisabled ? ValidationOption.NoValidation : ValidationOption.None;
+            ValidationContext<T>.Init(value, name, validationIsDisabled);
         }
 
-        internal bool ValidationIsDisabled() => ValidationOption == ValidationOption.NoValidation;
+        internal bool ValidationIsDisabled() => ValidationContext<T>.ValidationIsDisabled;
 
         /// <summary>
         /// Returns the value of the argument being validated
         /// </summary>
         public static implicit operator T(Argument<T> argument)
         {
-            return argument.Value;
+            return ValidationContext<T>.ArgumentValue;
         }
     }
 }
