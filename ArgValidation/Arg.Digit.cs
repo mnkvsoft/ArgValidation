@@ -635,6 +635,21 @@ namespace ArgValidation
         /// </para>
         /// </summary>
         /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
+        public static byte Zero(Expression<Func<byte>> value)
+        {
+            return Validate(value).Zero().Value;
+        }
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is not equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is not equals 0</exception>
         public static int Zero(Expression<Func<int>> value)
         {
             return Validate(value).Zero().Value;
@@ -778,6 +793,21 @@ namespace ArgValidation
         #endregion
 
         #region NotZero
+
+        /// <summary>
+        /// <para>
+        /// Throws <see cref="ArgumentException"/> if argument is equals 0
+        /// </para>
+        /// <para>
+        /// Note. For validation <see cref="Nullable{T}"/> you must first call the methods 
+        /// <see cref="ArgumentConditionExtension.IfNotNull{T}(ArgValidation.Argument{System.Nullable{T}})"/> or <see cref="Arg.IfNotNull{T}(System.Nullable{T},string)"/>
+        /// </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is equals 0</exception>
+        public static byte NotZero(Expression<Func<byte>> value)
+        {
+            return Validate(value).NotZero().Value;
+        }
 
         /// <summary>
         /// <para>

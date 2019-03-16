@@ -58,5 +58,19 @@ namespace ArgValidation.Tests.ComparableValidationTests
             var arg = new Argument<int>(maxValue + 1, "name", validationIsDisabled: true);
             arg.Max(maxValue);
         }
+
+        [Fact]
+        public void Max_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .Max(2));
+
+            Assert.Equal($"The maximum value for the argument '{nameof(value3)}' is '2'. Current value: '{value3}'",
+                exc.Message);
+        }
     }
 }

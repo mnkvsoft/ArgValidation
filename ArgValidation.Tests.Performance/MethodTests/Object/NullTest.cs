@@ -7,7 +7,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
     [MemoryDiagnoser]
     public class NullTest
     {
-        private static readonly System.Object NullObj = new System.Object();
+        private static readonly System.Object NullObj = null;
         private static readonly int? NullNullable = null;
 
         #region Object

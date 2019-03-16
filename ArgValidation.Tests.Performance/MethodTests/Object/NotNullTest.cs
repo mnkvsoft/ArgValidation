@@ -3,6 +3,8 @@ using BenchmarkDotNet.Attributes;
 
 namespace ArgValidation.Tests.Performance.MethodTests.Object
 {
+    [CoreJob]
+    [MemoryDiagnoser]
     public class NotNullTest
     {
         private static readonly System.Object Obj = new System.Object();

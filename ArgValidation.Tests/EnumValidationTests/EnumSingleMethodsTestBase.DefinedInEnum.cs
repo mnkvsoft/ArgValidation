@@ -45,5 +45,18 @@ namespace ArgValidation.Tests.EnumValidationTests
             var arg = new Argument<NotFlagsEnum>(value, "name", validationIsDisabled: true);
             arg.DefinedInEnum();
         }
+
+        [Fact]
+        public void DefinedInEnum_WithCustomException_CustomTypeException()
+        {
+            NotFlagsEnum value = (NotFlagsEnum)111;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .DefinedInEnum());
+
+            Assert.Equal($"Argument '{nameof(value)}' must be defined in enum type {typeof(NotFlagsEnum).FullName}. Current value: {value}", exc.Message);
+        }
     }
 }

@@ -46,5 +46,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.NotContains(value);
         }
+
+        [Fact]
+        public void NotContains_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NotContains("1"));
+
+            Assert.Equal($"Argument '{nameof(value)}' must not contains '1'. Current value: '{value}'", exc.Message);
+        }
     }
 }

@@ -68,5 +68,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.EndsWith("asfd");
         }
+
+        [Fact]
+        public void EndsWith_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .EndsWith("2"));
+
+            Assert.Equal($"Argument '{nameof(value)}' must ends with '2'. Current value: '{value}'", exc.Message);
+        }
     }
 }

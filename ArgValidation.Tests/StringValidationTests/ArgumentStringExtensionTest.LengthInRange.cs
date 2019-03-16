@@ -82,5 +82,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.LengthInRange(value.Length + 1, value.Length + 10);
         }
+
+        [Fact]
+        public void LengthInRange_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .LengthInRange(10, 20));
+
+            Assert.Equal($"Argument '{nameof(value)}' must be length in range 10 - 20. Current length: {value.Length}", exc.Message);
+        }
     }
 }

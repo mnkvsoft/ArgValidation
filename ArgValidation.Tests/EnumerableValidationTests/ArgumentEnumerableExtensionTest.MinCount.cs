@@ -46,5 +46,18 @@ namespace ArgValidation.Tests.EnumerableValidationTests
 
             arg.MinCount(digits.Length + 1);
         }
+
+        [Fact]
+        public void MinCount_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .MinCount(2));
+
+            Assert.Equal($"Argument '{nameof(arr)}' must contains a minimum of 2 elements. Current count elements: {arr.Length}", exc.Message);
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace ArgValidation
                 return arg;
 
             if (!string.IsNullOrEmpty(arg.Value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -37,7 +37,7 @@ namespace ArgValidation
                 return arg;
 
             if (string.IsNullOrEmpty(arg.Value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' cannot be empty or null. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -53,7 +53,7 @@ namespace ArgValidation
                 return arg;
 
             if (!string.IsNullOrWhiteSpace(arg.Value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -69,7 +69,7 @@ namespace ArgValidation
                 return arg;
 
             if (string.IsNullOrWhiteSpace(arg.Value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' cannot be empty or whitespace. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -88,7 +88,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthEqual));
 
             if (arg.Value.Length != value)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be length {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
 
             return arg;
@@ -107,7 +107,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthMoreThan));
 
             if (arg.Value.Length <= value)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be length more than {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
 
             return arg;
@@ -126,7 +126,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(LengthLessThan));
 
             if (arg.Value.Length >= value)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be length less than {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
 
             return arg;
@@ -145,7 +145,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(MaxLength));
 
             if (arg.Value.Length > value)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' has a maximum length of {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
 
             return arg;
@@ -164,7 +164,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(MinLength));
 
             if (arg.Value.Length < value)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' has a minimum length of {value}. Current length: {GetLengthValueForMessage(arg.Value)}");
 
             return arg;
@@ -184,7 +184,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfNotRange(min, max);
 
             if (!arg.Value.Length.InRange(min, max))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be length in range {min} - {max}. Current length: {GetLengthValueForMessage(arg.Value)}");
 
 
@@ -212,7 +212,7 @@ namespace ArgValidation
                 return arg;
 
             if (!ContainsPrivate(arg, value, comparisonType, methodName: nameof(Contains)))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -239,7 +239,7 @@ namespace ArgValidation
                 return arg;
 
             if (ContainsPrivate(arg, value, comparisonType, methodName: nameof(NotContains)))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must not contains {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -266,7 +266,7 @@ namespace ArgValidation
                 return arg;
 
             if (!StartsWithPrivate(arg, value, comparisonType, methodName: nameof(StartsWith)))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must starts with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -293,7 +293,7 @@ namespace ArgValidation
                 return arg;
 
             if (StartsWithPrivate(arg, value, comparisonType, methodName: nameof(NotStartsWith)))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must not starts with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -320,7 +320,7 @@ namespace ArgValidation
                 return arg;
 
             if (!EndsWithPrivate(arg, value, comparisonType, methodName: nameof(EndsWith)))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must ends with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -347,7 +347,7 @@ namespace ArgValidation
                 return arg;
 
             if (EndsWithPrivate(arg, value, comparisonType, methodName: nameof(NotEndsWith)))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must not ends with {ExceptionMessageHelper.GetStringValueForMessage(value)}. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -367,7 +367,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(arg: pattern, argName: nameof(pattern), methodName: nameof(Match));
 
             if (!StringConditionChecker.Match(arg, pattern))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be match with pattern '{pattern}'. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -387,7 +387,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentOfMethodIsNull(arg: pattern, argName: nameof(pattern), methodName: nameof(NotMatch));
 
             if (StringConditionChecker.Match(arg, pattern))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' not must be match with pattern '{pattern}'. Current value: {ExceptionMessageHelper.GetStringValueForMessage(arg.Value)}");
 
             return arg;
@@ -422,8 +422,9 @@ namespace ArgValidation
 
         private static string GetLengthValueForMessage(string value)
         {
+            // todo: cover with tests
             if (value == null)
-                return "unknown (string is null)";
+                return "undefined (string is null)";
 
             return value.Length.ToString();
         }

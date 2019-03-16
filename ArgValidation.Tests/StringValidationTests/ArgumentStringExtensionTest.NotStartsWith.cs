@@ -56,5 +56,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.NotStartsWith(value);
         }
+
+        [Fact]
+        public void NotStartsWith_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NotStartsWith("12"));
+
+            Assert.Equal($"Argument '{nameof(value)}' must not starts with '12'. Current value: '{value}'", exc.Message);
+        }
     }
 }

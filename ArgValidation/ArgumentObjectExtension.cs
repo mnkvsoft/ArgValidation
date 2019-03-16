@@ -21,7 +21,7 @@ namespace ArgValidation
                 return arg;
 
             if (!ObjectConditionChecker.IsDefault(arg.Value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be default value. Current value: '{arg.Value}'");
             return arg;
         }
@@ -36,7 +36,7 @@ namespace ArgValidation
                 return arg;
 
             if (ObjectConditionChecker.IsDefault(arg.Value))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not default value");
+                ValidationErrorExceptionThrower.ArgumentException(arg, $"Argument '{arg.Name}' must be not default value");
 
             return arg;
         }
@@ -51,7 +51,7 @@ namespace ArgValidation
                 return;
 
             if (arg.Value != null)
-                ValidationErrorExceptionThrower.ArgumentException(GetMessageFotNullValidation(arg));
+                ValidationErrorExceptionThrower.ArgumentException(arg, GetMessageFotNullValidation(arg));
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace ArgValidation
                 return;
 
             if (arg.Value != null)
-                ValidationErrorExceptionThrower.ArgumentException(GetMessageFotNullValidation(arg));
+                ValidationErrorExceptionThrower.ArgumentException(arg, GetMessageFotNullValidation(arg));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace ArgValidation
                 return arg;
 
             if (arg.Value == null)
-                ValidationErrorExceptionThrower.ArgumentNullException(arg.Name);
+                ValidationErrorExceptionThrower.ArgumentNullException(arg);
 
             return arg;
         }
@@ -98,7 +98,7 @@ namespace ArgValidation
                 return arg;
 
             if (!ObjectConditionChecker.IsEqual(arg.Value, value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be equal '{value}'. Current value: '{arg.Value}'");
 
             return arg;
@@ -114,7 +114,7 @@ namespace ArgValidation
                 return arg;
 
             if (ObjectConditionChecker.IsEqual(arg.Value, value))
-                ValidationErrorExceptionThrower.ArgumentException($"Argument '{arg.Name}' must be not equal '{value}'");
+                ValidationErrorExceptionThrower.ArgumentException(arg, $"Argument '{arg.Name}' must be not equal '{value}'");
 
             return arg;
         }
@@ -131,7 +131,7 @@ namespace ArgValidation
 
             if (!ObjectConditionChecker.In(arg, values))
             {
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' can only have the following values: {values.JoinForMessage()}. Current value: '{arg.Value}'");
             }
 
@@ -150,7 +150,7 @@ namespace ArgValidation
 
             if (ObjectConditionChecker.In(arg, values))
             {
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' can not have the following values: {values.JoinForMessage()}. Current value: {arg.Value.GetStringValueForMessage()}");
             }
 
@@ -167,32 +167,10 @@ namespace ArgValidation
                 return arg;
 
             if (condition)
-                ValidationErrorExceptionThrower.ArgumentException(message + Environment.NewLine + $"Argument name: '{arg.Name}'");
+                ValidationErrorExceptionThrower.ArgumentException(arg, message + Environment.NewLine + $"Argument name: '{arg.Name}'");
 
             return arg;
         }
-
-        /// <summary>
-        /// Throws <see cref="ArgumentException"/> if the argument is not contained in <paramref name="values"/>
-        /// </summary>
-        /// <exception cref="ArgumentException">Throws if the argument is not contained in <paramref name="values"/></exception>
-        /// <exception cref="ArgValidationException">Throws if <paramref name="values"/> is <c>null</c></exception>
-        [Obsolete("Use In method")]
-        public static Argument<T> OnlyValues<T>(this Argument<T> arg, params T[] values)
-        {
-            if (arg.ValidationIsDisabled())
-                return arg;
-
-            if (!ObjectConditionChecker.In(arg, values))
-            {
-                var valuesStr = string.Join(", ", values.Select(v => $"'{v}'"));
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{arg.Name}' must have only values: {valuesStr}. Current value: '{arg.Value}'");
-            }
-
-            return arg;
-        }
-
 
         private static string GetMessageFotNullValidation<T>(Argument<T> arg)
         {

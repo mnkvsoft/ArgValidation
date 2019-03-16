@@ -87,5 +87,19 @@ namespace ArgValidation.Tests.ComparableValidationTests
             var arg = new Argument<int>(max + 1, "name", validationIsDisabled: true);
             arg.InRange(min, max);
         }
+
+        [Fact]
+        public void InRange_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .InRange(4, 5));
+
+            Assert.Equal($"Argument '{nameof(value3)}' must be in range from '4' to '5'. Current value: '{value3}'",
+                exc.Message);
+        }
     }
 }

@@ -70,5 +70,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.Contains("asfd");
         }
+
+        [Fact]
+        public void Contains_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .Contains("4"));
+
+            Assert.Equal($"Argument '{nameof(value)}' must contains '4'. Current value: '{value}'", exc.Message);
+        }
     }
 }
