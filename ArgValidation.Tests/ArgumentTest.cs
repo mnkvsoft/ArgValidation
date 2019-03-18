@@ -26,5 +26,14 @@ namespace ArgValidation.Tests
             string value2 = arg;
             Assert.Equal(value, value2);
         }
+
+        [Fact]
+        public void With_CustomException_CustomExceptionTypeIsSetToValidationContext()
+        {
+            Argument<string> arg = new Argument<string>("value", "name");
+            arg.With<CustomException>();
+
+            Assert.Equal(typeof(CustomException), arg.CustomExceptionType);
+        }
     }
 }

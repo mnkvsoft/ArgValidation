@@ -35,5 +35,21 @@ namespace ArgValidation.Tests.ObjectValidationTests
             var arg = new Argument<int>(1, "name", validationIsDisabled: true);
             arg.FailedIf(true, "message");
         }
+
+        [Fact]
+        public void FailedIf_WithCustomException_CustomTypeException()
+        {
+            int value = 3;
+            string message = "failed message";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .FailedIf(value != 4, message));
+
+            Assert.Equal(message + Environment.NewLine +
+                         $"Argument name: '{nameof(value)}'",
+                exc.Message);
+        }
     }
 }

@@ -61,5 +61,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.MaxLength(value.Length - 1);
         }
+
+        [Fact]
+        public void MaxLength_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .MaxLength(1));
+
+            Assert.Equal($"Argument '{nameof(value)}' has a maximum length of 1. Current length: {value.Length}", exc.Message);
+        }
     }
 }

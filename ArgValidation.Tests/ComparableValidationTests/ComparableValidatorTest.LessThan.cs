@@ -60,5 +60,19 @@ namespace ArgValidation.Tests.ComparableValidationTests
             var arg = new Argument<int>(lessThan, "name", validationIsDisabled: true);
             arg.LessThan(lessThan);
         }
+
+        [Fact]
+        public void LessThan_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .LessThan(2));
+
+            Assert.Equal($"Argument '{nameof(value3)}' must be less than '2'. Current value: '{value3}'",
+                exc.Message);
+        }
     }
 }

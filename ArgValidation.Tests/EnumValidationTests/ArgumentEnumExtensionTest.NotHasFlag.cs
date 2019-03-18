@@ -54,5 +54,18 @@ namespace ArgValidation.Tests.EnumValidationTests
             var arg =new Argument<FlagsEnum>(argValue, nameof(argValue), validationIsDisabled: true);
             arg.NotHasFlag(FlagsEnum.Value1);
         }
+
+        [Fact]
+        public void NotHasFlag_WithCustomException_CustomTypeException()
+        {
+            FlagsEnum value = FlagsEnum.Value0;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NotHasFlag(value));
+
+            Assert.Equal($"Argument '{nameof(value)}' must not have the nexts flag(s): {value}. Current value: {value}", exc.Message);
+        }
     }
 }

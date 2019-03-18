@@ -27,5 +27,19 @@ namespace ArgValidation.Tests.ObjectValidationTests
             var arg = new Argument<int>(value, "name", validationIsDisabled: true);
             arg.Equal(value + 1);
         }
+
+        [Fact]
+        public void Equal_WithCustomException_CustomTypeException()
+        {
+            object obj1 = new object();
+            object obj2 = new object();
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(obj1, nameof(obj1))
+                    .With<CustomException>()
+                        .Equal(obj2));
+
+            Assert.Equal($"Argument '{nameof(obj1)}' must be equal '{obj2}'. Current value: '{obj1}'", exc.Message);
+        }
     }
 }

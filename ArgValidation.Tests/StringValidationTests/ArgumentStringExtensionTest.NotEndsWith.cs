@@ -56,5 +56,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.NotEndsWith(value);
         }
+
+        [Fact]
+        public void NotEndsWith_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NotEndsWith("23"));
+
+            Assert.Equal($"Argument '{nameof(value)}' must not ends with '23'. Current value: '{value}'", exc.Message);
+        }
     }
 }

@@ -83,6 +83,7 @@ namespace ArgValidation.Tests.Performance
             //BenchmarkRunner.Run<IfNotNullTest>();
 
             BenchmarkRunner.Run<ComplexTest>();
+            //BenchmarkRunner.Run<WithTest>();
         }
     }
 }

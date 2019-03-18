@@ -10,32 +10,34 @@ namespace ArgValidation.Tests
         protected abstract void RunPositive(Expression<Func<int>> value);
         protected abstract void RunPositive(Expression<Func<long>> value);
         protected abstract void RunPositive(Expression<Func<decimal>> value); 
-        protected abstract void RunPositive(Expression<Func<float>> value); 
-        
+        protected abstract void RunPositive(Expression<Func<float>> value);
+
         protected abstract void RunPositiveOrZero(Expression<Func<double>> value); 
         protected abstract void RunPositiveOrZero(Expression<Func<int>> value);
         protected abstract void RunPositiveOrZero(Expression<Func<long>> value);
         protected abstract void RunPositiveOrZero(Expression<Func<decimal>> value); 
-        protected abstract void RunPositiveOrZero(Expression<Func<float>> value); 
-        
+        protected abstract void RunPositiveOrZero(Expression<Func<float>> value);
+
+        protected abstract void RunZero(Expression<Func<byte>> value);
         protected abstract void RunZero(Expression<Func<double>> value); 
         protected abstract void RunZero(Expression<Func<int>> value);
         protected abstract void RunZero(Expression<Func<long>> value);
         protected abstract void RunZero(Expression<Func<decimal>> value); 
-        protected abstract void RunZero(Expression<Func<float>> value); 
-        
+        protected abstract void RunZero(Expression<Func<float>> value);
+
+        protected abstract void RunNotZero(Expression<Func<byte>> value);
         protected abstract void RunNotZero(Expression<Func<double>> value);
         protected abstract void RunNotZero(Expression<Func<int>> value);
         protected abstract void RunNotZero(Expression<Func<long>> value);
         protected abstract void RunNotZero(Expression<Func<decimal>> value);
         protected abstract void RunNotZero(Expression<Func<float>> value);
-        
+
         protected abstract void RunNegative(Expression<Func<double>> value); 
         protected abstract void RunNegative(Expression<Func<int>> value);
         protected abstract void RunNegative(Expression<Func<long>> value);
         protected abstract void RunNegative(Expression<Func<decimal>> value); 
-        protected abstract void RunNegative(Expression<Func<float>> value); 
-        
+        protected abstract void RunNegative(Expression<Func<float>> value);
+
         protected abstract void RunNegativeOrZero(Expression<Func<double>> value); 
         protected abstract void RunNegativeOrZero(Expression<Func<int>> value);
         protected abstract void RunNegativeOrZero(Expression<Func<long>> value);
@@ -48,7 +50,6 @@ namespace ArgValidation.Tests
         [InlineData(1)]
         [InlineData(10)]
         [InlineData(100)]
-        [InlineData(1000)]
         public void Positive_ValueMoreThanZero_Ok(double doubleValue)
         {
             var intValue = (int)Math.Ceiling(doubleValue);
@@ -70,7 +71,6 @@ namespace ArgValidation.Tests
         [InlineData(-1)]
         [InlineData(-10)]
         [InlineData(-100)]
-        [InlineData(-1000)]
         public void Positive_ValueLessOrEqualsZero_Exception(double doubleValue)
         {
             var intValue = (int) Math.Floor(doubleValue);
@@ -92,7 +92,6 @@ namespace ArgValidation.Tests
         [InlineData(1)]
         [InlineData(10)]
         [InlineData(100)]
-        [InlineData(1000)]
         public void PositiveOrZero_ValueMoreOrEqualsZero_Ok(double doubleValue)
         {
             var intValue = (int) Math.Ceiling(doubleValue);
@@ -113,7 +112,6 @@ namespace ArgValidation.Tests
         [InlineData(-1)]
         [InlineData(-10)]
         [InlineData(-100)]
-        [InlineData(-1000)]
         public void PositiveOrZero_ValueLessThanZero_Exception(double doubleValue)
         {
             var intValue = (int) Math.Floor(doubleValue);
@@ -129,7 +127,6 @@ namespace ArgValidation.Tests
         }
 
         [Theory]
-        [InlineData(1000)]
         [InlineData(100)]
         [InlineData(10)]
         [InlineData(1)]
@@ -140,14 +137,15 @@ namespace ArgValidation.Tests
         [InlineData(-1)]
         [InlineData(-10)]
         [InlineData(-100)]
-        [InlineData(-1000)]
         public void Zero_ValueNotEqualsZero_Exception(double doubleValue)
         {
+            var byteValue = doubleValue < 0 ? (byte)Math.Floor(doubleValue) : (byte)Math.Ceiling(doubleValue);
             var intValue = doubleValue < 0 ? (int) Math.Floor(doubleValue) : (int) Math.Ceiling(doubleValue);
             var longValue = doubleValue < 0 ? (long)Math.Floor(doubleValue) : (long)Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
             var floatValue = (float) doubleValue;
 
+            Assert.Throws<ArgumentException>(() => RunZero(() => byteValue));
             Assert.Throws<ArgumentException>(() => RunZero(() => doubleValue));
             Assert.Throws<ArgumentException>(() => RunZero(() => intValue));
             Assert.Throws<ArgumentException>(() => RunZero(() => longValue));
@@ -158,6 +156,7 @@ namespace ArgValidation.Tests
         [Fact]
         public void Zero_ValueEqualsZero_Ok()
         {
+            RunZero(() => (byte)0);
             RunZero(() => 0.0);
             RunZero(() => 0);
             RunZero(() => 0L);
@@ -166,7 +165,6 @@ namespace ArgValidation.Tests
         }
         
         [Theory]
-        [InlineData(1000)]
         [InlineData(100)]
         [InlineData(10)]
         [InlineData(1)]
@@ -177,16 +175,18 @@ namespace ArgValidation.Tests
         [InlineData(-1)]
         [InlineData(-10)]
         [InlineData(-100)]
-        [InlineData(-1000)]
         public void NotZero_ValueNotEqualsZero_Ok(double doubleValue)
         {
+            var byteValue = doubleValue < 0 ? (byte)Math.Floor(doubleValue) : (byte)Math.Ceiling(doubleValue);
             var intValue = doubleValue < 0 ? (int) Math.Floor(doubleValue) : (int) Math.Ceiling(doubleValue);
             var longValue = doubleValue < 0 ? (long)Math.Floor(doubleValue) : (long)Math.Ceiling(doubleValue);
             var decimalValue = (decimal) doubleValue;
             var floatValue = (float) doubleValue;
 
+            RunNotZero(() => byteValue);
             RunNotZero(() => doubleValue);
             RunNotZero(() => intValue);
+            RunNotZero(() => longValue);
             RunNotZero(() => decimalValue);
             RunNotZero(() => floatValue);
         }
@@ -194,6 +194,7 @@ namespace ArgValidation.Tests
         [Fact]
         public void NotZero_ValueEqualsZero_Exception()
         {
+            Assert.Throws<ArgumentException>(() => RunNotZero(() => (byte)0));
             Assert.Throws<ArgumentException>(() => RunNotZero(() => 0.0));
             Assert.Throws<ArgumentException>(() => RunNotZero(() => 0));
             Assert.Throws<ArgumentException>(() => RunNotZero(() => 0L));
@@ -207,7 +208,6 @@ namespace ArgValidation.Tests
         [InlineData(-1)]
         [InlineData(-10)]
         [InlineData(-100)]
-        [InlineData(-1000)]
         public void Negative_ValueLessThanZero_Ok(double doubleValue)
         {
             var intValue = (int) Math.Floor(doubleValue);
@@ -229,7 +229,6 @@ namespace ArgValidation.Tests
         [InlineData(1)]
         [InlineData(10)]
         [InlineData(100)]
-        [InlineData(1000)]
         public void Negative_ValueMoreOrEqualsZero_Exception(double doubleValue)
         {
             var intValue = (int) Math.Ceiling(doubleValue);
@@ -251,7 +250,6 @@ namespace ArgValidation.Tests
         [InlineData(-1)]
         [InlineData(-10)]
         [InlineData(-100)]
-        [InlineData(-1000)]
         public void NegativeOrZero_ValueLessOrEqualsZero_Ok(double doubleValue)
         {
             var intValue = (int) Math.Floor(doubleValue);
@@ -272,7 +270,6 @@ namespace ArgValidation.Tests
         [InlineData(1)]
         [InlineData(10)]
         [InlineData(100)]
-        [InlineData(1000)]
         public void NegativeOrZero_ValueMoreThanZero_Exception(double doubleValue)
         {
             var intValue = (int) Math.Ceiling(doubleValue);

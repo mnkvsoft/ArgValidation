@@ -27,7 +27,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentIsNullForCount(arg);
 
             if (!arg.Value.CountEquals(value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg,
                     $"Argument '{arg.Name}' must contains {value} elements. Current count elements: {arg.Value.Count()}");
 
             return arg;
@@ -47,7 +47,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentIsNullForCount(arg);
 
             if (arg.Value.CountEquals(value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' not must contains {arg.Value.Count()} elements");
 
             return arg;
@@ -67,7 +67,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentIsNullForCount(arg);
 
             if (!arg.Value.CountMoreThan(value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must contains more than {value} elements. Current count elements: {arg.Value.Count()}");
 
             return arg;
@@ -87,7 +87,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentIsNullForCount(arg);
 
             if (!arg.Value.CountLessThan(value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must contains less than {value} elements. Current count elements: {arg.Value.Count()}");
 
             return arg;
@@ -107,7 +107,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentIsNullForCount(arg);
 
             if (arg.Value.CountLessThan(value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must contains a minimum of {value} elements. Current count elements: {arg.Value.Count()}");
 
             return arg;
@@ -127,7 +127,7 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentIsNullForCount(arg);
 
             if (arg.Value.CountMoreThan(value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must contains a maximum of {value} elements. Current count elements: {arg.Value.Count()}");
 
             return arg;
@@ -147,8 +147,9 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(Contains));
 
             if (!arg.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+            // todo: current values
 
             return arg;
         }
@@ -167,8 +168,9 @@ namespace ArgValidation
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(NotContains));
 
             if (arg.Value.Contains(elem))
-                ValidationErrorExceptionThrower.ArgumentException(
-                    $"Argument '{arg.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
+                    $"Argument '{arg.Name}' contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value");
+            // todo: current values
 
             return arg;
         }
@@ -188,8 +190,9 @@ namespace ArgValidation
 
             var currentCount = arg.Value.Count();
             if (currentCount > 0)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be empty");
+            // todo: current values
 
             return arg;
         }
@@ -209,7 +212,7 @@ namespace ArgValidation
 
             var currentCount = arg.Value.Count();
             if (currentCount < 1)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be not empty");
 
             return arg;
@@ -230,7 +233,7 @@ namespace ArgValidation
 
             var currentCount = arg.Value.Count();
             if (currentCount > 0)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be null or empty");
 
             return arg;
@@ -247,12 +250,12 @@ namespace ArgValidation
                 return arg;
 
             if (arg.Value == null)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be null or empty. Current value is null");
 
             var currentCount = arg.Value.Count();
             if (currentCount < 1)
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be null or empty. Current value is empty");
 
             return arg;

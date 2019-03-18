@@ -12,5 +12,18 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.NullOrWhitespace();
         }
+
+        [Fact]
+        public void NullOrWhitespace_WithCustomException_CustomTypeException()
+        {
+            string value = "value";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NullOrWhitespace());
+
+            Assert.Equal($"Argument '{nameof(value)}' must be empty or whitespace. Current value: '{value}'", exc.Message);
+        }
     }
 }

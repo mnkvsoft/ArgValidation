@@ -57,5 +57,19 @@ namespace ArgValidation.Tests.ComparableValidationTests
             var arg = new Argument<int>(minValue - 1, "name", validationIsDisabled: true);
             arg.Min(minValue);
         }
+
+        [Fact]
+        public void Min_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .Min(4));
+
+            Assert.Equal($"The minimum value for the argument '{nameof(value3)}' is '4'. Current value: '{value3}'",
+                exc.Message);
+        }
     }
 }

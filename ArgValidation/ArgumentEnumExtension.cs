@@ -19,7 +19,7 @@ namespace ArgValidation
                 return arg;
 
             if (!DefinedInEnum(arg.Value))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must be defined in enum type {typeof(TEnum).FullName}. Current value: {arg.Value}");
 
             return arg;
@@ -35,7 +35,7 @@ namespace ArgValidation
                 return arg;
 
             if (!arg.Value.HasFlag(flag))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must have the nexts flag(s): {flag}. Current value: {arg.Value}");
 
             return arg;
@@ -51,7 +51,7 @@ namespace ArgValidation
                 return arg;
 
             if (arg.Value.HasFlag(flag))
-                ValidationErrorExceptionThrower.ArgumentException(
+                ValidationErrorExceptionThrower.ArgumentException(arg, 
                     $"Argument '{arg.Name}' must not have the nexts flag(s): {flag}. Current value: {arg.Value}");
 
             return arg;

@@ -56,5 +56,18 @@ namespace ArgValidation.Tests.EnumerableValidationTests
 
             arg.MaxCount(digits.Length - 1);
         }
+
+        [Fact]
+        public void MaxCount_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1, 2};
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .MaxCount(1));
+
+            Assert.Equal($"Argument '{nameof(arr)}' must contains a maximum of 1 elements. Current count elements: {arr.Length}", exc.Message);
+        }
     }
 }

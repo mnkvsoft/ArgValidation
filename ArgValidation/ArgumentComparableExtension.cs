@@ -26,7 +26,7 @@ namespace ArgValidation
                 return arg;
 
             if (!CompatableConditionChecker.MoreThan(arg, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(arg,
                     $"Argument '{arg.Name}' must be more than '{value}'. Current value: '{arg.Value}'");
 
             return arg;
@@ -49,7 +49,7 @@ namespace ArgValidation
                 return arg;
 
             if (!CompatableConditionChecker.LessThan(arg, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(arg,
                     $"Argument '{arg.Name}' must be less than '{value}'. Current value: '{arg.Value}'");
 
             return arg;
@@ -72,7 +72,7 @@ namespace ArgValidation
                 return arg;
 
             if (!CompatableConditionChecker.Max(arg, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(arg,
                     $"The maximum value for the argument '{arg.Name}' is '{value}'. Current value: '{arg.Value}'");
 
             return arg;
@@ -95,7 +95,7 @@ namespace ArgValidation
                 return arg;
 
             if (!CompatableConditionChecker.Min(arg, value))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(arg,
                     $"The minimum value for the argument '{arg.Name}' is '{value}'. Current value: '{arg.Value}'");
 
             return arg;
@@ -124,7 +124,7 @@ namespace ArgValidation
                 return arg;
 
             if (!CompatableConditionChecker.InRange(arg, min, max))
-                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(
+                ValidationErrorExceptionThrower.ArgumentOutOfRangeException(arg,
                     $"Argument '{arg.Name}' must be in range from '{min}' to '{max}'. Current value: '{arg.Value}'");
 
             return arg;

@@ -59,5 +59,19 @@ namespace ArgValidation.Tests.ComparableValidationTests
             var arg = new Argument<int>(moreThanValue, "name", validationIsDisabled: true);
             arg.MoreThan(moreThanValue);
         }
+
+        [Fact]
+        public void MoreThan_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .MoreThan(4));
+
+            Assert.Equal($"Argument '{nameof(value3)}' must be more than '4'. Current value: '{value3}'",
+                exc.Message);
+        }
     }
 }
