@@ -74,10 +74,11 @@ When writing business logic classes, it is almost always necessary to check the 
 ```
 ## Get started
 
-All checks begin with a reference to the static class `Arg`.
-Then there are 2 ways:
+All checks begin with a reference to the static class `Arg`
 
-- Call the Validate method, which provides all the possible methods for validation the argument using a fluent API.
+### Basic validation
+
+Call the Validate method, which provides all the possible methods for validation the argument using a fluent API
 
 ```cs
 // example
@@ -87,7 +88,9 @@ Arg.Validate(personName, nameof (personName))
      .LengthInRange(1, 30);
 ```
 
-- If you want to perform only 1 validation, without passing any additional parameters to the check method (*Simple validation method*), then you can immediately call this method directly. This path does not support a fluent API.
+### Short validation
+
+If you want to perform only 1 validation, without passing any additional parameters to the check method (*Short validation method*), then you can immediately call this method directly. This path does not support a fluent API
 
 ```cs
 // example
@@ -97,16 +100,65 @@ Arg.NotDefault(birthDate, nameof (birthDate));
 Arg.PositiveOrZero(passengersCount, nameof (passengersCount));
 ```
 
+### Validation by condition
+
+If you want validation in case only if the argument is not null, then you must use the condition method
+
+```cs
+// example
+
+// passangerCount is Nullable type
+
+Arg.IfNotNull(passangerCount, nameof(passangerCount))
+      .Positive();  
+      
+// or
+
+Arg.Validate(passangerCount, nameof(passangerCount))
+     .IfNotNull(
+       .Positive();
+```
+
+*Important* For `Nullable` type before validation need always invoke `IfNotNull` method. Since variables of this type are defined specifically to be able to take the `null` value
+
+### Custom validation
+
+If the required verification method is very specific, it is necessary to use the `FailedIf` method
+
+```cs
+// example
+
+// driverShortName is string argument
+Arg.Validate(driverShortName, nameof(driverShortName))
+     .NotNullOrWhitespace()
+     .MaxLength(30)
+     .FailedIf(driverShortName.Last() != '.', "Lastname must be shorted. Last char must be '.'");
+```
+
+### Throwing out custom exception types
+
+If the required that a custom type of exception be thrown in case of failed validation, then it is necessary to call the `With` method and all subsequent methods of validation in case of failure will throw out the specified type of exceptions
+
+```cs
+// example
+
+Arg.Validate(personName, nameof (personName))
+	.With<CustomExceptionType>
+     .NotNull()
+     .LengthInRange(1, 30);
+```
+
+### Throwed exception types
 
 In the case of a failed validation, exception `ArgumentException` family is thrown.
-If for some reason the verification fails, for example, a LengthInRange is checked on an argument that is null, then `InvalidOperationException` is thrown in such cases.
+If for some reason the verification fails, for example, a LengthInRange is checked on an argument that is null, then `ArgValidationException` is thrown in such cases.
 
-*Important*. The library throws exceptions to the `ArgumentException` family, only in the case of a failed validaton, in all other cases, an `InvalidOperationException` is thrown.
+*Important*. The library throws exceptions to the `ArgumentException` family, only in the case of a failed validaton, in all other cases, an `ArgValidationException` is thrown.
 
 ## Complete list of validation methods
 
--s is labeled *simple validation methods.*
-*Simple validation method* is a validation method that does not require additional parameters for validation, except for the validated argument itself.
+-s is labeled *short validation methods.*
+*Short validation method* is a validation method that does not require additional parameters for validation, except for the validated argument itself.
 Methods are available directly by calling the class `Arg`.
 
 
@@ -119,6 +171,7 @@ For `Object`:
 - `Equal`
 - `NotEqual`
 - `OnlyValues`
+- `FailedIf`
 
 For `IComparable <T>`:
 
@@ -144,6 +197,10 @@ For `string`:
 - `NotContains`
 - `Match`
 - `Notmatch`
+- `StartsWith`
+- `NotStartsWith`
+- `EndsWith`
+- `NotEndsWith`
 
 For `IEnumerable`:
 
@@ -160,7 +217,13 @@ For `IEnumerable`:
 - `NullOrEmpty` -s
 - `NotNullOrEmpty` -s
 
-For `int, decimal, double, float`:
+For `Enum`:
+
+- `HasFlag`
+- `NotHasFlag`
+- `DefinedInEnum`
+
+For `int, long, decimal, double, float`:
 
 - `Positive` -s
 - `PositiveOrZero` -s

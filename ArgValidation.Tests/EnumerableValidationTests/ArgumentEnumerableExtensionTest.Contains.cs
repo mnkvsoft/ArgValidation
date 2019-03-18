@@ -6,15 +6,15 @@ namespace ArgValidation.Tests.EnumerableValidationTests
     public partial class ArgumentEnumerableExtensionTest
     {
         [Fact]
-        public void Contains_ValuesIsNull_InvalidOperationException()
+        public void Contains_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
             
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
                 Arg.Validate(() => nullValue)
                     .Contains(new object()));
             
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Contains' method", exc.Message);
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'Contains' method", exc.Message);
         }
 
         [Fact]
@@ -70,6 +70,19 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
 
             arg.Contains(notContainsValue);
+        }
+
+        [Fact]
+        public void Contains_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1, 2 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .Contains(3));
+
+            Assert.Equal($"Argument '{nameof(arr)}' not contains '3' value", exc.Message);
         }
     }
 }

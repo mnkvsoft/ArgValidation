@@ -6,26 +6,26 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void LengthInRange_MinMoreThanMax_InvalidOperationException()
+        public void LengthInRange_MinMoreThanMax_ArgValidationException()
         {
             var str = "str";
             var min5 = 5;
             var max3 = 3;
 
-            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => str).LengthInRange(min5, max3));
+            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => str).LengthInRange(min5, max3));
             Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 
         [Fact]
-        public void LengthInRange_ValueIsNull_InvalidOperationException()
+        public void LengthInRange_ValueIsNull_ArgValidationException()
         {
             string nullString = null;
             var min3 = 3;
             var max5 = 5;
 
-            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).LengthInRange(min3, max5));
+            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).LengthInRange(min3, max5));
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthInRange' method",
+                $"Argument '{nameof(nullString)}' is null. Can not execute 'LengthInRange' method",
                 exc.Message);
         }
 
@@ -81,6 +81,19 @@ namespace ArgValidation.Tests.StringValidationTests
             string value = "value";
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.LengthInRange(value.Length + 1, value.Length + 10);
+        }
+
+        [Fact]
+        public void LengthInRange_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .LengthInRange(10, 20));
+
+            Assert.Equal($"Argument '{nameof(value)}' must be length in range 10 - 20. Current length: {value.Length}", exc.Message);
         }
     }
 }

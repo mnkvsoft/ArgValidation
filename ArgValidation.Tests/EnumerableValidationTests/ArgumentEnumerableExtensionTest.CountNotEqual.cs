@@ -6,10 +6,10 @@ namespace ArgValidation.Tests.EnumerableValidationTests
     public partial class ArgumentEnumerableExtensionTest
     {
         [Fact]
-        public void CountNotEqual_ValuesIsNull_InvalidOperationException()
+        public void CountNotEqual_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).CountNotEqual(0));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullValue).CountNotEqual(0));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
@@ -35,6 +35,19 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
 
             arg.CountNotEqual(digits.Length);
+        }
+
+        [Fact]
+        public void CountNotEqual_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .CountNotEqual(1));
+
+            Assert.Equal($"Argument '{nameof(arr)}' not must contains {arr.Length} elements", exc.Message);
         }
     }
 }

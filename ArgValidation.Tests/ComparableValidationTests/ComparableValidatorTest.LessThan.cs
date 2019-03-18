@@ -30,11 +30,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void LessThan_ArgumentIsNull_InvalidOperationException()
+        public void LessThan_ArgumentIsNull_ArgValidationException()
         {
             ComparableClass nullValue = null;
             ComparableClass lessThanValue = new ComparableClass();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => nullValue).LessThan(lessThanValue);
             });
@@ -42,11 +42,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void LessThan_LessThanArgumentIsNull_InvalidOperationException()
+        public void LessThan_LessThanArgumentIsNull_ArgValidationException()
         {
             ComparableClass value = new ComparableClass();
             ComparableClass lessThanNull = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => value).LessThan(lessThanNull);
             });
@@ -59,6 +59,20 @@ namespace ArgValidation.Tests.ComparableValidationTests
             int lessThan = 1;
             var arg = new Argument<int>(lessThan, "name", validationIsDisabled: true);
             arg.LessThan(lessThan);
+        }
+
+        [Fact]
+        public void LessThan_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .LessThan(2));
+
+            Assert.Equal($"Argument '{nameof(value3)}' must be less than '2'. Current value: '{value3}'",
+                exc.Message);
         }
     }
 }

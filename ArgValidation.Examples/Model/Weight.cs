@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArgValidation.Examples
+namespace ArgValidation.Examples.Model
 {
     public struct Weight : IComparable<Weight>
     {

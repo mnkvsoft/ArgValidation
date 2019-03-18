@@ -6,14 +6,26 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void Contains_ArgumentIsNull_InvalidOperationException()
+        public void Contains_ArgumentIsNull_ArgValidationException()
         {
             string nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => nullValue).Contains("");
             });
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'Contains' method", exc.Message);            
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'Contains' method", exc.Message);            
+        }
+
+        [Fact]
+        public void Contains_ValueIsNull_ArgValidationException()
+        {
+            string arg = "value";
+            string nullValue = null;
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
+            {
+                Arg.Validate(() => arg).Contains(nullValue);
+            });
+            Assert.Equal($"Argument 'value' of method 'Contains' is null. Can not execute 'Contains' method", exc.Message);
         }
 
         [Fact]
@@ -24,35 +36,31 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void Contains_ValueNotContainsArgument_ArgumentException()
+        public void Contains_ArgumentNotContainsValue_ArgumentException()
         {
-            string value = "qwe";
-            string arg = "123";
+            string arg = "qwe";
+            string value = "123";
             ArgumentException exc = Assert.Throws<ArgumentException>(() =>
             {
-                Arg.Validate(() => value).Contains(arg);
+                Arg.Validate(() => arg).Contains(value);
             });
-            Assert.Equal($"Argument '{nameof(value)}' must contains '{arg}'. Current value: '{value}'", exc.Message);
+            Assert.Equal($"Argument '{nameof(arg)}' must contains '{value}'. Current value: '{arg}'", exc.Message);
         }
 
         [Fact]
-        public void Contains_ValueContainsArgument_Ok()
+        public void Contains_ArgumentContainsValue_Ok()
         {
-            string value = "string";
-            string substring = value.Substring(3);
-            Arg.Validate(() => value).Contains(substring);
+            string arg = "string";
+            string substring = arg.Substring(3);
+            Arg.Validate(() => arg).Contains(substring);
         }
 
         [Fact]
-        public void Contains_ValueNotNullButArgumentIsNull_ArgumentException()
+        public void Contains_ArgumentContainsValueWithIgnoreCase_Ok()
         {
-            string value = "value";
-            string nullArg = null;
-            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
-            {
-                Arg.Validate(() => value).Contains(nullArg);
-            });
-            Assert.Equal($"Argument '{nameof(value)}' must contains null. Current value: '{value}'", exc.Message);
+            string arg = "string";
+            string substring = "STR";
+            Arg.Validate(() => arg).Contains(substring, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -61,6 +69,19 @@ namespace ArgValidation.Tests.StringValidationTests
             string value = "value";
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.Contains("asfd");
+        }
+
+        [Fact]
+        public void Contains_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .Contains("4"));
+
+            Assert.Equal($"Argument '{nameof(value)}' must contains '4'. Current value: '{value}'", exc.Message);
         }
     }
 }

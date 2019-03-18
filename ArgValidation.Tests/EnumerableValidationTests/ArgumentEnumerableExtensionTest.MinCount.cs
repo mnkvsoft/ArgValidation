@@ -6,10 +6,10 @@ namespace ArgValidation.Tests.EnumerableValidationTests
     public partial class ArgumentEnumerableExtensionTest
     {
         [Fact]
-        public void MinCount_ValuesIsNull_InvalidOperationException()
+        public void MinCount_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).MinCount(0));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullValue).MinCount(0));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
@@ -45,6 +45,19 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
 
             arg.MinCount(digits.Length + 1);
+        }
+
+        [Fact]
+        public void MinCount_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .MinCount(2));
+
+            Assert.Equal($"Argument '{nameof(arr)}' must contains a minimum of 2 elements. Current count elements: {arr.Length}", exc.Message);
         }
     }
 }

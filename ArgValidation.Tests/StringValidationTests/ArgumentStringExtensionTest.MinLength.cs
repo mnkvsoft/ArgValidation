@@ -6,12 +6,12 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void MinLength_ArgumentIsNull_InvalidOperationException()
+        public void MinLength_ArgumentIsNull_ArgValidationException()
         {
             int length = 2;
             string nullString = null;
-            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).MinLength(length));
-            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'MinLength' method", exc.Message);
+            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).MinLength(length));
+            Assert.Equal($"Argument '{nameof(nullString)}' is null. Can not execute 'MinLength' method", exc.Message);
         }
 
         [Fact]
@@ -45,6 +45,19 @@ namespace ArgValidation.Tests.StringValidationTests
             string value = "asdf";
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.MinLength(value.Length + 1);
+        }
+
+        [Fact]
+        public void MinLength_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .MinLength(10));
+
+            Assert.Equal($"Argument '{nameof(value)}' has a minimum length of 10. Current length: {value.Length}", exc.Message);
         }
     }
 }

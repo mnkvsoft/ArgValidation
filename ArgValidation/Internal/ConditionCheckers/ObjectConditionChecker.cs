@@ -17,7 +17,7 @@ namespace ArgValidation.Internal.ConditionCheckers
             return EqualityComparer<T>.Default.Equals(obj1, obj2);
         }
         
-        internal static bool OnlyValues<T>(Argument<T> arg, T[] values)
+        internal static bool In<T>(Argument<T> arg, T[] values)
         {
             InvalidMethodArgumentThrower.IfArgumentIsNullForOnlyValues(values, nameof(values));
             return values.Any(x => IsEqual(arg.Value, x));

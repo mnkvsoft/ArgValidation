@@ -6,10 +6,10 @@ namespace ArgValidation.Tests.EnumerableValidationTests
     public partial class ArgumentEnumerableExtensionTest
     {
         [Fact]
-        public void MaxCount_ValuesIsNull_InvalidOperationException()
+        public void MaxCount_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => 
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => 
                 Arg.Validate(() => nullValue)
                     .MaxCount(0));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
@@ -55,6 +55,19 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
 
             arg.MaxCount(digits.Length - 1);
+        }
+
+        [Fact]
+        public void MaxCount_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1, 2};
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .MaxCount(1));
+
+            Assert.Equal($"Argument '{nameof(arr)}' must contains a maximum of 1 elements. Current count elements: {arr.Length}", exc.Message);
         }
     }
 }

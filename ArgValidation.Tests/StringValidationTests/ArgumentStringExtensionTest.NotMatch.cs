@@ -23,19 +23,19 @@ namespace ArgValidation.Tests.StringValidationTests
         }
 
         [Fact]
-        public void NotMatch_ArgumentValueIsNull_InvalidOperationException()
+        public void NotMatch_ArgumentValueIsNull_ArgValidationException()
         {
             string nullValue = null;
             const string pattern = "\\d{10}";
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(nullValue, nameof(nullValue)).NotMatch(pattern));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotMatch' method", exc.Message);
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(nullValue, nameof(nullValue)).NotMatch(pattern));
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'NotMatch' method", exc.Message);
         }
 
         [Fact]
-        public void NotMatch_Pattern_InvalidOperationException()
+        public void NotMatch_Pattern_ArgValidationException()
         {
             string argValue = "some-value";
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => 
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => 
                 Arg.Validate(argValue, nameof(argValue))
                     .NotMatch(pattern: null));
             Assert.Equal("Argument 'pattern' of method 'NotMatch' is null. Can not execute 'NotMatch' method", exc.Message);
@@ -47,6 +47,20 @@ namespace ArgValidation.Tests.StringValidationTests
             string digits = "0123456789";
             var arg = new Argument<string>(digits, "name", validationIsDisabled: true);
             arg.NotMatch("\\d+");
+        }
+
+        [Fact]
+        public void NotMatch_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            string pattern = "\\d\\d\\d";
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NotMatch(pattern));
+
+            Assert.Equal($"Argument '{nameof(value)}' not must be match with pattern '{pattern}'. Current value: '{value}'", exc.Message);
         }
     }
 }

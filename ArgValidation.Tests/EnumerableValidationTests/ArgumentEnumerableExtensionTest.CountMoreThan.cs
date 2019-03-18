@@ -6,10 +6,10 @@ namespace ArgValidation.Tests.EnumerableValidationTests
     public partial class ArgumentEnumerableExtensionTest
     {
         [Fact]
-        public void CountMoreThan_ValuesIsNull_InvalidOperationException()
+        public void CountMoreThan_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullValue).CountMoreThan(0));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullValue).CountMoreThan(0));
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not get count elements from null object", exc.Message);
         }
 
@@ -46,6 +46,19 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
 
             arg.CountMoreThan(digits.Length);
+        }
+
+        [Fact]
+        public void CountMoreThan_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .CountMoreThan(1));
+
+            Assert.Equal($"Argument '{nameof(arr)}' must contains more than 1 elements. Current count elements: {arr.Length}", exc.Message);
         }
     }
 }

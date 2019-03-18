@@ -58,24 +58,24 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void InRange_MinMoreThanMax_InvalidOperationException()
+        public void InRange_MinMoreThanMax_ArgValidationException()
         {
             int value = 1;
             int min5 = 5;
             int max3 = 3;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min5, max3));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => value).InRange(min5, max3));
             Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 
         [Fact]
-        public void InRange_MinEqualsMax_InvalidOperationException()
+        public void InRange_MinEqualsMax_ArgValidationException()
         {
             int value = 2;
             int min = 1;
             int max = min;
 
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => value).InRange(min, max));
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => value).InRange(min, max));
             Assert.Equal("Argument 'min' cannot be more or equals 'max'. Cannot define range", exc.Message);
         }
 
@@ -86,6 +86,20 @@ namespace ArgValidation.Tests.ComparableValidationTests
             int max = 2;
             var arg = new Argument<int>(max + 1, "name", validationIsDisabled: true);
             arg.InRange(min, max);
+        }
+
+        [Fact]
+        public void InRange_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .InRange(4, 5));
+
+            Assert.Equal($"Argument '{nameof(value3)}' must be in range from '4' to '5'. Current value: '{value3}'",
+                exc.Message);
         }
     }
 }

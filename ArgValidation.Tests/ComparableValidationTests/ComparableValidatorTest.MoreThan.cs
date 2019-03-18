@@ -29,11 +29,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void MoreThan_ArgumentIsNull_InvalidOperationException()
+        public void MoreThan_ArgumentIsNull_ArgValidationException()
         {
             ComparableClass nullValue = null;
             ComparableClass moreThanValue = new ComparableClass();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => nullValue).MoreThan(moreThanValue);
             });
@@ -41,11 +41,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void MoreThan_MoreThanArgumentIsNull_InvalidOperationException()
+        public void MoreThan_MoreThanArgumentIsNull_ArgValidationException()
         {
             ComparableClass value = new ComparableClass();
             ComparableClass moreThanNull = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => value).MoreThan(moreThanNull);
             });
@@ -58,6 +58,20 @@ namespace ArgValidation.Tests.ComparableValidationTests
             int moreThanValue = 1;
             var arg = new Argument<int>(moreThanValue, "name", validationIsDisabled: true);
             arg.MoreThan(moreThanValue);
+        }
+
+        [Fact]
+        public void MoreThan_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .MoreThan(4));
+
+            Assert.Equal($"Argument '{nameof(value3)}' must be more than '4'. Current value: '{value3}'",
+                exc.Message);
         }
     }
 }

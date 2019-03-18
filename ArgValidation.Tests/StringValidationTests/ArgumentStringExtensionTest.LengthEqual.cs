@@ -6,12 +6,12 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void LengthEqual_ArgumentIsNull_InvalidOperationException()
+        public void LengthEqual_ArgumentIsNull_ArgValidationException()
         {
             int length = 2;
             string nullString = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).LengthEqual(length));
-            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthEqual' method", exc.Message);
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).LengthEqual(length));
+            Assert.Equal($"Argument '{nameof(nullString)}' is null. Can not execute 'LengthEqual' method", exc.Message);
         }
 
         [Fact]
@@ -36,6 +36,19 @@ namespace ArgValidation.Tests.StringValidationTests
             string value = "value";
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.LengthEqual(value.Length + 1);
+        }
+
+        [Fact]
+        public void LengthEqual_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .LengthEqual(1));
+
+            Assert.Equal($"Argument '{nameof(value)}' must be length 1. Current length: {value.Length}", exc.Message);
         }
     }
 }

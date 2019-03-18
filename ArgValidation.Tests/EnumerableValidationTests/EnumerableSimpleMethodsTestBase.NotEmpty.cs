@@ -11,11 +11,11 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             where TEnumerable : IEnumerable;
     
         [Fact]
-        public void NotEmpty_ValuesIsNull_InvalidOperationException()
+        public void NotEmpty_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() => RunNotEmpty(() => nullValue));
-            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Сan not execute 'NotEmpty' method", exc.Message);
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() => RunNotEmpty(() => nullValue));
+            Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'NotEmpty' method", exc.Message);
         }
 
         [Fact]

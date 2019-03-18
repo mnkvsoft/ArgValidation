@@ -6,12 +6,12 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void LengthMoreThan_ArgumentIsNull_InvalidOperationException()
+        public void LengthMoreThan_ArgumentIsNull_ArgValidationException()
         {
             int length = 2;
             string nullString = null;
-            var exc = Assert.Throws<InvalidOperationException>(() => Arg.Validate(() => nullString).LengthMoreThan(length));
-            Assert.Equal($"Argument '{nameof(nullString)}' is null. Сan not execute 'LengthMoreThan' method", exc.Message);
+            var exc = Assert.Throws<ArgValidationException>(() => Arg.Validate(() => nullString).LengthMoreThan(length));
+            Assert.Equal($"Argument '{nameof(nullString)}' is null. Can not execute 'LengthMoreThan' method", exc.Message);
         }
 
         [Fact]
@@ -46,6 +46,19 @@ namespace ArgValidation.Tests.StringValidationTests
             string value = "value";
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.LengthMoreThan(value.Length + 1);
+        }
+
+        [Fact]
+        public void LengthMoreThan_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .LengthMoreThan(10));
+
+            Assert.Equal($"Argument '{nameof(value)}' must be length more than 10. Current length: {value.Length}", exc.Message);
         }
     }
 }

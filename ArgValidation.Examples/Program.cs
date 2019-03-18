@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Examples.Model;
 using ArgValidation.Examples.Model.ArgValidation.NameOf;
 
 namespace ArgValidation.Examples
@@ -15,7 +16,7 @@ namespace ArgValidation.Examples
                 releaseYear: 2005,
                 dateOfPurchase: new DateTime(2008, 02, 12));
 
-            var taxiOrder = new TaxiOrder(golfCar, passangerCount: 2);
+            var taxiOrder = new TaxiOrder(golfCar, passangerCount: 2, driverShortName: "Frank M.");
 
             Console.ReadLine();
         }

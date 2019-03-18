@@ -27,11 +27,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void Min_ArgumentIsNull_InvalidOperationException()
+        public void Min_ArgumentIsNull_ArgValidationException()
         {
             ComparableClass nullValue = null;
             ComparableClass minValue = new ComparableClass();
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => nullValue).Min(minValue);
             });
@@ -39,11 +39,11 @@ namespace ArgValidation.Tests.ComparableValidationTests
         }
 
         [Fact]
-        public void Min_MinArgumentIsNull_InvalidOperationException()
+        public void Min_MinArgumentIsNull_ArgValidationException()
         {
             ComparableClass value = new ComparableClass();
             ComparableClass minNull = null;
-            InvalidOperationException exc = Assert.Throws<InvalidOperationException>(() =>
+            ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
             {
                 Arg.Validate(() => value).Min(minNull);
             });
@@ -56,6 +56,20 @@ namespace ArgValidation.Tests.ComparableValidationTests
             int minValue = 1;
             var arg = new Argument<int>(minValue - 1, "name", validationIsDisabled: true);
             arg.Min(minValue);
+        }
+
+        [Fact]
+        public void Min_WithCustomException_CustomTypeException()
+        {
+            int value3 = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value3, nameof(value3))
+                    .With<CustomException>()
+                    .Min(4));
+
+            Assert.Equal($"The minimum value for the argument '{nameof(value3)}' is '4'. Current value: '{value3}'",
+                exc.Message);
         }
     }
 }

@@ -26,5 +26,18 @@ namespace ArgValidation.Tests.ObjectValidationTests
             var arg = new Argument<int>(value, "name", validationIsDisabled: true);
             arg.NotEqual(value);
         }
+
+        [Fact]
+        public void NotEqual_WithCustomException_CustomTypeException()
+        {
+            object obj = new object();
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(obj, nameof(obj))
+                    .With<CustomException>()
+                    .NotEqual(obj));
+
+            Assert.Equal($"Argument '{nameof(obj)}' must be not equal '{obj}'", exc.Message);
+        }
     }
 }

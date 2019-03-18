@@ -6,16 +6,16 @@ namespace ArgValidation.Tests.StringValidationTests
     public partial class ArgumentStringExtensionTest
     {
         [Fact]
-        public void MaxLength_ArgumentIsNull_InvalidOperationException()
+        public void MaxLength_ArgumentIsNull_ArgValidationException()
         {
             var length = 2;
             string nullString = null;
             
-            var exc = Assert.Throws<InvalidOperationException>(() =>
+            var exc = Assert.Throws<ArgValidationException>(() =>
                 Arg.Validate(() => nullString).MaxLength(length));
             
             Assert.Equal(
-                $"Argument '{nameof(nullString)}' is null. Сan not execute 'MaxLength' method",
+                $"Argument '{nameof(nullString)}' is null. Can not execute 'MaxLength' method",
                 exc.Message);
         }
 
@@ -60,6 +60,19 @@ namespace ArgValidation.Tests.StringValidationTests
             string value = "asdf";
             var arg = new Argument<string>(value, "name", validationIsDisabled: true);
             arg.MaxLength(value.Length - 1);
+        }
+
+        [Fact]
+        public void MaxLength_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .MaxLength(1));
+
+            Assert.Equal($"Argument '{nameof(value)}' has a maximum length of 1. Current length: {value.Length}", exc.Message);
         }
     }
 }
