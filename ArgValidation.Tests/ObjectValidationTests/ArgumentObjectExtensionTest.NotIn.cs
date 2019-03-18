@@ -46,5 +46,19 @@ namespace ArgValidation.Tests.ObjectValidationTests
             var arg = new Argument<int>(value, "name", validationIsDisabled: true);
             arg.NotIn(2, 3);
         }
+
+        [Fact]
+        public void NotIn_WithCustomException_CustomTypeException()
+        {
+            int value = 3;
+            int[] arr = { 1, 2, value };
+            
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NotIn(arr));
+
+            Assert.Equal($"Argument '{nameof(value)}' can not have the following values: '1', '2', '3'. Current value: '{value}'", exc.Message);
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             object nullObj = null;
             object[] objs = { new object(), new object(), nullObj };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => objs).NotContains(nullObj));
-            Assert.Equal($"Argument '{nameof(objs)}' not contains null value", exc.Message);
+            Assert.Equal($"Argument '{nameof(objs)}' contains null value", exc.Message);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             int value5 = 5;
             int[] digits = { 1, 2, value5 };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => Arg.Validate(() => digits).NotContains(value5));
-            Assert.Equal($"Argument '{nameof(digits)}' not contains '{value5}' value", exc.Message);
+            Assert.Equal($"Argument '{nameof(digits)}' contains '{value5}' value", exc.Message);
         }
 
         [Fact]
@@ -55,6 +55,19 @@ namespace ArgValidation.Tests.EnumerableValidationTests
             var arg = new Argument<int[]>(digits, "name", validationIsDisabled: true);
 
             arg.NotContains(digits[0]);
+        }
+
+        [Fact]
+        public void NotContains_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1, 2 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .NotContains(1));
+
+            Assert.Equal($"Argument '{nameof(arr)}' contains '1' value", exc.Message);
         }
     }
 }

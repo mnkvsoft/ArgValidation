@@ -36,5 +36,18 @@ namespace ArgValidation.Tests.EnumerableValidationTests
 
             arg.CountNotEqual(digits.Length);
         }
+
+        [Fact]
+        public void CountNotEqual_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .CountNotEqual(1));
+
+            Assert.Equal($"Argument '{nameof(arr)}' not must contains {arr.Length} elements", exc.Message);
+        }
     }
 }

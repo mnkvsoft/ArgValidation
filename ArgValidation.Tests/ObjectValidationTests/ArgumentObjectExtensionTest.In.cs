@@ -46,5 +46,19 @@ namespace ArgValidation.Tests.ObjectValidationTests
             var arg = new Argument<int>(value, "name", validationIsDisabled: true);
             arg.In(2, 3);
         }
+
+        [Fact]
+        public void In_WithCustomException_CustomTypeException()
+        {
+            int[] arr = {1, 2};
+            int value = 3;
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                        .In(arr));
+
+            Assert.Equal($"Argument '{nameof(value)}' can only have the following values: '1', '2'. Current value: '{value}'", exc.Message);
+        }
     }
 }

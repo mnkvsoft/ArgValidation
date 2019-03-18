@@ -48,5 +48,19 @@ namespace ArgValidation.Tests.StringValidationTests
             var arg = new Argument<string>(digits, "name", validationIsDisabled: true);
             arg.NotMatch("\\d+");
         }
+
+        [Fact]
+        public void NotMatch_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            string pattern = "\\d\\d\\d";
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .NotMatch(pattern));
+
+            Assert.Equal($"Argument '{nameof(value)}' not must be match with pattern '{pattern}'. Current value: '{value}'", exc.Message);
+        }
     }
 }

@@ -135,6 +135,19 @@ Arg.Validate(driverShortName, nameof(driverShortName))
      .FailedIf(driverShortName.Last() != '.', "Lastname must be shorted. Last char must be '.'");
 ```
 
+### Throwing out custom exception types
+
+If the required that a custom type of exception be thrown in case of failed validation, then it is necessary to call the `With` method and all subsequent methods of validation in case of failure will throw out the specified type of exceptions
+
+```cs
+// example
+
+Arg.Validate(personName, nameof (personName))
+	.With<CustomExceptionType>
+     .NotNull()
+     .LengthInRange(1, 30);
+```
+
 ### Throwed exception types
 
 In the case of a failed validation, exception `ArgumentException` family is thrown.

@@ -71,5 +71,18 @@ namespace ArgValidation.Tests.EnumerableValidationTests
 
             arg.Contains(notContainsValue);
         }
+
+        [Fact]
+        public void Contains_WithCustomException_CustomTypeException()
+        {
+            int[] arr = { 1, 2 };
+
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(arr, nameof(arr))
+                    .With<CustomException>()
+                    .Contains(3));
+
+            Assert.Equal($"Argument '{nameof(arr)}' not contains '3' value", exc.Message);
+        }
     }
 }

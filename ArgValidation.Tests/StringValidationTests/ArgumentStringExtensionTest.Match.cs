@@ -1,4 +1,5 @@
 ﻿using System;
+using ArgValidation.Internal;
 using Xunit;
 
 namespace ArgValidation.Tests.StringValidationTests
@@ -47,6 +48,20 @@ namespace ArgValidation.Tests.StringValidationTests
             string letters = "asdf";
             var arg = new Argument<string>(letters, "name", validationIsDisabled: true);
             arg.Match("\\d{10}");
+        }
+
+        [Fact]
+        public void Match_WithCustomException_CustomTypeException()
+        {
+            string value = "123";
+
+            string pattern = "\\d\\d\\d\\d";
+            CustomException exc = Assert.Throws<CustomException>(() =>
+                Arg.Validate(value, nameof(value))
+                    .With<CustomException>()
+                    .Match(pattern));
+
+            Assert.Equal($"Argument '{nameof(value)}' must be match with pattern '{pattern}'. Current value: '{value}'", exc.Message);
         }
     }
 }

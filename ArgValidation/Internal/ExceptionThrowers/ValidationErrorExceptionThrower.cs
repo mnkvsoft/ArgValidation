@@ -4,19 +4,28 @@ namespace ArgValidation.Internal.ExceptionThrowers
 {
     internal static class ValidationErrorExceptionThrower
     {
-        public static void ArgumentOutOfRangeException(string message)
+        public static void ArgumentOutOfRangeException<T>(Argument<T> arg, string message)
         {
+            if (arg.CustomExceptionType != null)
+                throw (Exception)Activator.CreateInstance(arg.CustomExceptionType, message);
+
             throw new ArgumentOutOfRangeException("", message);
         }
 
-        public static void ArgumentException(string message)
+        public static void ArgumentException<T>(Argument<T> arg, string message)
         {
+            if (arg.CustomExceptionType != null)
+                throw (Exception)Activator.CreateInstance(arg.CustomExceptionType, message);
+
             throw new ArgumentException(message);
         }
 
-        public static void ArgumentNullException(string paramName)
+        public static void ArgumentNullException<T>(Argument<T> arg)
         {
-            throw new ArgumentNullException(paramName);
+            if (arg.CustomExceptionType != null)
+                throw (Exception)Activator.CreateInstance(arg.CustomExceptionType, $"Argument '{arg.Name}' is null");
+
+            throw new ArgumentNullException(arg.Name);
         }
     }
 }

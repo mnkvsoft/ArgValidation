@@ -2,6 +2,8 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("ArgValidation.Tests")]
+[assembly: InternalsVisibleTo("ArgValidation.Tests.Performance")]
+
 //[assembly: AssemblyInformationalVersion("1.2.0")]
 //[assembly: AssemblyCompany("Viktor Mynkov")]
 //[assembly: AssemblyTitle("ArgValidation")]
