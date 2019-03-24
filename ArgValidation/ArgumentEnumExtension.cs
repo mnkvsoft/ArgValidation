@@ -57,7 +57,7 @@ namespace ArgValidation
             return arg;
         }
 
-        private static bool DefinedInEnum(Enum en)
+        internal static bool DefinedInEnum(Enum en)
         {
             bool result = !decimal.TryParse(en.ToString(), out _);
             return result;
