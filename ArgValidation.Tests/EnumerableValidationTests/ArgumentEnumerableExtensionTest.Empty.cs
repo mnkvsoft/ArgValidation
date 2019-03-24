@@ -22,7 +22,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
                     .With<CustomException>()
                     .Empty());
 
-            Assert.Equal($"Argument '{nameof(arr)}' must be empty", exc.Message);
+            Assert.Equal($"Argument '{nameof(arr)}' must be empty. Current value: ['1']", exc.Message);
         }
     }
 }
