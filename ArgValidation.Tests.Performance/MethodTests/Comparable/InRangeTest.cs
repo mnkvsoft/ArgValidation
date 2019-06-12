@@ -46,7 +46,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Comparable
             byte value1 = 1;
             byte value2 = 2;
             byte value3 = 3;
-            if (value2 <= value1)
+            if (!(value2 >= value1 && value2 <= value3))
                 throw new ArgumentException();
         }
 
@@ -82,7 +82,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Comparable
             Int32 value1 = 1;
             Int32 value2 = 2;
             Int32 value3 = 3;
-            if (value2 <= value1)
+            if (!(value2 >= value1 && value2 <= value3))
                 throw new ArgumentException();
         }
 
@@ -118,7 +118,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Comparable
             Int64 value1 = 1;
             Int64 value2 = 2;
             Int64 value3 = 3;
-            if (value2 <= value1)
+            if (!(value2 >= value1 && value2 <= value3))
                 throw new ArgumentException();
         }
 
@@ -154,7 +154,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Comparable
             Decimal value1 = 1;
             Decimal value2 = 2;
             Decimal value3 = 3;
-            if (value2 <= value1)
+            if (!(value2 >= value1 && value2 <= value3))
                 throw new ArgumentException();
         }
 
