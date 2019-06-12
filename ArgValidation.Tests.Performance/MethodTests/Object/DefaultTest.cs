@@ -47,7 +47,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Byte()
         {
             var value = default(Byte);
-            if (value != null)
+            if (value != 0)
                 throw new ArgumentException();
         }
 
@@ -83,7 +83,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Int32()
         {
             var value = default(Int32);
-            if (value != null)
+            if (value != 0)
                 throw new ArgumentException();
         }
 
@@ -119,7 +119,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Int64()
         {
             var value = default(Int64);
-            if (value != null)
+            if (value != 0)
                 throw new ArgumentException();
         }
 
@@ -155,7 +155,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Decimal()
         {
             var value = default(Decimal);
-            if (value != null)
+            if (value != 0)
                 throw new ArgumentException();
         }
 
