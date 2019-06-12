@@ -212,6 +212,7 @@ For `IEnumerable`:
 - `MaxCount`
 - `Contains`
 - `NotContains`
+- `NotContainsNull`
 - `Empty` -s
 - `NotEmpty` -s
 - `NullOrEmpty` -s
@@ -221,7 +222,7 @@ For `Enum`:
 
 - `HasFlag`
 - `NotHasFlag`
-- `DefinedInEnum`
+- `DefinedInEnum` -s
 
 For `int, long, decimal, double, float`:
 
@@ -236,4 +237,4 @@ For `int, long, decimal, double, float`:
 ## Used technologies
 
 - Language: C# 7.0
-- Target framefork: .NET Standard 2.0, .NET Standard 1.4, .NET Standard 1.0, .NET Framework 4.0
+- Target framework: .NET Standard 2.0, .NET Standard 1.4, .NET Standard 1.0

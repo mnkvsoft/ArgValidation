@@ -8,7 +8,7 @@ namespace ArgValidation.Tests.Internal
     public partial class IEnumerableExtensionTest
     {
         [Fact]
-        public void Count_ICollection_ResetNotInv()
+        public void Count_ICollection_ResetNotInvoke()
         {
             int count = 10;
             Assert.Equal(count, EnumerableExtension.Count(new OnlyCountCollectionMock(count)));
@@ -17,7 +17,7 @@ namespace ArgValidation.Tests.Internal
         [Fact]
         public void Count_IEnumerable_ResetWasCall()
         {
-            var enumerable = new EnumerableMock(1);
+            var enumerable = EnumerableMock.CreateNotEmpty();
             EnumerableExtension.Count(enumerable);
             Assert.True(enumerable.ResetWasCall);
         }
@@ -26,7 +26,7 @@ namespace ArgValidation.Tests.Internal
         public void Count_IEnumerableCountIsLess_False()
         {
             int count = 10;
-            Assert.Equal(count, EnumerableExtension.Count(new EnumerableMock(count)));
+            Assert.Equal(count, EnumerableExtension.Count(EnumerableMock.CreateWintCountElems(count)));
         }
     }
 }

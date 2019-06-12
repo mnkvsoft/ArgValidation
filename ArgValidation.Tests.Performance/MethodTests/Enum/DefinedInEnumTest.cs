@@ -23,12 +23,11 @@ namespace ArgValidation.Tests.Performance.MethodTests.Enum
             Arg.Validate(Value, nameof(Value)).DefinedInEnum();
         }
 
-        // todo: implement Arg.DefinedInEnum
-        //[Benchmark]
-        //public void ArgValidaton_Short()
-        //{
-        //    Arg.DefinedInEnum(Value, nameof(Value));
-        //}
+        [Benchmark]
+        public void ArgValidaton_Short()
+        {
+            Arg.DefinedInEnum(Value, nameof(Value));
+        }
 
         [Benchmark]
         public void ArgValidation_Multiple()

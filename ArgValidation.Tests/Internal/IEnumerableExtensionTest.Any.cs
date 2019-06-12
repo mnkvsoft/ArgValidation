@@ -1,5 +1,4 @@
-﻿using ArgValidation.Internal;
-using ArgValidation.Internal.Utils;
+﻿using ArgValidation.Internal.Utils;
 using ArgValidation.Tests.Mocks;
 using Xunit;
 
@@ -22,7 +21,7 @@ namespace ArgValidation.Tests.Internal
         [Fact]
         public void Any_IEnumerable_ResetWasCall()
         {
-            var enumerable = new EnumerableMock(1);
+            var enumerable = EnumerableMock.CreateNotEmpty();
             EnumerableExtension.Any(enumerable);
             Assert.True(enumerable.ResetWasCall);
         }
@@ -37,14 +36,14 @@ namespace ArgValidation.Tests.Internal
         [Fact]
         public void Any_IEnumerableIsNotEmpty_True()
         {
-            EnumerableMock notEmpty = new EnumerableMock(1);
+            EnumerableMock notEmpty = EnumerableMock.CreateNotEmpty();
             Assert.True(EnumerableExtension.Any(notEmpty));
         }
 
         [Fact]
         public void Any_IEnumerableManyElems_NoUnnecessaryIterations()
         {
-            EnumerableMock enumerable = new EnumerableMock(9);
+            EnumerableMock enumerable = EnumerableMock.CreateWintCountElems(9);
             EnumerableExtension.Any(enumerable);
             Assert.Equal(1, enumerable.MoveNextCallCounter);
         }

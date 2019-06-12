@@ -26,7 +26,7 @@ namespace ArgValidation.Tests.Internal
         [Fact]
         public void CountEquals_IEnumerable_ResetWasCall()
         {
-            var enumerable = new EnumerableMock(1);
+            var enumerable = EnumerableMock.CreateWintCountElems(1);
             EnumerableExtension.CountEquals(enumerable, 1);
             Assert.True(enumerable.ResetWasCall);
         }
@@ -40,19 +40,19 @@ namespace ArgValidation.Tests.Internal
         [Fact]
         public void CountEquals_IEnumerableCountIsMore_False()
         {
-            Assert.False(EnumerableExtension.CountEquals(new EnumerableMock(2), 1));
+            Assert.False(EnumerableExtension.CountEquals(EnumerableMock.CreateWintCountElems(2), 1));
         }
 
         [Fact]
         public void CountEquals_IEnumerableCountIsEquals_True()
         {
-            Assert.True(EnumerableExtension.CountEquals(new EnumerableMock(2), 2));
+            Assert.True(EnumerableExtension.CountEquals(EnumerableMock.CreateWintCountElems(2), 2));
         }
 
         [Fact]
         public void CountEquals_IEnumerableManyElems_NoUnnecessaryIterations()
         {
-            EnumerableMock enumerable = new EnumerableMock(100);
+            EnumerableMock enumerable = EnumerableMock.CreateWintCountElems(100);
             EnumerableExtension.CountEquals(enumerable, 2);
             Assert.Equal(3, enumerable.MoveNextCallCounter);
         }

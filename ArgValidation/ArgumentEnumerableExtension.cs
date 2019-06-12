@@ -134,6 +134,8 @@ namespace ArgValidation
             return arg;
         }
 
+        // todo: count in range
+
         /// <summary>
         /// Throws <see cref="ArgumentException"/> if argument is not contains <paramref name="elem"/>
         /// </summary>
@@ -150,7 +152,6 @@ namespace ArgValidation
             if (!arg.Value.Contains(elem))
                 ValidationErrorExceptionThrower.ArgumentException(arg,
                     $"Argument '{arg.Name}' not contains {ExceptionMessageHelper.GetStringValueForMessage(elem)} value. {GetCurrentValuesString(arg.Value)}");
-            // todo: current values
 
             return arg;
         }
@@ -176,6 +177,26 @@ namespace ArgValidation
         }
 
         /// <summary>
+        /// Throws <see cref="ArgumentException"/> if argument is contains <c>null</c>
+        /// </summary>
+        /// <exception cref="ArgumentException">Throws if argument is contains <c>null</c></exception>
+        /// <exception cref="ArgValidationException">Throws if argument is <c>null</c></exception>
+        public static Argument<TEnumerable> NotContainsNull<TEnumerable>(this Argument<TEnumerable> arg)
+            where TEnumerable : IEnumerable
+        {
+            if (arg.ValidationIsDisabled())
+                return arg;
+
+            InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(NotContainsNull));
+
+            if (arg.Value.Contains(null))
+                ValidationErrorExceptionThrower.ArgumentException(arg,
+                    $"Argument '{arg.Name}' contains null. {GetCurrentValuesString(arg.Value)}");
+
+            return arg;
+        }
+
+        /// <summary>
         /// Throws <see cref="ArgumentException"/> if element count is more than 0
         /// </summary>
         /// <exception cref="ArgumentException">Throws if element count is more than 0</exception>
@@ -188,8 +209,7 @@ namespace ArgValidation
 
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(Empty));
 
-            var currentCount = arg.Value.Count();
-            if (currentCount > 0)
+            if (arg.Value.Any())
                 ValidationErrorExceptionThrower.ArgumentException(arg, $"Argument '{arg.Name}' must be empty. {GetCurrentValuesString(arg.Value)}");
 
             return arg;
@@ -208,8 +228,7 @@ namespace ArgValidation
 
             InvalidMethodArgumentThrower.IfArgumentValueIsNull(arg, methodName: nameof(NotEmpty));
 
-            var currentCount = arg.Value.Count();
-            if (currentCount < 1)
+            if (!arg.Value.Any())
                 ValidationErrorExceptionThrower.ArgumentException(arg,
                     $"Argument '{arg.Name}' must be not empty");
 
@@ -229,8 +248,7 @@ namespace ArgValidation
             if (arg.Value == null)
                 return arg;
 
-            var currentCount = arg.Value.Count();
-            if (currentCount > 0)
+            if (arg.Value.Any())
                 ValidationErrorExceptionThrower.ArgumentException(arg,
                     $"Argument '{arg.Name}' must be null or empty. {GetCurrentValuesString(arg.Value)}");
 
@@ -247,18 +265,14 @@ namespace ArgValidation
             if (arg.ValidationIsDisabled())
                 return arg;
 
-            if (arg.Value == null || arg.Value.Count() < 1)
+            if (arg.Value == null || !arg.Value.Any())
                 ValidationErrorExceptionThrower.ArgumentException(arg,
                     $"Argument '{arg.Name}' must be null or empty. {GetCurrentValuesString(arg.Value)}");
 
             return arg;
         }
 
-        // todo: count in range
-
-        // todo: tests
-
-        private static string GetCurrentValuesString(IEnumerable enumerable)
+        internal static string GetCurrentValuesString(IEnumerable enumerable)
         {
             if (enumerable == null)
                 return "Current value: null";

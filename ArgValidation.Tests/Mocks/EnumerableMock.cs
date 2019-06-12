@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Linq;
 
 namespace ArgValidation.Tests.Mocks
 {
     internal sealed class EnumerableMock : IEnumerable
     {
-        public static EnumerableMock CreateEmpty() => new EnumerableMock(0);
-        public static EnumerableMock CreateNotEmpty() => new EnumerableMock(1);
+        private readonly object[] _elems;
+        public static EnumerableMock CreateEmpty() => new EnumerableMock(new object []{});
+        public static EnumerableMock CreateNotEmpty() => new EnumerableMock(new[] { new object() });
+        public static EnumerableMock CreateWintCountElems(int count) => new EnumerableMock(new object[count]);
 
         private EnumeratorMock _enumerator;
 
-        public EnumerableMock(int count)
+        public EnumerableMock(object[] elems)
         {
-            Count = count;
+            _elems = elems;
         }
 
         public IEnumerator GetEnumerator()
         {
-            _enumerator = new EnumeratorMock(Count);
+            _enumerator = new EnumeratorMock(_elems);
             return _enumerator;
         }
 
         public bool ResetWasCall => _enumerator.WasReset;
-
-        public int Count { get; }
 
         public int MoveNextCallCounter => _enumerator.Counter;
     }

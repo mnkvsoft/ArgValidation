@@ -29,9 +29,8 @@ namespace ArgValidation.Tests.Performance.MethodTests
                 throw new Exception();
 
             // enum validation
-            // todo
-            //if (!System.Enum.IsDefined(typeof(StringComparison), EnumValue))
-            //    throw new Exception();
+            if (!System.Enum.IsDefined(typeof(StringComparison), EnumValue))
+                throw new Exception();
 
             // string validation
             if(string.IsNullOrWhiteSpace(StringValue))
@@ -54,8 +53,7 @@ namespace ArgValidation.Tests.Performance.MethodTests
             Arg.Validate(DecimalValue, nameof(DecimalValue)).PositiveOrZero();
 
             // enum validation
-            // todo
-            //Arg.Validate(EnumValue, nameof(EnumValue)).DefinedInEnum();
+            Arg.Validate(EnumValue, nameof(EnumValue)).DefinedInEnum();
 
             // string validation
             Arg.Validate(StringValue, nameof(StringValue)).NotNullOrWhitespace();

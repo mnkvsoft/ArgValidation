@@ -5,21 +5,21 @@ namespace ArgValidation.Tests.Mocks
 {
     internal class EnumeratorMock : IEnumerator
     {
-        private readonly int _count;
+        private object[] _elems;
         public int Counter = 0;
         public bool WasReset { get; set; } = false;
 
-        public EnumeratorMock(int count)
+        public EnumeratorMock(object[] elems)
         {
-            _count = count;
+            _elems = elems;
         }
 
-        public object Current => throw new NotImplementedException();
+        public object Current => _elems[Counter - 1];
 
         public bool MoveNext()
         {
             Counter++;
-            return Counter <= _count;
+            return Counter <= _elems.Length;
         }
 
         public void Reset()

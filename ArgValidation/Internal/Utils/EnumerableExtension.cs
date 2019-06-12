@@ -86,5 +86,18 @@ namespace ArgValidation.Internal.Utils
 
             return counter;
         }
+
+        public static bool Contains(this IEnumerable enumerable, object value)
+        {
+            var enumerator = enumerable.GetEnumerator();
+            enumerator.Reset();
+            while (enumerator.MoveNext())
+            {
+                if (enumerator.Current == value)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }
