@@ -50,7 +50,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Byte()
         {
             Byte value = 1;
-            var arr = new[] { value, 2, 3 };
+            var arr = new[] { 2, 3 };
 
             if (arr.Contains(value))
                 throw new ArgumentException();
@@ -60,7 +60,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Byte()
         {
             Byte value = 1;
-            var arr = new Byte[] { value, 2, 3 };
+            var arr = new Byte[] { 2, 3 };
             Arg.Validate(value, nameof(value))
                 .NotIn(arr);
         }
@@ -69,10 +69,10 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Byte_Multiple()
         {
             Byte value = 1;
-            var arr = new Byte[] { value, 2, 3 };
+            var arr = new Byte[] { 2, 3 };
             Arg.Validate(value, nameof(value))
-                .In(arr)
-                .In(arr)
+                .NotIn(arr)
+                .NotIn(arr)
                 .NotIn(arr);
         }
 
@@ -84,7 +84,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Int32()
         {
             Int32 value = 1;
-            var arr = new[] { value, 2, 3};
+            var arr = new Int32[] {  2, 3};
 
             if (arr.Contains(value))
                 throw new ArgumentException();
@@ -94,7 +94,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Int32()
         {
             Int32 value = 1;
-            var arr = new [] { value, 2, 3 };
+            var arr = new Int32[] { 2, 3 };
             Arg.Validate(value, nameof(value))
                 .NotIn(arr);
         }
@@ -103,10 +103,10 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Int32_Multiple()
         {
             Int32 value = 1;
-            var arr = new[] { value, 2, 3 };
+            var arr = new Int32[] { 2, 3 };
             Arg.Validate(value, nameof(value))
-                .In(arr)
-                .In(arr)
+                .NotIn(arr)
+                .NotIn(arr)
                 .NotIn(arr);
         }
 
@@ -118,7 +118,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Int64()
         {
             Int64 value = 1;
-            var arr = new[] { value, 2, 3};
+            var arr = new Int64[] { 2, 3};
 
             if (arr.Contains(value))
                 throw new ArgumentException();
@@ -128,7 +128,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Int64()
         {
             Int64 value = 1;
-            var arr = new[] { value, 2, 3 };
+            var arr = new Int64[] { 2, 3 };
             Arg.Validate(value, nameof(value))
                 .NotIn(arr);
         }
@@ -137,10 +137,10 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Int64_Multiple()
         {
             Int64 value = 1;
-            var arr = new[] { value, 2, 3 };
+            var arr = new Int64[] { 2, 3 };
             Arg.Validate(value, nameof(value))
-                .In(arr)
-                .In(arr)
+                .NotIn(arr)
+                .NotIn(arr)
                 .NotIn(arr);
         }
 
@@ -152,7 +152,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void Native_Decimal()
         {
             Decimal value = 1;
-            var arr = new[] { value, 2, 3};
+            var arr = new Decimal[] { 2, 3};
 
             if (arr.Contains(value))
                 throw new ArgumentException();
@@ -162,7 +162,7 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Decimal()
         {
             Decimal value = 1;
-            var arr = new[] { value, 2, 3 };
+            var arr = new Decimal[] { 2, 3 };
             Arg.Validate(value, nameof(value))
                 .NotIn(arr);
         }
@@ -171,10 +171,10 @@ namespace ArgValidation.Tests.Performance.MethodTests.Object
         public void ArgValidation_Decimal_Multiple()
         {
             Decimal value = 1;
-            var arr = new[] { value, 2, 3 };
+            var arr = new Decimal[] { 2, 3 };
             Arg.Validate(value, nameof(value))
-                .In(arr)
-                .In(arr)
+                .NotIn(arr)
+                .NotIn(arr)
                 .NotIn(arr);
         }
 

@@ -28,7 +28,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             object[] objs = { new object() };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => RunNullOrEmpty(() => objs));
-            Assert.Equal($"Argument '{nameof(objs)}' must be null or empty", exc.Message);
+            Assert.Equal($"Argument '{nameof(objs)}' must be null or empty. Current value: ['System.Object']", exc.Message);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             object[] containsNull = { null };
             ArgumentException exc = Assert.Throws<ArgumentException>(() => RunNullOrEmpty(() => containsNull));
-            Assert.Equal($"Argument '{nameof(containsNull)}' must be null or empty", exc.Message);
+            Assert.Equal($"Argument '{nameof(containsNull)}' must be null or empty. Current value: [null]", exc.Message);
         }
     }
 }

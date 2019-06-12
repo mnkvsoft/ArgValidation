@@ -13,7 +13,8 @@ namespace ArgValidation
         /// <para>Also works with flags.</para>
         /// </summary>
         /// <exception cref="ArgumentException">Throws if the argument is not defined in enum <typeparamref name="TEnum"/></exception>
-        public static Argument<TEnum> DefinedInEnum<TEnum>(this Argument<TEnum> arg) where TEnum : Enum
+        public static Argument<TEnum> DefinedInEnum<TEnum>(this Argument<TEnum> arg)
+            where TEnum : Enum
         {
             if (arg.ValidationIsDisabled())
                 return arg;
@@ -57,7 +58,7 @@ namespace ArgValidation
             return arg;
         }
 
-        private static bool DefinedInEnum(Enum en)
+        internal static bool DefinedInEnum(Enum en)
         {
             bool result = !decimal.TryParse(en.ToString(), out _);
             return result;

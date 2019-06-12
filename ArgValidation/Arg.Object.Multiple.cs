@@ -5,6 +5,7 @@ namespace ArgValidation
 {
     public static partial class Arg
     {
+        /*
         /// <summary>
         /// <para>
         /// Throws <see cref="ArgumentNullException"/> if the argument is <c>null</c>
@@ -15,10 +16,10 @@ namespace ArgValidation
         /// </para>
         /// </summary>
         /// <exception cref="ArgumentException">Throws if the argument is <c>null</c></exception>
-        //public static T NotNull<T>(Expression<Func<T>> value) where T : class
-        //{
-        //    return Validate(value).NotNull().Value;
-        //}
+        public static T NotNull<T>(Expression<Func<T>> value) where T : class
+        {
+            return Validate(value).NotNull().Value;
+        }
 
         /// <summary>
         /// <para>
@@ -37,5 +38,6 @@ namespace ArgValidation
             where T2 : class
         {
         }
+        */
     }
 }

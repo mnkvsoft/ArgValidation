@@ -9,11 +9,11 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         public void Contains_ValuesIsNull_ArgValidationException()
         {
             object[] nullValue = null;
-            
+
             ArgValidationException exc = Assert.Throws<ArgValidationException>(() =>
                 Arg.Validate(() => nullValue)
                     .Contains(new object()));
-            
+
             Assert.Equal($"Argument '{nameof(nullValue)}' is null. Can not execute 'Contains' method", exc.Message);
         }
 
@@ -22,7 +22,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             object nullObj = null;
             object[] objs = { nullObj, new object() };
-            
+
             Arg.Validate(() => objs)
                 .Contains(nullObj);
         }
@@ -32,12 +32,12 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             object[] objs = { new object(), new object() };
             object nullObj = null;
-            
-            ArgumentException exc = Assert.Throws<ArgumentException>(() => 
+
+            ArgumentException exc = Assert.Throws<ArgumentException>(() =>
                 Arg.Validate(() => objs)
                     .Contains(nullObj));
-            
-            Assert.Equal($"Argument '{nameof(objs)}' not contains null value", exc.Message);
+
+            Assert.Equal($"Argument '{nameof(objs)}' not contains null value. Current value: ['System.Object', 'System.Object']", exc.Message);
         }
 
         [Fact]
@@ -53,12 +53,12 @@ namespace ArgValidation.Tests.EnumerableValidationTests
         {
             int value5 = 5;
             int[] digits = { 1, 2 };
-            
+
             ArgumentException exc = Assert.Throws<ArgumentException>(() =>
                 Arg.Validate(() => digits)
                     .Contains(value5));
-            
-            Assert.Equal($"Argument '{nameof(digits)}' not contains '{value5}' value", exc.Message);
+
+            Assert.Equal($"Argument '{nameof(digits)}' not contains '{value5}' value. Current value: ['1', '2']", exc.Message);
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace ArgValidation.Tests.EnumerableValidationTests
                     .With<CustomException>()
                     .Contains(3));
 
-            Assert.Equal($"Argument '{nameof(arr)}' not contains '3' value", exc.Message);
+            Assert.Equal($"Argument '{nameof(arr)}' not contains '3' value. Current value: ['1', '2']", exc.Message);
         }
     }
 }
