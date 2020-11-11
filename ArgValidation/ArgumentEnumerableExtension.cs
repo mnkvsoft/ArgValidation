@@ -267,7 +267,7 @@ namespace ArgValidation
 
             if (arg.Value == null || !arg.Value.Any())
                 ValidationErrorExceptionThrower.ArgumentException(arg,
-                    $"Argument '{arg.Name}' must be null or empty. {GetCurrentValuesString(arg.Value)}");
+                    $"Argument '{arg.Name}' cannot be null or empty. {GetCurrentValuesString(arg.Value)}");
 
             return arg;
         }

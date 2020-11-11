@@ -8,9 +8,9 @@ namespace ArgValidation
     /// </summary>
     public struct Argument<T>
     {
-        internal string Name { get; }
+        public string Name { get; }
 
-        internal T Value { get; }
+        public  T Value { get; }
 
         private ValidationOption ValidationOption { get; }
 

@@ -393,6 +393,7 @@ namespace ArgValidation
             return arg;
         }
 
+        // todo: OnlyDigits()
         // todo: NotMatch(this Argument<string> arg, Regex regex)
         // todo: Char(5).IsDigit()
 
