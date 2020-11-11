@@ -8,8 +8,14 @@ namespace ArgValidation
     /// </summary>
     public struct Argument<T>
     {
+        /// <summary>
+        /// Argument name
+        /// </summary>
         public string Name { get; }
 
+        /// <summary>
+        /// Argument value
+        /// </summary>
         public  T Value { get; }
 
         private ValidationOption ValidationOption { get; }
